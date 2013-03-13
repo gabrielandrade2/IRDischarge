@@ -1,0 +1,21 @@
+- Colocar editor de regras para cada tipo de informação(Diagnóstico, Encaminhamento...)#
+- Regra definida por [prep][N*][prep] onde o local em que estiver o asterisco, é a informação desejada
+- Criar banco de dados com tipos de informação
+- Armazenar em banco de dados execuções do algoritmo
+- Fazer opção para rodar métodos diferente(RegEx e Análise sintática)
+- Para cada regra, criar subregras de "stop-words"
+- Verificar novas implementações de classe do Cogroo
+
+- Ideia Pacheco
+  - Ao encontrar falso positivo, usuário poder dizer que está errado, e com isso, popular a regra que errou, com a palavra indesejada.
+  
+-Executar sumários de trás pra frente em caso de continuidade #OK
+
+-Verificar onde normalmente a informação se encontra no texto, para priorizar essa região na escolha.
+
+-Tentar criar regras baseada em VP e NP
+
+-Stemming como regras base ou como desempate
+
+- Não fazer leitura de todo o documento atrás da regras completa. Primeiro procurar primeiro termo da regra no texto, apenas se ele for encotrado, verificar o segundo e aí por diante.
+(verificar de performance é melhorada com isso) Se for, guardar gráfico e citar na metodologia
