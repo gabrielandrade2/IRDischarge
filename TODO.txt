@@ -19,3 +19,5 @@
 
 - Não fazer leitura de todo o documento atrás da regras completa. Primeiro procurar primeiro termo da regra no texto, apenas se ele for encotrado, verificar o segundo e aí por diante.
 (verificar de performance é melhorada com isso) Se for, guardar gráfico e citar na metodologia
+
+Teste BitBucket
