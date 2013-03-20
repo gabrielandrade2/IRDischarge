@@ -1,6 +1,5 @@
 package console;
 
-//Teste
 
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +48,7 @@ public class RulesXLS {
 		//List<Regra> rules = RulesStemSub.getRules(true);
 		List<Regra> rules = TaggerStemSub.getRules(true);
 		
-		File inputWorkbook = new File("files\\MEDINFO_SUMARIOS_v1.xls");
+		File inputWorkbook = new File("files\\laudosTCteste1.xls");
 		Workbook w;
 		try {
 			

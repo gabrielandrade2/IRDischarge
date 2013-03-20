@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import org.tartarus.snowball.SnowballStemmer;
@@ -69,6 +70,7 @@ public class TaggerStemSub {
 		text = preProccessText(text);
 		
 		String res = "";
+		String res1 = "";
 
 		//Separa texto em sentenças
 		String[] sentencas = cogroo.sentDetect(text);
@@ -91,13 +93,20 @@ public class TaggerStemSub {
 			
 			for (Token token : tokens){
 				if(!isWeb)
+				{
 					res += token.getLexeme() + "_" + token.getMorphologicalTag() + " ";
+    				res1 += token.getLexeme() + "_" + token.getMorphologicalTag() + " ";
+				}
 				else
+				{
 					res += token.getLexeme() + "_<b>" + token.getMorphologicalTag() + "</b> ";
+    				res1 += token.getLexeme() + "_<b>" + token.getMorphologicalTag() + "</b> ";
+				}
 			}
 				
 		}
 		System.out.println(res);
+		System.out.println(res1);
 		return (isWeb) ? res.replace("\n", "<br>") : res; 
 				
 	}
@@ -138,10 +147,16 @@ public class TaggerStemSub {
 			cogroo.tagger(sc);
 			
 			sent.addAll(sc.getTokens());
+/*			System.out.println("parada para mostrar a frase taggeada");
+			 System.out.println(cogroo.toString());
+			Scanner scan = new Scanner(System.in);
+		    scan.next();
+*/		    
 			
 		}
 		
 		//Percorre regras
+		String wordsEtags = "";
 		for (Regra rule : rules) {
 			
 			//Regras a serem percorridas
@@ -171,7 +186,6 @@ public class TaggerStemSub {
     		
     		//Adiciona regra atual
     		rulesToMatch.add(rule);
-			
     		for(int l = 0; l < rulesToMatch.size(); l++){
     		
     			Regra r = rulesToMatch.get(l);
@@ -182,13 +196,16 @@ public class TaggerStemSub {
 		    	//System.out.println("Regra Atual: " + Rules.getPrintableWords(r) + "\n\n");
 		        //System.out.println("Qtde palavras: " + sent.size());
 		        //System.out.println("Qtde palavras regras: " + qtdePalavrasRegra);
-		        
+		    	
 		        //Percorre palavras
 		        for(int i = 0; i < sent.size(); i++){
 		        
 		        	//Obtém as palavras correspondentes a regra definida
 		        	List<String> words = this.getWords(i, qtdePalavrasRegra, sent);
-		        	
+		        	wordsEtags = wordsEtags + "[" + sent.get(i).toString() + "]";
+		        	wordsEtags = wordsEtags + "[" + sent.get(i).getMorphologicalTag() + "]";
+//					System.out.println("words[i] " + i + " " + sent.get(i).getMorphologicalTag() + "");
+
 		        	try{
 		        		
 			        	//Se não faltaram palavras para completar a regra
@@ -196,8 +213,8 @@ public class TaggerStemSub {
 			        	
 				        	//Obtém as TAGS das palavras correspondentes a regra definida
 			        		String tags[] = this.getTags(i, qtdePalavrasRegra, sent);
-			        		
 				        	//Se foi encontrada ocorrência da regra no trecho atual
+//			        		System.out.println("tags 1 " + tags[1]);
 			        		if(this.ruleApplies(tags, r, words)){
 				        		
 			        			res += "TRECHO ENCONTRADO: " + Rules.getPrintableWords(words) + "\r\nRegra: " + r.previa + "\n";
@@ -212,14 +229,20 @@ public class TaggerStemSub {
 		        	}
 		        	
 				}
-	        
+		        
     		}
 	        
 	      
 		}
+        System.out.println(wordsEtags);
 		
 		if(res.equals(""))
-			return "Não encontrado!";
+		{
+			System.out.println("parada");
+		    Scanner scan = new Scanner(System.in);
+		    scan.next();
+			return "Não encontrado!TaggerStemSub 222";
+		}
 		else
 			return res;
 	        
@@ -1284,7 +1307,8 @@ public class TaggerStemSub {
 			}
 			
 			words[i] = tokens.get(pos + i).getMorphologicalTag() + "";
-		
+
+			
 		}
 		
 		return words;
@@ -1302,30 +1326,35 @@ public class TaggerStemSub {
 		
 		//Percorre palavras e regras
 		//Ex: Isso é uma frase - [V_INF][N_M_S][PREP][N_F_P]
+		
 		for(int i = 0; i < getRuleSize(rule); i++){
 
 			Termo t = rule.termos.get(i);
 			String termo = t.termo;
 			
-			//System.out.print(tags[i] + " = " + termo + "_");
-			//System.out.println();
-			
+/*			System.out.print(tags[i] + " = " + termo + "_");
+			System.out.println();
+*/			
 			//Se for regra de STEMMING
 			if(isStemRule(t)){
 				//System.out.println(TaggerStemRoot.getStem(words.get(i)));
 				//System.out.println(termo.replace("*", ""));
 				//System.out.println("-----");
 				if(!TaggerStemRoot.getStem(words.get(i)).equalsIgnoreCase(termo.replace("*", "")))
+				{
 					return false;
+				}
 			}
 			else{
 				//TODO: Retirar underlines na obtenção do POS-tagging
 				if(!tags[i].equalsIgnoreCase(termo + "_"))
+				{
 					return false;
+				}
 			}
 		
 		}
-		
+
 		return true;
 		
 	}
