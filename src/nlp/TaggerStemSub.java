@@ -202,7 +202,7 @@ public class TaggerStemSub {
 		        
 		        	//Obtém as palavras correspondentes a regra definida
 		        	List<String> words = this.getWords(i, qtdePalavrasRegra, sent);
-		        	wordsEtags = wordsEtags + "[" + sent.get(i).toString() + "]";
+		        	wordsEtags = wordsEtags + "[" + i + "]" + "[" + sent.get(i).toString() + "]";
 		        	wordsEtags = wordsEtags + "[" + sent.get(i).getMorphologicalTag() + "]";
 //					System.out.println("words[i] " + i + " " + sent.get(i).getMorphologicalTag() + "");
 
@@ -217,7 +217,7 @@ public class TaggerStemSub {
 //			        		System.out.println("tags 1 " + tags[1]);
 			        		if(this.ruleApplies(tags, r, words)){
 				        		
-			        			res += "TRECHO ENCONTRADO: " + Rules.getPrintableWords(words) + "\r\nRegra: " + r.previa + "\n";
+			        			res += "TRECHO ENCONTRADO: " + i + Rules.getPrintableWords(words) + "\r\nRegra: " + r.previa + "\n";
 				        		//return "TRECHO ENCONTRADO: " + Rules.getPrintableWords(words) + "\nRegra: " + rule.toString() + "\n";
 				        		
 				        	}
@@ -235,13 +235,42 @@ public class TaggerStemSub {
 	      
 		}
         System.out.println(wordsEtags);
-		
+		System.out.println("parada encontrado");
+		System.out.println("indice: ");
+	    Scanner scan1 = new Scanner(System.in);
+	    String inputString = scan1.nextLine();
+	    int indice = Integer.parseInt(inputString);
+		System.out.println("quantidade Termos: ");
+		scan1 = new Scanner(System.in);
+		inputString = scan1.nextLine();
+	    int qtdTermos = Integer.parseInt(inputString);
+	    
+	    System.out.println("valor de indice = " + indice);
+	    System.out.println("valor de qtd termos= " + qtdTermos);
+
+	    String queryRegras = "insert into regras(id, conjunto_id, elemento_id, ordem, previa, observacao) select max(id)+1 ,1,8,1,";
+	    String queryTermosRegras = "insert into termosregras(id, regra_id, tipotermo_id, ordem, termo) select max(termosregras.id) +1, max(regras.id), 1, ";
+        String previa = "";
+        String observacao = "";
+        String termo = "";
+	    for(int ii = indice; ii < indice+qtdTermos; ii++){
+        	previa = previa + "[" + sent.get(ii).getMorphologicalTag() + "]";
+        	observacao = observacao + sent.get(ii).toString() + " ";
+        	termo = termo + sent.get(ii).getMorphologicalTag();
+        	termo = termo.substring(0, termo.length()-1);
+        	System.out.println(queryTermosRegras + (ii - indice + 1) + "," + "'" + termo + "'"+ " from regras , termosregras");
+        	termo = "";
+        	}
+        System.out.println(queryRegras + "'" + previa +"'" + "," + "'" + observacao + "'" + " from regras");
+        observacao = "";
+	    
 		if(res.equals(""))
 		{
-			System.out.println("parada");
+			System.out.println("parada não encontrado");
 		    Scanner scan = new Scanner(System.in);
 		    scan.next();
-			return "Não encontrado!TaggerStemSub 222";
+			
+		    return "Não encontrado!";
 		}
 		else
 			return res;
@@ -1428,7 +1457,9 @@ public class TaggerStemSub {
 	
 	public static List<Regra> getRulesDB(){
 
-		return new Regra().findByElement(8, 2, true);
+// original		return new Regra().findByElement(8, 2, true);
+
+		return new Regra().findByElement(8, 1, true);
 		
 	}
 	
