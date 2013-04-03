@@ -4,6 +4,9 @@ package console;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
+
+import br.gpri.model.Interface;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -35,6 +38,16 @@ public class RulesXLS {
 	 */
 	public static void main(String[] args) throws IOException {
 		
+		Scanner s = new Scanner(System.in);
+		
+		//Selecionar qual programa utilizar
+		System.out.println("1 - Interface Gráfica");
+		System.out.println("2 - IRDischarge");
+		System.out.print("Digite a opção selecionada: ");
+		
+		if (s.nextInt() == 1)
+			Interface.ExecutaInterface();
+		else{
 		//Tagger antes do Stemming
 		//Tagger tagger = new Tagger();
 		
@@ -92,7 +105,7 @@ public class RulesXLS {
 		closeXLS();
 
 	}
-	
+	}
 	public static void createXLS(){
 		
 		try {

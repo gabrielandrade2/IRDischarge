@@ -10,13 +10,13 @@ public class MainEtiquetas {
 		CogrooWrapper cogroo = new CogrooWrapper();
 
 		/**
-		 * Lucas, a classe  está misturada no main, mas fiz rápido só para que dê para entender e fazer as etiquetas, o segredo de algumas coisas infelizmente não posso entregar hehe, mas acho que aqui tem o suficiente p/ as tags que desejam. abraço.
+		 * Lucas, a classe  estï¿½ misturada no main, mas fiz rï¿½pido sï¿½ para que dï¿½ para entender e fazer as etiquetas, o segredo de algumas coisas infelizmente nï¿½o posso entregar hehe, mas acho que aqui tem o suficiente p/ as tags que desejam. abraï¿½o.
 		 * 
 		 */
 		
-		// Altere aqui o sumário que deseja etiquetar/classificar
-		//String text = "Paciente portador de prótese mecanica mitral normofuncionante, fibrilação atrial cronica, insuficiencia tricuspide grave, insuficiencia cardiaca esquerda e direita, FE 40%, interna por dispnéia ao repouso e congestão sistemica importante. Iniciado manejo com diurético EV + HCTZ com boa reposta. Realizado cat cardiaco direito com POAP = 32 e PSAP = 36. Apresentou epistaxe recorrente com anticoagulação em níveis adequados -- avaliado pela otorrino = vasos proeminentes em plexo de Kiesselbach bilateralmente, sendo cauterizado. Tem alta hospitalar em bom estado geral, ICC classe III, com indicação de seguir acompanhamento no ambulatorio de ICT, anticoagulados e otorrino.   Orientações na alta Fazer uso das medicações conforme prescrito Restrição hídrica diaria a 1200 ml.  Dieta com pouco sal Procurar a emergencia se necessário  Medicações na alta AAS 100 mg/d Femprocumona 3 mg/d Hidralazina 25 mg 3x/d Isossorbida 40 mg 3x/d Furosemida 120 + 120 mg/d Digoxina 0,125 mg 2/2d Alopurinol 100 mg/d ";
-		String text = "Feito encaminhamento para médico";
+		// Altere aqui o sumï¿½rio que deseja etiquetar/classificar
+		//String text = "Paciente portador de prï¿½tese mecanica mitral normofuncionante, fibrilaï¿½ï¿½o atrial cronica, insuficiencia tricuspide grave, insuficiencia cardiaca esquerda e direita, FE 40%, interna por dispnï¿½ia ao repouso e congestï¿½o sistemica importante. Iniciado manejo com diurï¿½tico EV + HCTZ com boa reposta. Realizado cat cardiaco direito com POAP = 32 e PSAP = 36. Apresentou epistaxe recorrente com anticoagulaï¿½ï¿½o em nï¿½veis adequados -- avaliado pela otorrino = vasos proeminentes em plexo de Kiesselbach bilateralmente, sendo cauterizado. Tem alta hospitalar em bom estado geral, ICC classe III, com indicaï¿½ï¿½o de seguir acompanhamento no ambulatorio de ICT, anticoagulados e otorrino.   Orientaï¿½ï¿½es na alta Fazer uso das medicaï¿½ï¿½es conforme prescrito Restriï¿½ï¿½o hï¿½drica diaria a 1200 ml.  Dieta com pouco sal Procurar a emergencia se necessï¿½rio  Medicaï¿½ï¿½es na alta AAS 100 mg/d Femprocumona 3 mg/d Hidralazina 25 mg 3x/d Isossorbida 40 mg 3x/d Furosemida 120 + 120 mg/d Digoxina 0,125 mg 2/2d Alopurinol 100 mg/d ";
+		String text = "Feito encaminhamento para mï¿½dico";
 
 		/**
 		 * pega frase para ser analisada
@@ -24,7 +24,7 @@ public class MainEtiquetas {
 		String[] sentencas = cogroo.sentDetect(text);
 		for (String sentenca : sentencas) {
 			
-			// se quiser tire os comentários daqui para ver o resultado do funcionamento, assim como os outros prints de outras funcionalidades
+			// se quiser tire os comentï¿½rios daqui para ver o resultado do funcionamento, assim como os outros prints de outras funcionalidades
 			//System.out.println(sentenca);
 			
 			
@@ -41,12 +41,12 @@ public class MainEtiquetas {
 			//	System.out.println(token);
 			
 			/**
-			 * aqui é uma implementação de uma função do cogroo, ajuda a obter melhor classificação no texto
+			 * aqui ï¿½ uma implementaï¿½ï¿½o de uma funï¿½ï¿½o do cogroo, ajuda a obter melhor classificaï¿½ï¿½o no texto
 			 */
 			cogroo.nameFinder(sc);
 			
 			/** 
-			 *  expande preposições, como 'na'='em'+'a'.
+			 *  expande preposiï¿½ï¿½es, como 'na'='em'+'a'.
 			 */
 			
 			cogroo.preTagger(sc);
@@ -56,14 +56,14 @@ public class MainEtiquetas {
 			
 			/**
 			 * 
-			 * Tagger: realiza etiquetagem morfossintática da frase. 
+			 * Tagger: realiza etiquetagem morfossintï¿½tica da frase. 
 			 * 
 			  */
 			
 			cogroo.tagger(sc);
 			tokens = sc.getTokens();
 			for (Token token : tokens)
-				System.out.print(token.getLexeme() + "_" + token.getMorphologicalTag() + " ");
+				System.out.print(/*token.getLexeme() +*/ "_" + token.getMorphologicalTag() + " ");
 			System.out.println();		
 		}
 	}

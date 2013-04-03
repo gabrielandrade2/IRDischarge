@@ -8,7 +8,7 @@ public class DbConnection {
 	
 	private String path = "jdbc:mysql://localhost:3306/irdischarge";
 	private String usuario = "root";
-	private String password = "scatt3r";
+	private String password = "root";
 	private static DbConnection conexao = null;
 	private Connection conn = null;
 
