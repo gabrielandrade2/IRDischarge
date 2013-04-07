@@ -13,25 +13,28 @@ package br.gpri.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
+
 
 
 public class Janela extends javax.swing.JFrame  implements ActionListener {
 
     // Declaração das variáveis                  
-    private javax.swing.JButton BotaoAbrir;
-    private javax.swing.JButton BotaoAnterior;
-    private javax.swing.JButton BotaoGerarRegra;
-    private javax.swing.JButton BotaoProximo;
-    private javax.swing.JButton BotaoSelecionar;
-    private javax.swing.JTextField TextoCaminhoArquivo;
-    private javax.swing.JTextField TextoGeraRegra;
-    private javax.swing.JTextField TextoRegra;
+    private JButton BotaoAbrir;
+    private JButton BotaoAnterior;
+    private JButton BotaoGerarRegra;
+    private JButton BotaoProximo;
+    private JButton BotaoSelecionar;
+    private JTextField TextoCaminhoArquivo;
+    private JTextField TextoGeraRegra;
+    private JTextField TextoRegra;
     private JTextArea TextoSumario;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JScrollPane Scroll;
+    
 	
     public Janela() {
         initComponents();
@@ -52,10 +55,15 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
         jLabel4 = new javax.swing.JLabel();
         BotaoAbrir = new javax.swing.JButton();
         BotaoSelecionar = new javax.swing.JButton();
+        Scroll = new JScrollPane(TextoSumario);
 
+                
         //Quebra de Linha Caixa de texto Sumário
         TextoSumario.setLineWrap(true);
         TextoSumario.setWrapStyleWord(true);  
+        
+        //Scroll da Caixa de Texto do Sumário
+        //
         
         
         //Habilitando ActionListener Botões      
@@ -65,6 +73,10 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 		BotaoSelecionar.addActionListener(this.Seleciona);
 		BotaoGerarRegra.addActionListener(this.GeraRegra);
 		
+		//Desabilitando edição
+		TextoSumario.setEditable(false);
+		TextoGeraRegra.setEditable(false);
+		TextoRegra.setEditable(false);
 		
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -150,9 +162,10 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
                 .add(jLabel3)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(TextoRegra, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap()
+                )
         );
-
+        
         pack();
     }// </editor-fold>                        
 
@@ -205,6 +218,10 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 	    	  System.out.println(Interface.linha);
 	    	  Interface.celula = Interface.Planilha.getCell(0, Interface.linha);
 	    	  TextoSumario.setText(Interface.celula.getContents());
+	    	  
+	    	  //Limpa Caixa de Texto Regras
+	    	  TextoGeraRegra.setText(null);
+	    	  TextoRegra.setText(null);
 	      }
 	    }
 	};
@@ -215,6 +232,10 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
   	    	  System.out.println(Interface.linha);
   	    	  Interface.celula = Interface.Planilha.getCell(0, Interface.linha);
   	    	  TextoSumario.setText(Interface.celula.getContents());
+  	    	  
+  	    	  //Limpa Caixa de Texto Regras
+	    	  TextoGeraRegra.setText(null);
+	    	  TextoRegra.setText(null);
   	      }       
         }
 	};
