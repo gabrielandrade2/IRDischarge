@@ -13,6 +13,8 @@ package br.gpri.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JTextArea;
+
 
 public class Janela extends javax.swing.JFrame  implements ActionListener {
 
@@ -25,7 +27,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
     private javax.swing.JTextField TextoCaminhoArquivo;
     private javax.swing.JTextField TextoGeraRegra;
     private javax.swing.JTextField TextoRegra;
-    private javax.swing.JTextField TextoSumario;
+    private JTextArea TextoSumario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -37,7 +39,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 
     public void initComponents() {
 
-        TextoSumario = new javax.swing.JTextField();
+        TextoSumario = new javax.swing.JTextArea();
         TextoGeraRegra = new javax.swing.JTextField();
         TextoRegra = new javax.swing.JTextField();
         BotaoProximo = new javax.swing.JButton();
@@ -51,6 +53,10 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
         BotaoAbrir = new javax.swing.JButton();
         BotaoSelecionar = new javax.swing.JButton();
 
+        //Quebra de Linha Caixa de texto Sumário
+        TextoSumario.setLineWrap(true);
+        TextoSumario.setWrapStyleWord(true);  
+        
         
         //Habilitando ActionListener Botões      
 		BotaoAbrir.addActionListener(this.Abre);
