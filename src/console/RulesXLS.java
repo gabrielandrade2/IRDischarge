@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import br.gpri.model.Interface;
+import br.gpri.view.Interface;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -47,6 +47,7 @@ public class RulesXLS {
 		
 		if (s.nextInt() == 1)
 			Interface.ExecutaInterface();
+		
 		else{
 		//Tagger antes do Stemming
 		//Tagger tagger = new Tagger();
@@ -61,7 +62,7 @@ public class RulesXLS {
 		//List<Regra> rules = RulesStemSub.getRules(true);
 		List<Regra> rules = TaggerStemSub.getRules(true);
 		
-		File inputWorkbook = new File("files\\laudosTCteste1.xls");
+		File inputWorkbook = new File("files/MEDINFO_SUMARIOS_v1.xls");
 		Workbook w;
 		try {
 			

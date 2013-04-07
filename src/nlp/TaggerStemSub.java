@@ -1361,7 +1361,7 @@ public class TaggerStemSub {
 			Termo t = rule.termos.get(i);
 			String termo = t.termo;
 			
-/*			System.out.print(tags[i] + " = " + termo + "_");
+/*			System.out.print(tags[i] + " = " + termTaggerStemSub o + "_");
 			System.out.println();
 */			
 			//Se for regra de STEMMING

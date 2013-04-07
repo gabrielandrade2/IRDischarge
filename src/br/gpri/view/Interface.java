@@ -1,4 +1,4 @@
-package br.gpri.model;
+package br.gpri.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,42 +6,45 @@ import java.io.File;
 
 import javax.swing.JFrame;
 
+import nlp.TaggerStemSub;
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 
-import br.gpri.view.Janela;
 
 public class Interface extends JFrame {
 
-	public static String caminho;
-	public static Cell celula;
-	public static Integer linha;
-	public static Workbook Excel;
-	public static Sheet Planilha;
+	protected static String caminho;
+	protected static Cell celula;
+	protected static Integer linha;
+	protected static Workbook Excel;
+	protected static Sheet Planilha;
+	protected static TaggerStemSub Tagger;
 	
 	public static void ExecutaInterface() {
 		Janela();
 					
 	}
 
-	public static void Excel(){
+	//Abre o arquivo xls e pega a primeira celula da coluna A
+	protected static void Excel(){
 		try{
 			Excel = Workbook.getWorkbook(new File(caminho));
 			Planilha = Excel.getSheet(0);
-			celula = Planilha.getCell(0, 0);
+			celula = Planilha.getCell(0, 0);}
 		
-		}
 		catch(java.io.FileNotFoundException e){
-				System.out.println("Arquivo n√£o encontrado");}
+				System.out.println("Arquivo n„o encontrado");}
 		
 		catch(Exception e){
 			e.printStackTrace();}
 	}
 	
-	public static void Janela(){
+	protected static void Janela(){
 		caminho = new String();
 		linha = new Integer(0);
+		Tagger = new TaggerStemSub();
 		Janela window = new Janela();
 		window.abrejanela();
 	}

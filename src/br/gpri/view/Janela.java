@@ -13,15 +13,24 @@ package br.gpri.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import br.gpri.model.Interface;
 
-/**
- *
- * @author sikeira
- */
-public class Janela extends javax.swing.JFrame implements ActionListener {
+public class Janela extends javax.swing.JFrame  implements ActionListener {
 
-    /** Creates new form Janela */
+    // DeclaraÁ„o das vari·veis                  
+    private javax.swing.JButton BotaoAbrir;
+    private javax.swing.JButton BotaoAnterior;
+    private javax.swing.JButton BotaoGerarRegra;
+    private javax.swing.JButton BotaoProximo;
+    private javax.swing.JButton BotaoSelecionar;
+    private javax.swing.JTextField TextoCaminhoArquivo;
+    private javax.swing.JTextField TextoGeraRegra;
+    private javax.swing.JTextField TextoRegra;
+    private javax.swing.JTextField TextoSumario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+	
     public Janela() {
         initComponents();
     }
@@ -43,16 +52,14 @@ public class Janela extends javax.swing.JFrame implements ActionListener {
         BotaoSelecionar = new javax.swing.JButton();
 
         
-        //Habilitando ActionListener Bot√£o      
+        //Habilitando ActionListener Botıes      
 		BotaoAbrir.addActionListener(this.Abre);
         BotaoProximo.addActionListener(this.Proximo);
 		BotaoAnterior.addActionListener(this.Anterior);
 		BotaoSelecionar.addActionListener(this.Seleciona);
+		BotaoGerarRegra.addActionListener(this.GeraRegra);
 		
-		//Funcionalidade Bot√£o Gerar Regra
-		//***Todo***
 		
-	
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -173,22 +180,7 @@ public class Janela extends javax.swing.JFrame implements ActionListener {
         });
     }
     
-    // Variables declaration - do not modify                     
-    public javax.swing.JButton BotaoAbrir;
-    public javax.swing.JButton BotaoAnterior;
-    public javax.swing.JButton BotaoGerarRegra;
-    public javax.swing.JButton BotaoProximo;
-    public javax.swing.JButton BotaoSelecionar;
-    public javax.swing.JTextField TextoCaminhoArquivo;
-    public javax.swing.JTextField TextoGeraRegra;
-    public javax.swing.JTextField TextoRegra;
-    public javax.swing.JTextField TextoSumario;
-    public javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabel2;
-    public javax.swing.JLabel jLabel3;
-    public javax.swing.JLabel jLabel4;
-	
-    
+  
     //Funcionalidade Bot√£o Abrir
     ActionListener Abre = new ActionListener() {
         public void actionPerformed(ActionEvent Abre) {
@@ -210,7 +202,6 @@ public class Janela extends javax.swing.JFrame implements ActionListener {
 	      }
 	    }
 	};
-	
 	ActionListener Anterior = new ActionListener() {
         public void actionPerformed(ActionEvent Anterior) {
         	if(Interface.linha != 0){
@@ -222,18 +213,24 @@ public class Janela extends javax.swing.JFrame implements ActionListener {
         }
 	};
 	
-	//Funcionalidade Bot√£o Selecionar Texto
+	//Funcionalidade Bot„o Selecionar Texto
 	ActionListener Seleciona = new ActionListener() {
         public void actionPerformed(ActionEvent Seleciona) {
-        TextoGeraRegra.setText(TextoSumario.getSelectedText());	
-  	             
+        TextoGeraRegra.setText(TextoSumario.getSelectedText());         
         }
 	};
 
-	@Override
+	//Funcionalidade Bot„o Gerar Regra
+	ActionListener GeraRegra = new ActionListener() {
+	        public void actionPerformed(ActionEvent GeraRegra) {
+	        	String Tagged_Text;//String para teste
+	        	Tagged_Text = Interface.Tagger.tagTextCogroo(TextoGeraRegra.getText(), false);
+	        	TextoRegra.setText(Tagged_Text);
+	        }
+		};
+	
+	//ActionPerformed GenÈrico (N„o faz nada)
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
                  
 }
