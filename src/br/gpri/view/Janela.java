@@ -251,7 +251,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 	ActionListener GeraRegra = new ActionListener() {
 	        public void actionPerformed(ActionEvent GeraRegra) {
 	        	String Tagged_Text;//String para teste
-	        	Tagged_Text = Interface.Tagger.tagTextCogroo(TextoGeraRegra.getText(), false);
+	        	Tagged_Text = Interface.Tagger.TaggerInterface(TextoSumario.getText(), TextoGeraRegra.getText(),false);
 	        	TextoRegra.setText(Tagged_Text);
 	        }
 		};

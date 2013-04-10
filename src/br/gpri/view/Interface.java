@@ -1,10 +1,10 @@
 package br.gpri.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFrame;
+
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import nlp.TaggerStemSub;
 
@@ -49,4 +49,5 @@ public class Interface extends JFrame {
 		window.abrejanela();
 	}
 	
+		
 }

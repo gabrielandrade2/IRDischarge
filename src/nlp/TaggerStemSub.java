@@ -59,6 +59,68 @@ public class TaggerStemSub {
 		
 	}
 	
+
+	//Tagger para Interface gráfica
+	
+	public String TaggerInterface(String text_sumario, String text_selecionado, boolean isWeb){
+		
+		//Executa operações de PRÉ-PROCESSAMENTO
+		text_sumario = preProccessText(text_sumario);
+		text_selecionado = preProccessText(text_selecionado);
+		
+		//Separa texto selecionado em palavras
+		String text_separado[] = text_selecionado.split(" ");
+				
+		String res = "";
+		String res1 = "";
+
+		//Separa texto em sentenças
+		String[] sentencas = cogroo.sentDetect(text_sumario);
+		for (String sentenca : sentencas) {
+			
+			//Tokeniza sentença
+			SentenceCogroo sc = new SentenceCogroo(sentenca);
+			List<Token> tokens = null;
+			cogroo.tokenizer(sc);
+
+			//Aplica o NAMEFINDER
+			cogroo.nameFinder(sc);
+			
+			//Expansão de preposições
+			cogroo.preTagger(sc);
+			
+			//Realiza POS_tagging
+			cogroo.tagger(sc);
+			tokens = sc.getTokens();
+			
+			//Procura onde estão os termos selecionados
+			//Compara um termo com o primeiro do vetor separado, caso encontre, ve se os termos
+			//seguintes também são os esperados
+			boolean igual = false;
+			for(int i=0; i < tokens.size(); i++){
+				for(int j=0; j < text_separado.length; j++){
+					if(text_separado[j].equals(tokens.get(i+j).getLexeme()))
+						igual = true;
+					else{
+						igual = false;
+						break;}}
+				
+				//Cria a string a ser retornada,
+				//a partir do indice do primeiro termo esperado encontrado. 
+				if(igual){
+					for(int k=i; k < (i + text_separado.length); k++){
+						Token token = tokens.get(k);	
+						res += token.getLexeme() + "_" + token.getMorphologicalTag() + " ";
+						}
+					break;}
+				}
+		}
+		System.out.println(res);
+		return (isWeb) ? res.replace("\n", "<br>") : res; 
+				
+	}
+
+	
 	/**
 	 * Executa etiquetação de texto recebido com o Cogroo
 	 * @param text
@@ -90,7 +152,7 @@ public class TaggerStemSub {
 			//Realiza POS_tagging
 			cogroo.tagger(sc);
 			tokens = sc.getTokens();
-			
+
 			for (Token token : tokens){
 				if(!isWeb)
 				{
@@ -110,6 +172,9 @@ public class TaggerStemSub {
 		return (isWeb) ? res.replace("\n", "<br>") : res; 
 				
 	}
+	
+	
+	
 	
 	public String testTagRules(String text, List<Regra> rules, boolean isWeb){
 		
