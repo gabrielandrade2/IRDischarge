@@ -1,3 +1,9 @@
-/console
+/activerecord
 /br
+/conn
+/console
 /nlp
+/org
+/servlets
+/tests
+/util
