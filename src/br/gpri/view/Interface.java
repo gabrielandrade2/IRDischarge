@@ -15,12 +15,18 @@ import jxl.Workbook;
 
 public class Interface extends JFrame {
 
+	public static Janela window;
+	public static JanelaInsert windowinsert;
 	protected static String caminho;
 	protected static Cell celula;
 	protected static Integer linha;
 	protected static Workbook Excel;
 	protected static Sheet Planilha;
 	protected static TaggerStemSub Tagger;
+	//Inserts
+	public static String[] termosregras;
+	public static String regras;
+	
 	
 	public static void ExecutaInterface() {
 		Janela();
@@ -45,7 +51,9 @@ public class Interface extends JFrame {
 		caminho = new String();
 		linha = new Integer(0);
 		Tagger = new TaggerStemSub();
-		Janela window = new Janela();
+		termosregras = new String[100];
+		window = new Janela();
+		windowinsert = new JanelaInsert();
 		window.abrejanela();
 	}
 	

@@ -19,6 +19,7 @@ import util.ArrayHandle;
 import util.ReadWriteTextFile;
 import activerecord.Regra;
 import activerecord.Termo;
+import br.gpri.view.Interface;
 import br.usp.pcs.lta.cogroo.entity.Token;
 import br.usp.pcs.lta.cogroo.entity.impl.runtime.SentenceCogroo;
 import br.usp.pcs.lta.cogroo.util.viewer.CogrooWrapper;
@@ -61,7 +62,6 @@ public class TaggerStemSub {
 	
 
 	//Tagger para Interface gráfica
-	
 	public String TaggerInterface(String text_sumario, String text_selecionado, boolean isWeb){
 		
 		//Executa operações de PRÉ-PROCESSAMENTO
@@ -97,6 +97,9 @@ public class TaggerStemSub {
 			//Compara um termo com o primeiro do vetor separado, caso encontre, ve se os termos
 			//seguintes também são os esperados
 			boolean igual = false;
+			String tags = null;
+			String palavras = null;
+			
 			for(int i=0; i < tokens.size(); i++){
 				for(int j=0; j < text_separado.length; j++){
 					if(text_separado[j].equals(tokens.get(i+j).getLexeme()))
@@ -108,13 +111,26 @@ public class TaggerStemSub {
 				//Cria a string a ser retornada,
 				//a partir do indice do primeiro termo esperado encontrado. 
 				if(igual){
-					for(int k=i; k < (i + text_separado.length); k++){
-						Token token = tokens.get(k);	
+					for(int k=0; k < text_separado.length; k++){
+						Token token = tokens.get(k+i);	
 						res += token.getLexeme() + "_" + token.getMorphologicalTag() + " ";
-						}
+						
+						//Inserts
+						//Termos Regras
+						String morphologicaltag = tokens.get(k+i).getMorphologicalTag().toString();
+						morphologicaltag = morphologicaltag.substring(0, morphologicaltag.length()-1);
+						Interface.termosregras[k] = ("insert into termosregras(id, regra_id, tipotermo_id, ordem, termo) select max(termosregras.id) +1, max(regras.id), 1," + (k+1) + ", '" + morphologicaltag + "' from regras, termosregras");
+						
+						//Regras
+						tags += ("[" + morphologicaltag + "] ");
+						palavras += (tokens.get(k+i).getLexeme() + " ");
+					}
 					break;}
 				}
+			//Regras
+			Interface.regras = ("insert into regras(id, conjunto_id, elemento_id, ordem, previa, observacao) select max(id)+1 ,1,8,1,' " + tags + "','" + palavras + "' from regras");
 		}
+			
 		System.out.println(res);
 		return (isWeb) ? res.replace("\n", "<br>") : res; 
 				

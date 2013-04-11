@@ -63,7 +63,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
         TextoSumario.setWrapStyleWord(true);  
         
         //Scroll da Caixa de Texto do Sumário
-        //
+        
         
         
         //Habilitando ActionListener Botões      
@@ -250,9 +250,10 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 	//Funcionalidade Botão Gerar Regra
 	ActionListener GeraRegra = new ActionListener() {
 	        public void actionPerformed(ActionEvent GeraRegra) {
-	        	String Tagged_Text;//String para teste
-	        	Tagged_Text = Interface.Tagger.TaggerInterface(TextoSumario.getText(), TextoGeraRegra.getText(),false);
-	        	TextoRegra.setText(Tagged_Text);
+	        	TextoRegra.setText(Interface.Tagger.TaggerInterface(TextoSumario.getText(), TextoGeraRegra.getText(),false));
+	        	
+	        	//Inserts
+	        	Interface.windowinsert.ExecutaJanela();
 	        }
 		};
 	
