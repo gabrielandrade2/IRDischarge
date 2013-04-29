@@ -69,8 +69,12 @@ public class TaggerStemSub {
 		text_selecionado = preProccessText(text_selecionado);
 		
 		//Separa texto selecionado em palavras
-		String text_separado[] = text_selecionado.split(" ");
-				
+		SentenceCogroo selecionado = new SentenceCogroo(text_selecionado);
+		cogroo.tokenizer(selecionado);
+		cogroo.nameFinder(selecionado);
+		cogroo.preTagger(selecionado);
+		List<Token> text_separado = selecionado.getTokens();
+						
 		String res = "";
 		String res1 = "";
 
@@ -101,8 +105,8 @@ public class TaggerStemSub {
 			String palavras = null;
 			
 			for(int i=0; i < tokens.size(); i++){
-				for(int j=0; j < text_separado.length; j++){
-					if(text_separado[j].equals(tokens.get(i+j).getLexeme()))
+				for(int j=0; j < text_separado.size(); j++){
+					if(text_separado.get(j).getLexeme().equals(tokens.get(i+j).getLexeme()))
 						igual = true;
 					else{
 						igual = false;
@@ -111,7 +115,7 @@ public class TaggerStemSub {
 				//Cria a string a ser retornada,
 				//a partir do indice do primeiro termo esperado encontrado. 
 				if(igual){
-					for(int k=0; k < text_separado.length; k++){
+					for(int k=0; k < text_separado.size(); k++){
 						Token token = tokens.get(k+i);	
 						res += token.getLexeme() + "_" + token.getMorphologicalTag() + " ";
 						

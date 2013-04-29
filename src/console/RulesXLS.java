@@ -62,7 +62,7 @@ public class RulesXLS {
 		//List<Regra> rules = RulesStemSub.getRules(true);
 		List<Regra> rules = TaggerStemSub.getRules(true);
 		
-		File inputWorkbook = new File("files/MEDINFO_SUMARIOS_v1.xls");
+		File inputWorkbook = new File("files/Sumarios_encaminhamento_v2.xls");
 		Workbook w;
 		try {
 			
