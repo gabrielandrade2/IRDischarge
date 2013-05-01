@@ -22,7 +22,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
     // Declaração das variáveis                  
     private JButton BotaoAbrir;
     private JButton BotaoAnterior;
-    private JButton BotaoGerarRegra;
+    //private JButton BotaoGerarRegra;
     private JButton BotaoProximo;
     private JButton BotaoSelecionar;
     private JTextField TextoCaminhoArquivo;
@@ -47,7 +47,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
         TextoRegra = new javax.swing.JTextField();
         BotaoProximo = new javax.swing.JButton();
         BotaoAnterior = new javax.swing.JButton();
-        BotaoGerarRegra = new javax.swing.JButton();
+        //BotaoGerarRegra = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -71,7 +71,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
         BotaoProximo.addActionListener(this.Proximo);
 		BotaoAnterior.addActionListener(this.Anterior);
 		BotaoSelecionar.addActionListener(this.Seleciona);
-		BotaoGerarRegra.addActionListener(this.GeraRegra);
+		//BotaoGerarRegra.addActionListener(this.GeraRegra);
 		
 		//Desabilitando edição
 		TextoSumario.setEditable(false);
@@ -85,7 +85,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 
         BotaoProximo.setText("Próximo");
 
-        BotaoGerarRegra.setText("Gerar Regra");
+        //BotaoGerarRegra.setText("Gerar Regra");
 
         jLabel1.setText("Sumário");
 
@@ -97,7 +97,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 
         BotaoAbrir.setText("Abrir");
 
-        BotaoSelecionar.setText("Selecionar");
+        BotaoSelecionar.setText("Gerar Regra");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,8 +117,8 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(TextoGeraRegra)
                             .add(TextoRegra))
-                        .add(6, 6, 6)
-                        .add(BotaoGerarRegra, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(6, 6, 6))
+                        //.add(BotaoGerarRegra, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel1)
@@ -156,8 +156,8 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
                 .add(jLabel2)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(TextoGeraRegra, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(BotaoGerarRegra))
+                    .add(TextoGeraRegra, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    //.add(BotaoGerarRegra))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel3)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -243,19 +243,14 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 	//Funcionalidade Botão Selecionar Texto
 	ActionListener Seleciona = new ActionListener() {
         public void actionPerformed(ActionEvent Seleciona) {
-        TextoGeraRegra.setText(TextoSumario.getSelectedText());         
+        TextoGeraRegra.setText(TextoSumario.getSelectedText());
+        TextoRegra.setText(Interface.Tagger.TaggerInterface(TextoSumario.getText(), TextoGeraRegra.getText(),false));
+    	
+    	//Inserts
+    	Interface.windowinsert.ExecutaJanela();
         }
 	};
 
-	//Funcionalidade Botão Gerar Regra
-	ActionListener GeraRegra = new ActionListener() {
-	        public void actionPerformed(ActionEvent GeraRegra) {
-	        	TextoRegra.setText(Interface.Tagger.TaggerInterface(TextoSumario.getText(), TextoGeraRegra.getText(),false));
-	        	
-	        	//Inserts
-	        	Interface.windowinsert.ExecutaJanela();
-	        }
-		};
 	
 	//ActionPerformed Genérico (Não faz nada)
 	public void actionPerformed(ActionEvent e) {
