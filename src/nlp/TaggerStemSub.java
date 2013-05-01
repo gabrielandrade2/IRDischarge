@@ -64,6 +64,8 @@ public class TaggerStemSub {
 	//Tagger para Interface gráfica
 	public String TaggerInterface(String text_sumario, String text_selecionado, boolean isWeb){
 		
+		ArrayList <String> termosregras = new ArrayList <String>();
+		
 		//Executa operações de PRÉ-PROCESSAMENTO
 		text_sumario = preProccessText(text_sumario);
 		text_selecionado = preProccessText(text_selecionado);
@@ -76,8 +78,7 @@ public class TaggerStemSub {
 		List<Token> text_separado = selecionado.getTokens();
 						
 		String res = "";
-		String res1 = "";
-
+		
 		//Separa texto em sentenças
 		String[] sentencas = cogroo.sentDetect(text_sumario);
 		for (String sentenca : sentencas) {
@@ -123,7 +124,7 @@ public class TaggerStemSub {
 						//Termos Regras
 						String morphologicaltag = tokens.get(k+i).getMorphologicalTag().toString();
 						morphologicaltag = morphologicaltag.substring(0, morphologicaltag.length()-1);
-						Interface.termosregras[k] = ("insert into termosregras(id, regra_id, tipotermo_id, ordem, termo) select max(termosregras.id) +1, max(regras.id), 1," + (k+1) + ", '" + morphologicaltag + "' from regras, termosregras");
+						termosregras.add("insert into termosregras(id, regra_id, tipotermo_id, ordem, termo) select max(termosregras.id) +1, max(regras.id), 1," + (k+1) + ", '" + morphologicaltag + "' from regras, termosregras");
 						
 						//Regras
 						tags += ("[" + morphologicaltag + "] ");
@@ -134,7 +135,8 @@ public class TaggerStemSub {
 			//Regras
 			Interface.regras = ("insert into regras(id, conjunto_id, elemento_id, ordem, previa, observacao) select max(id)+1 ,1,8,1,' " + tags + "','" + palavras + "' from regras");
 		}
-			
+		
+		Interface.termosregras = termosregras;
 		System.out.println(res);
 		return (isWeb) ? res.replace("\n", "<br>") : res; 
 				

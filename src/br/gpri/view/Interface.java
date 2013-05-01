@@ -1,6 +1,7 @@
 package br.gpri.view;
 
 import java.io.File;
+import java.util.ArrayList;
 
 
 import javax.swing.JFrame;
@@ -26,7 +27,7 @@ public class Interface extends JFrame {
 	protected static Sheet Planilha;
 	protected static TaggerStemSub Tagger;
 	//Inserts
-	public static String[] termosregras;
+	public static ArrayList <String> termosregras;
 	public static String regras;
 	public static Regra Regra;
 	
@@ -55,11 +56,16 @@ public class Interface extends JFrame {
 		linha = new Integer(0);
 		Tagger = new TaggerStemSub();
 		Regra = new Regra();
-		termosregras = new String[100];
+		termosregras = new ArrayList<String>();
 		window = new Janela();
 		windowinsert = new JanelaInsert();
 		window.abrejanela();
 	}
 	
+	//Faz os inserts usando o método criado dentro da classe Regra
+	protected static void Inserts(){
+		System.out.println("Erro Insert Regra: " + Regra.InsertElement(regras));
+		for (int i=0; i < termosregras.size(); i++)
+			System.out.println("Erro Insert TermosRegras["+ i + "]: " + Regra.InsertElement(termosregras.get(i)));}
 		
 }

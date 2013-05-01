@@ -57,9 +57,9 @@ public class JanelaInsert extends javax.swing.JFrame implements ActionListener {
 
 	//Insere texto na caixa ao criar a Janela
         String termosregras = "";
-    	for (int i = 0; i < Interface.termosregras.length; i++)
-    		if(Interface.termosregras[i] != null)
-    		termosregras += (Interface.termosregras[i] + "\n\n\n");
+    	for (int i = 0; i < Interface.termosregras.size(); i++)
+    		if(Interface.termosregras.get(i) != null)
+    		termosregras += (Interface.termosregras.get(i) + "\n\n\n");
     	this.TextoInserts.setText(termosregras);
 
     	this.TextoRegras.setText(Interface.regras);

@@ -248,7 +248,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
     	
     	//Inserts
     	Interface.windowinsert.ExecutaJanela();
-    	System.out.println(Interface.Regra.InsertElement(Interface.regras));
+    	Interface.Inserts();
         }
 	};
 
