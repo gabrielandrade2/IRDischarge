@@ -101,8 +101,8 @@ public class TaggerStemSub {
 			//Compara um termo com o primeiro do vetor separado, caso encontre, ve se os termos
 			//seguintes também são os esperados
 			boolean igual = false;
-			String tags = null;
-			String palavras = null;
+			String tags = "";
+			String palavras = "";
 			
 			for(int i=0; i < tokens.size(); i++){
 				for(int j=0; j < text_separado.size(); j++){

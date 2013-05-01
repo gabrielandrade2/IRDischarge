@@ -95,7 +95,7 @@ public class JanelaInsert extends javax.swing.JFrame implements ActionListener {
     }                      
 
     
-    public static void ExecutaJanela() {
+    public void ExecutaJanela() {
        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

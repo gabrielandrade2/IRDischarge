@@ -151,5 +151,20 @@ public class Regra extends ActiveRecord {
 		
 	}
 	
+
+public boolean InsertElement(String Insert){
+		
+	try{
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement(Insert);		
+		boolean sql = ps.execute();
+		return sql;}
 	
+	catch (SQLException e) {
+		System.out.println("Erro ao inserir termos");
+		e.printStackTrace();}
+	return false;
+
+		
+	}
+
 }

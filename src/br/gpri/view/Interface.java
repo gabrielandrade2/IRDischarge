@@ -2,11 +2,13 @@ package br.gpri.view;
 
 import java.io.File;
 
+
 import javax.swing.JFrame;
 
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import nlp.TaggerStemSub;
+import activerecord.Regra;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -26,6 +28,7 @@ public class Interface extends JFrame {
 	//Inserts
 	public static String[] termosregras;
 	public static String regras;
+	public static Regra Regra;
 	
 	
 	public static void ExecutaInterface() {
@@ -51,6 +54,7 @@ public class Interface extends JFrame {
 		caminho = new String();
 		linha = new Integer(0);
 		Tagger = new TaggerStemSub();
+		Regra = new Regra();
 		termosregras = new String[100];
 		window = new Janela();
 		windowinsert = new JanelaInsert();
