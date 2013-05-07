@@ -1,63 +1,39 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Janela.java
- *
- * Created on 19/03/2013, 21:09:49
- */
 package br.gpri.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+/**
+ *
+ * @author sikeira
+ */
+public class Janela extends javax.swing.JFrame {
 
-
-
-public class Janela extends javax.swing.JFrame  implements ActionListener {
-
-    // Declaração das variáveis                  
-    private JButton BotaoAbrir;
-    private JButton BotaoAnterior;
-    //private JButton BotaoGerarRegra;
-    private JButton BotaoProximo;
-    private JButton BotaoSelecionar;
-    private JTextField TextoCaminhoArquivo;
-    private JTextField TextoGeraRegra;
-    private JTextField TextoRegra;
-    private JTextArea TextoSumario;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
-    private JLabel jLabel3;
-    private JLabel jLabel4;
-    private JScrollPane Scroll;
-    
-	
+    /** Creates new form Janela */
     public Janela() {
         initComponents();
     }
 
-    public void initComponents() {
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
 
         TextoSumario = new javax.swing.JTextArea();
         TextoGeraRegra = new javax.swing.JTextField();
         TextoRegra = new javax.swing.JTextField();
-        BotaoProximo = new javax.swing.JButton();
         BotaoAnterior = new javax.swing.JButton();
-        //BotaoGerarRegra = new javax.swing.JButton();
+        BotaoProximo = new javax.swing.JButton();
+        BotaoGerarRegra = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         TextoCaminhoArquivo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         BotaoAbrir = new javax.swing.JButton();
-        BotaoSelecionar = new javax.swing.JButton();
-        Scroll = new JScrollPane(TextoSumario);
+        DropDownListBox1 = new javax.swing.JComboBox();
+        DropDownListBox2 = new javax.swing.JComboBox();
 
-                
         //Quebra de Linha Caixa de texto Sumário
         TextoSumario.setLineWrap(true);
         TextoSumario.setWrapStyleWord(true);  
@@ -70,7 +46,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 		BotaoAbrir.addActionListener(this.Abre);
         BotaoProximo.addActionListener(this.Proximo);
 		BotaoAnterior.addActionListener(this.Anterior);
-		BotaoSelecionar.addActionListener(this.Seleciona);
+		BotaoGerarRegra.addActionListener(this.GeraRegra);
 		//BotaoGerarRegra.addActionListener(this.GeraRegra);
 		
 		//Desabilitando edição
@@ -85,7 +61,7 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 
         BotaoProximo.setText("Próximo");
 
-        //BotaoGerarRegra.setText("Gerar Regra");
+        BotaoGerarRegra.setText("Gerar Regra");
 
         jLabel1.setText("Sumário");
 
@@ -97,7 +73,9 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 
         BotaoAbrir.setText("Abrir");
 
-        BotaoSelecionar.setText("Gerar Regra");
+        DropDownListBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        DropDownListBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,19 +84,6 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(TextoSumario)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, BotaoAnterior, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, BotaoProximo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(BotaoSelecionar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
-                    .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(TextoGeraRegra)
-                            .add(TextoRegra))
-                        .add(6, 6, 6))
-                        //.add(BotaoGerarRegra, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel1)
@@ -129,7 +94,19 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
                                 .add(TextoCaminhoArquivo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 470, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(BotaoAbrir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                        .add(0, 220, Short.MAX_VALUE)))
+                        .add(0, 220, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(TextoSumario)
+                            .add(TextoGeraRegra)
+                            .add(TextoRegra))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(DropDownListBox1, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, BotaoProximo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, BotaoAnterior, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(BotaoGerarRegra, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .add(DropDownListBox2, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -150,28 +127,36 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
                         .add(18, 18, 18)
                         .add(BotaoProximo)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 162, Short.MAX_VALUE)
-                        .add(BotaoSelecionar))
+                        .add(BotaoGerarRegra))
                     .add(TextoSumario))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel2)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(TextoGeraRegra, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    //.add(BotaoGerarRegra))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(TextoGeraRegra, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(layout.createSequentialGroup()
+                        .add(DropDownListBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(DropDownListBox2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel3)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(TextoRegra, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap()
-                )
+                .addContainerGap())
         );
-        
+
         pack();
     }// </editor-fold>                        
 
-    
+    /**
+     * @param args the command line arguments
+     */
     public void abrejanela() {
-    
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -198,8 +183,23 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
             }
         });
     }
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton BotaoAbrir;
+    private javax.swing.JButton BotaoAnterior;
+    private javax.swing.JButton BotaoGerarRegra;
+    private javax.swing.JButton BotaoProximo;
+    private javax.swing.JComboBox DropDownListBox1;
+    private javax.swing.JComboBox DropDownListBox2;
+    private javax.swing.JTextField TextoCaminhoArquivo;
+    private javax.swing.JTextField TextoGeraRegra;
+    private javax.swing.JTextField TextoRegra;
+    private javax.swing.JTextArea TextoSumario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    // End of variables declaration
     
-  
     //Funcionalidade BotÃ£o Abrir
     ActionListener Abre = new ActionListener() {
         public void actionPerformed(ActionEvent Abre) {
@@ -241,8 +241,8 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 	};
 	
 	//Funcionalidade Botão Selecionar Texto
-	ActionListener Seleciona = new ActionListener() {
-        public void actionPerformed(ActionEvent Seleciona) {
+	ActionListener GeraRegra = new ActionListener() {
+        public void actionPerformed(ActionEvent GeraRegra) {
         TextoGeraRegra.setText(TextoSumario.getSelectedText());
         TextoRegra.setText(Interface.Tagger.TaggerInterface(TextoSumario.getText(), TextoGeraRegra.getText(),false));
     	
@@ -256,5 +256,4 @@ public class Janela extends javax.swing.JFrame  implements ActionListener {
 	//ActionPerformed Genérico (Não faz nada)
 	public void actionPerformed(ActionEvent e) {
 	}
-                 
 }
