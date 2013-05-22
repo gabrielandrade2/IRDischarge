@@ -3,6 +3,10 @@ package br.gpri.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author sikeira
@@ -33,7 +37,12 @@ public class Janela extends javax.swing.JFrame {
         BotaoAbrir = new javax.swing.JButton();
         DropDownListBox1 = new javax.swing.JComboBox();
         DropDownListBox2 = new javax.swing.JComboBox();
-
+        AbreArquivo = new javax.swing.JFileChooser();
+        
+               
+        AbreArquivo.setFileFilter(new FileNameExtensionFilter("Arquivo do Sumário/Laudos do Excel","xls"));
+        AbreArquivo.setAcceptAllFileFilterUsed(false);
+        
         //Quebra de Linha Caixa de texto Sumário
         TextoSumario.setLineWrap(true);
         TextoSumario.setWrapStyleWord(true);  
@@ -198,15 +207,23 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JFileChooser AbreArquivo;
     // End of variables declaration
     
     //Funcionalidade BotÃ£o Abrir
     ActionListener Abre = new ActionListener() {
         public void actionPerformed(ActionEvent Abre) {
-                Interface.caminho = TextoCaminhoArquivo.getText();
-                System.out.println(Interface.caminho);
-                Interface.Excel();
-                TextoSumario.setText(Interface.celula.getContents());
+        		int retorno = AbreArquivo.showOpenDialog(null);
+        		if (retorno == JFileChooser.APPROVE_OPTION){
+        			Interface.caminho = AbreArquivo.getSelectedFile().getAbsolutePath();
+        			TextoCaminhoArquivo.setText(Interface.caminho);
+        			System.out.println(Interface.caminho);
+        			Interface.Excel();
+        			TextoSumario.setText(Interface.celula.getContents());}
+        		else if(retorno == JFileChooser.CANCEL_OPTION)
+        			System.out.println("Usuário cancelou a operação");
+        		else
+        			System.out.println("Erro ao abrir o arquivo");
         }
 	};
 	

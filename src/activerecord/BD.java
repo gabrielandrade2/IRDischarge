@@ -5,68 +5,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.mysql.jdbc.PreparedStatement;
 
-public class Regra extends ActiveRecord {
+public class BD extends ActiveRecord {
 	
-	public int id;
-	public int regrapai_id;
-	public int elemento_id;
-	public Date dataregra;
-	public int ordem;
-	public String previa;
-	public String observacao;
-	public List<Termo> termos = new ArrayList<Termo>();
-	public List<Regra> subregras = new ArrayList<Regra>();
 	
-	//BUSCAR APENAS REGRAS COM regrapai_id = null e colocar sub-regras na lista acima
-			
-	//Se forem encontradas duas ocorrencias para a mesma regra, rodar subregra
+	public boolean InsertElement(String Insert){
+		
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement(Insert);		
+			boolean sql = ps.execute();
+			return sql;}
+		
+		catch (SQLException e) {
+			System.out.println("Erro ao inserir termos");
+			e.printStackTrace();}
+		return false;
+		}
 
-	public int insert(){
-		
-		return 0;
-		
-	}
-	
-	public boolean update(){
-		
-		return false;
-		
-	}
-	
-	public boolean delete(){
-		
-		return false;
-		
-	}
-	
-	public boolean delete(int id){
-		
-		return false;
-		
-	}
-	
-	public Regra find(int id){
-		
-		return new Regra();
-		
-	}
-	
-	public List<Regra> findAll(){
-		
-		return null;
-		
-	}
-	
-	/**
-	 * Busca regras baseada no tipo de elemento desejado (Diagnóstico, Continuidade, etc) e conjunto de regras
-	 * @param elemento_id
-	 * @param conjunto_id
-	 * @param withTerms
-	 * @return
-	 */
+	//Select Genérico
 	public List<Regra> findByElement(int elemento_id, int conjunto_id, boolean withTerms){
 		
 		List<Regra> list = new ArrayList<Regra>();
@@ -151,5 +108,6 @@ public class Regra extends ActiveRecord {
 		
 	}
 	
-
+	//Select para dropdownlistbox
+	
 }

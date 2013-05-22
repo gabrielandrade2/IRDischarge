@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import nlp.TaggerStemSub;
-import activerecord.Regra;
+import activerecord.BD;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -29,7 +29,7 @@ public class Interface extends JFrame {
 	//Inserts
 	public static ArrayList <String> termosregras;
 	public static String regras;
-	public static Regra Regra;
+	public static BD BD;
 	
 	
 	public static void ExecutaInterface() {
@@ -55,7 +55,7 @@ public class Interface extends JFrame {
 		caminho = new String();
 		linha = new Integer(0);
 		Tagger = new TaggerStemSub();
-		Regra = new Regra();
+		BD = new BD();
 		termosregras = new ArrayList<String>();
 		window = new Janela();
 		windowinsert = new JanelaInsert();
@@ -64,8 +64,8 @@ public class Interface extends JFrame {
 	
 	//Faz os inserts usando o método criado dentro da classe Regra
 	protected static void Inserts(){
-		System.out.println("Erro Insert Regra: " + Regra.InsertElement(regras));
+		System.out.println("Erro Insert Regra: " + BD.InsertElement(regras));
 		for (int i=0; i < termosregras.size(); i++)
-			System.out.println("Erro Insert TermosRegras["+ i + "]: " + Regra.InsertElement(termosregras.get(i)));}
+			System.out.println("Erro Insert TermosRegras["+ i + "]: " + BD.InsertElement(termosregras.get(i)));}
 		
 }
