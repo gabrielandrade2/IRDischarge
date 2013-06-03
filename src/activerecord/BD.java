@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import br.gpri.view.DropDownInfo;
+
 import com.mysql.jdbc.PreparedStatement;
 
 public class BD extends ActiveRecord {
@@ -109,5 +112,27 @@ public class BD extends ActiveRecord {
 	}
 	
 	//Select para dropdownlistbox
-	
+public void selectDropDownListBox(String Tabela, DropDownInfo d){
+		
+		 try {
+			 
+			 PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * from "+Tabela);
+             //ps.setString(1, Tabela);
+             System.out.println(ps.toString());
+             ResultSet res = ps.executeQuery();
+
+			 while (res.next()) {
+				 d.adiciona(res.getInt("id"), res.getString("abreviacao"), res.getString("nome"));
+				 
+				 
+			 }
+		 } catch (SQLException e) {
+			 System.out.println("Erro ao buscar itens DropDownListBox");
+			 System.out.println("Provavelmente coluna da tabela errada no método xD");
+			 //e.printStackTrace();
+		 }
+
+		
+	}
+
 }

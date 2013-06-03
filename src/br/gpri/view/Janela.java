@@ -15,6 +15,7 @@ public class Janela extends javax.swing.JFrame {
 
     /** Creates new form Janela */
     public Janela() {
+    	super("IRDischarge v0.1 - PUCPR 2013");
         initComponents();
     }
 
@@ -22,7 +23,7 @@ public class Janela extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-
+    	
         TextoSumario = new javax.swing.JTextArea();
         TextoGeraRegra = new javax.swing.JTextField();
         TextoRegra = new javax.swing.JTextField();
@@ -81,10 +82,20 @@ public class Janela extends javax.swing.JFrame {
         jLabel4.setText("Caminho para o Arquivo");
 
         BotaoAbrir.setText("Abrir");
-
-        DropDownListBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        DropDownListBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        
+        
+        
+        //DropDownListBox
+        DropDownListBox1.setModel(new javax.swing.DefaultComboBoxModel(Interface.list1.textoArray()));
+        DropDownListBox1.setToolTipText(Interface.list1.textoDescricao(DropDownListBox1.getSelectedIndex()));
+        
+        DropDownListBox2.setModel(new javax.swing.DefaultComboBoxModel(Interface.list2.textoArray()));
+        DropDownListBox2.setToolTipText(Interface.list2.textoDescricao(DropDownListBox2.getSelectedIndex()));
+        //DropDownListBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        
+        //ActionListener
+        DropDownListBox1.addActionListener(DropDown);
+        DropDownListBox2.addActionListener(DropDown);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,9 +277,18 @@ public class Janela extends javax.swing.JFrame {
     	//Inserts
     	Interface.windowinsert.ExecutaJanela();
     	Interface.Inserts();
+    	
         }
 	};
 
+	ActionListener DropDown = new ActionListener() {
+        public void actionPerformed(ActionEvent DropDown) {
+            DropDownListBox1.setToolTipText(Interface.list1.textoDescricao(DropDownListBox1.getSelectedIndex()));
+            DropDownListBox2.setToolTipText(Interface.list2.textoDescricao(DropDownListBox2.getSelectedIndex()));
+        }
+	};
+	
+	
 	
 	//ActionPerformed Genérico (Não faz nada)
 	public void actionPerformed(ActionEvent e) {

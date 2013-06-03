@@ -30,6 +30,9 @@ public class Interface extends JFrame {
 	public static ArrayList <String> termosregras;
 	public static String regras;
 	public static BD BD;
+	//DropDownListBox
+	public static DropDownInfo list1;
+	public static DropDownInfo list2;
 	
 	
 	public static void ExecutaInterface() {
@@ -57,6 +60,8 @@ public class Interface extends JFrame {
 		Tagger = new TaggerStemSub();
 		BD = new BD();
 		termosregras = new ArrayList<String>();
+		list1 = new DropDownInfo("elementos");
+		list2 = new DropDownInfo("termosregras");
 		window = new Janela();
 		windowinsert = new JanelaInsert();
 		window.abrejanela();
@@ -67,5 +72,8 @@ public class Interface extends JFrame {
 		System.out.println("Erro Insert Regra: " + BD.InsertElement(regras));
 		for (int i=0; i < termosregras.size(); i++)
 			System.out.println("Erro Insert TermosRegras["+ i + "]: " + BD.InsertElement(termosregras.get(i)));}
+	
 		
 }
+
+
