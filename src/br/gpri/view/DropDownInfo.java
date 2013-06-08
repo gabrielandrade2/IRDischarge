@@ -3,7 +3,6 @@ package br.gpri.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import activerecord.BD;
 
 public class DropDownInfo {
 	
@@ -39,6 +38,13 @@ public class DropDownInfo {
 			return "";
 		else
 		return descricao.get(i);
+	}
+	
+	public int getId(int i){
+		if(id.size() == 0)
+			return -1;
+		else
+		return id.get(i);
 	}
 	
 }

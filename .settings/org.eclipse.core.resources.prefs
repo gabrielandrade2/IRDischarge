@@ -2,4 +2,5 @@ eclipse.preferences.version=1
 encoding//src/console/DischargeAI.java=ISO-8859-1
 encoding//src/console/RulesXLS.java=ISO-8859-1
 encoding//src/console/TaggerXLS.java=ISO-8859-1
+encoding//src/nlp/TaggerStemSub.java=UTF-8
 encoding/<project>=ISO-8859-1

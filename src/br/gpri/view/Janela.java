@@ -272,7 +272,9 @@ public class Janela extends javax.swing.JFrame {
 	ActionListener GeraRegra = new ActionListener() {
         public void actionPerformed(ActionEvent GeraRegra) {
         TextoGeraRegra.setText(TextoSumario.getSelectedText());
-        TextoRegra.setText(Interface.Tagger.TaggerInterface(TextoSumario.getText(), TextoGeraRegra.getText(),false));
+        
+        int idDropDown = Interface.list1.getId(DropDownListBox1.getSelectedIndex());
+        TextoRegra.setText(Interface.Tagger.TaggerInterface(TextoSumario.getText(), TextoGeraRegra.getText(),idDropDown,false));
     	
     	//Inserts
     	Interface.windowinsert.ExecutaJanela();

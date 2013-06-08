@@ -43,15 +43,15 @@ public class TaggerStemSub {
 
 		//Expande as datas	
 		text = expandirData(text);
-		//Retira erros recorrentes nos sum·rios
+		//Retira erros recorrentes nos sum√°rios
 		text = retiraErrosRecorrentes(text);
-		//Retira pontuaÁ„o e caracteres especiais
+		//Retira pontua√ß√£o e caracteres especiais
 		text = retiraPontuacao(text);
-		//EspaÁa ponto
+		//Espa√ßa ponto
 		text = espacaPontuacao(text);
-		//Expande AcrÙnimos
+		//Expande Acr√¥nimos
 		text = expandirAcronimos(text);
-		//Coloca em min˙sculas
+		//Coloca em min√∫sculas
 		text = text.toLowerCase();
 		//Retira Stopwords
 		text = retiraStopWords(text);
@@ -61,12 +61,12 @@ public class TaggerStemSub {
 	}
 	
 
-	//Tagger para Interface gr·fica
-	public String TaggerInterface(String text_sumario, String text_selecionado, boolean isWeb){
+	//Tagger para Interface gr√°fica
+	public String TaggerInterface(String text_sumario, String text_selecionado,int idDropDown, boolean isWeb){
 		
 		ArrayList <String> termosregras = new ArrayList <String>();
 		
-		//Executa operaÁıes de PR…-PROCESSAMENTO
+		//Executa opera√ß√µes de PR√â-PROCESSAMENTO
 		text_sumario = preProccessText(text_sumario);
 		text_selecionado = preProccessText(text_selecionado);
 		
@@ -79,11 +79,11 @@ public class TaggerStemSub {
 						
 		String res = "";
 		
-		//Separa texto em sentenÁas
+		//Separa texto em senten√ßas
 		String[] sentencas = cogroo.sentDetect(text_sumario);
 		for (String sentenca : sentencas) {
 			
-			//Tokeniza sentenÁa
+			//Tokeniza senten√ßa
 			SentenceCogroo sc = new SentenceCogroo(sentenca);
 			List<Token> tokens = null;
 			cogroo.tokenizer(sc);
@@ -91,16 +91,16 @@ public class TaggerStemSub {
 			//Aplica o NAMEFINDER
 			cogroo.nameFinder(sc);
 			
-			//Expans„o de preposiÁıes
+			//Expans√£o de preposi√ß√µes
 			cogroo.preTagger(sc);
 			
 			//Realiza POS_tagging
 			cogroo.tagger(sc);
 			tokens = sc.getTokens();
 			
-			//Procura onde est„o os termos selecionados
+			//Procura onde est√£o os termos selecionados
 			//Compara um termo com o primeiro do vetor separado, caso encontre, ve se os termos
-			//seguintes tambÈm s„o os esperados
+			//seguintes tamb√©m s√£o os esperados
 			boolean igual = false;
 			String tags = "";
 			String palavras = "";
@@ -133,7 +133,7 @@ public class TaggerStemSub {
 					break;}
 				}
 			//Regras
-			Interface.regras = ("insert into regras(id, conjunto_id, elemento_id, ordem, previa, observacao) select max(id)+1 ,1,8,1,' " + tags + "','" + palavras + "' from regras");
+			Interface.regras = ("insert into regras(id, conjunto_id, elemento_id, ordem, previa, observacao) select max(id)+1 ,1,"+ idDropDown +",1,' " + tags + "','" + palavras + "' from regras");
 		}
 		
 		Interface.termosregras = termosregras;
@@ -144,23 +144,23 @@ public class TaggerStemSub {
 
 	
 	/**
-	 * Executa etiquetaÁ„o de texto recebido com o Cogroo
+	 * Executa etiqueta√ß√£o de texto recebido com o Cogroo
 	 * @param text
 	 * @return
 	 */
 	public String tagTextCogroo(String text, boolean isWeb){
 		
-		//Executa operaÁıes de PR…-PROCESSAMENTO
+		//Executa opera√ß√µes de PR√â-PROCESSAMENTO
 		text = preProccessText(text);
 		
 		String res = "";
 		String res1 = "";
 
-		//Separa texto em sentenÁas
+		//Separa texto em senten√ßas
 		String[] sentencas = cogroo.sentDetect(text);
 		for (String sentenca : sentencas) {
 			
-			//Tokeniza sentenÁa
+			//Tokeniza senten√ßa
 			SentenceCogroo sc = new SentenceCogroo(sentenca);
 			List<Token> tokens = null;
 			cogroo.tokenizer(sc);
@@ -168,7 +168,7 @@ public class TaggerStemSub {
 			//Aplica o NAMEFINDER
 			cogroo.nameFinder(sc);
 			
-			//Expans„o de preposiÁıes
+			//Expans√£o de preposi√ß√µes
 			cogroo.preTagger(sc);
 			
 			//Realiza POS_tagging
@@ -200,7 +200,7 @@ public class TaggerStemSub {
 	
 	public String testTagRules(String text, List<Regra> rules, boolean isWeb){
 		
-		//Executa operaÁıes de PR…-PROCESSAMENTO
+		//Executa opera√ß√µes de PR√â-PROCESSAMENTO
 		text = preProccessText(text);
 		
 		System.out.println(text);
@@ -208,16 +208,16 @@ public class TaggerStemSub {
 		//Quantidade de palavras por regra
 		int qtdePalavrasRegra = 0;
 		
-		//Armazena saÌda do resultado
+		//Armazena sa√≠da do resultado
 		String res = "";
 		
 		//Lista de TOKENS
 		List<Token> sent = new ArrayList<Token>();
 		
-		//Separa as sentenÁas e efetua pos-tagging
+		//Separa as senten√ßas e efetua pos-tagging
 		String[] sentencas = cogroo.sentDetect(text);
 		
-		//INVERTE ORDEM DAS SENTEN«AS - Melhor aproveitamento para CONTINUIDADE/ENCAMINHAMENTO
+		//INVERTE ORDEM DAS SENTEN√áAS - Melhor aproveitamento para CONTINUIDADE/ENCAMINHAMENTO
 		ArrayHandle.reverse(sentencas);
 
 		//Percorre as sentencas
@@ -250,14 +250,14 @@ public class TaggerStemSub {
     		List<Regra> rulesToMatch = new ArrayList<Regra>();
     		
     		/*
-    		 * VERIFICAR SE REGRA TEM SUBREGRAS, SE SIM, PERCORR -LAS ANTES DE BUSCAR REGRA ATUAL
-    		 * - Se n„o encontrar nenhuma das sub-regras, buscar regra-base
+    		 * VERIFICAR SE REGRA TEM SUBREGRAS, SE SIM, PERCORR√ä-LAS ANTES DE BUSCAR REGRA ATUAL
+    		 * - Se n√£o encontrar nenhuma das sub-regras, buscar regra-base
     		 * 
-    		 * Quanto mais especÌfica(MAIOR QTDE DE TERMOS) uma regra tiver, MENOR A CHANCE DE OBTEN«√O DE FALSO POSITIVO.
-    		 * Portanto, se as regras mais especÌficas forem analisadas anteriormente, o algoritmo estaria privilegiando regras
+    		 * Quanto mais espec√≠fica(MAIOR QTDE DE TERMOS) uma regra tiver, MENOR A CHANCE DE OBTEN√á√ÉO DE FALSO POSITIVO.
+    		 * Portanto, se as regras mais espec√≠ficas forem analisadas anteriormente, o algoritmo estaria privilegiando regras
     		 * com maior chance de VERDADEIRO POSITIVO
     		 * 
-    		 * OBS: Ser· que apenas uma invers„o de ordem das regras no algoritmo SEM SUB-REGRAS j· n„o resolveria?
+    		 * OBS: Ser√° que apenas uma invers√£o de ordem das regras no algoritmo SEM SUB-REGRAS j√° n√£o resolveria?
     		 */
     		
     		//Se existem SUB-REGRAS na regra atual, adiciona-as na Lista
@@ -277,7 +277,7 @@ public class TaggerStemSub {
     		
     			Regra r = rulesToMatch.get(l);
     			
-				//ObtÈm quantidade de palavras da regra
+				//Obt√©m quantidade de palavras da regra
 		    	qtdePalavrasRegra = this.getRuleSize(r);
 		        
 		    	//System.out.println("Regra Atual: " + Rules.getPrintableWords(r) + "\n\n");
@@ -287,7 +287,7 @@ public class TaggerStemSub {
 		        //Percorre palavras
 		        for(int i = 0; i < sent.size(); i++){
 		        
-		        	//ObtÈm as palavras correspondentes a regra definida
+		        	//Obt√©m as palavras correspondentes a regra definida
 		        	List<String> words = this.getWords(i, qtdePalavrasRegra, sent);
 		        	wordsEtags = wordsEtags + "[" + i + "]" + "[" + sent.get(i).toString() + "]";
 		        	wordsEtags = wordsEtags + "[" + sent.get(i).getMorphologicalTag() + "]";
@@ -295,12 +295,12 @@ public class TaggerStemSub {
 
 		        	try{
 		        		
-			        	//Se n„o faltaram palavras para completar a regra
+			        	//Se n√£o faltaram palavras para completar a regra
 		        		if(words.size() == qtdePalavrasRegra){
 			        	
-				        	//ObtÈm as TAGS das palavras correspondentes a regra definida
+				        	//Obt√©m as TAGS das palavras correspondentes a regra definida
 			        		String tags[] = this.getTags(i, qtdePalavrasRegra, sent);
-				        	//Se foi encontrada ocorrÍncia da regra no trecho atual
+				        	//Se foi encontrada ocorr√™ncia da regra no trecho atual
 //			        		System.out.println("tags 1 " + tags[1]);
 			        		if(this.ruleApplies(tags, r, words)){
 				        		
@@ -353,11 +353,11 @@ public class TaggerStemSub {
 	    
 		if(res.equals(""))
 		{
-			System.out.println("parada n„o encontrado");
+			System.out.println("parada n√£o encontrado");
 		    Scanner scan = new Scanner(System.in);
 		    scan.next();
 			
-		    return "N„o encontrado!";
+		    return "N√£o encontrado!";
 		}
 		else
 			return res;
@@ -374,7 +374,7 @@ public class TaggerStemSub {
 	}
 	
 	/**
-	 * ObtÈm o STEM da palavra
+	 * Obt√©m o STEM da palavra
 	 * @param word
 	 * @return
 	 */
@@ -462,7 +462,7 @@ public class TaggerStemSub {
 			 
 			text = text.replace("/jan/"," de janeiro de ");
 	    	text = text.replace("/fev/"," de fevereiro de ");
-	    	text = text.replace("/mar/"," de marÁo de ");
+	    	text = text.replace("/mar/"," de mar√ßo de ");
 	    	text = text.replace("/abr/"," de abril de ");
 	    	text = text.replace("/mai/"," de maio de ");
 	    	text = text.replace("/jun/"," de junho de ");
@@ -475,7 +475,7 @@ public class TaggerStemSub {
 			  
 	    	text = text.replace("/01/"," de janeiro de ");
 	    	text = text.replace("/02/"," de fevereiro de ");
-	    	text = text.replace("/03/"," de marÁo de ");
+	    	text = text.replace("/03/"," de mar√ßo de ");
 	    	text = text.replace("/04/"," de abril de ");
 	    	text = text.replace("/05/"," de maio de ");
 	    	text = text.replace("/06/"," de junho de ");
@@ -503,7 +503,7 @@ public class TaggerStemSub {
 	    	
 	    	text = text.replace("/jan"," de janeiro");
 	    	text = text.replace("/fev"," de fevereiro");
-	    	text = text.replace("/mar"," de marÁo");
+	    	text = text.replace("/mar"," de mar√ßo");
 	    	text = text.replace("/abr"," de abril");
 	    	text = text.replace("/mai"," de maio");
 	    	text = text.replace("/jun"," de junho");
@@ -516,7 +516,7 @@ public class TaggerStemSub {
 	    	
 	        text = text.replace("/01"," de janeiro");
 	    	text = text.replace("/02"," de fevereiro");
-	    	text = text.replace("/03"," de marÁo");
+	    	text = text.replace("/03"," de mar√ßo");
 	    	text = text.replace("/04"," de abril");
 	    	text = text.replace("/05"," de maio");
 	    	text = text.replace("/06"," de junho");
@@ -551,646 +551,646 @@ public class TaggerStemSub {
 	public String expandirAcronimos(String text){
 		
 		
-		text = text.replace(" AAS "," ·cido acetil salicÌlico ");
-		text = text.replace(" ACTP "," angioplastia coron·ria transluminal percut‚nea ");
-		text = text.replace(" HCPA "," Hospital de ClÌnicas de Porto Alegre ");
-		text = text.replace(" HAS "," hipertens„o arterial sistÍmica ");
+		text = text.replace(" AAS "," √°cido acetil salic√≠lico ");
+		text = text.replace(" ACTP "," angioplastia coron√°ria transluminal percut√¢nea ");
+		text = text.replace(" HCPA "," Hospital de Cl√≠nicas de Porto Alegre ");
+		text = text.replace(" HAS "," hipertens√£o arterial sist√™mica ");
 		text = text.replace(" VO "," via oral ");
-		text = text.replace(" ICC "," insuficiÍncia cardÌaca congestiva ");
-		text = text.replace(" FE "," fraÁ„o de ejeÁ„o ");
+		text = text.replace(" ICC "," insufici√™ncia card√≠aca congestiva ");
+		text = text.replace(" FE "," fra√ß√£o de eje√ß√£o ");
 		text = text.replace(" ECG "," eletrocardiograma ");
-		text = text.replace(" VE "," ventrÌculo esquerdo ");
-		text = text.replace(" IAM "," infarto agudo do mioc·rdio ");
-		text = text.replace(" CD "," coron·ria direita ");
-		text = text.replace(" DAE "," dimens„o do ·trio esquerdo ");
-		text = text.replace(" DA "," artÈria descendente anterior ");
+		text = text.replace(" VE "," ventr√≠culo esquerdo ");
+		text = text.replace(" IAM "," infarto agudo do mioc√°rdio ");
+		text = text.replace(" CD "," coron√°ria direita ");
+		text = text.replace(" DAE "," dimens√£o do √°trio esquerdo ");
+		text = text.replace(" DA "," art√©ria descendente anterior ");
 		text = text.replace(" TC "," tomografia computadorizada ");
-		text = text.replace(" CAT "," avaliaÁ„o crÌtica tÛpica ");
+		text = text.replace(" CAT "," avalia√ß√£o cr√≠tica t√≥pica ");
 		text = text.replace(" mg/d "," miligrama/decilitro ");
 		text = text.replace(" CTI "," Centro de Terapia Intensiva ");
 		text = text.replace(" DM "," diabetes melitus ");
-		text = text.replace(" CRM "," cardio-resson‚ncia magnÈtica ");
-		text = text.replace(" AE "," ·trio esquerdo ");
-		text = text.replace(" RN "," recÈm-nato ");
+		text = text.replace(" CRM "," cardio-resson√¢ncia magn√©tica ");
+		text = text.replace(" AE "," √°trio esquerdo ");
+		text = text.replace(" RN "," rec√©m-nato ");
 		text = text.replace(" STENT "," stent ");
 		text = text.replace(" IG "," imunoglobulina ");
-		text = text.replace(" IRC "," insuficiÍncia renal crÙnica ");
-		text = text.replace(" TIMI "," medida do fluxo coron·rio e microvascular ");
+		text = text.replace(" IRC "," insufici√™ncia renal cr√¥nica ");
+		text = text.replace(" TIMI "," medida do fluxo coron√°rio e microvascular ");
 		text = text.replace(" APGAR "," Apgar ");
-		text = text.replace(" NR "," n„o-reagente ");
+		text = text.replace(" NR "," n√£o-reagente ");
 		text = text.replace(" AVC "," acidente vascular cerebral ");
-		text = text.replace(" ACD "," artÈria coron·ria direita ");
-		text = text.replace(" CX "," artÈria circunflexa ");
+		text = text.replace(" ACD "," art√©ria coron√°ria direita ");
+		text = text.replace(" CX "," art√©ria circunflexa ");
 		text = text.replace(" RX "," raio X ");
-		text = text.replace(" DPOC "," doenÁa pulmonar obstrutiva crÙnica ");
-		text = text.replace(" PSAP "," press„o sistÛlica da artÈria pulmonar ");
-		text = text.replace(" PCR "," parada c·rdio-respiratÛria ");
+		text = text.replace(" DPOC "," doen√ßa pulmonar obstrutiva cr√¥nica ");
+		text = text.replace(" PSAP "," press√£o sist√≥lica da art√©ria pulmonar ");
+		text = text.replace(" PCR "," parada c√°rdio-respirat√≥ria ");
 		text = text.replace(" ECO "," ecocardiograma ");
-		text = text.replace(" VD "," ventrÌculo direito ");
-		text = text.replace(" IC "," insuficiÍncia cardÌaca ");
+		text = text.replace(" VD "," ventr√≠culo direito ");
+		text = text.replace(" IC "," insufici√™ncia card√≠aca ");
 		text = text.replace(" EV "," endovenosa ");
-		text = text.replace(" O2 "," oxigÍnio ");
-		text = text.replace(" FC "," funÁ„o cardÌaca ");
+		text = text.replace(" O2 "," oxig√™nio ");
+		text = text.replace(" FC "," fun√ß√£o card√≠aca ");
 		text = text.replace(" NPH "," protamina neutra Hagedorn ");
 		text = text.replace(" HCTZ "," hidroclortiazida ");
-		text = text.replace(" FO "," ferida operatÛria ");
-		text = text.replace(" INR "," raz„o normalizada internacional ");
+		text = text.replace(" FO "," ferida operat√≥ria ");
+		text = text.replace(" INR "," raz√£o normalizada internacional ");
 		text = text.replace(" BID "," duas vezes ao dia ");
-		text = text.replace(" PA "," press„o arterial ");
-		text = text.replace(" SCA "," sÌndrome coronariana aguda ");
-		text = text.replace(" VDRL "," laboratÛrio de pesquisa de doenÁas venÈreas ");
-		text = text.replace(" ADA "," artÈria descendente anterior ");
-		text = text.replace(" ACFA "," fibrilaÁ„o atrial crÙnica ");
+		text = text.replace(" PA "," press√£o arterial ");
+		text = text.replace(" SCA "," s√≠ndrome coronariana aguda ");
+		text = text.replace(" VDRL "," laborat√≥rio de pesquisa de doen√ßas ven√©reas ");
+		text = text.replace(" ADA "," art√©ria descendente anterior ");
+		text = text.replace(" ACFA "," fibrila√ß√£o atrial cr√¥nica ");
 		text = text.replace(" SL "," sublingual ");
-		text = text.replace(" CI "," cardiopatia isquÍmica ");
+		text = text.replace(" CI "," cardiopatia isqu√™mica ");
 		text = text.replace(" MP "," marca-passo ");
-		text = text.replace(" ITU "," infecÁ„o do trato urin·rio ");
+		text = text.replace(" ITU "," infec√ß√£o do trato urin√°rio ");
 		text = text.replace(" BCP "," broncopneumonia ");
 		text = text.replace(" DM2 "," diabetes melitus tipo 2 ");
 		text = text.replace(" UI "," unidades internacionais ");
-		text = text.replace(" ATB "," antibiÛtico ");
-		text = text.replace(" TS "," tipo sang¸Ìneo ");
-		text = text.replace(" TID "," dilataÁ„o isquÍmica transitÛria ");
-		text = text.replace(" FA "," fibrilaÁ„o atrial ");
-		text = text.replace(" TCE "," tronco de coron·ria esquerda ");
+		text = text.replace(" ATB "," antibi√≥tico ");
+		text = text.replace(" TS "," tipo sang√º√≠neo ");
+		text = text.replace(" TID "," dilata√ß√£o isqu√™mica transit√≥ria ");
+		text = text.replace(" FA "," fibrila√ß√£o atrial ");
+		text = text.replace(" TCE "," tronco de coron√°ria esquerda ");
 		text = text.replace(" II "," 2 ");
-		text = text.replace(" IM "," insuficiÍncia mitral ");
+		text = text.replace(" IM "," insufici√™ncia mitral ");
 		text = text.replace(" PS "," pronto socorro ");
-		text = text.replace(" HIV "," vÌrus da imunodeficiÍncia humana ");
-		text = text.replace(" mmHg "," milÌmetro de merc˙rio ");
-		//text = text.replace(" NA "," sÛdio ");//Retirado 05/09/2012
-		text = text.replace(" HCV "," vÌrus da hepatite C ");
+		text = text.replace(" HIV "," v√≠rus da imunodefici√™ncia humana ");
+		text = text.replace(" mmHg "," mil√≠metro de merc√∫rio ");
+		//text = text.replace(" NA "," s√≥dio ");//Retirado 05/09/2012
+		text = text.replace(" HCV "," v√≠rus da hepatite C ");
 		text = text.replace(" AP "," ausculta pulmonar ");
 		text = text.replace(" IgG "," imunoglobulina G ");
 		text = text.replace(" MIE "," membro inferior esquerdo ");
 		text = text.replace(" PP "," parto prematuro ");
 		text = text.replace(" TP "," trabalho de parto ");
-		text = text.replace(" AC "," ausculta cardÌaca ");
+		text = text.replace(" AC "," ausculta card√≠aca ");
 		text = text.replace(" HMG "," hemograma ");
-		text = text.replace(" ACX "," artÈria coronariana circunflexa ");
+		text = text.replace(" ACX "," art√©ria coronariana circunflexa ");
 		text = text.replace(" EQU "," exame qualitativo de urina ");
 		text = text.replace(" UTI "," Unidade de Terapia Intensiva ");
-		text = text.replace(" IR "," insuficiÍncia renal ");
+		text = text.replace(" IR "," insufici√™ncia renal ");
 		text = text.replace(" SV "," supraventricular ");
-		text = text.replace(" DP "," doenÁa periapical ");
+		text = text.replace(" DP "," doen√ßa periapical ");
 		text = text.replace(" III "," 3 ");
 		text = text.replace(" IV "," 4 ");
 		text = text.replace(" MID "," membro inferior direito ");
-		text = text.replace(" RNM "," resson‚ncia nuclear magnÈtica ");
-		text = text.replace(" RN1 "," recÈm-nato 1 ");
-		text = text.replace(" TSH "," hormÙnio tÌreo-estimulante ");
-		text = text.replace(" CDI "," cardioversor-desfibrilador implant·vel ");
-		text = text.replace(" VM "," ventilaÁ„o mec‚nica ");
+		text = text.replace(" RNM "," resson√¢ncia nuclear magn√©tica ");
+		text = text.replace(" RN1 "," rec√©m-nato 1 ");
+		text = text.replace(" TSH "," horm√¥nio t√≠reo-estimulante ");
+		text = text.replace(" CDI "," cardioversor-desfibrilador implant√°vel ");
+		text = text.replace(" VM "," ventila√ß√£o mec√¢nica ");
 		text = text.replace(" BRE "," bloqueio de ramo esquerdo ");
 		text = text.replace(" IGG "," imunoglobulina G ");
 		text = text.replace(" EDA "," endoscopia digestiva alta ");
-		text = text.replace(" IT "," transiÁ„o interna ");
+		text = text.replace(" IT "," transi√ß√£o interna ");
 		text = text.replace(" BAV "," bloqueio atrioventricular ");
-		text = text.replace(" CHAD "," concentrado de hem·cias adulto ");
+		text = text.replace(" CHAD "," concentrado de hem√°cias adulto ");
 		text = text.replace(" IgM "," imunoglobulina M ");
-		text = text.replace(" DD "," di‚metro diastÛlico ");
-		text = text.replace(" DS "," di‚metro sistÛlico ");
+		text = text.replace(" DD "," di√¢metro diast√≥lico ");
+		text = text.replace(" DS "," di√¢metro sist√≥lico ");
 		text = text.replace(" HPS "," Hospital de Pronto Socorro ");
 		text = text.replace(" CK "," creatinoquinase ");
 		text = text.replace(" MEI "," medicina interna ");
-		text = text.replace(" PC "," parada cardÌaca ");
+		text = text.replace(" PC "," parada card√≠aca ");
 		text = text.replace(" MG "," miligrama ");
 		text = text.replace(" TOXO "," toxoplamose ");
-		text = text.replace(" ADAE "," ·trio direito ·trio esquerdo ");
+		text = text.replace(" ADAE "," √°trio direito √°trio esquerdo ");
 		text = text.replace(" IGM "," imunoglobulina M ");
-		text = text.replace(" SC "," subcut‚neo ");
-		text = text.replace(" CA "," c‚ncer ");
-		text = text.replace(" AV "," ·trio ventricular ");
-		text = text.replace(" BAAR "," bacilo ·lcool ·cido resistente ");
+		text = text.replace(" SC "," subcut√¢neo ");
+		text = text.replace(" CA "," c√¢ncer ");
+		text = text.replace(" AV "," √°trio ventricular ");
+		text = text.replace(" BAAR "," bacilo √°lcool √°cido resistente ");
 		text = text.replace(" BT "," bilirrubina total ");
 		text = text.replace(" EGD "," esofagogastroduodenoscopia ");
 		text = text.replace(" TV "," taquicardias ventriculares ");
 		text = text.replace(" QT "," quimioterapia ");
 		text = text.replace(" TEP "," tromboembolismo pulmonar ");
 		text = text.replace(" TVP "," trombose venosa profunda ");
-		text = text.replace(" TA "," artÈria transversa ");
-		text = text.replace(" CO "," monÛxido de carbono ");
+		text = text.replace(" TA "," art√©ria transversa ");
+		text = text.replace(" CO "," mon√≥xido de carbono ");
 		text = text.replace(" CP "," comprimido ");
-		text = text.replace(" EHCPA "," serviÁo de emergÍncias do Hospital de ClÌnicas de Porto Alegre ");
-		text = text.replace(" EPED "," especialidades pedi·tricas ");
-		text = text.replace(" HBsAg "," antÌgeno de superfÌcie do vÌrus da hepatite B ");
+		text = text.replace(" EHCPA "," servi√ßo de emerg√™ncias do Hospital de Cl√≠nicas de Porto Alegre ");
+		text = text.replace(" EPED "," especialidades pedi√°tricas ");
+		text = text.replace(" HBsAg "," ant√≠geno de superf√≠cie do v√≠rus da hepatite B ");
 		text = text.replace(" BD "," morte cerebral ");
-		text = text.replace(" SSST "," sem supradesnÌvel do segmento ST ");
-		text = text.replace(" DDVE "," di‚metro diastÛlico do ventrÌculo esquerdo ");
-		text = text.replace(" DCE "," depuraÁ„o de creatinina endÛgena ");
+		text = text.replace(" SSST "," sem supradesn√≠vel do segmento ST ");
+		text = text.replace(" DDVE "," di√¢metro diast√≥lico do ventr√≠culo esquerdo ");
+		text = text.replace(" DCE "," depura√ß√£o de creatinina end√≥gena ");
 		text = text.replace(" MsIs "," membros inferiores ");
-		text = text.replace(" SF "," soro fisiolÛgico ");
+		text = text.replace(" SF "," soro fisiol√≥gico ");
 		text = text.replace(" VP "," vasopressina ");
-		text = text.replace(" CPAP "," press„o positiva contÌnua em vias aÈreas ");
-		text = text.replace(" HD "," hemodi·lise ");
-		text = text.replace(" ITB "," Ìndice tornozelo/braÁo ");
-		text = text.replace(" IRA "," insuficiÍncia renal aguda ");
+		text = text.replace(" CPAP "," press√£o positiva cont√≠nua em vias a√©reas ");
+		text = text.replace(" HD "," hemodi√°lise ");
+		text = text.replace(" ITB "," √≠ndice tornozelo/bra√ßo ");
+		text = text.replace(" IRA "," insufici√™ncia renal aguda ");
 		text = text.replace(" TTO "," tratamento ");
-		text = text.replace(" DSVE "," di‚metro sistÛlico do ventrÌculo esquerdo ");
+		text = text.replace(" DSVE "," di√¢metro sist√≥lico do ventr√≠culo esquerdo ");
 		text = text.replace(" IECA "," inibidor da enzima conversora de angiotensina ");
-		text = text.replace(" VEF1 "," volume expiratÛrio forÁado 1 ");
+		text = text.replace(" VEF1 "," volume expirat√≥rio for√ßado 1 ");
 		text = text.replace(" BAVT "," bloqueio atrioventricular total ");
 		text = text.replace(" CF "," colo femoral ");
-		text = text.replace(" DVO "," dist˙rbio ventilatÛrio obstrutivo ");
-		text = text.replace(" RTU "," ressecÁ„o transuretral ");
-		text = text.replace(" EAP "," edema agudo de pulm„o ");
-		text = text.replace(" ICT "," Ìndice cardiotor·cico ");
+		text = text.replace(" DVO "," dist√∫rbio ventilat√≥rio obstrutivo ");
+		text = text.replace(" RTU "," ressec√ß√£o transuretral ");
+		text = text.replace(" EAP "," edema agudo de pulm√£o ");
+		text = text.replace(" ICT "," √≠ndice cardiotor√°cico ");
 		text = text.replace(" MSE "," membro superior esquerdo ");
-		text = text.replace(" ACx "," artÈria circunflexa A ");
-		text = text.replace(" AVE "," acidente vascular encef·lico ");
+		text = text.replace(" ACx "," art√©ria circunflexa A ");
+		text = text.replace(" AVE "," acidente vascular encef√°lico ");
 		text = text.replace(" HMC "," hemocultura ");
 		text = text.replace(" TB "," tuberculose ");
-		text = text.replace(" B2 "," ausculta cardÌaca ");
-		text = text.replace(" FR "," freq¸Íncia respiratÛria ");
-		text = text.replace(" TE "," teste ergomÈtrico ");
-		text = text.replace(" ATC "," angioplastia transluminal coron·ria ");
-		text = text.replace(" IGO "," Ìndice do grau de obesidade ");
-		text = text.replace(" NPT "," nutriÁ„o parenteral total ");
-		text = text.replace(" CD4 "," grupo de diferenciaÁ„o 4 ");
-		text = text.replace(" CMV "," citomegalovÌrus ");
+		text = text.replace(" B2 "," ausculta card√≠aca ");
+		text = text.replace(" FR "," freq√º√™ncia respirat√≥ria ");
+		text = text.replace(" TE "," teste ergom√©trico ");
+		text = text.replace(" ATC "," angioplastia transluminal coron√°ria ");
+		text = text.replace(" IGO "," √≠ndice do grau de obesidade ");
+		text = text.replace(" NPT "," nutri√ß√£o parenteral total ");
+		text = text.replace(" CD4 "," grupo de diferencia√ß√£o 4 ");
+		text = text.replace(" CMV "," citomegalov√≠rus ");
 		text = text.replace(" EEG "," eletroencefalograma ");
-		text = text.replace(" FV "," fibrilaÁ„o ventricular ");
+		text = text.replace(" FV "," fibrila√ß√£o ventricular ");
 		text = text.replace(" RV "," remodelamento ventricular ");
 		text = text.replace(" VI "," 6 ");
 		text = text.replace(" AJ "," antes do jantar ");
-		text = text.replace(" HbsAg "," antÌgeno de superfÌcie da hepatite B ");
-		text = text.replace(" PL "," punÁ„o lombar ");
-		text = text.replace(" PSA "," antÌgeno especÌfico da prÛstata ");
+		text = text.replace(" HbsAg "," ant√≠geno de superf√≠cie da hepatite B ");
+		text = text.replace(" PL "," pun√ß√£o lombar ");
+		text = text.replace(" PSA "," ant√≠geno espec√≠fico da pr√≥stata ");
 		text = text.replace(" RHZ "," rifampicina, isoniazida e pirazinamida ");
-		text = text.replace(" TT "," transtor·cico ");
-		text = text.replace(" CK-MB "," fraÁ„o MB da creatinofosfoquinase ");
+		text = text.replace(" TT "," transtor√°cico ");
+		text = text.replace(" CK-MB "," fra√ß√£o MB da creatinofosfoquinase ");
 		text = text.replace(" MSD "," membro superior direito ");
 		text = text.replace(" T4 "," tiroxina ");
-		text = text.replace(" UTIP "," Unidade de Terapia Intensiva Pedi·trica ");
-		text = text.replace(" AA "," apÛs almoÁo ");
+		text = text.replace(" UTIP "," Unidade de Terapia Intensiva Pedi√°trica ");
+		text = text.replace(" AA "," ap√≥s almo√ßo ");
 		text = text.replace(" ACO "," anticoagulante oral ");
-		text = text.replace(" LDH "," desidrogenase l·ctica ");
-		text = text.replace(" MM "," mieloma m˙ltiplo ");
+		text = text.replace(" LDH "," desidrogenase l√°ctica ");
+		text = text.replace(" MM "," mieloma m√∫ltiplo ");
 		text = text.replace(" NPO "," nada por via oral ");
-		text = text.replace(" TGO "," transaminase glut‚mica oxalacÈtica ");
+		text = text.replace(" TGO "," transaminase glut√¢mica oxalac√©tica ");
 		text = text.replace(" ECGs "," eletrocardiogramas ");
 		text = text.replace(" HVE "," hipertrofia ventricular esquerda ");
-		text = text.replace(" METS "," equivalente metabÛlico ");
-		text = text.replace(" PBF "," perfil biofÌsico fetal ");
+		text = text.replace(" METS "," equivalente metab√≥lico ");
+		text = text.replace(" PBF "," perfil biof√≠sico fetal ");
 		text = text.replace(" SNE "," sonda nasoenteral ");
-		text = text.replace(" CVF "," capacidade vital forÁada ");
+		text = text.replace(" CVF "," capacidade vital for√ßada ");
 		text = text.replace(" DDD "," DDD ");
 		text = text.replace(" HGT "," hemoglicoteste ");
-		text = text.replace(" ILA "," Ìndice de lÌquido amniÛtico ");
+		text = text.replace(" ILA "," √≠ndice de l√≠quido amni√≥tico ");
 		text = text.replace(" OK "," ok ");
 		text = text.replace(" SVD "," sobrecarga ventricular direita ");
-		text = text.replace(" AIT "," ataque isquÍmico transitÛrio ");
+		text = text.replace(" AIT "," ataque isqu√™mico transit√≥rio ");
 		text = text.replace(" HGTs "," hemoglicotestes ");
 		text = text.replace(" MMII "," membros inferiores ");
-		text = text.replace(" MgCx "," ramo marginal da artÈria circunflexa ");
-		text = text.replace(" PAM "," press„o arterial mÈdia ");
-		text = text.replace(" PO "," pÛs-operatÛrio ");
+		text = text.replace(" MgCx "," ramo marginal da art√©ria circunflexa ");
+		text = text.replace(" PAM "," press√£o arterial m√©dia ");
+		text = text.replace(" PO "," p√≥s-operat√≥rio ");
 		text = text.replace(" TET "," tubo endotraqueal ");
-		text = text.replace(" HAP "," hipertens„o arterial pulmonar ");
+		text = text.replace(" HAP "," hipertens√£o arterial pulmonar ");
 		text = text.replace(" MTX "," metotrexato ");
 		text = text.replace(" PMT "," prematuro ");
-		text = text.replace(" PPL "," press„o pleural ");
-		text = text.replace(" PUC "," PontifÌcia Universidade CatÛlica ");
+		text = text.replace(" PPL "," press√£o pleural ");
+		text = text.replace(" PUC "," Pontif√≠cia Universidade Cat√≥lica ");
 		text = text.replace(" RDT "," radioterapia ");
-		text = text.replace(" SIDA "," sÌndrome da imunodeficiÍncia adquirida ");
+		text = text.replace(" SIDA "," s√≠ndrome da imunodefici√™ncia adquirida ");
 		text = text.replace(" SN "," sistema nervoso ");
-		text = text.replace(" VSG "," velocidade de sedimentaÁ„o globular ");
-		text = text.replace(" VSR "," vÌrus sincicial respiratÛrio ");
+		text = text.replace(" VSG "," velocidade de sedimenta√ß√£o globular ");
+		text = text.replace(" VSR "," v√≠rus sincicial respirat√≥rio ");
 		text = text.replace(" BR "," bloqueio de ramo ");
-		text = text.replace(" CE "," coron·ria esquerda ");
+		text = text.replace(" CE "," coron√°ria esquerda ");
 		text = text.replace(" DN "," data do nascimento ");
 		text = text.replace(" ECA "," enzima conversora de angotensina ");
-		text = text.replace(" EEF "," escala de expressıes faciais ");
+		text = text.replace(" EEF "," escala de express√µes faciais ");
 		text = text.replace(" FNB "," fenobarbital ");
-		text = text.replace(" NS "," n„o significativo ");
+		text = text.replace(" NS "," n√£o significativo ");
 		text = text.replace(" NTG "," nitroglicerina ");
-		text = text.replace(" PROX "," prÛximo ");
-		text = text.replace(" SST "," supradesnÌvel do segmento ST ");
-		text = text.replace(" TGP "," transaminase glut‚mico-pir˙vica ");
-		text = text.replace(" TIG "," imunoglobulina antitet‚nica humana ");
-		text = text.replace(" AINE "," antiinflamatÛrio n„o-esteroidal ");
-		text = text.replace(" CN "," catÈter nasal ");
-		text = text.replace(" CPRE "," colangiopancreatografia retrÛgrada endoscÛpica ");
+		text = text.replace(" PROX "," pr√≥ximo ");
+		text = text.replace(" SST "," supradesn√≠vel do segmento ST ");
+		text = text.replace(" TGP "," transaminase glut√¢mico-pir√∫vica ");
+		text = text.replace(" TIG "," imunoglobulina antitet√¢nica humana ");
+		text = text.replace(" AINE "," antiinflamat√≥rio n√£o-esteroidal ");
+		text = text.replace(" CN "," cat√©ter nasal ");
+		text = text.replace(" CPRE "," colangiopancreatografia retr√≥grada endosc√≥pica ");
 		text = text.replace(" HDA "," hemorragia digestiva alta ");
 		text = text.replace(" LCR "," licor ");
-		text = text.replace(" Mg-Cx "," ramo marginal da artÈria circunflexa ");
-		text = text.replace(" PBE "," peritonite bacteriana espont‚nea ");
+		text = text.replace(" Mg-Cx "," ramo marginal da art√©ria circunflexa ");
+		text = text.replace(" PBE "," peritonite bacteriana espont√¢nea ");
 		text = text.replace(" PN "," pneumonia ");
-		text = text.replace(" BCF "," batimentos cardÌacos fetais ");
+		text = text.replace(" BCF "," batimentos card√≠acos fetais ");
 		text = text.replace(" CV "," carga viral ");
 		text = text.replace(" HB "," hemoglobina ");
-		text = text.replace(" IAo "," insuficiÍncia aÛrtica ");
+		text = text.replace(" IAo "," insufici√™ncia a√≥rtica ");
 		text = text.replace(" LSD "," lobo superior direito ");
-		text = text.replace(" RxTx "," raio X de tÛrax ");
-		text = text.replace(" SAMU "," ServiÁo de Atendimento MÈdico de UrgÍncia ");
+		text = text.replace(" RxTx "," raio X de t√≥rax ");
+		text = text.replace(" SAMU "," Servi√ßo de Atendimento M√©dico de Urg√™ncia ");
 		text = text.replace(" x/dia "," vezes ao dia ");
-		text = text.replace(" AD "," ·trio direito ");
+		text = text.replace(" AD "," √°trio direito ");
 		text = text.replace(" ARV "," anti-retro viral ");
 		text = text.replace(" AVCs "," acidentes vasculares cerebrais ");
-		text = text.replace(" CCA "," cardiopatias congÍnitas em adultos ");
-		text = text.replace(" CEA "," antÌgeno carcinoembrion·rio ");
-		text = text.replace(" CIV "," comunicaÁ„o interventricular ");
-		text = text.replace(" DRGE "," doenÁa do refluxo gastresof·gico ");
+		text = text.replace(" CCA "," cardiopatias cong√™nitas em adultos ");
+		text = text.replace(" CEA "," ant√≠geno carcinoembrion√°rio ");
+		text = text.replace(" CIV "," comunica√ß√£o interventricular ");
+		text = text.replace(" DRGE "," doen√ßa do refluxo gastresof√°gico ");
 		text = text.replace(" GGT "," gama GT ");
-		text = text.replace(" HBSAG "," antÌgeno de superfÌcie para hepatite B ");
-		text = text.replace(" HF "," histÛria familiar ");
+		text = text.replace(" HBSAG "," ant√≠geno de superf√≠cie para hepatite B ");
+		text = text.replace(" HF "," hist√≥ria familiar ");
 		text = text.replace(" I-ECA "," inibidor da enzima conversora de angiotensina ");
-		text = text.replace(" IAMs "," infarto agudo do mioc·rdio ");
-		text = text.replace(" IVC "," insuficiÍncia venosa crÙnica ");
-		text = text.replace(" MgCX "," ramo moarginal da artÈria circunflexa ");
-		text = text.replace(" SNG "," sonda nasog·strica ");
+		text = text.replace(" IAMs "," infarto agudo do mioc√°rdio ");
+		text = text.replace(" IVC "," insufici√™ncia venosa cr√¥nica ");
+		text = text.replace(" MgCX "," ramo moarginal da art√©ria circunflexa ");
+		text = text.replace(" SNG "," sonda nasog√°strica ");
 		text = text.replace(" TBC "," tuberculose ");
-		text = text.replace(" VO2 "," volume de oxigÍnio ");
+		text = text.replace(" VO2 "," volume de oxig√™nio ");
 		text = text.replace(" B12 "," B12 ");
 		text = text.replace(" BRD "," bloqueio de ramo direito ");
-		text = text.replace(" EA "," emergÍncia ambulatorial ");
+		text = text.replace(" EA "," emerg√™ncia ambulatorial ");
 		text = text.replace(" FAN "," fator anti-nuclear ");
-		text = text.replace(" FAV "," favor·vel ");
-		text = text.replace(" HNSC "," Hospital Nossa Senhora da ConceiÁ„o ");
-		text = text.replace(" MAP "," press„o mÈdia de vias aÈreas ");
+		text = text.replace(" FAV "," favor√°vel ");
+		text = text.replace(" HNSC "," Hospital Nossa Senhora da Concei√ß√£o ");
+		text = text.replace(" MAP "," press√£o m√©dia de vias a√©reas ");
 		text = text.replace(" NEG "," negativo ");
-		text = text.replace(" OMA "," otite mÈdia aguda ");
+		text = text.replace(" OMA "," otite m√©dia aguda ");
 		text = text.replace(" QMT "," quimioterapia ");
-		text = text.replace(" S-PP "," sistÛlico - parede posterior ");
-		text = text.replace(" TX "," tÛrax ");
+		text = text.replace(" S-PP "," sist√≥lico - parede posterior ");
+		text = text.replace(" TX "," t√≥rax ");
 		text = text.replace(" VCI "," veia cava inferior ");
-		text = text.replace(" VCM "," volume corpuscular mÈdio ");
+		text = text.replace(" VCM "," volume corpuscular m√©dio ");
 		text = text.replace(" C3 "," complemento 3 ");
 		text = text.replace(" CIG "," cigarro ");
-		text = text.replace(" CPER "," colangiopancreatografia endoscÛpica retrÛgrada ");
+		text = text.replace(" CPER "," colangiopancreatografia endosc√≥pica retr√≥grada ");
 		text = text.replace(" DIPI "," dipiridamol ");
 		text = text.replace(" EX "," ex ");
-		text = text.replace(" HPB "," hiperplasia prost·tica benigna ");
+		text = text.replace(" HPB "," hiperplasia prost√°tica benigna ");
 		text = text.replace(" IVUS "," ultra-sonografia intravascular ");
-		text = text.replace(" NBZ "," nebulizaÁ„o ");
+		text = text.replace(" NBZ "," nebuliza√ß√£o ");
 		text = text.replace(" PIG "," pequeno para idade gestacional ");
-		text = text.replace(" RM "," resson‚ncia magnÈtica ");
+		text = text.replace(" RM "," resson√¢ncia magn√©tica ");
 		text = text.replace(" TCC "," tomografia computadorizada cardiovascular ");
-		text = text.replace(" TSM "," tipo sang¸Ìneo da m„e ");
+		text = text.replace(" TSM "," tipo sang√º√≠neo da m√£e ");
 		text = text.replace(" VLP "," videolaparoscopia ");
 		text = text.replace(" AIG "," adequado para a idade gestacional ");
-		text = text.replace(" AINES "," antiinflamatÛrios n„o-esteroidais ");
+		text = text.replace(" AINES "," antiinflamat√≥rios n√£o-esteroidais ");
 		text = text.replace(" CAPS "," Centro de Atendimento Psicoprofissionalizante ");
-		text = text.replace(" CEC "," circulaÁ„o extracorpÛrea ");
-		text = text.replace(" CIPED "," Centro de InvestigaÁ„o de DoenÁas Pedi·tricas ");
+		text = text.replace(" CEC "," circula√ß√£o extracorp√≥rea ");
+		text = text.replace(" CIPED "," Centro de Investiga√ß√£o de Doen√ßas Pedi√°tricas ");
 		text = text.replace(" CT "," centro de tratamento ");
 		text = text.replace(" DG "," ramo diagonal ").replace(" Dg "," ramo diagonal ");//Adicionado 05/09/2012
-		text = text.replace(" DPCD "," di·lise peritoneal continuada ");
-		text = text.replace(" ESV "," extra-sÌstoles ventriculares ");
-		text = text.replace(" IMi "," infarto do mioc·rdio ");
-		text = text.replace(" IVAS "," infecÁıes das vias aÈreas superiores ");
-		text = text.replace(" PEG "," prÈ-ecl‚mpsia grave ");
+		text = text.replace(" DPCD "," di√°lise peritoneal continuada ");
+		text = text.replace(" ESV "," extra-s√≠stoles ventriculares ");
+		text = text.replace(" IMi "," infarto do mioc√°rdio ");
+		text = text.replace(" IVAS "," infec√ß√µes das vias a√©reas superiores ");
+		text = text.replace(" PEG "," pr√©-ecl√¢mpsia grave ");
 		text = text.replace(" R1 "," residente 1 ");
 		text = text.replace(" RG "," regime geral ");
-		text = text.replace(" RxT "," raio X de tÛrax ");
-		text = text.replace(" VD-AD "," ventrÌculo direito - ·trio direito ");
-		text = text.replace(" VEF "," volume expiratÛrio forÁado ");
+		text = text.replace(" RxT "," raio X de t√≥rax ");
+		text = text.replace(" VD-AD "," ventr√≠culo direito - √°trio direito ");
+		text = text.replace(" VEF "," volume expirat√≥rio for√ßado ");
 		text = text.replace(" mL "," mililitro ");
-		text = text.replace(" ABD "," detecÁ„o autom·tica de fronteira ");
-		text = text.replace(" ACTH "," hormÙnio adrenocorticotrÛfico ");
-		text = text.replace(" AMO "," alteraÁ„o de medula Ûssea ");
+		text = text.replace(" ABD "," detec√ß√£o autom√°tica de fronteira ");
+		text = text.replace(" ACTH "," horm√¥nio adrenocorticotr√≥fico ");
+		text = text.replace(" AMO "," altera√ß√£o de medula √≥ssea ");
 		text = text.replace(" BB "," beta-bloqueador ");
 		text = text.replace(" BI "," duas ");
-		text = text.replace(" BIA "," bal„o intra-aÛrtico ");
-		text = text.replace(" BX "," biÛpsia ");
+		text = text.replace(" BIA "," bal√£o intra-a√≥rtico ");
+		text = text.replace(" BX "," bi√≥psia ");
 		text = text.replace(" C4 "," complemento 4 ");
-		text = text.replace(" CEN "," catÈter endonasal ");
-		text = text.replace(" CKMB "," fraÁ„o MB da creatinofosfoquinase ");
+		text = text.replace(" CEN "," cat√©ter endonasal ");
+		text = text.replace(" CKMB "," fra√ß√£o MB da creatinofosfoquinase ");
 		text = text.replace(" DI "," dois ");
 		text = text.replace(" DIP "," dipiridamol ");
 		text = text.replace(" HP "," Helicobacter pylori ");
 		text = text.replace(" LID "," lobo inferior direito ");
-		text = text.replace(" MV "," murm˙rio vesicular ");
-		text = text.replace(" REED "," radiograma de esÙfago, estÙmago e duodeno ");
-		text = text.replace(" RNI "," raz„o normalizada internacional ");
+		text = text.replace(" MV "," murm√∫rio vesicular ");
+		text = text.replace(" REED "," radiograma de es√¥fago, est√¥mago e duodeno ");
+		text = text.replace(" RNI "," raz√£o normalizada internacional ");
 		text = text.replace(" STK "," streptoquinase ");
 		text = text.replace(" T2 "," tempo 2 ");
 		text = text.replace(" TPP "," trabalho de parto prematuro ");
-		text = text.replace(" VPA "," valproato de sÛdio ");
+		text = text.replace(" VPA "," valproato de s√≥dio ");
 		text = text.replace(" mCi "," milicurie ");
 		text = text.replace(" mg/dl "," miligrama/decilitro ");
-		text = text.replace(" AIH "," AutorizaÁ„o de InternaÁ„o Hospitalar ");
+		text = text.replace(" AIH "," Autoriza√ß√£o de Interna√ß√£o Hospitalar ");
 		text = text.replace(" BEG "," bom estado geral ");
 		text = text.replace(" CBZ "," carbamazepina ");
 		text = text.replace(" CHILD "," Child ");
-		text = text.replace(" CIA "," comunicaÁ„o interatrial ");
+		text = text.replace(" CIA "," comunica√ß√£o interatrial ");
 		text = text.replace(" D3 "," dia 3 ");
-		text = text.replace(" DNA "," ·cido desoxirribonuclÈico ");
+		text = text.replace(" DNA "," √°cido desoxirribonucl√©ico ");
 		text = text.replace(" ENMG "," eletroneuromiografia ");
 		text = text.replace(" ESQ "," esquerdo ");
-		text = text.replace(" ESSV "," extra-sÌstoles supraventriculares ");
-		text = text.replace(" FBC "," freq¸Íncia do batimento ciliar ");
-		text = text.replace(" FS "," freq¸Íncia sinusal ");
-		text = text.replace(" HT "," hematÛcrito ");
-		text = text.replace(" ITUs "," infecÁıes do trato urin·rio ");
-		text = text.replace(" ITr "," insuficiÍncia tric˙spide ");
+		text = text.replace(" ESSV "," extra-s√≠stoles supraventriculares ");
+		text = text.replace(" FBC "," freq√º√™ncia do batimento ciliar ");
+		text = text.replace(" FS "," freq√º√™ncia sinusal ");
+		text = text.replace(" HT "," hemat√≥crito ");
+		text = text.replace(" ITUs "," infec√ß√µes do trato urin√°rio ");
+		text = text.replace(" ITr "," insufici√™ncia tric√∫spide ");
 		text = text.replace(" LT "," leucograma total ");
 		text = text.replace(" PTU "," propiltiouracil ");
-		text = text.replace(" QD "," quantidade di·ria ");
-		text = text.replace(" QN "," quando necess·rio ");
+		text = text.replace(" QD "," quantidade di√°ria ");
+		text = text.replace(" QN "," quando necess√°rio ");
 		text = text.replace(" R2 "," residente 2 ");
 		text = text.replace(" RS "," ritmo sinusal ");
-		text = text.replace(" RXT "," raio X de tÛrax ");
+		text = text.replace(" RXT "," raio X de t√≥rax ");
 		text = text.replace(" SNC "," sistema nervoso central ");
-		text = text.replace(" SO "," sala de observaÁ„o ");
+		text = text.replace(" SO "," sala de observa√ß√£o ");
 		text = text.replace(" SVE "," sobrecarga ventricular esquerda ");
-		text = text.replace(" VD/AD "," ventrÌculo direito / ·trio direito ");
-		text = text.replace(" VPP "," ventilaÁ„o com press„o positiva ");
-		text = text.replace(" s/pp "," sistÛlico / parede posterior ");
+		text = text.replace(" VD/AD "," ventr√≠culo direito / √°trio direito ");
+		text = text.replace(" VPP "," ventila√ß√£o com press√£o positiva ");
+		text = text.replace(" s/pp "," sist√≥lico / parede posterior ");
 		text = text.replace(" AAA "," aneurisma da aorta abdominal ");
 		text = text.replace(" AB "," AB ");
-		text = text.replace(" AITs "," ataques isquÍmicos transitÛrios ");
-		text = text.replace(" AMBU "," ambulatÛrio ");
+		text = text.replace(" AITs "," ataques isqu√™micos transit√≥rios ");
+		text = text.replace(" AMBU "," ambulat√≥rio ");
 		text = text.replace(" BQLT "," bronquiolite ");
-		text = text.replace(" CO2 "," diÛxido de carbono ");
-		text = text.replace(" CTC "," corticÛide ");
-		text = text.replace(" DPN "," dispnÈia paroxÌstica noturna ");
+		text = text.replace(" CO2 "," di√≥xido de carbono ");
+		text = text.replace(" CTC "," cortic√≥ide ");
+		text = text.replace(" DPN "," dispn√©ia parox√≠stica noturna ");
 		text = text.replace(" DR "," doutor ");
-		text = text.replace(" GH "," hormÙnio do crescimento ");
-		text = text.replace(" hdl "," lipoproteÌnas de alta densidade ");
-		text = text.replace(" ICE "," insuficiÍncia congestiva esquerda ");
-		text = text.replace(" IFI "," imunofluorescÍncia indireta ");
+		text = text.replace(" GH "," horm√¥nio do crescimento ");
+		text = text.replace(" hdl "," lipoprote√≠nas de alta densidade ");
+		text = text.replace(" ICE "," insufici√™ncia congestiva esquerda ");
+		text = text.replace(" IFI "," imunofluoresc√™ncia indireta ");
 		text = text.replace(" KG "," quilograma ");
-		text = text.replace(" LBA "," lavado brÙnquico alveolar ");
-		text = text.replace(" LDL "," lipoproteÌnas de baixa densidade ");
-		text = text.replace(" M0 "," medula Ûssea ");
-		text = text.replace(" PAS "," press„o arterial sistÍmica ");
-		text = text.replace(" PFH "," prova de funÁ„o hep·tica ");
-		text = text.replace(" PSP "," punÁ„o suprap˙bica ");
-		text = text.replace(" PT "," perÌmetro ");
-		text = text.replace(" QI "," quociente de inteligÍncia ");
-		text = text.replace(" RMN "," resson‚ncia magnÈtica ");
+		text = text.replace(" LBA "," lavado br√¥nquico alveolar ");
+		text = text.replace(" LDL "," lipoprote√≠nas de baixa densidade ");
+		text = text.replace(" M0 "," medula √≥ssea ");
+		text = text.replace(" PAS "," press√£o arterial sist√™mica ");
+		text = text.replace(" PFH "," prova de fun√ß√£o hep√°tica ");
+		text = text.replace(" PSP "," pun√ß√£o suprap√∫bica ");
+		text = text.replace(" PT "," per√≠metro ");
+		text = text.replace(" QI "," quociente de intelig√™ncia ");
+		text = text.replace(" RMN "," resson√¢ncia magn√©tica ");
 		text = text.replace(" SG "," assobrevida global ");
 		text = text.replace(" SVs "," sinais vitais ");
 		text = text.replace(" T1 "," tempo 1 ");
 		text = text.replace(" i-ECA "," inibidores da enzima conversora de angiotensina ");
 		text = text.replace(" iECA "," inibidores da enzima conversora de angiotensina ");
 		text = text.replace(" mcg/d "," microgramas/decilitro ");
-		text = text.replace(" ACM "," artÈria cerebral mÈdia ");
-		text = text.replace(" ACTPs "," angioplastias coronarianas transluminais percut‚neas ");
-		text = text.replace(" AESP "," atividade elÈtrica sem pulso ");
-		text = text.replace(" AIRV "," alteraÁıes inespecÌficas da repolarizaÁ„o ventricular ");
+		text = text.replace(" ACM "," art√©ria cerebral m√©dia ");
+		text = text.replace(" ACTPs "," angioplastias coronarianas transluminais percut√¢neas ");
+		text = text.replace(" AESP "," atividade el√©trica sem pulso ");
+		text = text.replace(" AIRV "," altera√ß√µes inespec√≠ficas da repolariza√ß√£o ventricular ");
 		text = text.replace(" ANTI "," anti ");
-		text = text.replace(" AVCi "," acidente vascular cerebral isquÍmico ");
-		text = text.replace(" AVEi "," acidente vascular encef·lico isquÍmico ");
+		text = text.replace(" AVCi "," acidente vascular cerebral isqu√™mico ");
+		text = text.replace(" AVEi "," acidente vascular encef√°lico isqu√™mico ");
 		text = text.replace(" AZT "," zidovudina ");
 		text = text.replace(" B6 "," B6 ");
 		text = text.replace(" BQTE "," bronquite ");
-		text = text.replace(" CCT "," carcinoma de cÈlulas transicionais ");
+		text = text.replace(" CCT "," carcinoma de c√©lulas transicionais ");
 		text = text.replace(" DM1 "," diabetes melitus tipo I ");
-		text = text.replace(" EBV "," Epstein-Barr vÌrus ");
+		text = text.replace(" EBV "," Epstein-Barr v√≠rus ");
 		text = text.replace(" EGDA "," anastomose esofagogastroduodenal ");
 		text = text.replace(" FAF "," arma de fogo ");
-		text = text.replace(" HBV "," vÌrus da hepatite B ");
-		text = text.replace(" HCG "," hormÙnio da gonadotrofina coriÙnica ");
+		text = text.replace(" HBV "," v√≠rus da hepatite B ");
+		text = text.replace(" HCG "," horm√¥nio da gonadotrofina cori√¥nica ");
 		text = text.replace(" HMV "," Hospital Moinhos de Vento ");
-		text = text.replace(" HSL "," Hospital S„o Lucas ");
-		text = text.replace(" IMC "," Ìndice de massa corporal ");
-		text = text.replace(" LH "," hormÙnio luteinizante ");
+		text = text.replace(" HSL "," Hospital S√£o Lucas ");
+		text = text.replace(" IMC "," √≠ndice de massa corporal ");
+		text = text.replace(" LH "," horm√¥nio luteinizante ");
 		text = text.replace(" LIE "," lobo inferior esquerdo ");
-		text = text.replace(" MAM "," artÈria mam·ria ");
-		text = text.replace(" MED "," mÈdio ");
-		text = text.replace(" METs "," equivalentes metabÛlicos ");
-		text = text.replace(" MGCX "," ramo marginal da artÈria circunflexa ");
-		text = text.replace(" OAA "," obstruÁ„o arterial aguda ");
+		text = text.replace(" MAM "," art√©ria mam√°ria ");
+		text = text.replace(" MED "," m√©dio ");
+		text = text.replace(" METs "," equivalentes metab√≥licos ");
+		text = text.replace(" MGCX "," ramo marginal da art√©ria circunflexa ");
+		text = text.replace(" OAA "," obstru√ß√£o arterial aguda ");
 		text = text.replace(" P/C "," polifenol/carboidrato ");
-		text = text.replace(" PAAF "," punÁ„o aspirativa por agulha fina ");
-		text = text.replace(" PCRs "," paradas cardio-respiratÛrias ");
+		text = text.replace(" PAAF "," pun√ß√£o aspirativa por agulha fina ");
+		text = text.replace(" PCRs "," paradas cardio-respirat√≥rias ");
 		text = text.replace(" PNA "," pielonefrite aguda ");
 		text = text.replace(" R-x "," raio X ");
-		text = text.replace(" SIADH "," sÌndrome de secreÁ„o inapropriada de hormÙnio anti-diurÈtico ");
+		text = text.replace(" SIADH "," s√≠ndrome de secre√ß√£o inapropriada de horm√¥nio anti-diur√©tico ");
 		text = text.replace(" SK "," estreptoquinase ");
-		text = text.replace(" SOP "," sÌndrome do ov·rio policÌstico ");
-		text = text.replace(" SUS "," Sistema ⁄nico de Sa˙de ");
+		text = text.replace(" SOP "," s√≠ndrome do ov√°rio polic√≠stico ");
+		text = text.replace(" SUS "," Sistema √önico de Sa√∫de ");
 		text = text.replace(" TGI "," trato gastrointestinal ");
-		text = text.replace(" TMO "," transplante de medula Ûssea ");
+		text = text.replace(" TMO "," transplante de medula √≥ssea ");
 		text = text.replace(" TPO "," tireoperoxidase ");
-		text = text.replace(" TVNS "," taquicardia ventricular n„o sustentada ");
-		text = text.replace(" VD>AD "," ventrÌculo direito > ·trio direito ");
-		text = text.replace(" cm2 "," centÌmetro quadrado ");
-		text = text.replace(" o2 "," oxigÍnio ");
+		text = text.replace(" TVNS "," taquicardia ventricular n√£o sustentada ");
+		text = text.replace(" VD>AD "," ventr√≠culo direito > √°trio direito ");
+		text = text.replace(" cm2 "," cent√≠metro quadrado ");
+		text = text.replace(" o2 "," oxig√™nio ");
 		text = text.replace(" ACV "," aparelho cardiovascular ");
 		text = text.replace(" AMPI "," ampicilina ");
-		text = text.replace(" BMO "," biÛpsia de medula Ûssea ");
-		text = text.replace(" CIE "," carÛtida interna esquerda ");
-		text = text.replace(" CM "," centÌmetro ");
-		text = text.replace(" CPAPn "," press„o positiva contÌnua em vias aÈreas nasal ");
+		text = text.replace(" BMO "," bi√≥psia de medula √≥ssea ");
+		text = text.replace(" CIE "," car√≥tida interna esquerda ");
+		text = text.replace(" CM "," cent√≠metro ");
+		text = text.replace(" CPAPn "," press√£o positiva cont√≠nua em vias a√©reas nasal ");
 		text = text.replace(" CR "," creatinina ");
 		text = text.replace(" DMG "," diabetes melitus gestacional ");
-		text = text.replace(" DMSA "," ·cido dimercaptosuccÌnico ");
+		text = text.replace(" DMSA "," √°cido dimercaptosucc√≠nico ");
 		text = text.replace(" DRA "," doutora ");
 		text = text.replace(" DV "," densitovolumetria ");
-		text = text.replace(" DVP "," derivaÁ„o ventrÌculo peritoneal ");
-		text = text.replace(" EMG "," emergÍncia ");
-		text = text.replace(" FEVE "," fraÁ„o de ejeÁ„o do ventrÌculo esquerdo ");
+		text = text.replace(" DVP "," deriva√ß√£o ventr√≠culo peritoneal ");
+		text = text.replace(" EMG "," emerg√™ncia ");
+		text = text.replace(" FEVE "," fra√ß√£o de eje√ß√£o do ventr√≠culo esquerdo ");
 		text = text.replace(" FK "," trakolimus ");
-		text = text.replace(" FiO2 "," fraÁ„o de oxigÍnio inspirado ");
+		text = text.replace(" FiO2 "," fra√ß√£o de oxig√™nio inspirado ");
 		text = text.replace(" GA "," gasometria ");
 		text = text.replace(" HCO3 "," bicarbonato ");
 		text = text.replace(" HPIV "," hemorragia peri-intraventricular ");
 		text = text.replace(" HS "," horas ");
-		text = text.replace(" HTLV "," vÌrus T-linfotrÛpico humano ");
-		text = text.replace(" ISQ "," isquÍmico ");
+		text = text.replace(" HTLV "," v√≠rus T-linfotr√≥pico humano ");
+		text = text.replace(" ISQ "," isqu√™mico ");
 		text = text.replace(" KTTP "," tempo de tromboplastina parcialmente ativada ");
-		text = text.replace(" LMA "," leucemia mielÛide aguda ");
-		text = text.replace(" LOC "," l˙cido, orientado e consciente ");
+		text = text.replace(" LMA "," leucemia miel√≥ide aguda ");
+		text = text.replace(" LOC "," l√∫cido, orientado e consciente ");
 		text = text.replace(" LSE "," lobo superior esquerdo ");
-		text = text.replace(" MA "," meningites assÈpticas ");
-		text = text.replace(" MAC "," ambulatÛrio de cardiologia ");
-		text = text.replace(" MM-DA "," mam·ria - descendente anterior ");
+		text = text.replace(" MA "," meningites ass√©pticas ");
+		text = text.replace(" MAC "," ambulat√≥rio de cardiologia ");
+		text = text.replace(" MM-DA "," mam√°ria - descendente anterior ");
 		text = text.replace(" MMIIs "," membros inferiores ");
-		text = text.replace(" MO "," medula Ûssea ");
+		text = text.replace(" MO "," medula √≥ssea ");
 		text = text.replace(" MT "," metiltestosterona ");
-		text = text.replace(" MTD "," dose m·xima tolerada ");
+		text = text.replace(" MTD "," dose m√°xima tolerada ");
 		text = text.replace(" NEO "," neonatal ");
 		text = text.replace(" NEURO "," neurologia ");
-		text = text.replace(" NPS "," nitroprussiato de sÛdio ");
+		text = text.replace(" NPS "," nitroprussiato de s√≥dio ");
 		text = text.replace(" ORL "," otorrinolaringologia ");
 		text = text.replace(" PLAQ "," plaquetas ");
 		text = text.replace(" PPNL "," propranolol ");
-		text = text.replace(" PTH "," paratormÙnio ");
-		text = text.replace(" PVC "," press„o venosa central ");
-		text = text.replace(" PaO2 "," press„o arterial de oxigÍnio ");
-		text = text.replace(" RA "," rÍmora atrial ");
-		text = text.replace(" RDW "," amplitude de distribuiÁ„o eritrocit·ria ");
+		text = text.replace(" PTH "," paratorm√¥nio ");
+		text = text.replace(" PVC "," press√£o venosa central ");
+		text = text.replace(" PaO2 "," press√£o arterial de oxig√™nio ");
+		text = text.replace(" RA "," r√™mora atrial ");
+		text = text.replace(" RDW "," amplitude de distribui√ß√£o eritrocit√°ria ");
 		text = text.replace(" RH "," rifampicina e isoniazida ");
 		text = text.replace(" RxABD "," raio X abdominal ");
 		text = text.replace(" SFA "," sofrimento fetal agudo ");
 		text = text.replace(" SM "," silagem de milho ");
-		text = text.replace(" SPA "," ServiÁo de Pronto Atendimento ");
-		text = text.replace(" SpO2 "," saturaÁ„o percut‚nea de oxigÍnio ");
+		text = text.replace(" SPA "," Servi√ßo de Pronto Atendimento ");
+		text = text.replace(" SpO2 "," satura√ß√£o percut√¢nea de oxig√™nio ");
 		text = text.replace(" TAB "," transtorno afetivo bipolar ");
 		text = text.replace(" TAP "," tempo de atividade de protrombina ");
 		text = text.replace(" TARV "," terapia antiretroviral ");
-		text = text.replace(" TG "," triglicerÌdeos ");
-		text = text.replace(" TILT "," teste de inclinaÁ„o ortost·tica ");
+		text = text.replace(" TG "," triglicer√≠deos ");
+		text = text.replace(" TILT "," teste de inclina√ß√£o ortost√°tica ");
 		text = text.replace(" UCA "," cultura de urina ");
-		text = text.replace(" UCI "," unidade de cuidados intermedi·rios ");
+		text = text.replace(" UCI "," unidade de cuidados intermedi√°rios ");
 		text = text.replace(" URC "," urocultura ");
 		text = text.replace(" US "," ultra-sonografia ");
 		text = text.replace(" UTIN "," Unidade de Terapia Intensiva Neonatal ");
-		text = text.replace(" VD28 "," ventrÌculo direito 28 ");
-		text = text.replace(" pH "," potencial hidrogeniÙnico ");
+		text = text.replace(" VD28 "," ventr√≠culo direito 28 ");
+		text = text.replace(" pH "," potencial hidrogeni√¥nico ");
 		text = text.replace(" A2 "," amostra 2 ");
-		text = text.replace(" ADC "," coeficiente de difus„o aparente ");
-		text = text.replace(" AMgCx "," ramo marginal da artÈria circunflexa ");
-		text = text.replace(" ANCA "," anticorpo anticitoplasma de neutrÛfilo ");
-		text = text.replace(" ARV¥s "," antiretrovirais ");
-		text = text.replace(" BFM "," Berlin-Frankfurt-M¸nster ");
+		text = text.replace(" ADC "," coeficiente de difus√£o aparente ");
+		text = text.replace(" AMgCx "," ramo marginal da art√©ria circunflexa ");
+		text = text.replace(" ANCA "," anticorpo anticitoplasma de neutr√≥filo ");
+		text = text.replace(" ARV≈Ωs "," antiretrovirais ");
+		text = text.replace(" BFM "," Berlin-Frankfurt-M√ºnster ");
 		text = text.replace(" BQLTE "," bronquiolite ");
-		text = text.replace(" CAPD "," di·lise peritoneal ambulatorial crÙnica ");
-		text = text.replace(" CC "," cardiopatias congÍnitas ");
+		text = text.replace(" CAPD "," di√°lise peritoneal ambulatorial cr√¥nica ");
+		text = text.replace(" CC "," cardiopatias cong√™nitas ");
 		text = text.replace(" CHC "," carcinoma hepatocelular ");
 		text = text.replace(" CPT "," capacidade pulmonar total ");
 		text = text.replace(" CREAT "," creatinina ");
-		text = text.replace(" CTICC "," Centro de Tratamento Intensivo ClÌnico-cir˙rgico ");
-		text = text.replace(" DAOP "," doenÁa arterial obstrutiva perifÈrica ");
-		text = text.replace(" DBPOC "," doenÁa broncopulmonar obstrutiva crÙnica ");
-		text = text.replace(" DC "," doenÁa celÌaca ");
+		text = text.replace(" CTICC "," Centro de Tratamento Intensivo Cl√≠nico-cir√∫rgico ");
+		text = text.replace(" DAOP "," doen√ßa arterial obstrutiva perif√©rica ");
+		text = text.replace(" DBPOC "," doen√ßa broncopulmonar obstrutiva cr√¥nica ");
+		text = text.replace(" DC "," doen√ßa cel√≠aca ");
 		text = text.replace(" DDI "," DDI ");
-		text = text.replace(" DMO "," densidade mineral Ûssea ");
-		text = text.replace(" DRC "," doenÁa renal crÙnica ");
-		text = text.replace(" DX "," diagnÛstico ");
-		text = text.replace(" EF "," exame fÌsico ");
+		text = text.replace(" DMO "," densidade mineral √≥ssea ");
+		text = text.replace(" DRC "," doen√ßa renal cr√¥nica ");
+		text = text.replace(" DX "," diagn√≥stico ");
+		text = text.replace(" EF "," exame f√≠sico ");
 		text = text.replace(" EFZ "," efavirenz ");
-		text = text.replace(" ELLA "," endoprÛtese arterial de perna esquerda ");
-		text = text.replace(" EPF "," exame parasitolÛgico de fezes ");
+		text = text.replace(" ELLA "," endopr√≥tese arterial de perna esquerda ");
+		text = text.replace(" EPF "," exame parasitol√≥gico de fezes ");
 		text = text.replace(" EPO "," eritropoetina ");
-		text = text.replace(" EQ "," esquema quimioter·pico ");
+		text = text.replace(" EQ "," esquema quimioter√°pico ");
 		text = text.replace(" ESBL "," produtoras de beta-lactamase com espectro estendido ");
 		text = text.replace(" FOP "," forame oval patente ");
-		text = text.replace(" FSH "," hormÙnio folÌculo estimulante ");
-		text = text.replace(" G3 "," gestaÁ„o 3 ");
-		text = text.replace(" HELLP "," anemia hemolÌtica, nÌveis elevados de enzimas hep·ticas e contagem baixa de plaquetas ");
-		text = text.replace(" HMP "," histÛria mÈdica pregressa ");
-		text = text.replace(" IAO "," insuficiÍncia aÛrtica ");
-		text = text.replace(" ICP "," intervenÁ„o coron·ria percut‚nea ");
+		text = text.replace(" FSH "," horm√¥nio fol√≠culo estimulante ");
+		text = text.replace(" G3 "," gesta√ß√£o 3 ");
+		text = text.replace(" HELLP "," anemia hemol√≠tica, n√≠veis elevados de enzimas hep√°ticas e contagem baixa de plaquetas ");
+		text = text.replace(" HMP "," hist√≥ria m√©dica pregressa ");
+		text = text.replace(" IAO "," insufici√™ncia a√≥rtica ");
+		text = text.replace(" ICP "," interven√ß√£o coron√°ria percut√¢nea ");
 		text = text.replace(" IGP "," idade gestacional no parto ");
 		text = text.replace(" IN "," intranasais ");
-		text = text.replace(" JUP "," junÁ„o uretero-piÈlica ");
+		text = text.replace(" JUP "," jun√ß√£o uretero-pi√©lica ");
 		text = text.replace(" L1 "," lombar 1 ");
-		text = text.replace(" LM "," lobo mÈdio ");
+		text = text.replace(" LM "," lobo m√©dio ");
 		text = text.replace(" LV "," leite de vaca ");
 		text = text.replace(" MI "," membro inferior ");
 		text = text.replace(" MIBI "," metoxi-isobutil-isonitrila ");
-		text = text.replace(" MI¥s "," membros inferiores ");
-		text = text.replace(" MRSA "," Staphylococcus aureus resistente ‡ meticilina ");
+		text = text.replace(" MI≈Ωs "," membros inferiores ");
+		text = text.replace(" MRSA "," Staphylococcus aureus resistente √† meticilina ");
 		text = text.replace(" MTZ "," mirtazapina ");
 		text = text.replace(" MsIS "," membros inferiores ");
 		text = text.replace(" NC "," nervo craniano ");
-		text = text.replace(" OBS "," observaÁ„o ");
+		text = text.replace(" OBS "," observa√ß√£o ");
 		text = text.replace(" OD "," olho direito ");
 		text = text.replace(" OE "," olho esquerdo ");
-		text = text.replace(" PCO2 "," press„o de diÛxido de carbono ");
-		text = text.replace(" PCP "," press„o capilar pulmonar ");
+		text = text.replace(" PCO2 "," press√£o de di√≥xido de carbono ");
+		text = text.replace(" PCP "," press√£o capilar pulmonar ");
 		text = text.replace(" PCT "," paciente ");
-		text = text.replace(" PMAP "," press„o mÈdia da artÈria pulmonar ");
+		text = text.replace(" PMAP "," press√£o m√©dia da art√©ria pulmonar ");
 		text = text.replace(" PNE "," portador de necessidades especiais ");
-		text = text.replace(" PNTx "," pneumotÛrax ");
+		text = text.replace(" PNTx "," pneumot√≥rax ");
 		text = text.replace(" POA "," Porto Alegre ");
-		text = text.replace(" PPD "," derivado protÈico purificado ");
+		text = text.replace(" PPD "," derivado prot√©ico purificado ");
 		text = text.replace(" PV "," parto vaginal ");
 		text = text.replace(" QID "," quadrante inferior direito ");
 		text = text.replace(" R-X "," raio X ");
 		text = text.replace(" RBV "," ribavirina ");
 		text = text.replace(" RC "," risco cardiovascular ");
-		text = text.replace(" RCP "," reanimaÁ„o cardiopulmonar ");
-		text = text.replace(" RD "," retinopatia diabÈtica ");
+		text = text.replace(" RCP "," reanima√ß√£o cardiopulmonar ");
+		text = text.replace(" RD "," retinopatia diab√©tica ");
 		text = text.replace(" REAG "," reagente ");
-		text = text.replace(" RGE "," refluxo gastresof·gico ");
-		text = text.replace(" RHA "," ruÌdos hidroaÈreos ");
-		text = text.replace(" RN2 "," recÈm-nato 2 ");
-		text = text.replace(" RPD "," retinopatia diabÈtica proliferativa ");
-		text = text.replace(" RXTX "," raio X de tÛrax ");
-		text = text.replace(" S/N "," se necess·rio ");
-		text = text.replace(" SMC "," serviÁo mÈdico de cirurgia ");
-		text = text.replace(" SMO "," serviÁo mÈdico de oncologia ");
+		text = text.replace(" RGE "," refluxo gastresof√°gico ");
+		text = text.replace(" RHA "," ru√≠dos hidroa√©reos ");
+		text = text.replace(" RN2 "," rec√©m-nato 2 ");
+		text = text.replace(" RPD "," retinopatia diab√©tica proliferativa ");
+		text = text.replace(" RXTX "," raio X de t√≥rax ");
+		text = text.replace(" S/N "," se necess√°rio ");
+		text = text.replace(" SMC "," servi√ßo m√©dico de cirurgia ");
+		text = text.replace(" SMO "," servi√ßo m√©dico de oncologia ");
 		text = text.replace(" SR "," senhor ");
-		text = text.replace(" SVA "," sonda uretral pl·stica ");
-		text = text.replace(" TCEC "," tempo de circulaÁ„o extracorpÛrea ");
+		text = text.replace(" SVA "," sonda uretral pl√°stica ");
+		text = text.replace(" TCEC "," tempo de circula√ß√£o extracorp√≥rea ");
 		text = text.replace(" TIFF "," Tiffeneau ");
 		text = text.replace(" TOT "," tubo orotraqueal ");
-		text = text.replace(" TSRN "," tipo sang¸Ìneo do recÈm-nato ");
-		text = text.replace(" UBS "," Unidade B·sica de Sa˙de ");
-		text = text.replace(" VA "," vias aÈreas ");
+		text = text.replace(" TSRN "," tipo sang√º√≠neo do rec√©m-nato ");
+		text = text.replace(" UBS "," Unidade B√°sica de Sa√∫de ");
+		text = text.replace(" VA "," vias a√©reas ");
 		text = text.replace(" VAD "," vincristina, adriblastina e dexametasona ");
-		text = text.replace(" VB "," vesÌcula biliar ");
+		text = text.replace(" VB "," ves√≠cula biliar ");
 		text = text.replace(" VCR "," vincristina ");
-		text = text.replace(" VED "," di‚metro diastÛlico ");
-		text = text.replace(" VEDF "," ventrÌculo esquerdo di·stole final ");
-		text = text.replace(" VES "," di‚metro sistÛlico ");
-		text = text.replace(" VESF "," ventrÌculo esquerdo sÌstole final ");
-		text = text.replace(" VSVE "," via de saÌda do ventrÌculo esquerdo ");
+		text = text.replace(" VED "," di√¢metro diast√≥lico ");
+		text = text.replace(" VEDF "," ventr√≠culo esquerdo di√°stole final ");
+		text = text.replace(" VES "," di√¢metro sist√≥lico ");
+		text = text.replace(" VESF "," ventr√≠culo esquerdo s√≠stole final ");
+		text = text.replace(" VSVE "," via de sa√≠da do ventr√≠culo esquerdo ");
 		text = text.replace(" h/h "," de hora em hora ");
-		text = text.replace(" A2RV "," alteraÁ„o de repolarizaÁ„o ventricular ");
-		text = text.replace(" AA2 "," amino·cidos ");
-		text = text.replace(" ACE "," artÈria coron·ria esquerda ");
+		text = text.replace(" A2RV "," altera√ß√£o de repolariza√ß√£o ventricular ");
+		text = text.replace(" AA2 "," amino√°cidos ");
+		text = text.replace(" ACE "," art√©ria coron√°ria esquerda ");
 		text = text.replace(" ADS "," amniocentese descompressiva seriada ");
-		text = text.replace(" AI "," angina inst·vel ");
-		text = text.replace(" AINEs "," antiinflamatÛrios n„o-esteroidais ");
+		text = text.replace(" AI "," angina inst√°vel ");
+		text = text.replace(" AINEs "," antiinflamat√≥rios n√£o-esteroidais ");
 		text = text.replace(" ANGIO "," angiografia ");
 		text = text.replace(" ARA "," antagonistas dos receptores da angiotensina ");
-		text = text.replace(" ART "," artÈria ");
-		text = text.replace(" AVEs "," acidente vascular encef·lico ");
-		text = text.replace(" AVF "," ante-verso-flex„o ");
+		text = text.replace(" ART "," art√©ria ");
+		text = text.replace(" AVEs "," acidente vascular encef√°lico ");
+		text = text.replace(" AVF "," ante-verso-flex√£o ");
 		text = text.replace(" B1 "," B1 ");
 		text = text.replace(" B3 "," terceira bulha ");
 		text = text.replace(" B4 "," quarta bulha ");
 		text = text.replace(" BBloq "," beta-bloqueadores ");
-		text = text.replace(" BC "," bloco cir˙rgico ");
-		text = text.replace(" BCG "," bacilo de Calmette-GuÈrin ");
+		text = text.replace(" BC "," bloco cir√∫rgico ");
+		text = text.replace(" BCG "," bacilo de Calmette-Gu√©rin ");
 		text = text.replace(" BCPs "," broncopneumonias ");
-		text = text.replace(" BDAS "," bloqueios divisionais ‚ntero-superiores ");
-		text = text.replace(" BIPAP "," press„o positiva em vias aÈreas com dois nÌveis ");
-		text = text.replace(" BNF "," bulhas normofonÈticos ");
+		text = text.replace(" BDAS "," bloqueios divisionais √¢ntero-superiores ");
+		text = text.replace(" BIPAP "," press√£o positiva em vias a√©reas com dois n√≠veis ");
+		text = text.replace(" BNF "," bulhas normofon√©ticos ");
 		text = text.replace(" BT:41 "," bilirrubina total ");
-		text = text.replace(" BZD "," benzodiazepÌnicos ");
-		text = text.replace(" BiPAP "," press„o positiva em vias aÈreas com dois nÌveis ");
+		text = text.replace(" BZD "," benzodiazep√≠nicos ");
+		text = text.replace(" BiPAP "," press√£o positiva em vias a√©reas com dois n√≠veis ");
 		text = text.replace(" C1 "," cesariana 1 ");
-		text = text.replace(" CAt "," avaliaÁ„o crÌtica tÛpica ");
-		text = text.replace(" CD34 "," grupo de diferenciaÁ„o 34 ");
-		text = text.replace(" CHAd "," concentrado de hem·cias adulto ");
-		text = text.replace(" CIC "," cirurgia cardÌaca ");
-		text = text.replace(" CID "," ClassificaÁ„o Internacional de DoenÁas ");
-		text = text.replace(" CIP "," carcinoma incidental da prÛstata ");
+		text = text.replace(" CAt "," avalia√ß√£o cr√≠tica t√≥pica ");
+		text = text.replace(" CD34 "," grupo de diferencia√ß√£o 34 ");
+		text = text.replace(" CHAd "," concentrado de hem√°cias adulto ");
+		text = text.replace(" CIC "," cirurgia card√≠aca ");
+		text = text.replace(" CID "," Classifica√ß√£o Internacional de Doen√ßas ");
+		text = text.replace(" CIP "," carcinoma incidental da pr√≥stata ");
 		text = text.replace(" CTi "," centro de terapia intensiva ");
-		text = text.replace(" CVE "," cardiovers„o elÈtrica ");
-		text = text.replace(" CVM "," contraÁ„o volunt·ria m·xima ");
-		text = text.replace(" Ca2 "," c·lcio ");
-		text = text.replace(" CaT "," avaliaÁ„o crÌtica tÛpica ");
+		text = text.replace(" CVE "," cardiovers√£o el√©trica ");
+		text = text.replace(" CVM "," contra√ß√£o volunt√°ria m√°xima ");
+		text = text.replace(" Ca2 "," c√°lcio ");
+		text = text.replace(" CaT "," avalia√ß√£o cr√≠tica t√≥pica ");
 		text = text.replace(" D14 "," dia 14 ");
 		text = text.replace(" D4 "," dia 4 ");
 		text = text.replace(" DA/Dg "," descendente anterior / primeira diagonal ");
-		text = text.replace(" DBP "," di‚metro biparietal ");
+		text = text.replace(" DBP "," di√¢metro biparietal ");
 		text = text.replace(" DHEA "," deidroepiandrosterona ");
 		text = text.replace(" DIU "," dispositivo intra-uterino ");
 		text = text.replace(" DM-2 "," diabete melitus tipo 2 ");
 		text = text.replace(" DMII "," diabete melitus tipo 2 ");
-		text = text.replace(" DP-CD "," diagonal posterior - coron·ria direita ");
+		text = text.replace(" DP-CD "," diagonal posterior - coron√°ria direita ");
 		text = text.replace(" DPP "," descolamento prematuro de placenta ");
 		text = text.replace(" DPT "," espessamento peritoneal difuso ");
 		text = text.replace(" DTS "," dose total semanal ");
-		text = text.replace(" DVR "," dist˙rbio ventilatÛrio restritivo ");
+		text = text.replace(" DVR "," dist√∫rbio ventilat√≥rio restritivo ");
 		text = text.replace(" Dg-DA "," primeira diagonal / descendente anterior ");
 		text = text.replace(" Dg1 "," primeira diagonal 1 ");
 		text = text.replace(" Dm2 "," diabete melitus tipo 2 ");
 		text = text.replace(" E-D "," esquerda-direita ");
-		text = text.replace(" ECG¥s "," ecografias ");
+		text = text.replace(" ECG≈Ωs "," ecografias ");
 		text = text.replace(" ECT "," eletroconvulsoterapia ");
 		text = text.replace(" EDSS "," escala ampliada do estado de incapacidade ");
 		text = text.replace(" EFV "," efavirenz ");
-		text = text.replace(" EME "," emergÍncia ");
-		text = text.replace(" EMEP "," emergÍncia pedi·trica ");
-		text = text.replace(" EP "," epitÈlio pigmentado ");
-		text = text.replace(" FCm·x "," funÁ„o cardÌaca m·xima ");
-		text = text.replace(" FEJ "," fraÁ„o de ejeÁ„o ");
+		text = text.replace(" EME "," emerg√™ncia ");
+		text = text.replace(" EMEP "," emerg√™ncia pedi√°trica ");
+		text = text.replace(" EP "," epit√©lio pigmentado ");
+		text = text.replace(" FCm√°x "," fun√ß√£o card√≠aca m√°xima ");
+		text = text.replace(" FEJ "," fra√ß√£o de eje√ß√£o ");
 		text = text.replace(" FEM "," feminino ");
 		text = text.replace(" FEV "," fevereiro ");
-		text = text.replace(" FEj "," fraÁ„o de ejeÁ„o ");
-		text = text.replace(" FH "," formaÁ„o do hipocampo ");
-		text = text.replace(" FID "," fossa ilÌaca direita ");
+		text = text.replace(" FEj "," fra√ß√£o de eje√ß√£o ");
+		text = text.replace(" FH "," forma√ß√£o do hipocampo ");
+		text = text.replace(" FID "," fossa il√≠aca direita ");
 		text = text.replace(" FSV "," fundo de saco vaginal ");
-		text = text.replace(" G4 "," gestaÁ„o 4 ");
+		text = text.replace(" G4 "," gesta√ß√£o 4 ");
 		text = text.replace(" G6PD "," glicose-6-fosfato dehidrogenase ");
 		text = text.replace(" GI "," gastro intestinal ");
 		text = text.replace(" GNMP "," glomerulonefrite membrano-proliferativa ");
@@ -1198,31 +1198,31 @@ public class TaggerStemSub {
 		text = text.replace(" GRAM "," gram ");
 		text = text.replace(" GT "," glutariltransferase ");
 		text = text.replace(" GTS "," gotas ");
-		text = text.replace(" HAS,e "," hipertens„o arterial sistÍmica ");
+		text = text.replace(" HAS,e "," hipertens√£o arterial sist√™mica ");
 		text = text.replace(" HBAE "," hemibloqueio anterior esquerdo ");
-		text = text.replace(" HBP "," hiperplasia benigna da prÛstata ");
-		text = text.replace(" HBs "," vÌrus da hepatite B ");
-		text = text.replace(" HCSA "," Hospital da CrianÁa Santo AntÙnio ");
+		text = text.replace(" HBP "," hiperplasia benigna da pr√≥stata ");
+		text = text.replace(" HBs "," v√≠rus da hepatite B ");
+		text = text.replace(" HCSA "," Hospital da Crian√ßa Santo Ant√¥nio ");
 		text = text.replace(" HIC "," hemorragia intracraniana ");
 		text = text.replace(" HM "," hipertermia maligna ");
 		text = text.replace(" HMCs "," hemoculturas ");
-		text = text.replace(" HNF "," heparina n„o-fracionada ");
-		text = text.replace(" HTC "," hematÛcrito ");
-		text = text.replace(" HX "," histÛrico ");
-		text = text.replace(" Ht/Hb "," hematÛcrito/hemoglobina ");
+		text = text.replace(" HNF "," heparina n√£o-fracionada ");
+		text = text.replace(" HTC "," hemat√≥crito ");
+		text = text.replace(" HX "," hist√≥rico ");
+		text = text.replace(" Ht/Hb "," hemat√≥crito/hemoglobina ");
 		text = text.replace(" IA "," infarto agudo ");
-		text = text.replace(" IAM's "," infartos agudos do mioc·rdio ");
+		text = text.replace(" IAM's "," infartos agudos do mioc√°rdio ");
 		text = text.replace(" IF "," forma indeterminada ");
 		text = text.replace(" IFN "," interferon alfa-recombinante ");
-		text = text.replace(" IMT "," calibre intermedi·rio da carÛtida ");
-		text = text.replace(" IOT "," intubaÁ„o orotraqueal ");
-		text = text.replace(" IPC "," Ìndice de potencial de contaminaÁ„o ");
+		text = text.replace(" IMT "," calibre intermedi√°rio da car√≥tida ");
+		text = text.replace(" IOT "," intuba√ß√£o orotraqueal ");
+		text = text.replace(" IPC "," √≠ndice de potencial de contamina√ß√£o ");
 		text = text.replace(" ISHAK "," Ishak ");
-		text = text.replace(" ISRS "," inibidor seletivo da recaptaÁ„o de serotonina ");
-		text = text.replace(" ITC "," insuficiÍncia tric˙spide ");
+		text = text.replace(" ISRS "," inibidor seletivo da recapta√ß√£o de serotonina ");
+		text = text.replace(" ITC "," insufici√™ncia tric√∫spide ");
 		text = text.replace(" IVa "," veia interventricular anterior ");
 		text = text.replace(" IX "," 9 ");
-		text = text.replace(" K2 "," pot·ssio ");
+		text = text.replace(" K2 "," pot√°ssio ");
 		text = text.replace(" L2-L3 "," lombar 2 - lombar 3 ");
 		text = text.replace(" L3 "," lombar 3 ");
 		text = text.replace(" L4 "," lombar 4 ");
@@ -1231,109 +1231,109 @@ public class TaggerStemSub {
 		text = text.replace(" LE "," laparotomia exploradora ");
 		text = text.replace(" LFN "," linfonodos ");
 		text = text.replace(" LI "," liquido intersticial ");
-		text = text.replace(" LLA "," leucemia linfocÌtica aguda ");
-		text = text.replace(" LLC "," leucemia linfocÌtica crÙnica ");
-		text = text.replace(" LMC "," leucemia mielÛide crÙnica ");
+		text = text.replace(" LLA "," leucemia linfoc√≠tica aguda ");
+		text = text.replace(" LLC "," leucemia linfoc√≠tica cr√¥nica ");
+		text = text.replace(" LMC "," leucemia miel√≥ide cr√¥nica ");
 		text = text.replace(" LN "," linfonodo ");
-		text = text.replace(" LNH "," linfoma n„o-Hodgkin ");
-		text = text.replace(" LQR "," lÌquor ");
-		text = text.replace(" LUTS "," sintomas do trato urin·rio inferior ");
-		text = text.replace(" MELD "," modelo para doenÁa hep·tica terminal ");
+		text = text.replace(" LNH "," linfoma n√£o-Hodgkin ");
+		text = text.replace(" LQR "," l√≠quor ");
+		text = text.replace(" LUTS "," sintomas do trato urin√°rio inferior ");
+		text = text.replace(" MELD "," modelo para doen√ßa hep√°tica terminal ");
 		text = text.replace(" MF "," microorganismos filamentosos ");
-		text = text.replace(" MGCx "," ramo marginal da artÈria circunflexa ");
-		text = text.replace(" MGLIS "," artÈria coron·ria marginal localizada intrastent ");
+		text = text.replace(" MGCx "," ramo marginal da art√©ria circunflexa ");
+		text = text.replace(" MGLIS "," art√©ria coron√°ria marginal localizada intrastent ");
 		text = text.replace(" MMG "," mamografia ");
 		text = text.replace(" MMSS "," membros superiores ");
 		text = text.replace(" MSS "," membros superiores ");
-		text = text.replace(" MSSA "," Staphylococcus aureus sensÌvel ‡ meticilin ");
+		text = text.replace(" MSSA "," Staphylococcus aureus sens√≠vel √† meticilin ");
 		text = text.replace(" MSs "," membros superiores ");
 		text = text.replace(" Mg1 "," primeira marginal ");
 		text = text.replace(" MsSs "," membros superiores ");
-		text = text.replace(" NAC "," neuropatia autonÙmica cardiovascular ");
+		text = text.replace(" NAC "," neuropatia auton√¥mica cardiovascular ");
 		text = text.replace(" NAN "," leite NAN ");
-		text = text.replace(" ND "," nefropatia diabÈtica ");
+		text = text.replace(" ND "," nefropatia diab√©tica ");
 		text = text.replace(" NOV "," novembro ");
-		text = text.replace(" NYHA "," AssociaÁ„o do CoraÁ„o de Nova York ");
-		text = text.replace(" Na3 "," pot·ssio ");
-		text = text.replace(" OEA "," otoemisiones ac˙sticas ");
+		text = text.replace(" NYHA "," Associa√ß√£o do Cora√ß√£o de Nova York ");
+		text = text.replace(" Na3 "," pot√°ssio ");
+		text = text.replace(" OEA "," otoemisiones ac√∫sticas ");
 		text = text.replace(" OFT "," oftalmologia ");
 		text = text.replace(" OUT "," outubro ");
 		text = text.replace(" P4 "," parto 4 ");
-		text = text.replace(" PAAf "," punÁ„o aspirativa por agulha fina ");
+		text = text.replace(" PAAf "," pun√ß√£o aspirativa por agulha fina ");
 		text = text.replace(" PAC "," pneumonia adquirida na comunidade ");
-		text = text.replace(" PASP "," press„o sistÛlica da artÈria pulmonar ");
-		text = text.replace(" PAVM "," pneumonia associada ‡ ventilaÁ„o mec‚nica ");
+		text = text.replace(" PASP "," press√£o sist√≥lica da art√©ria pulmonar ");
+		text = text.replace(" PAVM "," pneumonia associada √† ventila√ß√£o mec√¢nica ");
 		text = text.replace(" PFE "," peso fetal estimado ");
-		text = text.replace(" PICC "," catÈter central de inserÁ„o perifÈrica ");
+		text = text.replace(" PICC "," cat√©ter central de inser√ß√£o perif√©rica ");
 		text = text.replace(" PNI "," psiconeuroimunologia ");
 		text = text.replace(" PNM "," pneumonia ");
 		text = text.replace(" PNP "," polineuropatia ");
-		text = text.replace(" PO2 "," press„o parcial do oxigÍnio ");
-		text = text.replace(" POP "," procedimento operacional padr„o ");
+		text = text.replace(" PO2 "," press√£o parcial do oxig√™nio ");
+		text = text.replace(" POP "," procedimento operacional padr√£o ");
 		text = text.replace(" PS-MG "," Pronto Socorro de Minas Gerais ");
 		text = text.replace(" PSG "," polissonografia ");
-		text = text.replace(" PUCRS "," PontifÌcia Universidade CatÛlica do Rio Grande do Sul ");
+		text = text.replace(" PUCRS "," Pontif√≠cia Universidade Cat√≥lica do Rio Grande do Sul ");
 		text = text.replace(" PVM "," prolapso da valva mitral ");
 		text = text.replace(" R3 "," residente 3 ");
-		text = text.replace(" RCR "," ressuscitaÁ„o cardio-respiratÛria ");
+		text = text.replace(" RCR "," ressuscita√ß√£o cardio-respirat√≥ria ");
 		text = text.replace(" RCT "," rastreamento corporal total com radioiodo ");
 		text = text.replace(" RDNPM "," retardo do desenvolvimento neuropsicomotor ");
-		text = text.replace(" RDP "," retinopatia diabÈtica proliferativa ");
-		text = text.replace(" RE "," retÌculo esquerdo ");
+		text = text.replace(" RDP "," retinopatia diab√©tica proliferativa ");
+		text = text.replace(" RE "," ret√≠culo esquerdo ");
 		text = text.replace(" RHJ "," refluxo hepato-jugular ");
 		text = text.replace(" RR "," risco relativo ");
 		text = text.replace(" RT "," radioterapia ");
 		text = text.replace(" RTX "," neurotoxina resiniferatoxina ");
-		text = text.replace(" RUB "," rubÈola ");
+		text = text.replace(" RUB "," rub√©ola ");
 		text = text.replace(" S1 "," sacro 1 ");
 		text = text.replace(" SAD "," sobrecarga atrial direita ");
 		text = text.replace(" SAE "," sobrecarga atrial esquerda ");
-		text = text.replace(" SCD "," seio coron·rio distal ");
-		text = text.replace(" SMD "," sÌndrome mielodispl·sica ");
-		text = text.replace(" SOG "," sonda orog·strica ");
+		text = text.replace(" SCD "," seio coron√°rio distal ");
+		text = text.replace(" SMD "," s√≠ndrome mielodispl√°sica ");
+		text = text.replace(" SOG "," sonda orog√°strica ");
 		text = text.replace(" SP "," sala de politraumatizados ");
-		text = text.replace(" SPECT "," spect cardÌaco ");
+		text = text.replace(" SPECT "," spect card√≠aco ");
 		text = text.replace(" SULFA "," sulfametoxazol ");
-		text = text.replace(" T12 "," tor·cica 12 ");
+		text = text.replace(" T12 "," tor√°cica 12 ");
 		text = text.replace(" T4L "," tetraiodotironina ");
 		text = text.replace(" T:0,7 "," troponina 0 ");
 		text = text.replace(" T:2,1 "," troponina 2 ");
 		text = text.replace(" THB "," transtorno de humor bipolar ");
-		text = text.replace(" TIG5 "," taxa de infus„o de glicose ");
+		text = text.replace(" TIG5 "," taxa de infus√£o de glicose ");
 		text = text.replace(" TISQ "," tempo de isquemia ");
-		text = text.replace(" TJV "," transfus„o intravascular ");
+		text = text.replace(" TJV "," transfus√£o intravascular ");
 		text = text.replace(" TMP "," trimetoprim ");
-		text = text.replace(" TRAM "," retalho miocut‚neo transverso abdominal ");
+		text = text.replace(" TRAM "," retalho miocut√¢neo transverso abdominal ");
 		text = text.replace(" TSC "," tiragem subcostal ");
 		text = text.replace(" TSE "," spin-eco turbo ");
-		text = text.replace(" TSH:5 "," hormÙnio tÌreo-estimulante 5 ");
-		text = text.replace(" TTG "," teste de toler‚ncia a glicose ");
-		text = text.replace(" TU "," trato urin·rio ");
-		text = text.replace(" TVS "," taquicardias ventriculares monomÛrficas sustentadas ");
+		text = text.replace(" TSH:5 "," horm√¥nio t√≠reo-estimulante 5 ");
+		text = text.replace(" TTG "," teste de toler√¢ncia a glicose ");
+		text = text.replace(" TU "," trato urin√°rio ");
+		text = text.replace(" TVS "," taquicardias ventriculares monom√≥rficas sustentadas ");
 		text = text.replace(" TnT "," troponina ");
-		text = text.replace(" TxH "," transplante hep·tico ");
-		text = text.replace(" UCC "," Unidade de Cardiopatias CongÍnitas ");
-		text = text.replace(" UFC "," unidades formadoras de colÙnia ");
-		text = text.replace(" UR "," urÈia ");
+		text = text.replace(" TxH "," transplante hep√°tico ");
+		text = text.replace(" UCC "," Unidade de Cardiopatias Cong√™nitas ");
+		text = text.replace(" UFC "," unidades formadoras de col√¥nia ");
+		text = text.replace(" UR "," ur√©ia ");
 		text = text.replace(" URO "," urocultura ");
-		text = text.replace(" VA-AD "," valvula anterior do ·trio direito ");
+		text = text.replace(" VA-AD "," valvula anterior do √°trio direito ");
 		text = text.replace(" VANCO "," vancomicina ");
-		text = text.replace(" VAS "," vias aÈreas superiores ");
-		text = text.replace(" VD17 "," ventrÌculo direito 17 ");
-		text = text.replace(" VEd "," di·stole do ventrÌculo esquerdo ");
-		text = text.replace(" VEs "," sÌstole do ventrÌculo esquerdo ");
-		text = text.replace(" VMA "," ·cido vanilmandÈlico ");
+		text = text.replace(" VAS "," vias a√©reas superiores ");
+		text = text.replace(" VD17 "," ventr√≠culo direito 17 ");
+		text = text.replace(" VEd "," di√°stole do ventr√≠culo esquerdo ");
+		text = text.replace(" VEs "," s√≠stole do ventr√≠culo esquerdo ");
+		text = text.replace(" VMA "," √°cido vanilmand√©lico ");
 		text = text.replace(" VR "," via retal ");
-		text = text.replace(" Vo2 "," volume de oxigÍnio ");
+		text = text.replace(" Vo2 "," volume de oxig√™nio ");
 		text = text.replace(" XII "," 12 ");
 		text = text.replace(" b2 "," beta 2 ");
 		text = text.replace(" g/dia "," grama/dia ");
 		text = text.replace(" mVE "," massa ventricular esquerda ");
-		text = text.replace(" mnmHg "," milÌmetros de merc˙rio ");
-		text = text.replace(" pCO2 "," press„o de diÛxido de carbono ");
+		text = text.replace(" mnmHg "," mil√≠metros de merc√∫rio ");
+		text = text.replace(" pCO2 "," press√£o de di√≥xido de carbono ");
 		text = text.replace(" r-x "," raio X ");
-		text = text.replace(" s/n "," se necess·rio ");
-		text = text.replace(" satO2 "," saturaÁ„o de oxigÍnio ");
+		text = text.replace(" s/n "," se necess√°rio ");
+		text = text.replace(" satO2 "," satura√ß√£o de oxig√™nio ");
 		text = text.replace(" vO "," via oral ");
 		
 		return text;
@@ -1345,7 +1345,7 @@ public class TaggerStemSub {
 	
 	
 	/**
-	 * ANTIGOS M…TODOS DA CLASSE RULES
+	 * ANTIGOS M√âTODOS DA CLASSE RULES
 	 */
 	
 	
@@ -1355,7 +1355,7 @@ public class TaggerStemSub {
 	
 	
 	/**
-	 * ObtÈm quantidade de palavras de uma regra
+	 * Obt√©m quantidade de palavras de uma regra
 	 * @param arr
 	 * @return
 	 */
@@ -1365,7 +1365,7 @@ public class TaggerStemSub {
 	}
 	
 	/**
-	 * ObtÈm conjunto de palavras de acordo com a quantidade e posiÁ„o definidas
+	 * Obt√©m conjunto de palavras de acordo com a quantidade e posi√ß√£o definidas
 	 * @param pos
 	 * @param qtde
 	 * @param tokens
@@ -1400,7 +1400,7 @@ public class TaggerStemSub {
 	}
 	
 	/**
-	 * ObtÈm conjunto de regras de acordo com a quantidade e posiÁ„o definidas
+	 * Obt√©m conjunto de regras de acordo com a quantidade e posi√ß√£o definidas
 	 * @param pos
 	 * @param qtde
 	 * @param tokens
@@ -1441,7 +1441,7 @@ public class TaggerStemSub {
 	public boolean ruleApplies(String[] tags, Regra rule, List<String> words){
 		
 		//Percorre palavras e regras
-		//Ex: Isso È uma frase - [V_INF][N_M_S][PREP][N_F_P]
+		//Ex: Isso √© uma frase - [V_INF][N_M_S][PREP][N_F_P]
 		
 		for(int i = 0; i < getRuleSize(rule); i++){
 
@@ -1462,7 +1462,7 @@ public class TaggerStemSub {
 				}
 			}
 			else{
-				//TODO: Retirar underlines na obtenÁ„o do POS-tagging
+				//TODO: Retirar underlines na obten√ß√£o do POS-tagging
 				if(!tags[i].equalsIgnoreCase(termo + "_"))
 				{
 					return false;
@@ -1476,7 +1476,7 @@ public class TaggerStemSub {
 	}
 	
 	/**
-	 * Verifica È regra de STEMMING
+	 * Verifica √© regra de STEMMING
 	 * @param rule
 	 * @return
 	 */
@@ -1493,7 +1493,7 @@ public class TaggerStemSub {
 	}
 	
 	/**
-	 * Verifica È regra de POS-TAG
+	 * Verifica √© regra de POS-TAG
 	 * @param rule
 	 * @return
 	 */
@@ -1510,7 +1510,7 @@ public class TaggerStemSub {
 	}
 	
 	/**
-	 * ObtÈm vers„o para impress„o dos conte˙dos de um array
+	 * Obt√©m vers√£o para impress√£o dos conte√∫dos de um array
 	 * @param arr
 	 * @return
 	 */
@@ -1551,7 +1551,7 @@ public class TaggerStemSub {
 	}
 	
 	
-	//TODO: Ajustar funÁ„o para popular lista de regras - List<Regra>
+	//TODO: Ajustar fun√ß√£o para popular lista de regras - List<Regra>
 	public static List<ArrayList<String>> getRulesExcel(){
 		
 		List<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
@@ -1582,7 +1582,7 @@ public class TaggerStemSub {
 					while (tokens.hasMoreTokens()) {
 						aux = tokens.nextToken();
 						
-						//Se È regra de STEMMING n„o coloca UNDERLINE
+						//Se √© regra de STEMMING n√£o coloca UNDERLINE
 						if(isStemRule(aux))
 							listSingle.add(aux.replace("[", "").replace("]", ""));
 						else
