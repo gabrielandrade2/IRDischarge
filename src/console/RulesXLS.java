@@ -63,6 +63,7 @@ public class RulesXLS {
 		List<Regra> rules = TaggerStemSub.getRules(true);
 		
 		File inputWorkbook = new File("files/Sumarios_encaminhamento_v2.xls");
+//		"C:/Users/fernando/Documents/puc/laudos/examesNovoFormato/TC - descrição RandomizadoSO DESCRICAO.xls"
 		Workbook w;
 		try {
 			
