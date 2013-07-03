@@ -69,9 +69,9 @@ public class Interface extends JFrame {
 	
 	//Faz os inserts usando o método criado dentro da classe Regra
 	protected static void Inserts(){
-		System.out.println("Erro Insert Regra: " + BD.InsertElement(regras));
+		System.out.println("Erro Insert Regra: " + BD.insertBD(regras));
 		for (int i=0; i < termosregras.size(); i++)
-			System.out.println("Erro Insert TermosRegras["+ i + "]: " + BD.InsertElement(termosregras.get(i)));}
+			System.out.println("Erro Insert TermosRegras["+ i + "]: " + BD.insertBD(termosregras.get(i)));}
 	
 		
 }

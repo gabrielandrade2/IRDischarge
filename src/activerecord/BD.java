@@ -12,21 +12,58 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class BD extends ActiveRecord {
 	
-	
-	public boolean InsertElement(String Insert){
+	public boolean insertBD(String Insert){
 		
 		try{
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(Insert);		
-			boolean sql = ps.execute();
-			return sql;}
+			boolean erro = ps.execute();
+			return erro;}
 		
 		catch (SQLException e) {
-			System.out.println("Erro ao inserir termos");
+			System.out.println("Erro ao efetuar Insert");
 			e.printStackTrace();}
 		return false;
 		}
 
+	
+	public Login selectLogin(String usuario){
+		
+		Login Login = new Login();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT usuario, senha from usuarios WHERE usuario = '"+usuario+"';");
+		    ResultSet res = ps.executeQuery();
+		    while(res.next()){
+		    	Login.setUsuario(res.getString("usuario"));
+		    	Login.setSenha(res.getString("senha"));
+		    }
+		    
+		    return Login;
+		    
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return Login;
+			
+	}
 	//Select Genérico
+	public ResultSet selectBD(String s){
+	
+		try {
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement(s);
+		    ResultSet res = ps.executeQuery();
+		  	System.out.println(res.getString("usuario"));
+		    return res;
+		} 
+		
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+    
+	}
+	
 	public List<Regra> findByElement(int elemento_id, int conjunto_id, boolean withTerms){
 		
 		List<Regra> list = new ArrayList<Regra>();
