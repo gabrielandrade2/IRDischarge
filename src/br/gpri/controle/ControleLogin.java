@@ -19,13 +19,12 @@ public class ControleLogin extends Principal {
 	}
 
 	public void abreJanela(){
-		Janela.inicia();
 		Janela.setVisible(true);
 	}
 	
 	public void fechaJanela(){
-    	Janela.setVisible(false);
-    	Janela.dispose();
+		Janela.setVisible(false);
+		Janela.dispose();
 	}
 	
 	protected boolean verificaSenha(Login l){

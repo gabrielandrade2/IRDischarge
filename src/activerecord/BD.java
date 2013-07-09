@@ -12,20 +12,6 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class BD extends ActiveRecord {
 	
-	public boolean insertBD(String Insert){
-		
-		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement(Insert);		
-			boolean erro = ps.execute();
-			return erro;}
-		
-		catch (SQLException e) {
-			System.out.println("Erro ao efetuar Insert");
-			e.printStackTrace();}
-		return false;
-		}
-
-	
 	public Login selectLogin(String usuario){
 		
 		Login Login = new Login();
@@ -46,6 +32,22 @@ public class BD extends ActiveRecord {
 		return Login;
 			
 	}
+	
+	//Não utilizado
+	
+	public boolean insertBD(String Insert){
+		
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement(Insert);		
+			boolean erro = ps.execute();
+			return erro;}
+		
+		catch (SQLException e) {
+			System.out.println("Erro ao efetuar Insert");
+			e.printStackTrace();}
+		return false;
+		}
+	
 	//Select Genérico
 	public ResultSet selectBD(String s){
 	

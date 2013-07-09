@@ -13,8 +13,7 @@ public class JanelaArquivo extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        radioButtonGroup = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         AList = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
@@ -22,29 +21,24 @@ public class JanelaArquivo extends javax.swing.JFrame {
         AExecutarRadio = new javax.swing.JRadioButton();
         ABotaoOk = new javax.swing.JButton();
         ABotaoVoltar = new javax.swing.JButton();
+        AbreArquivo = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        AList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(AList);
 
         jLabel1.setText("Arquivos");
 
+        
+        //Radio Buttons
+        radioButtonGroup.add(ACadastrarRadio);
+        radioButtonGroup.add(AExecutarRadio);
+        
         ACadastrarRadio.setText("Cadastrar");
-        ACadastrarRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ACadastrarRadioActionPerformed(evt);
-            }
-        });
-
         AExecutarRadio.setText("Executar");
+        
 
         ABotaoOk.setText("OK");
-
         ABotaoVoltar.setText("Voltar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,12 +118,12 @@ public class JanelaArquivo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton ABotaoOk;
     public javax.swing.JButton ABotaoVoltar;
-    private javax.swing.JRadioButton ACadastrarRadio;
-    private javax.swing.JRadioButton AExecutarRadio;
-    private javax.swing.JList AList;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
+    public javax.swing.JRadioButton ACadastrarRadio;
+    public javax.swing.JRadioButton AExecutarRadio;
+    public javax.swing.JList AList;
+    private javax.swing.ButtonGroup radioButtonGroup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JFileChooser AbreArquivo;
     // End of variables declaration//GEN-END:variables
 }

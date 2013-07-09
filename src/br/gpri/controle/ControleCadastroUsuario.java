@@ -20,20 +20,19 @@ public class ControleCadastroUsuario extends Principal {
 	}
 	
 	public void abreJanela(){
-		Janela.inicia();
-        Janela.setVisible(true);
+		Janela.setVisible(true);
 	}
 	
 	public void fechaJanela(){
 		Janela.setVisible(false);
-  	  	Janela.dispose();
-  	  	Principal.JanelaLogin.abreJanela();
+		Janela.dispose();
+		Principal.JanelaLogin.abreJanela();
 	}
 	
 	ActionListener Voltar = new ActionListener() {
 	      public void actionPerformed(ActionEvent Voltar) {
 	    	  fechaJanela();
-	       }
+	      }
 	};	
 	
     ActionListener OK = new ActionListener() {
@@ -48,7 +47,7 @@ public class ControleCadastroUsuario extends Principal {
   	  		else
   	  			System.out.println("Usuário cadastrado com sucesso");
   	  		fechaJanela();
-  	  	 }
+  	   	 }
 	};
 	
 }

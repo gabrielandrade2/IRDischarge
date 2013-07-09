@@ -1,21 +1,95 @@
 package br.gpri.controle;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import br.gpri.janelas.JanelaArquivo;
 
-public class ControleArquivo {
 
+public class ControleArquivo extends Principal {
+
+	boolean Cadastrar = false;
+	boolean Executar = false;
 	JanelaArquivo Janela;
 	
 	public ControleArquivo(){
 		Janela = new JanelaArquivo();
-		Janela.ABotaoOk.addActionListener(null);
-		Janela.ABotaoVoltar.addActionListener(null);
+		Janela.ABotaoOk.addActionListener(this.OK);
+		Janela.ABotaoVoltar.addActionListener(this.Volta);
+		Janela.ACadastrarRadio.addActionListener(this.Cad);
+		Janela.AExecutarRadio.addActionListener(this.Exec);
+		//Janela.AbreArquivo.addActionListener(null);
+		geraListaArquivos();
+		
 	}
 	
 	public void abreJanela(){
-		Janela.inicia();
 		Janela.setVisible(true);
 	}
-
-
+	
+	public void fechaJanela(){
+		Janela.setVisible(false);
+		Janela.dispose();
+	}
+	
+	public void geraListaArquivos(){
+		//Fazer conexão banco de dados
+		Janela.AList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+	}
+	
+	ActionListener Volta = new ActionListener() {
+        public void actionPerformed(ActionEvent Volta) {
+		fechaJanela();
+		JanelaLogin.abreJanela();
+		}
+    };
+    
+	ActionListener OK = new ActionListener() {
+        public void actionPerformed(ActionEvent OK) {
+		if(Executar){
+        	fechaJanela();
+        	JanelaExecucao.abreJanela();}
+        else if(Cadastrar){
+        	fechaJanela();
+        	JanelaCadRegra.abreJanela();}
+        else
+        	System.out.println("Selecione uma opção");
+		}
+    };  
+	
+	ActionListener Cad = new ActionListener() {
+        public void actionPerformed(ActionEvent Cad) {
+        	Cadastrar = true;
+        	Executar = false;
+		}
+    };  
+    
+	ActionListener Exec = new ActionListener() {
+        public void actionPerformed(ActionEvent Exec) {
+        	Cadastrar = false;
+        	Executar = true;
+		}
+    }; 
+    
+   /* ActionListener AbreArquivo = new ActionListener() {
+        public void actionPerformed(ActionEvent Abre) {
+        		int retorno = AbreArquivo.showOpenDialog(null);
+        		if (retorno == JFileChooser.APPROVE_OPTION){
+        			Interface.caminho = AbreArquivo.getSelectedFile().getAbsolutePath();
+        			TextoCaminhoArquivo.setText(Interface.caminho);
+        			System.out.println(Interface.caminho);
+        			Interface.Excel();
+        			TextoSumario.setText(Interface.celula.getContents());
+        			//Fazer conexão banco de dados
+        			}
+        		else if(retorno == JFileChooser.CANCEL_OPTION)
+        			System.out.println("Usuário cancelou a operação");
+        		else
+        			System.out.println("Erro ao abrir o arquivo");
+        }
+	};*/
 }

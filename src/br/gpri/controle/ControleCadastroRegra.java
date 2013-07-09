@@ -18,10 +18,15 @@ public class ControleCadastroRegra extends Principal{
 		celula = null;
 		
 		Janela = new JanelaCadastroRegra();
-			
 	}
-
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-	};
+	
+	public void abreJanela(){
+		Janela.setVisible(true);
+	}
+	
+	public void fechaJanela(){
+		Janela.setVisible(false);
+		Janela.dispose();
+	}
+	
 }
