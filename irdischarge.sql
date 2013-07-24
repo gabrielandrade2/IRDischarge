@@ -183,3 +183,11 @@ INSERT INTO `tipotermosregras` (`id`, `nome`) VALUES
 /*!40000 ALTER TABLE `tipotermosregras` ENABLE KEYS */;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+DROP TABLE IF EXISTS usuarios;
+CREATE TABLE IF NOT EXISTS usuarios(
+	usuario varchar(20),
+	senha varchar(10),
+	nome varchar(50),
+	email varchar(50),
+	PRIMARY KEY(usuario)
+);

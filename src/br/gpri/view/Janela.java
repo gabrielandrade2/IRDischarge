@@ -15,7 +15,7 @@ public class Janela extends javax.swing.JFrame {
 
     /** Creates new form Janela */
     public Janela() {
-    	super("IRDischarge v0.1 - PUCPR 2013");
+    	super("INTEMED v0.1 - PUCPR 2013");
         initComponents();
     }
 

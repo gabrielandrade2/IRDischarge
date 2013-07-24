@@ -12,12 +12,17 @@ public class ControleCadastroRegra extends Principal{
 	protected Integer linha;
 	protected JanelaCadastroRegra Janela;
 	protected Cell celula;
-		
+	
+	
 	public ControleCadastroRegra(){
 		linha = 0;
 		celula = null;
 		
 		Janela = new JanelaCadastroRegra();
+		Janela.BotaoAnterior1.addActionListener(this.Anterior);
+		Janela.BotaoProximo1.addActionListener(this.Proximo);
+		Janela.CRBotaoExecutar.addActionListener(this.Executar);
+		Janela.CRBotaoVoltar.addActionListener(this.Voltar);
 	}
 	
 	public void abreJanela(){
@@ -28,5 +33,43 @@ public class ControleCadastroRegra extends Principal{
 		Janela.setVisible(false);
 		Janela.dispose();
 	}
+	 ActionListener Anterior = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+	
+	 ActionListener Proximo = new ActionListener() {
+			
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+	
+	 ActionListener Executar = new ActionListener() {
+			
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			fechaJanela();
+			JanelaExecucao.abreJanela();
+			
+		}
+	};
+	
+	 ActionListener Voltar = new ActionListener() {
+			
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			fechaJanela();
+			JanelaArquivo.abreJanela();
+			
+		}
+	};
+	
 	
 }

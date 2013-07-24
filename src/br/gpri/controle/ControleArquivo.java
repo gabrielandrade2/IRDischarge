@@ -3,6 +3,9 @@ package br.gpri.controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import br.gpri.janelas.JanelaArquivo;
 
 
@@ -18,7 +21,9 @@ public class ControleArquivo extends Principal {
 		Janela.ABotaoVoltar.addActionListener(this.Volta);
 		Janela.ACadastrarRadio.addActionListener(this.Cad);
 		Janela.AExecutarRadio.addActionListener(this.Exec);
-		//Janela.AbreArquivo.addActionListener(null);
+	/*	Janela.BotaoAbrir.addActionListener(this.Abre);
+		Janela.AbreArquivo.setFileFilter(new FileNameExtensionFilter("Arquivo do Sumário/Laudos do Excel","xls"));
+        Janela.AbreArquivo.setAcceptAllFileFilterUsed(false);*/
 		geraListaArquivos();
 		
 	}
@@ -74,15 +79,15 @@ public class ControleArquivo extends Principal {
         	Executar = true;
 		}
     }; 
-    
-   /* ActionListener AbreArquivo = new ActionListener() {
+    /*
+    ActionListener Abre = new ActionListener() {
         public void actionPerformed(ActionEvent Abre) {
-        		int retorno = AbreArquivo.showOpenDialog(null);
+        		int retorno = Janela.AbreArquivo.showOpenDialog(null);
         		if (retorno == JFileChooser.APPROVE_OPTION){
-        			Interface.caminho = AbreArquivo.getSelectedFile().getAbsolutePath();
+        			ControleExcel = Janela.AbreArquivo.getSelectedFile().getAbsolutePath();
         			TextoCaminhoArquivo.setText(Interface.caminho);
         			System.out.println(Interface.caminho);
-        			Interface.Excel();
+        			ControleExcel();
         			TextoSumario.setText(Interface.celula.getContents());
         			//Fazer conexão banco de dados
         			}

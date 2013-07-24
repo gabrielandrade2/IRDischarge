@@ -10,10 +10,10 @@ public class JanelaArquivo extends javax.swing.JFrame {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        radioButtonGroup = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        
         jScrollPane1 = new javax.swing.JScrollPane();
         AList = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
@@ -21,25 +21,48 @@ public class JanelaArquivo extends javax.swing.JFrame {
         AExecutarRadio = new javax.swing.JRadioButton();
         ABotaoOk = new javax.swing.JButton();
         ABotaoVoltar = new javax.swing.JButton();
+        BotaoAbrir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         AbreArquivo = new javax.swing.JFileChooser();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+/*
+        AList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(AList);
 
+        jLabel1.setText("Arquivos");
+
+        ACadastrarRadio.setText("Cadastrar");
+        ACadastrarRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ACadastrarRadioActionPerformed(evt);
+            }
+        });*/
+
+        
+     
+        BotaoAbrir.setText("Abrir");
+
+        jLabel2.setText("INTEMED");
+        
         jScrollPane1.setViewportView(AList);
 
         jLabel1.setText("Arquivos");
 
         
         //Radio Buttons
-        radioButtonGroup.add(ACadastrarRadio);
-        radioButtonGroup.add(AExecutarRadio);
+        buttonGroup1.add(ACadastrarRadio);
+        buttonGroup1.add(AExecutarRadio);
         
         ACadastrarRadio.setText("Cadastrar");
         AExecutarRadio.setText("Executar");
         
 
         ABotaoOk.setText("OK");
-        ABotaoVoltar.setText("Voltar");
+        ABotaoVoltar.setText("Sair");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -48,33 +71,40 @@ public class JanelaArquivo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ACadastrarRadio)
-                        .addGap(18, 18, 18)
-                        .addComponent(AExecutarRadio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ABotaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ABotaoOk, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(238, 238, 238)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 51, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))))
+                        .addGap(0, 65, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ACadastrarRadio)
+                        .addGap(18, 18, 18)
+                        .addComponent(AExecutarRadio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ABotaoVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BotaoAbrir)
+                            .addComponent(ABotaoOk, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(40, 40, 40)
+                .addGap(15, 15, 15)
+                .addComponent(BotaoAbrir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ACadastrarRadio)
                     .addComponent(AExecutarRadio)
@@ -84,17 +114,21 @@ public class JanelaArquivo extends javax.swing.JFrame {
         );
 
         pack();
-    }
+    }// </editor-fold>                        
 
-    private void ACadastrarRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACadastrarRadioActionPerformed
+    private void ACadastrarRadioActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
-    }//GEN-LAST:event_ACadastrarRadioActionPerformed
+    }                                               
 
     /**
      * @param args the command line arguments
      */
-    public void inicia() {
- 
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -113,17 +147,25 @@ public class JanelaArquivo extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-      
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new JanelaArquivo().setVisible(true);
+            }
+        });
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     public javax.swing.JButton ABotaoOk;
     public javax.swing.JButton ABotaoVoltar;
     public javax.swing.JRadioButton ACadastrarRadio;
     public javax.swing.JRadioButton AExecutarRadio;
     public javax.swing.JList AList;
-    private javax.swing.ButtonGroup radioButtonGroup;
+    public javax.swing.JButton BotaoAbrir;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JFileChooser AbreArquivo;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration           
 }
