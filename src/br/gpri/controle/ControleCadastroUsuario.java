@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import br.gpri.janelas.JanelaCadastroUsuario;
 
-public class ControleCadastroUsuario extends Variaveis{
+public class ControleCadastroUsuario extends Principal {
 	
 	String nome;
 	String email;
@@ -26,7 +26,7 @@ public class ControleCadastroUsuario extends Variaveis{
 	public void fechaJanela(){
 		Janela.setVisible(false);
 		Janela.dispose();
-		JanelaLogin.abreJanela();
+		Principal.JanelaLogin.abreJanela();
 	}
 	
 	ActionListener Voltar = new ActionListener() {
