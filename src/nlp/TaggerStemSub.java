@@ -234,11 +234,11 @@ public class TaggerStemSub {
 			cogroo.tagger(sc);
 			
 			sent.addAll(sc.getTokens());
-/*			System.out.println("parada para mostrar a frase taggeada");
+			System.out.println("parada para mostrar a frase taggeada");
 			 System.out.println(cogroo.toString());
-			Scanner scan = new Scanner(System.in);
-		    scan.next();
-*/		    
+//			Scanner scan = new Scanner(System.in);
+	//	    scan.next();
+		    
 			
 		}
 		
@@ -257,7 +257,8 @@ public class TaggerStemSub {
     		 * Portanto, se as regras mais específicas forem analisadas anteriormente, o algoritmo estaria privilegiando regras
     		 * com maior chance de VERDADEIRO POSITIVO
     		 * 
-    		 * OBS: Será que apenas uma inversão de ordem das regras no algoritmo SEM SUB-REGRAS já não resolveria?
+    		 * OBS: Será que apenas uma inversão de ordem das regras n		    Scanner scan = new Scanner(System.in);
+		    scan.next()o algoritmo SEM SUB-REGRAS já não resolveria?
     		 */
     		
     		//Se existem SUB-REGRAS na regra atual, adiciona-as na Lista
@@ -354,8 +355,8 @@ public class TaggerStemSub {
 		if(res.equals(""))
 		{
 //			System.out.println("parada não encontrado");
-		    Scanner scan = new Scanner(System.in);
-		    scan.next();
+		    //Scanner scan = new Scanner(System.in);
+		    //scan.next();
 			
 		    return "Não encontrado!";
 		}
@@ -407,7 +408,7 @@ public class TaggerStemSub {
 	
 	public String getRulesFile(String type){
 		return ReadWriteTextFile.getContents(new File("rules/rules_" + type + ".txt"));
-		
+		//http://stackoverflow.com/questions/4757947/what-is-a-chunker-in-natural-language-processing
 	}
 	
 	public void setRulesFile(String type, String text){
@@ -1546,7 +1547,7 @@ public class TaggerStemSub {
 
 // original		return new Regra().findByElement(8, 2, true);
 
-		return new Regra().findByElement(8, 1, true);
+		return new Regra().findByElement(1, 1, true);
 		
 	}
 	

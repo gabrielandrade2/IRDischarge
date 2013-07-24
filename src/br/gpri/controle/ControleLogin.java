@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 import br.gpri.janelas.JanelaLogin;
 
-public class ControleLogin extends Principal {
+public class ControleLogin extends Variaveis{
 
 	protected JanelaLogin Janela;
 	

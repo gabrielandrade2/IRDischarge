@@ -9,7 +9,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import br.gpri.janelas.JanelaArquivo;
 
 
-public class ControleArquivo extends Principal {
+public class ControleArquivo extends Variaveis {
 
 	boolean Cadastrar = false;
 	boolean Executar = false;

@@ -7,7 +7,7 @@ import jxl.Cell;
 
 import br.gpri.janelas.JanelaCadastroRegra;
 
-public class ControleCadastroRegra extends Principal{
+public class ControleCadastroRegra extends Variaveis{
 
 	protected Integer linha;
 	protected JanelaCadastroRegra Janela;
