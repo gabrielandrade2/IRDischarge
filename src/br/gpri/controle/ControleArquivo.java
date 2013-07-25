@@ -21,9 +21,9 @@ public class ControleArquivo extends Variaveis {
 		Janela.ABotaoVoltar.addActionListener(this.Volta);
 		Janela.ACadastrarRadio.addActionListener(this.Cad);
 		Janela.AExecutarRadio.addActionListener(this.Exec);
-	/*	Janela.BotaoAbrir.addActionListener(this.Abre);
+		Janela.BotaoAbrir.addActionListener(this.Abre);
 		Janela.AbreArquivo.setFileFilter(new FileNameExtensionFilter("Arquivo do Sumário/Laudos do Excel","xls"));
-        Janela.AbreArquivo.setAcceptAllFileFilterUsed(false);*/
+        Janela.AbreArquivo.setAcceptAllFileFilterUsed(false);
 		geraListaArquivos();
 	}
 	
@@ -81,22 +81,18 @@ public class ControleArquivo extends Variaveis {
         	Executar = true;
 		}
     }; 
-    /*
+    
     ActionListener Abre = new ActionListener() {
         public void actionPerformed(ActionEvent Abre) {
         		int retorno = Janela.AbreArquivo.showOpenDialog(null);
         		if (retorno == JFileChooser.APPROVE_OPTION){
-        			ControleExcel = Janela.AbreArquivo.getSelectedFile().getAbsolutePath();
-        			TextoCaminhoArquivo.setText(Interface.caminho);
-        			System.out.println(Interface.caminho);
-        			ControleExcel();
-        			TextoSumario.setText(Interface.celula.getContents());
-        			//Fazer conexão banco de dados
+        			caminhoArquivo = Janela.AbreArquivo.getSelectedFile().getAbsolutePath();
+        			Excel.abreExcel(caminhoArquivo);
         			}
         		else if(retorno == JFileChooser.CANCEL_OPTION)
         			System.out.println("Usuário cancelou a operação");
         		else
         			System.out.println("Erro ao abrir o arquivo");
         }
-	};*/
+	};
 }
