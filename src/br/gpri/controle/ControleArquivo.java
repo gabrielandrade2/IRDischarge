@@ -9,7 +9,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import br.gpri.janelas.JanelaArquivo;
 
 
-public class ControleArquivo extends Principal {
+public class ControleArquivo extends Variaveis {
 
 	boolean Cadastrar = false;
 	boolean Executar = false;
@@ -25,7 +25,6 @@ public class ControleArquivo extends Principal {
 		Janela.AbreArquivo.setFileFilter(new FileNameExtensionFilter("Arquivo do Sumário/Laudos do Excel","xls"));
         Janela.AbreArquivo.setAcceptAllFileFilterUsed(false);*/
 		geraListaArquivos();
-		
 	}
 	
 	public void abreJanela(){
@@ -49,6 +48,7 @@ public class ControleArquivo extends Principal {
 	ActionListener Volta = new ActionListener() {
         public void actionPerformed(ActionEvent Volta) {
 		fechaJanela();
+		JanelaLogin = new ControleLogin();
 		JanelaLogin.abreJanela();
 		}
     };
@@ -57,9 +57,11 @@ public class ControleArquivo extends Principal {
         public void actionPerformed(ActionEvent OK) {
 		if(Executar){
         	fechaJanela();
+        	JanelaExecucao = new ControleExecucao();
         	JanelaExecucao.abreJanela();}
         else if(Cadastrar){
         	fechaJanela();
+        	JanelaCadRegra = new ControleCadastroRegra();
         	JanelaCadRegra.abreJanela();}
         else
         	System.out.println("Selecione uma opção");

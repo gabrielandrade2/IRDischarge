@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 import br.gpri.janelas.JanelaLogin;
 
-public class ControleLogin extends Principal {
+public class ControleLogin extends Variaveis {
 
 	protected JanelaLogin Janela;
 	
@@ -40,6 +40,7 @@ public class ControleLogin extends Principal {
 	ActionListener Cadastro = new ActionListener() {
         public void actionPerformed(ActionEvent Cadastro) {
 		fechaJanela();
+		JanelaCadUsuario = new ControleCadastroUsuario();
 		JanelaCadUsuario.abreJanela();
 		}
     };
@@ -53,7 +54,8 @@ public class ControleLogin extends Principal {
         	if(aceito){
         		Usuario = l.getUsuario();
         		fechaJanela();
-        		JanelaArquivo.abreJanela();
+        		JanelaArquivo = new ControleArquivo();
+        		JanelaArquivo.abreJanela(); 
         	}
         	else{
         		System.out.println("Login falhou");

@@ -7,7 +7,7 @@ import jxl.Cell;
 
 import br.gpri.janelas.JanelaCadastroRegra;
 
-public class ControleCadastroRegra extends Principal{
+public class ControleCadastroRegra extends Variaveis{
 
 	protected Integer linha;
 	protected JanelaCadastroRegra Janela;
@@ -56,8 +56,8 @@ public class ControleCadastroRegra extends Principal{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			fechaJanela();
+			JanelaExecucao = new ControleExecucao();
 			JanelaExecucao.abreJanela();
-			
 		}
 	};
 	
@@ -66,6 +66,7 @@ public class ControleCadastroRegra extends Principal{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			fechaJanela();
+			JanelaArquivo = new ControleArquivo();
 			JanelaArquivo.abreJanela();
 			
 		}
