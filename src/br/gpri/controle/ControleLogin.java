@@ -53,7 +53,7 @@ public class ControleLogin extends Variaveis {
         	boolean aceito = verificaSenha(l);
         	
         	if(aceito){
-        		Usuario = l.getUsuario();
+        		idUsuario = l.getId();
         		fechaJanela();
         		JanelaArquivo = new ControleArquivo();
         		JanelaArquivo.abreJanela(); 
