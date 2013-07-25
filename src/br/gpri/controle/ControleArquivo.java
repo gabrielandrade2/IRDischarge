@@ -57,10 +57,12 @@ public class ControleArquivo extends Variaveis {
         public void actionPerformed(ActionEvent OK) {
 		if(Executar){
         	fechaJanela();
+        	Excel.abreExcel(caminhoArquivo);
         	JanelaExecucao = new ControleExecucao();
         	JanelaExecucao.abreJanela();}
         else if(Cadastrar){
         	fechaJanela();
+        	Excel.abreExcel(caminhoArquivo);
         	JanelaCadRegra = new ControleCadastroRegra();
         	JanelaCadRegra.abreJanela();}
         else
@@ -87,7 +89,6 @@ public class ControleArquivo extends Variaveis {
         		int retorno = Janela.AbreArquivo.showOpenDialog(null);
         		if (retorno == JFileChooser.APPROVE_OPTION){
         			caminhoArquivo = Janela.AbreArquivo.getSelectedFile().getAbsolutePath();
-        			Excel.abreExcel(caminhoArquivo);
         			}
         		else if(retorno == JFileChooser.CANCEL_OPTION)
         			System.out.println("Usuário cancelou a operação");
