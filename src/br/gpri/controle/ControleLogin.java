@@ -9,7 +9,7 @@ import br.gpri.janelas.JanelaLogin;
 
 public class ControleLogin extends Variaveis {
 
-	protected JanelaLogin Janela;
+	private JanelaLogin Janela;
 	
 		
 	public ControleLogin(){
@@ -28,7 +28,7 @@ public class ControleLogin extends Variaveis {
 		Janela.dispose();
 	}
 	
-	protected boolean verificaSenha(Login l){
+	private boolean verificaSenha(Login l){
 		if(l.getUsuario() != ""){
 			String a = Janela.getSenha();
 			String b = l.getSenha();

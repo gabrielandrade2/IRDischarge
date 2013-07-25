@@ -4,7 +4,7 @@ import br.gpri.janelas.JanelaExecucao;
 
 public class ControleExecucao extends Principal{
 
-	JanelaExecucao Janela; 
+	private JanelaExecucao Janela; 
 	
 	public ControleExecucao(){
 		

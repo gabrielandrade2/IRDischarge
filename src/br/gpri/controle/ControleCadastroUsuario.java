@@ -7,11 +7,11 @@ import br.gpri.janelas.JanelaCadastroUsuario;
 
 public class ControleCadastroUsuario extends Variaveis {
 	
-	String nome;
-	String email;
-	String usuario;
-	String senha;
-	JanelaCadastroUsuario Janela;
+	private String nome;
+	private String email;
+	private String usuario;
+	private String senha;
+	private JanelaCadastroUsuario Janela;
 	
 	public ControleCadastroUsuario() {
 		Janela = new JanelaCadastroUsuario();

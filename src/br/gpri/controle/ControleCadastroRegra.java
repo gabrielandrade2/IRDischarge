@@ -9,14 +9,11 @@ import br.gpri.janelas.JanelaCadastroRegra;
 
 public class ControleCadastroRegra extends Variaveis{
 
-	protected Integer linha;
-	protected JanelaCadastroRegra Janela;
-	protected Cell celula;
-	
-	
+	private Integer linha;
+	private JanelaCadastroRegra Janela;
+		
 	public ControleCadastroRegra(){
 		linha = 0;
-		celula = null;
 		
 		Janela = new JanelaCadastroRegra();
 		Janela.BotaoAnterior1.addActionListener(this.Anterior);

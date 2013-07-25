@@ -11,9 +11,9 @@ import br.gpri.janelas.JanelaArquivo;
 
 public class ControleArquivo extends Variaveis {
 
-	boolean Cadastrar = false;
-	boolean Executar = false;
-	JanelaArquivo Janela;
+	private boolean Cadastrar = false;
+	private boolean Executar = false;
+	private JanelaArquivo Janela;
 	
 	public ControleArquivo(){
 		Janela = new JanelaArquivo();
@@ -37,7 +37,7 @@ public class ControleArquivo extends Variaveis {
 		Janela.dispose();
 	}
 	
-	public void geraListaArquivos(){
+	private void geraListaArquivos(){
 		//Fazer conexão banco de dados
 		Janela.AList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
