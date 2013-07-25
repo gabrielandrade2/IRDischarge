@@ -19,8 +19,8 @@ public class BD extends ActiveRecord {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT usuario, senha from usuarios WHERE usuario = '"+usuario+"';");
 		    ResultSet res = ps.executeQuery();
 		    while(res.next()){
-		    	Login.setUsuario(res.getString("usuario"));
-		    	Login.setSenha(res.getString("senha"));
+		    	Login.setUsuario(res.getString("Usuario"));
+		    	Login.setSenha(res.getString("Senha"));
 		    }
 		    
 		    return Login;
