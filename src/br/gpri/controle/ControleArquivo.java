@@ -25,6 +25,7 @@ public class ControleArquivo extends Variaveis {
 		Janela.AbreArquivo.setFileFilter(new FileNameExtensionFilter("Arquivo do Sumário/Laudos do Excel","xls"));
         Janela.AbreArquivo.setAcceptAllFileFilterUsed(false);
 		geraListaArquivos();
+		Janela.setLocationRelativeTo(null);
 	}
 	
 	public void abreJanela(){

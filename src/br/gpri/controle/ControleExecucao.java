@@ -8,6 +8,8 @@ public class ControleExecucao extends Principal{
 	
 	public ControleExecucao(){
 		
+		
+		Janela.setLocationRelativeTo(null);
 	}
 	
 	public void abreJanela(){

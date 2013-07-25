@@ -16,6 +16,7 @@ public class ControleLogin extends Variaveis {
 		Janela = new JanelaLogin();
 		Janela.BotaoCadastro.addActionListener(Cadastro);
 		Janela.BotaoLogin.addActionListener(Login);
+		Janela.setLocationRelativeTo(null);
 	}
 
 	public void abreJanela(){

@@ -17,6 +17,7 @@ public class ControleCadastroUsuario extends Variaveis {
 		Janela = new JanelaCadastroUsuario();
 		Janela.CBotaoOk.addActionListener(OK);
 		Janela.CBotaoVoltar.addActionListener(Voltar);
+		Janela.setLocationRelativeTo(null);
 	}
 	
 	public void abreJanela(){

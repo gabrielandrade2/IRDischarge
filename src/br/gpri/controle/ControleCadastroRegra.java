@@ -23,6 +23,7 @@ public class ControleCadastroRegra extends Variaveis{
 		Janela.BotaoProximo1.addActionListener(this.Proximo);
 		Janela.CRBotaoExecutar.addActionListener(this.Executar);
 		Janela.CRBotaoVoltar.addActionListener(this.Voltar);
+		Janela.setLocationRelativeTo(null);
 	}
 	
 	public void abreJanela(){
