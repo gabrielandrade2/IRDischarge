@@ -10,7 +10,7 @@ public class Principal{
 
 /*Rodar no MYSQL
 
-create table Arquivos(
+create table arquivos(
 idUsuario int,
 idArquivo int,
 absolutePath varchar(1000),

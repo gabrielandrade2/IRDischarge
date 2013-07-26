@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import br.gpri.view.DropDownInfo;
 
@@ -16,7 +17,7 @@ public class BD extends ActiveRecord {
 		
 		Login Login = new Login();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT usuario, senha from usuarios WHERE usuario = '"+usuario+"';");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idUsuario, usuario, senha from usuarios WHERE usuario = '"+usuario+"';");
 		    ResultSet res = ps.executeQuery();
 		    while(res.next()){
 		    	Login.setId(res.getInt("idUsuario"));
@@ -33,6 +34,54 @@ public class BD extends ActiveRecord {
 		return Login;
 			
 	}
+	
+	public Stack<Arquivo> selectArquivos(int idUsuario){
+		
+		Stack<Arquivo> arquivosRecentes = new Stack();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT nomeArquivo, absolutePath from arquivos WHERE idUsuario = '"+idUsuario+"';");
+		    ResultSet res = ps.executeQuery();
+		    while(res.next()){
+		    	Arquivo a = new Arquivo();
+		    	a.setNome(res.getString("nomeArquivo"));
+		    	a.setCaminho(res.getString("absolutePath"));
+		    	arquivosRecentes.push(a);
+		    }
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return arquivosRecentes;
+	}
+	
+	private void limpaArquivosUsuario(int idUsuario){
+		try{
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement("DELETE FROM arquivos where idUsuario = "+idUsuario+";");
+				ps.execute();
+	    }
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean insertArquivos(int idUsuario,Stack<Arquivo> arquivosRecentes){
+		limpaArquivosUsuario(idUsuario);
+		try{
+			for(int i=0; i<arquivosRecentes.size(); i++){
+				Arquivo a = arquivosRecentes.elementAt(i);
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+idUsuario+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
+				ps.execute();
+		    }
+		    return false;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
 	
 	//Não utilizado
 	
@@ -67,89 +116,6 @@ public class BD extends ActiveRecord {
     
 	}
 	
-	public List<Regra> findByElement(int elemento_id, int conjunto_id, boolean withTerms){
-		
-		List<Regra> list = new ArrayList<Regra>();
-		
-		 try {
-			 
-             PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM regras WHERE conjunto_id = ? AND elemento_id = ? AND isnull(regrapai_id) ORDER BY ordem");
-             ps.setInt(1, conjunto_id);
-             ps.setInt(2, elemento_id);
-             ResultSet res = ps.executeQuery();
-             
-			 while (res.next()) {
-				 
-				 Regra r = new Regra();
-				 
-				 r.id = res.getInt("id");
-				 r.regrapai_id = res.getInt("regrapai_id");
-				 r.elemento_id = res.getInt("elemento_id");
-				 r.ordem = res.getInt("ordem");
-				 r.dataregra = res.getDate("dataregra");
-				 r.previa = res.getString("previa");
-				 r.observacao = res.getString("observacao");
-				 
-				 //Busca SUB-REGRAS
-				 try{
-					 
-					 PreparedStatement pss = (PreparedStatement) con.prepareStatement("SELECT * FROM regras WHERE conjunto_id = ? AND elemento_id = ? AND regrapai_id = ? ORDER BY ordem");
-					 pss.setInt(1, conjunto_id);
-					 pss.setInt(2, elemento_id);
-		             pss.setInt(3, r.id);
-		             ResultSet ress = pss.executeQuery();
-		             
-					 while (ress.next()) {
-						 
-						 Regra rs = new Regra();
-						 
-						 rs.id = ress.getInt("id");
-						 rs.regrapai_id = ress.getInt("regrapai_id");
-						 rs.elemento_id = ress.getInt("elemento_id");
-						 rs.ordem = ress.getInt("ordem");
-						 rs.dataregra = ress.getDate("dataregra");
-						 rs.previa = ress.getString("previa");
-						 rs.observacao = ress.getString("observacao");
-						 
-						 //Se é para buscar termos das regras
-						 if(withTerms){
-						 
-							 //Busca termos
-							 rs.termos = new Termo().findByRegra(rs.id);
-						 
-						 }
-						 
-						 //Adiciona a lista de SUB-REGRAS
-						 r.subregras.add(rs);
-						 
-					 } 
-					
-					 
-				 }
-				 catch (SQLException e) {
-					 System.out.println("Erro ao buscar sub-regras!");
-					 e.printStackTrace();
-				 }
-				 
-				 //Se é para buscar termos das regras
-				 if(withTerms){
-				 
-					 //Busca termos
-					 r.termos = new Termo().findByRegra(r.id);
-				 
-				 }
-				 
-				 list.add(r);
-				 
-			 }
-		 } catch (SQLException e) {
-			 System.out.println("Erro ao buscar regras!");
-			 e.printStackTrace();
-		 }
-
-		return list;
-		
-	}
 	
 	//Select para dropdownlistbox
 public void selectDropDownListBox(String Tabela, DropDownInfo d){

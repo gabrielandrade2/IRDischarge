@@ -1,5 +1,7 @@
 package br.gpri.janelas;
 
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author sikeira
@@ -16,6 +18,7 @@ public class JanelaArquivo extends javax.swing.JFrame {
         
         jScrollPane1 = new javax.swing.JScrollPane();
         AList = new javax.swing.JList();
+        lista = new DefaultListModel();
         jLabel1 = new javax.swing.JLabel();
         ACadastrarRadio = new javax.swing.JRadioButton();
         AExecutarRadio = new javax.swing.JRadioButton();
@@ -160,6 +163,7 @@ public class JanelaArquivo extends javax.swing.JFrame {
     public javax.swing.JRadioButton ACadastrarRadio;
     public javax.swing.JRadioButton AExecutarRadio;
     public javax.swing.JList AList;
+    public DefaultListModel lista;
     public javax.swing.JButton BotaoAbrir;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

@@ -5,7 +5,6 @@ import activerecord.BD;
 public class Variaveis {
 	
 	protected static int idUsuario = 0;
-	protected static String caminhoArquivo = new String();
 	protected static ControleExcel Excel = new ControleExcel();
 	protected static BD BD = new BD();
 	
