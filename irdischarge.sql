@@ -185,9 +185,10 @@ INSERT INTO `tipotermosregras` (`id`, `nome`) VALUES
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 DROP TABLE IF EXISTS usuarios;
 CREATE TABLE IF NOT EXISTS usuarios(
+	idUsuario int(10)  unsigned NOT NULL AUTO_INCREMENT,
 	usuario varchar(20),
 	senha varchar(10),
 	nome varchar(50),
 	email varchar(50),
-	PRIMARY KEY(usuario)
+	PRIMARY KEY(idUsuario, usuario)
 );

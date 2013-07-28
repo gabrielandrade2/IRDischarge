@@ -1,5 +1,8 @@
 package br.gpri.controle;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import br.gpri.janelas.JanelaExecucao;
 
 public class ControleExecucao extends Principal{
@@ -8,7 +11,10 @@ public class ControleExecucao extends Principal{
 	
 	public ControleExecucao(){
 		
-		
+		Janela = new JanelaExecucao();
+		Janela.BotaoOk.addActionListener(this.Ok);
+		Janela.BOTAOVOLTAR.addActionListener(this.Voltar);
+		Janela.BotaoTrocar.addActionListener(this.Trocar);
 		Janela.setLocationRelativeTo(null);
 	}
 	
@@ -20,4 +26,33 @@ public class ControleExecucao extends Principal{
 		Janela.setVisible(false);
 		Janela.dispose();
 	}
+	
+	 ActionListener Voltar = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fechaJanela();
+
+				
+			}
+		};
+	
+		 ActionListener Ok = new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					fechaJanela();
+					
+					
+				}
+			};
+			
+			 ActionListener Trocar = new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						
+					}
+				};
 }
