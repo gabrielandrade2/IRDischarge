@@ -3,9 +3,10 @@ package br.gpri.controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import br.gpri.janelas.JanelaExecucao;
 
-public class ControleExecucao extends Principal{
+public class ControleExecucao extends Variaveis{
 
 	private JanelaExecucao Janela; 
 	
@@ -32,7 +33,8 @@ public class ControleExecucao extends Principal{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				fechaJanela();
-
+				JanelaCadRegra = new ControleCadastroRegra();
+				JanelaCadRegra.abreJanela();
 				
 			}
 		};
