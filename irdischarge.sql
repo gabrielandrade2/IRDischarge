@@ -186,7 +186,7 @@ INSERT INTO `tipotermosregras` (`id`, `nome`) VALUES
 DROP TABLE IF EXISTS usuarios;
 CREATE TABLE IF NOT EXISTS usuarios(
 	idUsuario int(10)  unsigned NOT NULL AUTO_INCREMENT,
-	usuario varchar(20),
+	Usuario varchar(20) UNIQUE,
 	senha varchar(10),
 	nome varchar(50),
 	email varchar(50),
