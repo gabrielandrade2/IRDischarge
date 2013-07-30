@@ -126,8 +126,8 @@ public class JanelaResultados extends javax.swing.JFrame {
     }
     
     //Atributos
-    private javax.swing.JButton BotaoOK;
-    private javax.swing.JButton BotaoVoltar;
+    public javax.swing.JButton BotaoOK;
+    public javax.swing.JButton BotaoVoltar;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

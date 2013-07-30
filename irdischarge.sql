@@ -192,3 +192,12 @@ CREATE TABLE IF NOT EXISTS usuarios(
 	email varchar(50),
 	PRIMARY KEY(idUsuario, usuario)
 );
+
+DROP TABLE IF EXISTS arquivos;
+CREATE TABLE IF NOT EXISTS arquivos(
+idUsuario int,
+idArquivo int,
+absolutePath varchar(1000),
+nomeArquivo varchar(100),
+
+PRIMARY KEY (idUsuario,idArquivo));
