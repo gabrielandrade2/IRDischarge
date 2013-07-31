@@ -20,6 +20,8 @@ public class ControleCadastroRegra extends Variaveis{
 		Janela.BotaoProximo1.addActionListener(this.Proximo);
 		Janela.CRBotaoExecutar.addActionListener(this.Executar);
 		Janela.CRBotaoVoltar.addActionListener(this.Voltar);
+		Janela.BotaoGerarRegra1.addActionListener(this.GerarRegra);
+		Janela.BotaoSubRegra.addActionListener(this.GerarSubRegra);
 		Janela.setLocationRelativeTo(null);
 	}
 	
@@ -66,6 +68,26 @@ public class ControleCadastroRegra extends Variaveis{
 			fechaJanela();
 			JanelaArquivo = new ControleArquivo();
 			JanelaArquivo.abreJanela();
+			
+		}
+	};
+	
+	 ActionListener GerarRegra = new ActionListener() {
+			
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JanelaElementos = new ControleElementos();
+			JanelaElementos.abreJanela();
+			
+		}
+	};
+	
+	 ActionListener GerarSubRegra = new ActionListener() {
+			
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JanelaElementos = new ControleElementos();
+			JanelaElementos.abreJanela();
 			
 		}
 	};
