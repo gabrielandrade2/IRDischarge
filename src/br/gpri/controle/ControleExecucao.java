@@ -33,7 +33,6 @@ public class ControleExecucao extends Variaveis{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				fechaJanela();
-				JanelaCadRegra = new ControleCadastroRegra();
 				JanelaCadRegra.abreJanela();
 				
 			}

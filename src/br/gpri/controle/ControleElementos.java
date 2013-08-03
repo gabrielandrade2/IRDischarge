@@ -4,15 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import br.gpri.janelas.JanelaElementos;
+import activerecord.*;
 
-public class ControleElementos {
+public class ControleElementos extends Variaveis{
 	
 	private JanelaElementos Janela;
+	private Regra Regra;
 	
-	public ControleElementos(){
+	public ControleElementos(Regra r){
 		Janela = new JanelaElementos();
 		Janela.BotaoOK.addActionListener(this.Ok);
 		Janela.BotaoVoltar.addActionListener(this.Voltar);
+		this.Regra = r;
 		
 	}
 	

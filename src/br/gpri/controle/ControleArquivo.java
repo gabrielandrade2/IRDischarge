@@ -19,7 +19,6 @@ import br.gpri.janelas.JanelaArquivo;
 
 public class ControleArquivo extends Variaveis {
 
-	private String caminhoArquivo = new String();
 	private boolean Cadastrar = false;
 	private boolean Executar = false;
 	private JanelaArquivo Janela;
@@ -59,7 +58,7 @@ public class ControleArquivo extends Variaveis {
 		Janela.AList.addMouseListener(this.Lista);
 		}
 	
-		public void adicionaArquivoRecente(Arquivo a){
+		private void adicionaArquivoRecente(Arquivo a){
 			testaArquivoRecenteExiste(a);
 			
 			if(arquivosRecentes.size() >= 10)
@@ -71,7 +70,7 @@ public class ControleArquivo extends Variaveis {
 			caminhoArquivo = a.getCaminho();
 		}
 	
-		public void testaArquivoRecenteExiste(Arquivo a){
+		private void testaArquivoRecenteExiste(Arquivo a){
 			for(int i=0; i<arquivosRecentes.size(); i++){
 				String x = a.getCaminho();
 				String y = arquivosRecentes.elementAt(i).getCaminho();

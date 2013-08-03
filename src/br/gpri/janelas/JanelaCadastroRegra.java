@@ -45,7 +45,7 @@ public class JanelaCadastroRegra extends javax.swing.JFrame {
         BotaoAbrir = new javax.swing.JButton();
         DropDownListBox1 = new javax.swing.JComboBox();
         DropDownListBox2 = new javax.swing.JComboBox();
-        TextoSumario1 = new javax.swing.JTextField();
+        TextoSumario1 = new javax.swing.JTextArea();
         BotaoAnterior1 = new javax.swing.JButton();
         BotaoProximo1 = new javax.swing.JButton();
         BotaoGerarRegra1 = new javax.swing.JButton();
@@ -81,9 +81,9 @@ public class JanelaCadastroRegra extends javax.swing.JFrame {
 
         BotaoAbrir.setText("Abrir");
 
-        DropDownListBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+       // DropDownListBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        DropDownListBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+      //  DropDownListBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -161,7 +161,7 @@ public class JanelaCadastroRegra extends javax.swing.JFrame {
 
         BotaoGerarRegra1.setText("Criar Regra");
 
-        DropDownListBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+      //  DropDownListBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         CRBotaoVoltar.setText("Voltar");
 
@@ -173,20 +173,12 @@ public class JanelaCadastroRegra extends javax.swing.JFrame {
 
         jLabel7.setText("INTEMED");
 
-        ListaRegras.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        
         jScrollPane1.setViewportView(ListaRegras);
 
         jLabel8.setText("Regras:");
 
-        ListaSubRegras.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+       
         jScrollPane2.setViewportView(ListaSubRegras);
 
         jLabel9.setText("Sub-Regras:");
@@ -328,14 +320,14 @@ public class JanelaCadastroRegra extends javax.swing.JFrame {
     public javax.swing.JButton CRBotaoVoltar;
     private javax.swing.JComboBox DropDownListBox1;
     private javax.swing.JComboBox DropDownListBox2;
-    private javax.swing.JComboBox DropDownListBox3;
-    private javax.swing.JList ListaRegras;
-    private javax.swing.JList ListaSubRegras;
-    private javax.swing.JTextField TextoCaminhoArquivo;
-    private javax.swing.JTextField TextoGeraRegra;
-    private javax.swing.JTextField TextoRegra;
+    public javax.swing.JComboBox DropDownListBox3;
+    public javax.swing.JList ListaRegras;
+    public javax.swing.JList ListaSubRegras;
+    public javax.swing.JTextField TextoCaminhoArquivo;
+    public javax.swing.JTextField TextoGeraRegra;
+    public javax.swing.JTextField TextoRegra;
     private javax.swing.JTextField TextoSumario;
-    private javax.swing.JTextField TextoSumario1;
+    public javax.swing.JTextArea TextoSumario1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

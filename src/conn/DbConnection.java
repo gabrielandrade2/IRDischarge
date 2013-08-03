@@ -6,7 +6,8 @@ import java.sql.Connection;
 
 public class DbConnection {
 	
-	private String path = "jdbc:mysql://localhost:3306/irdischarge";
+	//private String path = "jdbc:mysql://localhost:3306/irdischarge";
+	private String path = "jdbc:mysql://localhost:3306/intemed";
 	private String usuario = "root";
 	private String password = "root";
 	private static DbConnection conexao = null;

@@ -1,49 +1,27 @@
 package activerecord;
 
-import java.util.List;
-
 public class Elemento extends ActiveRecord {
 	
-	public int id;
-	public String abreviacao;
-	public String nome;
+	private int id;
+	private String nome;
+	private String descricao;
 	
-	public int insert(){
-		
-		return 0;
-		
+	public int getId() {
+		return id;
 	}
-	
-	public boolean update(){
-		
-		return false;
-		
+	public void setId(int id) {
+		this.id = id;
 	}
-	
-	public boolean delete(){
-		
-		return false;
-		
+	public String getNome() {
+		return nome;
 	}
-	
-	public boolean delete(int id){
-		
-		return false;
-		
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	
-	public Elemento find(int id){
-		
-		return new Elemento();
-		
+	public String getDescricao() {
+		return descricao;
 	}
-	
-	public List<Elemento> findAll(){
-		
-		return null;
-		
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-	
-	
-	
 }

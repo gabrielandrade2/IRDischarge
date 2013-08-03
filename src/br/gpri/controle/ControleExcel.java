@@ -32,6 +32,10 @@ public class ControleExcel {
 		return (Planilha.getCell(0, linha));
 	}
 	
+	public String getConteudoCelula(Integer linha){
+		return (Planilha.getCell(0, linha).getContents());
+	}
+	
 	public int getNumLinhas(){
 		return (Planilha.getRows());
 	}
