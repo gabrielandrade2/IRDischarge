@@ -242,7 +242,6 @@ public class Tagger {
 	    return text;
 	}
 	
-	
 	public String retiraStopWords(String text){
 		
 		text = text.replace(" o ", " ");
