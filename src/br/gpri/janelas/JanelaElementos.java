@@ -13,13 +13,16 @@ public class JanelaElementos extends javax.swing.JFrame {
       @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
-        buttonGroup5 = new javax.swing.ButtonGroup();
-        buttonGroup6 = new javax.swing.ButtonGroup();
-        buttonGroup7 = new javax.swing.ButtonGroup();
+        Termo1 = new javax.swing.ButtonGroup();
+        Termo2 = new javax.swing.ButtonGroup();
+        Termo3 = new javax.swing.ButtonGroup();
+        Termo4 = new javax.swing.ButtonGroup();
+        Termo5 = new javax.swing.ButtonGroup();
+        Termo6 = new javax.swing.ButtonGroup();
+        Termo7 = new javax.swing.ButtonGroup();
+        Termo8 = new javax.swing.ButtonGroup();
+        Termo9 = new javax.swing.ButtonGroup();
+        Termo10 = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
@@ -50,16 +53,16 @@ public class JanelaElementos extends javax.swing.JFrame {
         jRadioButton28 = new javax.swing.JRadioButton();
         jRadioButton29 = new javax.swing.JRadioButton();
         jRadioButton30 = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        TextoTermo1 = new javax.swing.JTextField();
+        TextoTermo2 = new javax.swing.JTextField();
+        TextoTermo3 = new javax.swing.JTextField();
+        TextoTermo4 = new javax.swing.JTextField();
+        TextoTermo5 = new javax.swing.JTextField();
+        TextoTermo6 = new javax.swing.JTextField();
+        TextoTermo7 = new javax.swing.JTextField();
+        TextoTermo8 = new javax.swing.JTextField();
+        TextoTermo9 = new javax.swing.JTextField();
+        TextoTermo10 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         BotaoOK = new javax.swing.JButton();
         BotaoVoltar = new javax.swing.JButton();
@@ -67,125 +70,107 @@ public class JanelaElementos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jRadioButton1.setText("1º Nível");
-
         jRadioButton2.setText("2º Nível");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
-            }
-        });
-
         jRadioButton3.setText("Nenhum");
-
         jRadioButton4.setText("2º Nível");
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
-            }
-        });
-
         jRadioButton5.setText("Nenhum");
-
         jRadioButton6.setText("1º Nível");
-        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton6ActionPerformed(evt);
-            }
-        });
-
         jRadioButton7.setText("2º Nível");
-        jRadioButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton7ActionPerformed(evt);
-            }
-        });
-
         jRadioButton8.setText("Nenhum");
-
         jRadioButton9.setText("1º Nível");
-
         jRadioButton10.setText("2º Nível");
-        jRadioButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton10ActionPerformed(evt);
-            }
-        });
-
         jRadioButton11.setText("Nenhum");
-
         jRadioButton12.setText("1º Nível");
-
         jRadioButton13.setText("2º Nível");
-        jRadioButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton13ActionPerformed(evt);
-            }
-        });
-
         jRadioButton14.setText("Nenhum");
-
         jRadioButton15.setText("1º Nível");
-        jRadioButton15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton15ActionPerformed(evt);
-            }
-        });
-
         jRadioButton16.setText("1º Nível");
-
         jRadioButton17.setText("2º Nível");
-        jRadioButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton17ActionPerformed(evt);
-            }
-        });
-
         jRadioButton18.setText("Nenhum");
-
         jRadioButton19.setText("1º Nível");
-
         jRadioButton20.setText("2º Nível");
-        jRadioButton20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton20ActionPerformed(evt);
-            }
-        });
-
         jRadioButton21.setText("Nenhum");
-
         jRadioButton22.setText("1º Nível");
-
         jRadioButton23.setText("2º Nível");
-        jRadioButton23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton23ActionPerformed(evt);
-            }
-        });
-
         jRadioButton24.setText("Nenhum");
-
         jRadioButton25.setText("1º Nível");
-
         jRadioButton26.setText("2º Nível");
-        jRadioButton26.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton26ActionPerformed(evt);
-            }
-        });
-
         jRadioButton27.setText("Nenhum");
-
         jRadioButton28.setText("1º Nível");
-
         jRadioButton29.setText("2º Nível");
-        jRadioButton29.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton29ActionPerformed(evt);
-            }
-        });
-
         jRadioButton30.setText("Nenhum");
-
+        
+        Termo1.add(jRadioButton1);
+        Termo1.add(jRadioButton2);
+        Termo1.add(jRadioButton3);
+        
+        Termo2.add(jRadioButton4);
+        Termo2.add(jRadioButton5);
+        Termo2.add(jRadioButton6);
+        
+        Termo3.add(jRadioButton7);
+        Termo3.add(jRadioButton8);
+        Termo3.add(jRadioButton9);
+        
+        Termo4.add(jRadioButton10);
+        Termo4.add(jRadioButton11);
+        Termo4.add(jRadioButton12);
+        
+        Termo5.add(jRadioButton13);
+        Termo5.add(jRadioButton14);
+        Termo5.add(jRadioButton15);
+        
+        Termo6.add(jRadioButton16);
+        Termo6.add(jRadioButton17);
+        Termo6.add(jRadioButton18);
+        
+        Termo7.add(jRadioButton19);
+        Termo7.add(jRadioButton20);
+        Termo7.add(jRadioButton21);
+        
+        Termo8.add(jRadioButton22);
+        Termo8.add(jRadioButton23);
+        Termo8.add(jRadioButton24);
+        
+        Termo9.add(jRadioButton25);
+        Termo9.add(jRadioButton26);
+        Termo9.add(jRadioButton27);
+        
+        Termo10.add(jRadioButton28);
+        Termo10.add(jRadioButton29);
+        Termo10.add(jRadioButton30);
+        
+        jRadioButton1.setVisible(false);
+        jRadioButton2.setVisible(false);
+        jRadioButton3.setVisible(false);
+        jRadioButton4.setVisible(false);
+        jRadioButton5.setVisible(false);
+        jRadioButton6.setVisible(false);
+        jRadioButton7.setVisible(false);
+        jRadioButton8.setVisible(false);
+        jRadioButton9.setVisible(false);
+        jRadioButton10.setVisible(false);
+        jRadioButton11.setVisible(false);
+        jRadioButton12.setVisible(false);
+        jRadioButton13.setVisible(false);
+        jRadioButton14.setVisible(false);
+        jRadioButton15.setVisible(false);
+        jRadioButton16.setVisible(false);
+        jRadioButton17.setVisible(false);
+        jRadioButton18.setVisible(false);
+        jRadioButton19.setVisible(false);
+        jRadioButton20.setVisible(false);
+        jRadioButton21.setVisible(false);
+        jRadioButton22.setVisible(false);
+        jRadioButton23.setVisible(false);
+        jRadioButton24.setVisible(false);
+        jRadioButton25.setVisible(false);
+        jRadioButton26.setVisible(false);
+        jRadioButton27.setVisible(false);
+        jRadioButton28.setVisible(false);
+        jRadioButton29.setVisible(false);
+        jRadioButton30.setVisible(false);
+        
         jLabel1.setText("Elementos");
 
         BotaoOK.setText("OK");
@@ -206,7 +191,7 @@ public class JanelaElementos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jTextField3)
+                                .addComponent(TextoTermo3)
                                 .addGap(18, 18, 18)
                                 .addComponent(jRadioButton9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -215,7 +200,7 @@ public class JanelaElementos extends javax.swing.JFrame {
                                 .addComponent(jRadioButton8))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TextoTermo4, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(jRadioButton12))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -223,7 +208,7 @@ public class JanelaElementos extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jRadioButton11))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TextoTermo2, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(jRadioButton6)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -232,12 +217,12 @@ public class JanelaElementos extends javax.swing.JFrame {
                                     .addComponent(jRadioButton5))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextField9)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(TextoTermo9)
+                                        .addComponent(TextoTermo8, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TextoTermo7, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TextoTermo6, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TextoTermo5, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TextoTermo10, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -283,7 +268,7 @@ public class JanelaElementos extends javax.swing.JFrame {
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                     .addComponent(jRadioButton30))))))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TextoTermo1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(jRadioButton1)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -301,61 +286,61 @@ public class JanelaElementos extends javax.swing.JFrame {
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
                     .addComponent(jRadioButton3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextoTermo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton6)
                     .addComponent(jRadioButton4)
                     .addComponent(jRadioButton5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextoTermo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton9)
                     .addComponent(jRadioButton7)
                     .addComponent(jRadioButton8)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextoTermo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton12)
                     .addComponent(jRadioButton10)
                     .addComponent(jRadioButton11)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextoTermo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton15)
                     .addComponent(jRadioButton13)
                     .addComponent(jRadioButton14)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextoTermo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton16)
                     .addComponent(jRadioButton17)
                     .addComponent(jRadioButton18)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextoTermo6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton19)
                     .addComponent(jRadioButton20)
                     .addComponent(jRadioButton21)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextoTermo7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton22)
                     .addComponent(jRadioButton23)
                     .addComponent(jRadioButton24)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextoTermo8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton25)
                     .addComponent(jRadioButton26)
                     .addComponent(jRadioButton27)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextoTermo9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton28)
                     .addComponent(jRadioButton29)
                     .addComponent(jRadioButton30)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextoTermo10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotaoOK)
@@ -365,54 +350,6 @@ public class JanelaElementos extends javax.swing.JFrame {
 
         pack();
     }
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
-
-    private void jRadioButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton7ActionPerformed
-
-    private void jRadioButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton10ActionPerformed
-
-    private void jRadioButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton13ActionPerformed
-
-    private void jRadioButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton17ActionPerformed
-
-    private void jRadioButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton20ActionPerformed
-
-    private void jRadioButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton23ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton23ActionPerformed
-
-    private void jRadioButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton26ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton26ActionPerformed
-
-    private void jRadioButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton29ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton29ActionPerformed
-
-    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton6ActionPerformed
-
-    private void jRadioButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton15ActionPerformed
 
 
     public void inicia() {
@@ -442,52 +379,55 @@ public class JanelaElementos extends javax.swing.JFrame {
     // Atributos
     public javax.swing.JButton BotaoOK;
     public javax.swing.JButton BotaoVoltar;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.ButtonGroup buttonGroup5;
-    private javax.swing.ButtonGroup buttonGroup6;
-    private javax.swing.ButtonGroup buttonGroup7;
+    private javax.swing.ButtonGroup Termo1;
+    private javax.swing.ButtonGroup Termo2;
+    private javax.swing.ButtonGroup Termo3;
+    private javax.swing.ButtonGroup Termo4;
+    private javax.swing.ButtonGroup Termo5;
+    private javax.swing.ButtonGroup Termo6;
+    private javax.swing.ButtonGroup Termo7;
+    private javax.swing.ButtonGroup Termo8;
+    private javax.swing.ButtonGroup Termo9;
+    private javax.swing.ButtonGroup Termo10;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton11;
-    private javax.swing.JRadioButton jRadioButton12;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton15;
-    private javax.swing.JRadioButton jRadioButton16;
-    private javax.swing.JRadioButton jRadioButton17;
-    private javax.swing.JRadioButton jRadioButton18;
-    private javax.swing.JRadioButton jRadioButton19;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton20;
-    private javax.swing.JRadioButton jRadioButton21;
-    private javax.swing.JRadioButton jRadioButton22;
-    private javax.swing.JRadioButton jRadioButton23;
-    private javax.swing.JRadioButton jRadioButton24;
-    private javax.swing.JRadioButton jRadioButton25;
-    private javax.swing.JRadioButton jRadioButton26;
-    private javax.swing.JRadioButton jRadioButton27;
-    private javax.swing.JRadioButton jRadioButton28;
-    private javax.swing.JRadioButton jRadioButton29;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton30;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    public javax.swing.JRadioButton jRadioButton1;
+    public javax.swing.JRadioButton jRadioButton10;
+    public javax.swing.JRadioButton jRadioButton11;
+    public javax.swing.JRadioButton jRadioButton12;
+    public javax.swing.JRadioButton jRadioButton13;
+    public javax.swing.JRadioButton jRadioButton14;
+    public javax.swing.JRadioButton jRadioButton15;
+    public javax.swing.JRadioButton jRadioButton16;
+    public javax.swing.JRadioButton jRadioButton17;
+    public javax.swing.JRadioButton jRadioButton18;
+    public javax.swing.JRadioButton jRadioButton19;
+    public javax.swing.JRadioButton jRadioButton2;
+    public javax.swing.JRadioButton jRadioButton20;
+    public javax.swing.JRadioButton jRadioButton21;
+    public javax.swing.JRadioButton jRadioButton22;
+    public javax.swing.JRadioButton jRadioButton23;
+    public javax.swing.JRadioButton jRadioButton24;
+    public javax.swing.JRadioButton jRadioButton25;
+    public javax.swing.JRadioButton jRadioButton26;
+    public javax.swing.JRadioButton jRadioButton27;
+    public javax.swing.JRadioButton jRadioButton28;
+    public javax.swing.JRadioButton jRadioButton29;
+    public javax.swing.JRadioButton jRadioButton3;
+    public javax.swing.JRadioButton jRadioButton30;
+    public javax.swing.JRadioButton jRadioButton4;
+    public javax.swing.JRadioButton jRadioButton5;
+    public javax.swing.JRadioButton jRadioButton6;
+    public javax.swing.JRadioButton jRadioButton7;
+    public javax.swing.JRadioButton jRadioButton8;
+    public javax.swing.JRadioButton jRadioButton9;
+    public javax.swing.JTextField TextoTermo1;
+    public javax.swing.JTextField TextoTermo10;
+    public javax.swing.JTextField TextoTermo2;
+    public javax.swing.JTextField TextoTermo3;
+    public javax.swing.JTextField TextoTermo4;
+    public javax.swing.JTextField TextoTermo5;
+    public javax.swing.JTextField TextoTermo6;
+    public javax.swing.JTextField TextoTermo7;
+    public javax.swing.JTextField TextoTermo8;
+    public javax.swing.JTextField TextoTermo9;
 }

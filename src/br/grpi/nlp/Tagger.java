@@ -114,6 +114,7 @@ public class Tagger {
 						t.setIdRegra(idRegra);
 						t.setIdTermo(k);
 						t.setTermo(token.getMorphologicalTag().toString());
+						t.setTexto(token.getLexeme().toString());
 						termosregras.add(t);
 						
 					}

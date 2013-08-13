@@ -13,8 +13,15 @@ public class Termo extends ActiveRecord {
 	public int idTermo;
 	public int ordem;
 	public String termo;
+	public String texto;
 	
 	
+	public String getTexto() {
+		return texto;
+	}
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
 	public int getIdRegra() {
 		return idRegra;
 	}

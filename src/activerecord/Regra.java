@@ -23,6 +23,9 @@ public class Regra extends ActiveRecord {
 	public Termo getTermo(int index) {
 		return termos.get(index);
 	}
+	public int getNumTermos(){
+		return termos.size();
+	}
 	public void setTermos(List<Termo> termos) {
 		this.termos = termos;
 	}

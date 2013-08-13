@@ -180,7 +180,7 @@ public class BD extends ActiveRecord {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT MAX(idRegra)+1 FROM regras;");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
-				 maxId = res.getInt(0);
+				 maxId = res.getInt(1);
 			}
 		}
 		

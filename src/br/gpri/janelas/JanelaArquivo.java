@@ -28,23 +28,6 @@ public class JanelaArquivo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         AbreArquivo = new javax.swing.JFileChooser();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-/*
-        AList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(AList);
-
-        jLabel1.setText("Arquivos");
-
-        ACadastrarRadio.setText("Cadastrar");
-        ACadastrarRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ACadastrarRadioActionPerformed(evt);
-            }
-        });*/
-
         
      
         BotaoAbrir.setText("Abrir");
@@ -119,19 +102,7 @@ public class JanelaArquivo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void ACadastrarRadioActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
-    }                                               
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -166,7 +137,6 @@ public class JanelaArquivo extends javax.swing.JFrame {
     public DefaultListModel lista;
     public javax.swing.JButton BotaoAbrir;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
