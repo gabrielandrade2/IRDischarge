@@ -101,10 +101,49 @@ public class BD extends ActiveRecord {
 		return Lista;
 	}
 	
+	public List<Conjunto> selectConjunto(){
+		List<Conjunto> Lista = new ArrayList();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM conjuntos;"); 
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				Conjunto Conjunto= new Conjunto();
+				Conjunto.setId(res.getInt("idConjunto"));
+				Conjunto.setNome(res.getString("nomeConjunto"));
+				Lista.add(Conjunto);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return Lista;
+	}
+	
 	public List<Regra> selectRegraCadastro(int idTexto, String arquivo, int idUsuario){
 		List<Regra> Lista = new ArrayList();
 		try{
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto FROM regras WHERE (idTexto="+idTexto+" AND arquivo='"+arquivo+"' AND idUsuario="+idUsuario+");");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				Regra r = new Regra();
+				r.setId(res.getInt("idRegra"));
+				r.setPrevia(res.getString("previa"));
+				r.setTexto(res.getString("texto"));
+				Lista.add(r);
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return Lista;
+}
+	
+	public List<Regra> selectRegraExecucao(int idUsuario){
+		List<Regra> Lista = new ArrayList();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto FROM regras WHERE (idUsuario="+idUsuario+");");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				Regra r = new Regra();

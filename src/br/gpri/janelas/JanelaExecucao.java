@@ -31,13 +31,14 @@ public class JanelaExecucao extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         BotaoOk = new javax.swing.JButton();
         BOTAOVOLTAR = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        DropDownlistboxElementos = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         DropDownlistboxConjunto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                
         DropDownlistboxConjunto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DropDownlistboxConjuntoActionPerformed(evt);
@@ -88,7 +89,7 @@ public class JanelaExecucao extends javax.swing.JFrame {
 
         BOTAOVOLTAR.setText("Voltar");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        DropDownlistboxElementos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Conjuntos:");
 
@@ -121,7 +122,7 @@ public class JanelaExecucao extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DropDownlistboxElementos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 171, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -135,7 +136,7 @@ public class JanelaExecucao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DropDownlistboxConjunto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DropDownlistboxElementos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -199,7 +200,7 @@ public class JanelaExecucao extends javax.swing.JFrame {
     public javax.swing.JButton BotaoTrocar;
     public javax.swing.JComboBox DropDownlistboxConjunto;
     public javax.swing.JTable TabelaExecucao;
-    private javax.swing.JComboBox jComboBox1;
+    public javax.swing.JComboBox DropDownlistboxElementos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
