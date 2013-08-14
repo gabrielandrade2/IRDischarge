@@ -141,10 +141,10 @@ public class BD extends ActiveRecord {
 		return Lista;
 	}
 	
-	public boolean insertRegra(int idUsuario, Regra r, int idTexto, int caminhoArquivo){
+	public boolean insertRegra(int idUsuario, Regra r){
 		boolean erro = true;
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO regras (idUsuario,idRegra,idConjunto,idElemento,previa,texto,idTexto,arquivo) VALUES ("+idUsuario+","+r.getId()+","+r.getConjunto()+","+r.getElemento()+",'"+r.getPrevia()+"','"+r.getTexto()+"',"+idTexto+",'"+caminhoArquivo+"');");		
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO regras (idUsuario,idRegra,idConjunto,idElemento,previa,texto,idTexto,arquivo) VALUES ("+idUsuario+","+r.getId()+","+r.getConjunto()+","+r.getElemento()+",'"+r.getPrevia()+"','"+r.getTexto()+"',"+r.getIdTexto()+",'"+r.getCaminhoArquivo()+"');");		
 			 erro = ps.execute();
 		}
 		catch(SQLException e){

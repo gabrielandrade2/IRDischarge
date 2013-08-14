@@ -148,7 +148,9 @@ public class ControleCadastroRegra extends Variaveis{
 			
 			Tagger Tagger = new Tagger(); 
 			Regra r = Tagger.geraRegra(Janela.TextoSumario1.getText(), Janela.TextoSumario1.getSelectedText(), idElemento, idRegra);
-						
+			r.setIdTexto(linha);
+			r.setCaminhoArquivo(caminhoArquivo);
+			
 			JanelaElementos = new ControleElementos(r);
 			JanelaElementos.abreJanela();
 			

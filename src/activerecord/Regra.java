@@ -16,7 +16,21 @@ public class Regra extends ActiveRecord {
 	private String previa;
 	private String texto;
 	private List<Termo> termos;
+	private int idTexto;
+	private String caminhoArquivo;
 	
+	public int getIdTexto() {
+		return idTexto;
+	}
+	public void setIdTexto(int idTexto) {
+		this.idTexto = idTexto;
+	}
+	public String getCaminhoArquivo() {
+		return caminhoArquivo;
+	}
+	public void setCaminhoArquivo(String caminhoArquivo) {
+		this.caminhoArquivo = caminhoArquivo;
+	}
 	public List<Termo> getTermos() {
 		return termos;
 	}
