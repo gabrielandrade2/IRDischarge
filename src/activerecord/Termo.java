@@ -10,6 +10,7 @@ import com.mysql.jdbc.PreparedStatement;
 public class Termo extends ActiveRecord {
 	
 	public int idRegra;
+	public int idSubregra;
 	public int idTermo;
 	public int ordem;
 	public String termo;
@@ -46,5 +47,10 @@ public class Termo extends ActiveRecord {
 	public void setTermo(String termo) {
 		this.termo = termo;
 	}
-		
+	public int getIdSubregra() {
+		return idSubregra;
+	}
+	public void setIdSubregra(int idSubregra) {
+		this.idSubregra = idSubregra;
+	}
 }

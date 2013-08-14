@@ -14,18 +14,28 @@ public class ControleElementos extends Variaveis{
 	
 	private JanelaElementos Janela;
 	private Regra Regra;
+	private Subregra Subregra;
 	private List<Termo> Termos;
+	private boolean isSubregra;
 	
 	public ControleElementos(Regra r){
 		Janela = new JanelaElementos();
-		Janela.BotaoOK.addActionListener(this.Ok);
-		Janela.BotaoVoltar.addActionListener(this.Voltar);
+		this.isSubregra = false;
 		this.Regra = r;
 		this.Termos = Regra.getTermos();
 		inicializaJanela();
 		setVisivel(Regra.getNumTermos());
 		setTextoTermos(Regra.getNumTermos());
-		//Janela.setLocationRelativeTo(null);
+	}
+	
+	public ControleElementos(Subregra s){
+		Janela = new JanelaElementos();
+		this.isSubregra = true;
+		this.Subregra = s;
+		this.Termos = Subregra.getTermos();
+		inicializaJanela();
+		setVisivel(Subregra.getNumTermos());
+		setTextoTermos(Subregra.getNumTermos());
 	}
 	
 	public void abreJanela(){
@@ -54,7 +64,9 @@ public class ControleElementos extends Variaveis{
         		Janela.GrupoTermo[i].add(Janela.jRadioButton[(i*3)+j]);
         
         setInvisivel();
-
+        Janela.BotaoOK.addActionListener(this.Ok);
+		Janela.BotaoVoltar.addActionListener(this.Voltar);
+		Janela.setLocationRelativeTo(null);
 	}
 	
 	private void setInvisivel(){
@@ -91,7 +103,6 @@ public class ControleElementos extends Variaveis{
 					Termos.get(i).setOrdem(0);
 			}
 		}
-		Regra.setTermos(Termos);
 	}
 	
 	ActionListener Voltar = new ActionListener() {
@@ -104,12 +115,27 @@ public class ControleElementos extends Variaveis{
 
 	 ActionListener Ok = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getRadioSelecionados(Regra.getNumTermos());
+				if(isSubregra){
+					getRadioSelecionados(Subregra.getNumTermos());
+					Subregra.setTermos(Termos);
+					boolean erro = BD.insertSubRegra(Subregra);
+					if(erro)
+						System.out.println("Erro ao inserir a subregra no Banco de Dados");
+					else
+						System.out.println("Subregra inserida no Banco de Dados com sucesso");
+				}
+				else{
+					getRadioSelecionados(Regra.getNumTermos());
+					Regra.setTermos(Termos);
+					boolean erro = BD.insertRegra(idUsuario, Regra);
+					if(erro)
+						System.out.println("Erro ao inserir a regra no Banco de Dados");
+					else
+						System.out.println("Regra inserida no Banco de Dados com sucesso");
+				}
 				
-				//Inserir BD
-				fechaJanela();
-
-				
+				JanelaCadRegra.geraListaRegras();
+				fechaJanela();		
 			}
 		};
 

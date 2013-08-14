@@ -229,6 +229,55 @@ public class BD extends ActiveRecord {
 		return maxId;
 	}
 	
+	public boolean insertSubRegra(Subregra s){
+		boolean erro = true;
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO subregras (idRegra, idSubregra, previa, texto) VALUES ("+s.getIdRegra()+","+s.getId()+",'"+s.getPrevia()+"','"+s.getTexto()+"');");		
+			 erro = ps.execute();
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+				
+		erro = insertTermosSubRegras(s.getTermos()); 
+		return erro;
+		
+	}
+	
+	public boolean insertTermosSubRegras(List<Termo> termossubregras){
+		boolean erro = true;
+		for(int i=0; i<termossubregras.size(); i++){
+			try{
+				Termo t = termossubregras.get(i);
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO termossubregras VALUES ("+t.getIdRegra()+","+t.getIdSubregra()+","+t.getIdTermo()+","+t.getOrdem()+",'"+t.getTermo()+"');");		
+				 erro = ps.execute();
+				 if(erro == true)
+					 break;
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		 
+		return erro;
+	}
+	
+	public int selectMaxIdSubRegra(int idRegra){
+		int maxId = 0;
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT MAX(idSubRegra)+1 FROM subregras WHERE idRegra = "+idRegra+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				 maxId = res.getInt(1);
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return maxId;
+	}
+	
 	//Não utilizado
 	
 	public boolean insertBD(String Insert){

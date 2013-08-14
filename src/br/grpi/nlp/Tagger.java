@@ -17,6 +17,7 @@ import org.tartarus.snowball.ext.portugueseStemmer;
 import util.ArrayHandle;
 import util.ReadWriteTextFile;
 import activerecord.Regra;
+import activerecord.Subregra;
 import activerecord.Termo;
 import br.gpri.view.Interface;
 import br.usp.pcs.lta.cogroo.entity.Token;
@@ -111,7 +112,7 @@ public class Tagger {
 						Token token = tokens.get(k+i);
 						if(token.getLexeme().toString().equals("."));
 						else{
-							previa += token.getLexeme() + "_" + token.getMorphologicalTag() + " ";
+							previa += "[" + token.getMorphologicalTag() + "]";
 							Termo t = new Termo();
 							t.setIdRegra(idRegra);
 							t.setIdTermo(k);
@@ -135,6 +136,87 @@ public class Tagger {
 		return r; 
 	}
 
+	
+	public Subregra geraSubRegra(String text_sumario, String text_selecionado,int idRegra, int idSubRegra){
+		
+		List <Termo> termosregras = new ArrayList();
+		
+		//Executa operações de PRÉ-PROCESSAMENTO
+		text_sumario = preProccessText(text_sumario);
+		text_selecionado = preProccessText(text_selecionado);
+		
+		//Separa texto selecionado em palavras
+		SentenceCogroo selecionado = new SentenceCogroo(text_selecionado);
+		cogroo.tokenizer(selecionado);
+		cogroo.nameFinder(selecionado);
+		cogroo.preTagger(selecionado);
+		List<Token> text_separado = selecionado.getTokens();
+						
+		String previa = "";
+		
+		//Separa texto em sentenças
+		String[] sentencas = cogroo.sentDetect(text_sumario);
+		for (String sentenca : sentencas) {
+			
+			//Tokeniza sentença
+			SentenceCogroo sc = new SentenceCogroo(sentenca);
+			List<Token> tokens = null;
+			cogroo.tokenizer(sc);
+
+			//Aplica o NAMEFINDER
+			cogroo.nameFinder(sc);
+			
+			//Expansão de preposições
+			cogroo.preTagger(sc);
+			
+			//Realiza POS_tagging
+			cogroo.tagger(sc);
+			tokens = sc.getTokens();
+			
+			//Procura onde estão os termos selecionados
+			//Compara um termo com o primeiro do vetor separado, caso encontre, ve se os termos
+			//seguintes também são os esperados
+			boolean igual = false;
+			
+			for(int i=0; i < tokens.size(); i++){
+				for(int j=0; j < text_separado.size(); j++){
+					if(text_separado.get(j).getLexeme().equals(tokens.get(i+j).getLexeme()))
+						igual = true;
+					else{
+						igual = false;
+						break;
+					}
+				}
+				
+				//Cria a string a ser retornada,
+				//a partir do indice do primeiro termo esperado encontrado. 
+				if(igual){
+					for(int k=0; k < text_separado.size(); k++){
+						Token token = tokens.get(k+i);
+						if(token.getLexeme().toString().equals("."));
+						else{
+							previa += "[" + token.getMorphologicalTag() + "]";
+							Termo t = new Termo();
+							t.setIdRegra(idRegra);
+							t.setIdTermo(k);
+							t.setTermo(token.getMorphologicalTag().toString());
+							t.setTexto(token.getLexeme().toString());
+							termosregras.add(t);
+						}
+					}
+				}
+			}
+		}
+		
+		Subregra s = new Subregra();
+		s.setId(idSubRegra);
+		s.setIdRegra(idRegra);
+		s.setPrevia(previa);
+		s.setTexto(text_selecionado);
+		s.setTermos(termosregras);
+		
+		return s; 
+	}
 	
 	public String retiraErrosRecorrentes(String text){
 		
