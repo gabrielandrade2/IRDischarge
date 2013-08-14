@@ -1,14 +1,8 @@
 package activerecord;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.PreparedStatement;
-
-public class Regra extends ActiveRecord {
+public class Regra{
 	
 	private int id;
 	private int conjunto;
