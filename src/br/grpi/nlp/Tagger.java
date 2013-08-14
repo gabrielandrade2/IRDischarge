@@ -108,15 +108,17 @@ public class Tagger {
 				//a partir do indice do primeiro termo esperado encontrado. 
 				if(igual){
 					for(int k=0; k < text_separado.size(); k++){
-						Token token = tokens.get(k+i);	
-						previa += token.getLexeme() + "_" + token.getMorphologicalTag() + " ";
-						Termo t = new Termo();
-						t.setIdRegra(idRegra);
-						t.setIdTermo(k);
-						t.setTermo(token.getMorphologicalTag().toString());
-						t.setTexto(token.getLexeme().toString());
-						termosregras.add(t);
-						
+						Token token = tokens.get(k+i);
+						if(token.getLexeme().toString().equals("."));
+						else{
+							previa += token.getLexeme() + "_" + token.getMorphologicalTag() + " ";
+							Termo t = new Termo();
+							t.setIdRegra(idRegra);
+							t.setIdTermo(k);
+							t.setTermo(token.getMorphologicalTag().toString());
+							t.setTexto(token.getLexeme().toString());
+							termosregras.add(t);
+						}
 					}
 				}
 			}
