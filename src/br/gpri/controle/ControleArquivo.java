@@ -74,9 +74,11 @@ public class ControleArquivo extends Variaveis {
 			for(int i=0; i<arquivosRecentes.size(); i++){
 				String x = a.getCaminho();
 				String y = arquivosRecentes.elementAt(i).getCaminho();
-				if(x.contentEquals(y))
+				if(x.contentEquals(y)){
 					arquivosRecentes.remove(i);
+					Janela.AList.remove(i);
 				}
+			}
 		}
 		
 
