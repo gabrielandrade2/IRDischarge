@@ -91,6 +91,7 @@ public class ControleCadastroRegra extends Variaveis{
 		Janela.ListaRegras.updateUI();
 		Janela.ListaRegras.setSelectedIndex(0);
 		Janela.ListaRegras.ensureIndexIsVisible(0);
+		atualizaSubRegras();
 	}
 	
 	 ActionListener Anterior = new ActionListener() {
@@ -188,26 +189,31 @@ public class ControleCadastroRegra extends Variaveis{
 	
 	ListSelectionListener Regras = new ListSelectionListener() {
 		public void valueChanged(ListSelectionEvent Regras) {
-			DefaultListModel lista = new DefaultListModel();
-			int index = Janela.ListaRegras.getSelectedIndex();
-			if(index > 0){
-				int idRegra = regras.get(index).getId();
-				List<Subregra> subregras = BD.selectSubRegra(idRegra);
-				if(subregras.isEmpty()){
-					lista.addElement("Não existem subregras");
-				}
-				else{
-					for(int i=0; i<subregras.size(); i++){
-						lista.addElement(subregras.get(i).getPrevia());
-					}
-				}
-			}
-			else
-				lista.addElement("Não existem subregras");
-			Janela.ListaSubRegras.setModel(lista);
-			Janela.ListaSubRegras.updateUI();
-			
+			atualizaSubRegras();
 		}
 	};
+	
+	private void atualizaSubRegras(){
+		DefaultListModel lista = new DefaultListModel();
+		int index = Janela.ListaRegras.getSelectedIndex();
+		if(index >= 0 && !regras.isEmpty()){
+			int idRegra = regras.get(index).getId();
+			List<Subregra> subregras = BD.selectSubRegra(idRegra);
+			if(subregras.isEmpty()){
+				lista.addElement("Não existem subregras");
+			}
+			else{
+				for(int i=0; i<subregras.size(); i++){
+					lista.addElement(subregras.get(i).getPrevia());
+				}
+			}
+		}
+		else
+			lista.addElement("Não existem subregras");
+		Janela.ListaSubRegras.setModel(lista);
+		Janela.ListaSubRegras.updateUI();
+	}
+	
+	
 }
 
