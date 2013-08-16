@@ -59,8 +59,10 @@ public class ControleArquivo extends Variaveis {
 		}
 	
 		private void adicionaArquivoRecente(Arquivo a){
-			testaArquivoRecenteExiste(a);
-			
+			boolean existe = testaArquivoRecenteExiste(a);
+			if(existe){
+				Janela.lista.removeElement(a.getNome());
+			}
 			if(arquivosRecentes.size() >= 10)
 				arquivosRecentes.remove(10);
 			arquivosRecentes.insertElementAt(a, 0);
@@ -70,15 +72,16 @@ public class ControleArquivo extends Variaveis {
 			caminhoArquivo = a.getCaminho();
 		}
 	
-		private void testaArquivoRecenteExiste(Arquivo a){
+		private boolean testaArquivoRecenteExiste(Arquivo a){
 			for(int i=0; i<arquivosRecentes.size(); i++){
 				String x = a.getCaminho();
 				String y = arquivosRecentes.elementAt(i).getCaminho();
 				if(x.contentEquals(y)){
 					arquivosRecentes.remove(i);
-					Janela.AList.remove(i);
+					return true;
 				}
 			}
+			return false;
 		}
 		
 
