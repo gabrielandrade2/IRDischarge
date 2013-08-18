@@ -31,12 +31,23 @@ public class ControleExecucao extends Variaveis{
 		
 		buscaDropDownElementos();
 		buscaDropDownConjuntos();
+		
 		criaTabela();
 	}
 	
 	private void criaTabela(){
-	regras = BD.selectRegraExecucao(idUsuario);
-	DefaultTableModel tabela = new DefaultTableModel() {  
+		int indexConjunto = Janela.DropDownlistboxConjunto.getSelectedIndex();
+		int indexElemento = Janela.DropDownlistboxElementos.getSelectedIndex();
+		
+		int idConjunto = 0;
+		int idElemento = 0;
+		if(indexConjunto != 0)
+			idConjunto = conjuntos.get(indexConjunto).getId();
+		if(indexElemento != 0)
+			idElemento = elementos.get(indexElemento).getId();
+		
+		regras = BD.selectRegraExecucao(idUsuario,idConjunto,idElemento);
+		DefaultTableModel tabela = new DefaultTableModel() {  
 	    @Override  
 	    public Class<?> getColumnClass(int column) {  
 	        if (column == 0)  
@@ -56,7 +67,7 @@ public class ControleExecucao extends Variaveis{
 	 
 	for(int i=0; i<regras.size();i++){
 		Regra r = regras.get(i);
-		Object[] o={true,r.getTexto(), r.getPrevia(), r.getElemento()};
+		Object[] o={true,r.getTexto(), r.getPrevia(), elementos.get(r.getElemento()).getNome()};
 		tabela.addRow(o);
 		
 	}
@@ -72,6 +83,7 @@ public class ControleExecucao extends Variaveis{
 		todos.setNome("TODOS");
 		todos.setDescricao("Todos os elementos");
 		elementos.add(0, todos);
+		
 		DefaultComboBoxModel lista = new DefaultComboBoxModel();
 		for(int i=0; i<elementos.size(); i++){
 			lista.addElement(elementos.get(i).getNome());
@@ -88,6 +100,7 @@ public class ControleExecucao extends Variaveis{
 		todos.setId(0);
 		todos.setNome("TODOS");
 		conjuntos.add(0, todos);
+		
 		DefaultComboBoxModel lista = new DefaultComboBoxModel();
 		for(int i=0; i<conjuntos.size(); i++){
 			lista.addElement(conjuntos.get(i).getNome());
@@ -144,14 +157,14 @@ public class ControleExecucao extends Variaveis{
 				int item = Janela.DropDownlistboxElementos.getSelectedIndex();
 				String tooltip = elementos.get(item).getDescricao();
 				Janela.DropDownlistboxElementos.setToolTipText(tooltip);
+				
+				criaTabela();
 			}
 		};
 
 		ActionListener DropDownListBoxConj = new ActionListener() {
 			public void actionPerformed(ActionEvent DropDownListBox) {
-				int item = Janela.DropDownlistboxConjunto.getSelectedIndex();
-				String tooltip = elementos.get(item).getDescricao();
-				Janela.DropDownlistboxConjunto.setToolTipText(tooltip);
+				criaTabela();
 			}
 		};
 }

@@ -140,16 +140,25 @@ public class BD extends ActiveRecord {
 		return Lista;
 }
 	
-	public List<Regra> selectRegraExecucao(int idUsuario){
+	public List<Regra> selectRegraExecucao(int idUsuario, int idConjunto, int idElemento){
 		List<Regra> Lista = new ArrayList();
+		PreparedStatement ps = null;
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto FROM regras WHERE (idUsuario="+idUsuario+");");
+			if(idConjunto == 0 && idElemento == 0)
+				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento FROM regras WHERE (idUsuario="+idUsuario+");");
+			else if(idConjunto == 0)
+				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento FROM regras WHERE (idUsuario="+idUsuario+" AND idElemento="+idElemento+");");
+			else if(idElemento == 0)
+				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento FROM regras WHERE (idUsuario="+idUsuario+" AND idConjunto="+idConjunto+");");
+			else
+				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento FROM regras WHERE (idUsuario="+idUsuario+" AND idElemento="+idElemento+" AND idConjunto="+idConjunto+");");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				Regra r = new Regra();
 				r.setId(res.getInt("idRegra"));
 				r.setPrevia(res.getString("previa"));
 				r.setTexto(res.getString("texto"));
+				r.setElemento(res.getInt("idElemento"));
 				Lista.add(r);
 			}
 		}
