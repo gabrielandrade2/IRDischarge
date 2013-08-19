@@ -153,8 +153,8 @@ public class ControleCadastroRegra extends Variaveis{
 			r.setIdTexto(linha);
 			r.setCaminhoArquivo(caminhoArquivo);
 			
-			JanelaElementos = new ControleElementos(r);
-			JanelaElementos.abreJanela();
+			JanelaIndices = new ControleIndice(r);
+			JanelaIndices.abreJanela();
 			
 		}
 	};
@@ -173,8 +173,8 @@ public class ControleCadastroRegra extends Variaveis{
 						
 				Tagger Tagger = new Tagger();
 				Subregra s = Tagger.geraSubRegra(Janela.TextoSumario1.getText(), Janela.TextoSumario1.getSelectedText(), idRegra, idSubRegra);
-				JanelaElementos = new ControleElementos(s);
-				JanelaElementos.abreJanela();
+				JanelaIndices = new ControleIndice(s);
+				JanelaIndices.abreJanela();
 			}
 		}
 	};

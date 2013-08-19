@@ -12,7 +12,7 @@ public class Variaveis {
 	protected static ControleArquivo JanelaArquivo;
 	protected static ControleCadastroRegra JanelaCadRegra;
 	protected static ControleCadastroUsuario JanelaCadUsuario;
-	protected static ControleElementos JanelaElementos;
+	protected static ControleIndice JanelaIndices;
 	protected static ControleExecucao JanelaExecucao;
 	protected static ControleLogin JanelaLogin;
 	protected static ControleResultados JanelaResultados;
