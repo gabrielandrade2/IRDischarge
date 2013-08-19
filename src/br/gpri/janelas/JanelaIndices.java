@@ -47,6 +47,9 @@ public class JanelaIndices extends javax.swing.JFrame {
 
 	        BotaoOk = new javax.swing.JButton();
 	        BotaoOk.setText("OK");
+	        BotaoVoltar = new javax.swing.JButton();
+	        BotaoVoltar.setText("VOLTAR");
+	        
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	        getContentPane().setLayout(layout);
 	        layout.setHorizontalGroup(
@@ -61,7 +64,12 @@ public class JanelaIndices extends javax.swing.JFrame {
 	                    .addGroup(layout.createSequentialGroup()
 	                        .addContainerGap()
 	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-	                            .addComponent(BotaoOk)
+	                        	.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                        			.addComponent(BotaoVoltar)
+	                        			.addGap(18,18,18)
+	                        			.addComponent(BotaoOk))
+	                            
+	                            
 	                            .addGroup(layout.createSequentialGroup()
 	                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
 	                                    .addComponent(TextoTermo[9], javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -218,8 +226,10 @@ public class JanelaIndices extends javax.swing.JFrame {
 	                    .addComponent(jRadioButton[31])
 	                    .addComponent(jRadioButton[32]))
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                .addComponent(BotaoOk)
-	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotaoOk)
+                    .addComponent(BotaoVoltar))
+	                .addContainerGap())
 	        );
 
 	        
@@ -263,6 +273,7 @@ public class JanelaIndices extends javax.swing.JFrame {
 	    }
 	    // Variables declaration - do not modify                     
 	    public javax.swing.JButton BotaoOk;
+	    public javax.swing.JButton BotaoVoltar;
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel2;
 
