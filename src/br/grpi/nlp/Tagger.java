@@ -19,6 +19,7 @@ import util.ReadWriteTextFile;
 import activerecord.Regra;
 import activerecord.Subregra;
 import activerecord.Termo;
+import activerecord.TrechoEncontrado;
 import br.gpri.view.Interface;
 import br.usp.pcs.lta.cogroo.entity.Token;
 import br.usp.pcs.lta.cogroo.entity.impl.runtime.SentenceCogroo;
@@ -33,7 +34,7 @@ public class Tagger {
 		cogroo = new CogrooWrapper();
 	}
 	
-	public String preProccessText(String text){
+	private String preProccessText(String text){
 
 		//Expande as datas	
 		text = expandirData(text);
@@ -135,7 +136,6 @@ public class Tagger {
 		
 		return r; 
 	}
-
 	
 	public Subregra geraSubRegra(String text_sumario, String text_selecionado,int idRegra, int idSubRegra){
 		
@@ -218,7 +218,81 @@ public class Tagger {
 		return s; 
 	}
 	
-	public String retiraErrosRecorrentes(String text){
+	public void executaRegra(String texto_sumario, List<Regra> regras){
+		
+		List<TrechoEncontrado> encontrados = new ArrayList();
+		
+		//Executa operações de PRÉ-PROCESSAMENTO
+		String text_sumario = preProccessText(texto_sumario);
+							
+		//Separa texto em sentenças
+		String[] sentencas = cogroo.sentDetect(text_sumario);
+		for (String sentenca : sentencas) {
+			
+			//Tokeniza sentença
+			SentenceCogroo sc = new SentenceCogroo(sentenca);
+			List<Token> tokens = null;
+			cogroo.tokenizer(sc);
+
+			//Aplica o NAMEFINDER
+			cogroo.nameFinder(sc);
+			
+			//Expansão de preposições
+			cogroo.preTagger(sc);
+			
+			//Realiza POS_tagging
+			cogroo.tagger(sc);
+			tokens = sc.getTokens();
+			
+			//Executa cada uma das regras
+			for (Regra r : regras){
+				
+				boolean igual = false;
+				TrechoEncontrado t = new TrechoEncontrado();
+				String trecho = "";
+				
+				//Procura por incidencia da regra
+				for(int i=0; i < tokens.size(); i++){
+					if(tokens.get(i).getMorphologicalTag().toString() == r.getTermo(i).getTermo()){
+						//Se encontrar um termo igual começa a comparar
+						for(int j=0; j < r.getNumTermos(); j++){
+							if(tokens.get(i+j).getMorphologicalTag().toString() == r.getTermo(i+j).getTermo()){
+								igual = true;
+								trecho += tokens.get(i+j).getLexeme() + " ";
+							}
+							else{
+								igual = false;
+								break;
+							}
+						}
+						//
+						//Se toda a comparação for igual, se tiver subregras testa
+						//Se tudo der certo, adiona na lista de encontrados e limpa a string trecho
+						if(igual){
+							boolean testeSubregra = true;
+							if(r.hasSubregra())
+								testeSubregra = executaSubRegra(); //Testa as subregras, retorna true se ela validarem a regra
+							if(testeSubregra){
+								t.setRegra(r);
+								t.setTrechoEncontrado(trecho);
+								encontrados.add(t);
+							}
+							trecho = "";
+						}
+						
+					}
+				}		
+				
+			}
+		}
+			
+	}
+	
+	public boolean executaSubRegra(){
+		return true;
+	}
+	
+	private String retiraErrosRecorrentes(String text){
 		
 		text = text.replaceFirst("#", "Paciente");
 
@@ -227,18 +301,18 @@ public class Tagger {
 		
 	}
 	
-	public String retiraPontuacao(String text){
+	private String retiraPontuacao(String text){
 		
 		return text.replaceAll("[-!?><=%;/#,@*]", " ");
 		
 	}
 	
-	public String espacaPontuacao(String text){
+	private String espacaPontuacao(String text){
 		
 		return text.replace(".", " .");
 	}
 	
-	public String expandirData(String text){
+	private String expandirData(String text){
 		
 		
 		 if (Pattern.compile("[\\d]+[\\d]+[/]+[\\d]+[\\d]+[/]+[\\d]+[\\d]").matcher(text).find()
@@ -327,7 +401,7 @@ public class Tagger {
 	    return text;
 	}
 	
-	public String retiraStopWords(String text){
+	private String retiraStopWords(String text){
 		
 		text = text.replace(" o ", " ");
 		text = text.replace(" a ", " ");
@@ -343,7 +417,7 @@ public class Tagger {
 		
 	}
 	
-	public String expandirAcronimos(String text){
+	private String expandirAcronimos(String text){
 		
 		
 		text = text.replace(" AAS "," ácido acetil salicílico ");

@@ -92,7 +92,7 @@ public class ControleElementos extends Variaveis{
 	}
 	
 	private void getRadioSelecionados(int numTermos){
-		for(int i=0; i<numTermos; i++){
+		for(int i=0; i<(numTermos)*3; i++){
 			if(Janela.jRadioButton[i].isSelected()){
 				String s = Janela.jRadioButton[i].getText();
 				if(s.matches("1º Nível"))

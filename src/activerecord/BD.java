@@ -189,6 +189,52 @@ public class BD extends ActiveRecord {
 		return Lista;
 	}
 	
+	public Regra selectTermoRegra(Regra r){
+		List<Termo> Lista = new ArrayList<Termo>();
+		int idRegra = r.getId();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM termosregras WHERE idRegra="+idRegra+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				Termo t = new Termo();
+				t.setIdRegra(idRegra);
+				t.setIdTermo(res.getInt("idTermo"));
+				t.setOrdem(res.getInt("ordem"));
+				t.setTermo("termo");
+				Lista.add(t);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		r.setTermos(Lista);
+		return r;
+	}
+	
+	public Subregra selectTermoSubregra(Subregra s){
+		List<Termo> Lista = new ArrayList<Termo>();
+		int idRegra = s.getIdRegra();
+		int idSubregra = s.getId();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM termosregras WHERE idRegra="+idRegra+" AND idSubRegra="+idSubregra+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				Termo t = new Termo();
+				t.setIdRegra(idRegra);
+				t.setIdSubregra(idSubregra);
+				t.setIdTermo(res.getInt("idTermo"));
+				t.setOrdem(res.getInt("ordem"));
+				t.setTermo("termo");
+				Lista.add(t);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		s.setTermos(Lista);
+		return s;
+	}
+	
 	public boolean insertRegra(int idUsuario, Regra r){
 		boolean erro = true;
 		try{

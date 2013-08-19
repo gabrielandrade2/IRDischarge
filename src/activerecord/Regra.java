@@ -10,6 +10,7 @@ public class Regra{
 	private String previa;
 	private String texto;
 	private List<Termo> termos;
+	private List<Subregra> subregras;
 	private int idTexto;
 	private String caminhoArquivo;
 	
@@ -68,6 +69,13 @@ public class Regra{
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	
-	
+	public List<Subregra> getSubregras() {
+		return subregras;
+	}
+	public void setSubregras(List<Subregra> subregras) {
+		this.subregras = subregras;
+	}
+	public boolean hasSubregra(){
+		return !(this.subregras.isEmpty());
+	}
 }

@@ -21,6 +21,7 @@ public class ControleCadastroRegra extends Variaveis{
 	private JanelaCadastroRegra Janela;
 	private List<Elemento> elementos;
 	private List<Regra> regras;
+	List<Subregra> subregras;
 	
 		
 	public ControleCadastroRegra(){
@@ -63,6 +64,7 @@ public class ControleCadastroRegra extends Variaveis{
 		Janela.ListaSubRegras.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Janela.ListaSubRegras.setLayoutOrientation(JList.VERTICAL);
 		Janela.ListaSubRegras.setVisibleRowCount(5); //Provisório 5 itens verificar
+		Janela.ListaSubRegras.addListSelectionListener(this.Subregra);
 	}
 	
 	private void buscaDropDownElementos(){
@@ -190,6 +192,19 @@ public class ControleCadastroRegra extends Variaveis{
 	ListSelectionListener Regras = new ListSelectionListener() {
 		public void valueChanged(ListSelectionEvent Regras) {
 			atualizaSubRegras();
+			if(regras.size() > 0){
+				Regra r = regras.get(Janela.ListaRegras.getSelectedIndex());
+				Janela.ListaRegras.setToolTipText(r.getTexto());
+			}
+		}
+	};
+	
+	ListSelectionListener Subregra = new ListSelectionListener() {
+		public void valueChanged(ListSelectionEvent Regras) {
+			if(subregras.size() > 0){
+				Subregra s =  subregras.get(Janela.ListaSubRegras.getSelectedIndex());
+				Janela.ListaSubRegras.setToolTipText(s.getTexto());
+			}
 		}
 	};
 	
@@ -198,7 +213,7 @@ public class ControleCadastroRegra extends Variaveis{
 		int index = Janela.ListaRegras.getSelectedIndex();
 		if(index >= 0 && !regras.isEmpty()){
 			int idRegra = regras.get(index).getId();
-			List<Subregra> subregras = BD.selectSubRegra(idRegra);
+			subregras = BD.selectSubRegra(idRegra);
 			if(subregras.isEmpty()){
 				lista.addElement("Não existem subregras");
 			}

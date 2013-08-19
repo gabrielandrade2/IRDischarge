@@ -96,14 +96,16 @@ public class ControleIndice extends Variaveis{
 	
 	private void getRadioSelecionados(int numTermos){
 		for(int i=0; i<numTermos; i++){
-			if(Janela.jRadioButton[i].isSelected()){
-				String s = Janela.jRadioButton[i].getText();
-				if(s.matches("1º Nível"))
-					Termos.get(i).setOrdem(1);
-				if(s.matches("2º Nível"))
-					Termos.get(i).setOrdem(2);
-				if(s.matches("Nenhum"))
-					Termos.get(i).setOrdem(0);
+			for(int j=0; j<3; j++){
+				if(Janela.jRadioButton[(3*i)+j].isSelected()){
+					String s = Janela.jRadioButton[(3*i)+j].getText();
+					if(s.matches("1º Nível"))
+						Termos.get(i).setOrdem(1);
+					if(s.matches("2º Nível"))
+						Termos.get(i).setOrdem(2);
+					if(s.matches("Nenhum"))
+						Termos.get(i).setOrdem(0);
+				}
 			}
 		}
 	}

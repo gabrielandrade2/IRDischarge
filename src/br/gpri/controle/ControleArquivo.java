@@ -94,6 +94,7 @@ public class ControleArquivo extends Variaveis {
 				arquivosRecentes.remove(10);
 			arquivosRecentes.insertElementAt(a, 0);
 			caminhoArquivo = a.getCaminho();
+			Janela.AList.setToolTipText(caminhoArquivo);
 		}
 
 		public void mouseEntered(MouseEvent e) {}
