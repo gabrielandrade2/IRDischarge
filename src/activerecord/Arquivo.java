@@ -10,6 +10,7 @@ public class Arquivo {
 	}
 	
 	public void setCaminho(String s){
+		s = s.replace("\\", "/");
 		caminho = s;
 	}
 	
