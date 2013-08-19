@@ -65,7 +65,7 @@ public class ControleIndice extends Variaveis{
         
         setInvisivel();
         Janela.BotaoOk.addActionListener(this.Ok);
-		//Janela.BotaoVoltar.addActionListener(this.Voltar);
+		Janela.BotaoVoltar.addActionListener(this.Voltar);
 		Janela.setLocationRelativeTo(null);
 	}
 	
