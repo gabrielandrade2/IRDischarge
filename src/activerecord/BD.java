@@ -169,18 +169,19 @@ public class BD extends ActiveRecord {
 		return Lista;
 }
 	
-	public List<Subregra> selectSubRegra(int idRegra){
+	public List<Subregra> selectSubRegra(Regra r){
+		int idRegra = r.getId();
 		List<Subregra> Lista = new ArrayList<Subregra>();
 		try{
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM subregras WHERE idRegra="+idRegra+";");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
-				Subregra s = new Subregra();
-				s.setIdRegra(idRegra);
-				s.setId(res.getInt("idSubregra"));
-				s.setPrevia(res.getString("previa"));
-				s.setTexto(res.getString("texto"));
-				Lista.add(s);
+					Subregra s = new Subregra();
+					s.setIdRegra(idRegra);
+					s.setId(res.getInt("idSubregra"));
+					s.setPrevia(res.getString("previa"));
+					s.setTexto(res.getString("texto"));
+					Lista.add(s);
 			}
 		}
 		catch(SQLException e){
@@ -200,7 +201,7 @@ public class BD extends ActiveRecord {
 				t.setIdRegra(idRegra);
 				t.setIdTermo(res.getInt("idTermo"));
 				t.setOrdem(res.getInt("ordem"));
-				t.setTermo("termo");
+				t.setTermo(res.getString("termo"));
 				Lista.add(t);
 			}
 		}
@@ -216,7 +217,7 @@ public class BD extends ActiveRecord {
 		int idRegra = s.getIdRegra();
 		int idSubregra = s.getId();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM termosregras WHERE idRegra="+idRegra+" AND idSubRegra="+idSubregra+";");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM termossubregras WHERE idRegra="+idRegra+" AND idSubRegra="+idSubregra+";");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				Termo t = new Termo();
@@ -224,7 +225,7 @@ public class BD extends ActiveRecord {
 				t.setIdSubregra(idSubregra);
 				t.setIdTermo(res.getInt("idTermo"));
 				t.setOrdem(res.getInt("ordem"));
-				t.setTermo("termo");
+				t.setTermo(res.getString("termo"));
 				Lista.add(t);
 			}
 		}

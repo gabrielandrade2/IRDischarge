@@ -89,10 +89,6 @@ public class ControleArquivo extends Variaveis {
 		public void mouseClicked(MouseEvent e) {
 			int selecionado = Janela.AList.getSelectedIndex();
 			Arquivo a = arquivosRecentes.elementAt(selecionado);
-			testaArquivoRecenteExiste(a);
-			if(arquivosRecentes.size() >= 10)
-				arquivosRecentes.remove(10);
-			arquivosRecentes.insertElementAt(a, 0);
 			caminhoArquivo = a.getCaminho();
 			Janela.AList.setToolTipText(caminhoArquivo);
 		}
@@ -115,13 +111,25 @@ public class ControleArquivo extends Variaveis {
 	ActionListener OK = new ActionListener() {
         public void actionPerformed(ActionEvent OK) {
 		if(Executar){
+			int selecionado = Janela.AList.getSelectedIndex();
+			Arquivo a = arquivosRecentes.elementAt(selecionado);
+			testaArquivoRecenteExiste(a);
+			if(arquivosRecentes.size() >= 10)
+				arquivosRecentes.remove(10);
+			arquivosRecentes.insertElementAt(a, 0);
         	fechaJanela();
         	System.out.println("Erro:"+BD.insertArquivos(idUsuario, arquivosRecentes));
         	Excel.abreExcel(caminhoArquivo);
         	JanelaExecucao = new ControleExecucao();
         	JanelaExecucao.abreJanela();}
         else if(Cadastrar){
+        	int selecionado = Janela.AList.getSelectedIndex();
+			Arquivo a = arquivosRecentes.elementAt(selecionado);
         	fechaJanela();
+        	testaArquivoRecenteExiste(a);
+			if(arquivosRecentes.size() >= 10)
+				arquivosRecentes.remove(10);
+			arquivosRecentes.insertElementAt(a, 0);
         	System.out.println("Erro:"+BD.insertArquivos(idUsuario, arquivosRecentes));
         	Excel.abreExcel(caminhoArquivo);
         	JanelaCadRegra = new ControleCadastroRegra();

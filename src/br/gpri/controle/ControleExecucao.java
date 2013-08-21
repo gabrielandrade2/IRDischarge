@@ -2,6 +2,7 @@ package br.gpri.controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -11,7 +12,10 @@ import javax.swing.table.DefaultTableModel;
 import activerecord.Conjunto;
 import activerecord.Elemento;
 import activerecord.Regra;
+import activerecord.Subregra;
+import activerecord.TrechoEncontrado;
 import br.gpri.janelas.JanelaExecucao;
+import br.grpi.nlp.Tagger;
 
 public class ControleExecucao extends Variaveis{
 
@@ -70,7 +74,7 @@ public class ControleExecucao extends Variaveis{
 		String elemento = "";
 		for(int j=0; j<elementos.size(); j++)
 			if(r.getElemento() == elementos.get(j).getId()){
-				elemento = elementos.get(i).getNome();
+				elemento = elementos.get(j).getNome();
 				break;
 			}
 		
@@ -128,12 +132,48 @@ public class ControleExecucao extends Variaveis{
 		Janela.dispose();
 	}
 	
+	
+	//if(checkbox[i].isSelected())
+	
+	private List<Integer> pegaSelecaoRegras(){
+		List<Integer> indiceRegras = new ArrayList<Integer>();
+		for(int i=0; i<Janela.TabelaExecucao.getModel().getRowCount(); i++){
+			boolean a = (Boolean) Janela.TabelaExecucao.getModel().getValueAt(i,0);
+			if(a)			
+				indiceRegras.add(i);
+		}
+		return indiceRegras;
+	}
+	
+
+	private List<Regra> buscaRegrasSelecionadas(List<Integer> indiceRegras){
+		
+		List<Regra> regrasSelecionadas = new ArrayList<Regra>();
+		
+		for(int i=0; i<indiceRegras.size(); i++){
+			Regra r = regras.get(indiceRegras.get(i)); //Pega cada uma das regras
+			r = BD.selectTermoRegra(r); //Busca os termos dessa regra
+			
+			List<Subregra> subregras = new ArrayList<Subregra>();  
+			subregras = BD.selectSubRegra(r); //Busca suas subregras
+			if(!(subregras.isEmpty()))
+				for(int j=0; j<subregras.size(); j++){
+					Subregra s = subregras.get(j);	//Busca os termos da subregra e atualiza na lista
+					s = BD.selectTermoSubregra(s);
+					subregras.set(j,s);			
+				}
+			r.setSubregras(subregras);
+			regrasSelecionadas.add(r);
+		}
+		return regrasSelecionadas;		
+	}
+	
 	 ActionListener Voltar = new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				fechaJanela();
-				JanelaCadRegra.abreJanela();
+				JanelaArquivo.abreJanela();
 				
 			}
 		};
@@ -142,12 +182,34 @@ public class ControleExecucao extends Variaveis{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					Tagger Tagger = new Tagger();
+					
+					
+					List<Integer> indiceRegras = pegaSelecaoRegras(); //Verifica os checkbox
+					List<Regra> regrasSelecionadas = buscaRegrasSelecionadas(indiceRegras); //Busca as regras selecionadas
+					
+					for(int i=0; i<Excel.getNumLinhas(); i++){ //Pra cada texto, executa
+						String texto = Excel.getConteudoCelula(i);
+						List<TrechoEncontrado> encontrados = Tagger.executaRegra(texto, regrasSelecionadas);
+						
+						//Console
+						System.out.println("Texto "+(i+1));
+						System.out.println(texto);
+						System.out.println();
+						for(int j=0; j<encontrados.size(); j++){
+							System.out.println("Trecho Encontrado: "+encontrados.get(j).getTrechoEncontrado());
+							System.out.println("Regra: "+encontrados.get(j).getRegra().getPrevia());
+							System.out.println();
+						}
+					}
+					
+					
 					fechaJanela();
 					JanelaResultados = new ControleResultados();
 					JanelaResultados.abreJanela();
 					
 				}
-			};
+		 };
 		
 		 ActionListener Trocar = new ActionListener() {
 				

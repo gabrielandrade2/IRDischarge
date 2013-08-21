@@ -35,7 +35,8 @@ public class Tagger {
 	}
 	
 	private String preProccessText(String text){
-
+		//Adiciona espaço para acronimos no começo/final frase
+		text = espacaTexto(text);
 		//Expande as datas	
 		text = expandirData(text);
 		//Retira erros recorrentes nos sumários
@@ -50,6 +51,10 @@ public class Tagger {
 		text = text.toLowerCase();
 		//Retira Stopwords
 		text = retiraStopWords(text);
+		//Remove espaco ponto
+		text = removeEspacaPontuacao(text);
+		//Retira espaco comeco/final frase
+		text= removeEspacaTexto(text);
 		
 		return text;
 	}
@@ -218,9 +223,9 @@ public class Tagger {
 		return s; 
 	}
 	
-	public void executaRegra(String texto_sumario, List<Regra> regras){
+	public List<TrechoEncontrado> executaRegra(String texto_sumario, List<Regra> regras){
 		
-		List<TrechoEncontrado> encontrados = new ArrayList();
+		List<TrechoEncontrado> encontrados = new ArrayList<TrechoEncontrado>();
 		
 		//Executa operações de PRÉ-PROCESSAMENTO
 		String text_sumario = preProccessText(texto_sumario);
@@ -248,23 +253,29 @@ public class Tagger {
 			for (Regra r : regras){
 				
 				boolean igual = false;
-				TrechoEncontrado t = new TrechoEncontrado();
-				String trecho = "";
+				
 				
 				//Procura por incidencia da regra
 				for(int i=0; i < tokens.size(); i++){
-					if(tokens.get(i).getMorphologicalTag().toString() == r.getTermo(i).getTermo()){
-						//Se encontrar um termo igual começa a comparar
-						for(int j=0; j < r.getNumTermos(); j++){
-							if(tokens.get(i+j).getMorphologicalTag().toString() == r.getTermo(i+j).getTermo()){
-								igual = true;
-								trecho += tokens.get(i+j).getLexeme() + " ";
-							}
-							else{
-								igual = false;
-								break;
-							}
+					String trecho = "";
+					for(int j=0; j < r.getNumTermos(); j++){
+						String c;
+						try{
+							c = tokens.get(i+j).getMorphologicalTag().toString();
 						}
+						catch(IndexOutOfBoundsException e){
+							c = "";
+						}
+						String d = r.getTermo(j).getTermo();
+						if(c.contentEquals(d)){
+							igual = true;
+							trecho += tokens.get(i+j).getLexeme() + " ";
+						}
+						else{
+							igual = false;
+							break;
+						}
+					}
 						//
 						//Se toda a comparação for igual, se tiver subregras testa
 						//Se tudo der certo, adiona na lista de encontrados e limpa a string trecho
@@ -273,22 +284,22 @@ public class Tagger {
 							if(r.hasSubregra())
 								testeSubregra = executaSubRegra(r.getSubregras()); //Testa as subregras, retorna true se ela validarem a regra
 							if(testeSubregra){
+								TrechoEncontrado t = new TrechoEncontrado();
 								t.setRegra(r);
 								t.setTrechoEncontrado(trecho);
 								encontrados.add(t);
+								igual = false;
 							}
-							trecho = "";
+							
 						}
-						
-					}
 				}		
 				
 			}
 		}
-			
+		return encontrados;	
 	}
 	
-	public boolean executaSubRegra(List<Subregra> subregras){
+	private boolean executaSubRegra(List<Subregra> subregras){
 		return true;
 	}
 	
@@ -310,6 +321,21 @@ public class Tagger {
 	private String espacaPontuacao(String text){
 		
 		return text.replace(".", " .");
+	}
+	
+	private String removeEspacaPontuacao(String text){
+		
+		return text.replace(" .", ".");
+	}
+	
+	private String espacaTexto(String text){
+		
+		return (" "+text+" ");
+	}
+	
+	private String removeEspacaTexto(String text){
+		
+		return text.substring(1, (text.length()-1));
 	}
 	
 	private String expandirData(String text){

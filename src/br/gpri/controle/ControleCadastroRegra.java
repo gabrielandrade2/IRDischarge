@@ -164,7 +164,7 @@ public class ControleCadastroRegra extends Variaveis{
 	
 	ActionListener GerarSubRegra = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			Integer index = Janela.ListaRegras.getSelectedIndex();
+			Integer index = Janela.ListaRegras.getSelectedIndex();Janela.ListaSubRegras.getSelectedIndex();
 			if(index.equals(null))
 				System.out.println("É necessario selecionar uma regra");
 			else{
@@ -193,8 +193,13 @@ public class ControleCadastroRegra extends Variaveis{
 		public void valueChanged(ListSelectionEvent Regras) {
 			atualizaSubRegras();
 			if(regras.size() > 0){
-				Regra r = regras.get(Janela.ListaRegras.getSelectedIndex());
-				Janela.ListaRegras.setToolTipText(r.getTexto());
+					int a = Janela.ListaRegras.getSelectedIndex();
+					if(a < 0){
+						Janela.ListaRegras.setSelectedIndex(0);
+						a = Janela.ListaRegras.getSelectedIndex();
+					}
+					Regra r = regras.get(a);Janela.ListaSubRegras.getSelectedIndex();
+					Janela.ListaRegras.setToolTipText(r.getTexto());
 			}
 		}
 	};
@@ -202,8 +207,11 @@ public class ControleCadastroRegra extends Variaveis{
 	ListSelectionListener Subregra = new ListSelectionListener() {
 		public void valueChanged(ListSelectionEvent Regras) {
 			if(subregras.size() > 0){
-				Subregra s =  subregras.get(Janela.ListaSubRegras.getSelectedIndex());
-				Janela.ListaSubRegras.setToolTipText(s.getTexto());
+				int a = Janela.ListaSubRegras.getSelectedIndex();
+				if (a > 0){
+					Subregra s =  subregras.get(a);
+					Janela.ListaSubRegras.setToolTipText(s.getTexto());
+				}
 			}
 		}
 	};
@@ -212,8 +220,7 @@ public class ControleCadastroRegra extends Variaveis{
 		DefaultListModel lista = new DefaultListModel();
 		int index = Janela.ListaRegras.getSelectedIndex();
 		if(index >= 0 && !regras.isEmpty()){
-			int idRegra = regras.get(index).getId();
-			subregras = BD.selectSubRegra(idRegra);
+			subregras = BD.selectSubRegra(regras.get(index));
 			if(subregras.isEmpty()){
 				lista.addElement("Não existem subregras");
 			}
