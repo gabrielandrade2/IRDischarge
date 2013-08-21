@@ -26,6 +26,9 @@ public class ControleIndice extends Variaveis{
 		inicializaJanela();
 		setVisivel(Regra.getNumTermos());
 		setTextoTermos(Regra.getNumTermos());
+		int altura = 200+Regra.getNumTermos()*20;
+		Janela.setSize(400, altura);
+		
 	}
 	
 	public ControleIndice(Subregra s){
@@ -36,6 +39,8 @@ public class ControleIndice extends Variaveis{
 		inicializaJanela();
 		setVisivel(Subregra.getNumTermos());
 		setTextoTermos(Subregra.getNumTermos());
+		int altura = 200+Regra.getNumTermos()*20;
+		Janela.setSize(400, altura);
 	}
 	
 	public void abreJanela(){

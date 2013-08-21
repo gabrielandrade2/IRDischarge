@@ -11,8 +11,8 @@ public class ControleResultados extends Variaveis{
 	
 	public ControleResultados(){
 		Janela = new JanelaResultados();
-		Janela.BotaoOK.addActionListener(this.Ok);
-		Janela.BotaoVoltar.addActionListener(this.Voltar);
+		Janela.BotaoOk.addActionListener(this.Ok);
+		
 		
 	}
 	
@@ -25,17 +25,6 @@ public class ControleResultados extends Variaveis{
 		Janela.dispose();
 	}
 	
-	ActionListener Voltar = new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			fechaJanela();
-			JanelaExecucao = new ControleExecucao();
-			JanelaExecucao.abreJanela();
-			
-		}
-	};
-
 	 ActionListener Ok = new ActionListener() {
 			
 			@Override
