@@ -271,7 +271,7 @@ public class Tagger {
 						if(igual){
 							boolean testeSubregra = true;
 							if(r.hasSubregra())
-								testeSubregra = executaSubRegra(); //Testa as subregras, retorna true se ela validarem a regra
+								testeSubregra = executaSubRegra(r.getSubregras()); //Testa as subregras, retorna true se ela validarem a regra
 							if(testeSubregra){
 								t.setRegra(r);
 								t.setTrechoEncontrado(trecho);
@@ -288,7 +288,7 @@ public class Tagger {
 			
 	}
 	
-	public boolean executaSubRegra(){
+	public boolean executaSubRegra(List<Subregra> subregras){
 		return true;
 	}
 	

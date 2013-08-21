@@ -67,7 +67,14 @@ public class ControleExecucao extends Variaveis{
 	 
 	for(int i=0; i<regras.size();i++){
 		Regra r = regras.get(i);
-		Object[] o={true,r.getTexto(), r.getPrevia(), elementos.get(r.getElemento()).getNome()};
+		String elemento = "";
+		for(int j=0; j<elementos.size(); j++)
+			if(r.getElemento() == elementos.get(j).getId()){
+				elemento = elementos.get(i).getNome();
+				break;
+			}
+		
+		Object[] o={true,r.getTexto(), r.getPrevia(), elemento};
 		tabela.addRow(o);
 		
 	}
