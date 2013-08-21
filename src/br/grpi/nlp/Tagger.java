@@ -11,16 +11,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import org.tartarus.snowball.SnowballStemmer;
-import org.tartarus.snowball.ext.portugueseStemmer;
-
-import util.ArrayHandle;
-import util.ReadWriteTextFile;
 import activerecord.Regra;
 import activerecord.Subregra;
 import activerecord.Termo;
 import activerecord.TrechoEncontrado;
-import br.gpri.view.Interface;
 import br.usp.pcs.lta.cogroo.entity.Token;
 import br.usp.pcs.lta.cogroo.entity.impl.runtime.SentenceCogroo;
 import br.usp.pcs.lta.cogroo.util.viewer.CogrooWrapper;

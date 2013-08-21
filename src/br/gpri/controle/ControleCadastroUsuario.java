@@ -43,7 +43,7 @@ public class ControleCadastroUsuario extends Variaveis {
   	  		email = Janela.getEmail();
   	  		usuario = Janela.getUsuario();
   	  		senha = Janela.getSenha();
-  	  		boolean erro = BD.insertBD("INSERT INTO usuarios (Usuario,Senha,Nome,Email) VALUES('"+usuario+"','"+senha+"','"+nome+"','"+email+"');");
+  	  		boolean erro = BD.insertUsuario(usuario,senha,nome,email);
   	  		if(erro)
   	  			System.out.println("Falha ao cadastrar usuário");
   	  		else

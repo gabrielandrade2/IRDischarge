@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import br.gpri.view.DropDownInfo;
-
 import com.mysql.jdbc.PreparedStatement;
 
 public class BD extends ActiveRecord {
@@ -334,12 +332,10 @@ public class BD extends ActiveRecord {
 		return maxId;
 	}
 	
-	//Não utilizado
-	
-	public boolean insertBD(String Insert){
+	public boolean insertUsuario(String usuario, String senha, String nome, String email){
 		
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement(Insert);		
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO usuarios (Usuario,Senha,Nome,Email) VALUES('"+usuario+"','"+senha+"','"+nome+"','"+email+"');");		
 			boolean erro = ps.execute();
 			return erro;}
 		
@@ -349,47 +345,5 @@ public class BD extends ActiveRecord {
 		return false;
 		}
 	
-	//Select Genérico
-	public ResultSet selectBD(String s){
-	
-		try {
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement(s);
-		    ResultSet res = ps.executeQuery();
-		  	System.out.println(res.getString("usuario"));
-		    return res;
-		} 
-		
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-    
-	}
-	
-	
-	//Select para dropdownlistbox
-public void selectDropDownListBox(String Tabela, DropDownInfo d){
-		
-		 try {
-			 
-			 PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * from "+Tabela);
-             //ps.setString(1, Tabela);
-             System.out.println(ps.toString());
-             ResultSet res = ps.executeQuery();
-
-			 while (res.next()) {
-				 d.adiciona(res.getInt("id"), res.getString("abreviacao"), res.getString("nome"));
-				 
-				 
-			 }
-		 } catch (SQLException e) {
-			 System.out.println("Erro ao buscar itens DropDownListBox");
-			 System.out.println("Provavelmente coluna da tabela errada no método xD");
-			 //e.printStackTrace();
-		 }
-
-		
-	}
 
 }
