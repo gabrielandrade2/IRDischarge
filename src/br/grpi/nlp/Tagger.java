@@ -97,11 +97,19 @@ public class Tagger {
 			
 			for(int i=0; i < tokens.size(); i++){
 				for(int j=0; j < text_separado.size(); j++){
+					try{
 					if(text_separado.get(j).getLexeme().equals(tokens.get(i+j).getLexeme()))
 						igual = true;
 					else{
 						igual = false;
 						break;
+					}
+					}
+					catch(IndexOutOfBoundsException e){
+						System.out.println("Erro por texto selecionado estar em duas frases diferentes");
+						e.printStackTrace();
+						igual = false;
+					
 					}
 				}
 				
