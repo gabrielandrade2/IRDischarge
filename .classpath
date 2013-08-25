@@ -15,7 +15,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="jxl.jar"/>
 	<classpathentry kind="lib" path="swing-layout-1.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/gabriel/.tomcat6/webapps/IRDischarge/lib/CoGrOOBase-3.0.5.jar"/>
-	<classpathentry kind="lib" path="/home/gabriel/.tomcat6/webapps/IRDischarge/lib/mysql-connector-java-5.1.21-bin.jar"/>
+	<classpathentry kind="lib" path="lib/CoGrOOBase-3.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.21-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
