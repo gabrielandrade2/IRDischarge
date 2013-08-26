@@ -78,3 +78,25 @@ ordem int,
 termo varchar(60),
 PRIMARY KEY (idRegra, idSubRegra, idTermo),
 FOREIGN KEY (idRegra,idSubRegra) references subregras(idRegra,idSubRegra));
+
+DROP TABLE IF EXISTS textos;
+CREATE TABLE IF NOT EXISTS textos(
+idUsuario int,
+idArquivo int,
+idTexto int,
+texto text,
+PRIMARY KEY (idUsuario,idArquivo,idTexto),
+FOREIGN KEY (idUsuario) references usuarios(idUsuario),
+FOREIGN KEY (idArquivo) references arquivo(idArquivo));
+
+DROP TABLE IF EXISTS resultados;
+CREATE TABLE IF NOT EXISTS resultados(
+idUsuario int,
+idArquivo int,
+idTexto int NOT NULL,
+trechoEncontrado text,
+idRegra int,
+PRIMARY KEY (idUsuario,idArquivo,idTexto),
+FOREIGN KEY (idUsuario) references usuarios(idUsuario),
+FOREIGN KEY (idArquivo) references arquivos(idAquivo),
+FOREIGN KEY (idRegra) references regras(idRegra));

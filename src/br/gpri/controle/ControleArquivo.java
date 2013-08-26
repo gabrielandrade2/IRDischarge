@@ -23,6 +23,7 @@ public class ControleArquivo extends Variaveis {
 	private boolean Executar = false;
 	private JanelaArquivo Janela;
 	private Stack<Arquivo> arquivosRecentes = new Stack<Arquivo>();
+	private String caminhoArquivo = new String();
 	
 	public ControleArquivo(){
 		Janela = new JanelaArquivo();
@@ -30,7 +31,7 @@ public class ControleArquivo extends Variaveis {
 		Janela.ABotaoVoltar.addActionListener(this.Volta);
 		Janela.ACadastrarRadio.addActionListener(this.Cad);
 		Janela.AExecutarRadio.addActionListener(this.Exec);
-		Janela.BotaoAbrir.addActionListener(this.Abre);
+		Janela.BotaoAbrir.addActionListener(this.Importa);
 		Janela.AbreArquivo.setFileFilter(new FileNameExtensionFilter("Arquivo do Sumário/Laudos do Excel","xls"));
         Janela.AbreArquivo.setAcceptAllFileFilterUsed(false);
 		geraListaArquivos();
@@ -54,7 +55,7 @@ public class ControleArquivo extends Variaveis {
 		Janela.AList.setModel(Janela.lista);
 		Janela.AList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Janela.AList.setLayoutOrientation(JList.VERTICAL);
-		Janela.AList.setVisibleRowCount(10);
+		Janela.AList.setVisibleRowCount(30);
 		Janela.AList.addMouseListener(this.Lista);
 		}
 	
@@ -63,14 +64,15 @@ public class ControleArquivo extends Variaveis {
 			if(existe){
 				Janela.lista.removeElement(a.getNome());
 			}
-			if(arquivosRecentes.size() >= 10)
-				arquivosRecentes.remove(10);
+			if(arquivosRecentes.size() >= 30)
+				arquivosRecentes.remove(30);
 			arquivosRecentes.insertElementAt(a, 0);
 			Janela.lista.insertElementAt(a.getNome(), 0);
 			Janela.AList.setSelectedIndex(0);
 			Janela.AList.ensureIndexIsVisible(0);
 			caminhoArquivo = a.getCaminho();
 			idArquivo = a.getId();
+			System.out.println("Erro:"+BD.insertArquivos(idUsuario, arquivosRecentes));
 		}
 	
 		private boolean testaArquivoRecenteExiste(Arquivo a){
@@ -85,6 +87,34 @@ public class ControleArquivo extends Variaveis {
 			return false;
 		}
 		
+		private void colocaArquivoPrimeiroLista(){
+        	int selecionado = Janela.AList.getSelectedIndex();
+			Arquivo a = arquivosRecentes.elementAt(selecionado);
+           	testaArquivoRecenteExiste(a);
+			if(arquivosRecentes.size() >= 30)
+				arquivosRecentes.remove(30);
+			arquivosRecentes.insertElementAt(a, 0);
+        	System.out.println("Erro:"+BD.insertArquivos(idUsuario, arquivosRecentes));
+		}
+		
+		private void importaArquivo(Arquivo a){
+			ControleExcel e = new ControleExcel();
+			a.setId(BD.selectIdArquivo(a.getCaminho()));
+			e.abreExcel(a.getCaminho());
+			
+			for(int i=0; i<e.getNumLinhas(); i++){
+				String texto = e.getConteudoCelula(i);
+				texto = corrigeTexto(texto);
+				BD.importaTexto(idUsuario, a.getId(), i, texto);
+			}
+		}
+			
+		private String corrigeTexto(String texto){
+			texto=texto.replaceAll("\\", "/");
+			texto=texto.replaceAll("\n\n", "\n");
+			
+			return texto;
+		}
 
 	MouseListener Lista = new MouseListener(){
 		public void mouseClicked(MouseEvent e) {
@@ -113,26 +143,14 @@ public class ControleArquivo extends Variaveis {
 	ActionListener OK = new ActionListener() {
         public void actionPerformed(ActionEvent OK) {
 		if(Executar){
-			int selecionado = Janela.AList.getSelectedIndex();
-			Arquivo a = arquivosRecentes.elementAt(selecionado);
-			testaArquivoRecenteExiste(a);
-			if(arquivosRecentes.size() >= 10)
-				arquivosRecentes.remove(10);
-			arquivosRecentes.insertElementAt(a, 0);
+			colocaArquivoPrimeiroLista();
         	fechaJanela();
-        	System.out.println("Erro:"+BD.insertArquivos(idUsuario, arquivosRecentes));
         	Excel.abreExcel(caminhoArquivo);
         	JanelaExecucao = new ControleExecucao();
         	JanelaExecucao.abreJanela();}
         else if(Cadastrar){
-        	int selecionado = Janela.AList.getSelectedIndex();
-			Arquivo a = arquivosRecentes.elementAt(selecionado);
-        	fechaJanela();
-        	testaArquivoRecenteExiste(a);
-			if(arquivosRecentes.size() >= 10)
-				arquivosRecentes.remove(10);
-			arquivosRecentes.insertElementAt(a, 0);
-        	System.out.println("Erro:"+BD.insertArquivos(idUsuario, arquivosRecentes));
+        	colocaArquivoPrimeiroLista();
+		   	fechaJanela();
         	Excel.abreExcel(caminhoArquivo);
         	JanelaCadRegra = new ControleCadastroRegra();
         	JanelaCadRegra.abreJanela();}
@@ -155,8 +173,8 @@ public class ControleArquivo extends Variaveis {
 		}
     }; 
     
-    ActionListener Abre = new ActionListener() {
-        public void actionPerformed(ActionEvent Abre) {
+    ActionListener Importa = new ActionListener() {
+        public void actionPerformed(ActionEvent Importa) {
         		int retorno = Janela.AbreArquivo.showOpenDialog(null);
         		if (retorno == JFileChooser.APPROVE_OPTION){
         			Arquivo a = new Arquivo();
@@ -164,7 +182,7 @@ public class ControleArquivo extends Variaveis {
         			a.setCaminho(Janela.AbreArquivo.getSelectedFile().getAbsolutePath());
         			
         			adicionaArquivoRecente(a);
-        			System.out.println("Erro:"+BD.insertArquivos(idUsuario, arquivosRecentes));
+        			importaArquivo(a);
         			}
         		else if(retorno == JFileChooser.CANCEL_OPTION)
         			System.out.println("Usuário cancelou a operação");

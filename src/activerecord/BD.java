@@ -349,5 +349,34 @@ public class BD extends ActiveRecord {
 		return false;
 		}
 	
-
+	public boolean importaTexto(int idUsuario, int idArquivo, int idTexto, String texto){
+		boolean erro = true;
+		if(!texto.equals("")){
+			try{
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO textos VALUES ("+idUsuario+","+idArquivo+","+idTexto+",'"+texto+"');");		
+				 erro = ps.execute();
+				 erro = false;
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return erro;
+	}
+	
+	public int selectIdArquivo(String caminhoArquivo){
+		int id = -1;
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idArquivo from arquivos where absolutePath='"+caminhoArquivo+"';");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				 id = res.getInt("idArquivo");
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return id;
+	}
 }
