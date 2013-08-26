@@ -81,7 +81,7 @@ public class ControleCadastroRegra extends Variaveis{
 	}
 	
 	protected void geraListaRegras(){
-		regras = BD.selectRegraCadastro(linha,caminhoArquivo,idUsuario);
+		regras = BD.selectRegraCadastro(linha,idArquivo,idUsuario);
 		DefaultListModel lista = new DefaultListModel();
 		if(regras.isEmpty())
 			lista.addElement("Não existem regras");
@@ -153,7 +153,7 @@ public class ControleCadastroRegra extends Variaveis{
 			Tagger Tagger = new Tagger(); 
 			Regra r = Tagger.geraRegra(Janela.TextoSumario1.getText(), Janela.TextoSumario1.getSelectedText(), idElemento, idRegra);
 			r.setIdTexto(linha);
-			r.setCaminhoArquivo(caminhoArquivo);
+			r.setIdArquivo(idArquivo);
 			
 			JanelaIndices = new ControleIndice(r);
 			JanelaIndices.abreJanela();

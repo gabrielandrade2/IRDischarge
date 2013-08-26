@@ -12,7 +12,7 @@ public class Regra{
 	private List<Termo> termos;
 	private List<Subregra> subregras;
 	private int idTexto;
-	private String caminhoArquivo;
+	private int idArquivo;
 	
 	public int getIdTexto() {
 		return idTexto;
@@ -20,11 +20,11 @@ public class Regra{
 	public void setIdTexto(int idTexto) {
 		this.idTexto = idTexto;
 	}
-	public String getCaminhoArquivo() {
-		return caminhoArquivo;
+	public int getIdArquivo() {
+		return idArquivo;
 	}
-	public void setCaminhoArquivo(String caminhoArquivo) {
-		this.caminhoArquivo = caminhoArquivo;
+	public void setIdArquivo(int idArquivo) {
+		this.idArquivo = idArquivo;
 	}
 	public List<Termo> getTermos() {
 		return termos;

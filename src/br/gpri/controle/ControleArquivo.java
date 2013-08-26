@@ -22,7 +22,7 @@ public class ControleArquivo extends Variaveis {
 	private boolean Cadastrar = false;
 	private boolean Executar = false;
 	private JanelaArquivo Janela;
-	private Stack<Arquivo> arquivosRecentes = new Stack();
+	private Stack<Arquivo> arquivosRecentes = new Stack<Arquivo>();
 	
 	public ControleArquivo(){
 		Janela = new JanelaArquivo();
@@ -70,6 +70,7 @@ public class ControleArquivo extends Variaveis {
 			Janela.AList.setSelectedIndex(0);
 			Janela.AList.ensureIndexIsVisible(0);
 			caminhoArquivo = a.getCaminho();
+			idArquivo = a.getId();
 		}
 	
 		private boolean testaArquivoRecenteExiste(Arquivo a){
@@ -90,6 +91,7 @@ public class ControleArquivo extends Variaveis {
 			int selecionado = Janela.AList.getSelectedIndex();
 			Arquivo a = arquivosRecentes.elementAt(selecionado);
 			caminhoArquivo = a.getCaminho();
+			idArquivo = a.getId();
 			Janela.AList.setToolTipText(caminhoArquivo);
 		}
 

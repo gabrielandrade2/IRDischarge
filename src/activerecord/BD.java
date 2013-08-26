@@ -1,6 +1,5 @@
 package activerecord;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,12 +33,13 @@ public class BD extends ActiveRecord {
 	
 	public Stack<Arquivo> selectArquivos(int idUsuario){
 		
-		Stack<Arquivo> arquivosRecentes = new Stack();
+		Stack<Arquivo> arquivosRecentes = new Stack<Arquivo>();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT nomeArquivo, absolutePath from arquivos WHERE idUsuario = '"+idUsuario+"';");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idArquivo, ordem,nomeArquivo, absolutePath from arquivos WHERE idUsuario = '"+idUsuario+" ORDER BY ordem ASC';");
 		    ResultSet res = ps.executeQuery();
 		    while(res.next()){
 		    	Arquivo a = new Arquivo();
+		    	a.setId(res.getInt("idArquivo"));
 		    	a.setNome(res.getString("nomeArquivo"));
 		    	a.setCaminho(res.getString("absolutePath"));
 		    	arquivosRecentes.push(a);
@@ -67,7 +67,11 @@ public class BD extends ActiveRecord {
 		try{
 			for(int i=0; i<arquivosRecentes.size(); i++){
 				Arquivo a = arquivosRecentes.elementAt(i);
-				PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+idUsuario+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
+				PreparedStatement ps;
+				if(a.getId()<0)
+					ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos(idUsuario,ordem,absolutePath,nomeArquivo) values("+idUsuario+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
+				else
+					ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+idUsuario+","+a.getId()+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
 				ps.execute();
 		    }
 		    return false;
@@ -80,7 +84,7 @@ public class BD extends ActiveRecord {
 	}
 	
 	public List<Elemento> selectElemento(){
-		List<Elemento> Lista = new ArrayList();
+		List<Elemento> Lista = new ArrayList<Elemento>();
 		try{
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM elementos;"); //Talvez separar por usuario
 			ResultSet res = ps.executeQuery();
@@ -100,7 +104,7 @@ public class BD extends ActiveRecord {
 	}
 	
 	public List<Conjunto> selectConjunto(){
-		List<Conjunto> Lista = new ArrayList();
+		List<Conjunto> Lista = new ArrayList<Conjunto>();
 		try{
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM conjuntos;"); 
 			ResultSet res = ps.executeQuery();
@@ -118,10 +122,10 @@ public class BD extends ActiveRecord {
 		return Lista;
 	}
 	
-	public List<Regra> selectRegraCadastro(int idTexto, String arquivo, int idUsuario){
-		List<Regra> Lista = new ArrayList();
+	public List<Regra> selectRegraCadastro(int idTexto, int idArquivo, int idUsuario){
+		List<Regra> Lista = new ArrayList<Regra>();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto FROM regras WHERE (idTexto="+idTexto+" AND arquivo='"+arquivo+"' AND idUsuario="+idUsuario+");");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto FROM regras WHERE (idTexto="+idTexto+" AND idArquivo='"+idArquivo+"' AND idUsuario="+idUsuario+");");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				Regra r = new Regra();
@@ -139,7 +143,7 @@ public class BD extends ActiveRecord {
 }
 	
 	public List<Regra> selectRegraExecucao(int idUsuario, int idConjunto, int idElemento){
-		List<Regra> Lista = new ArrayList();
+		List<Regra> Lista = new ArrayList<Regra>();
 		PreparedStatement ps = null;
 		try{
 			if(idConjunto == 0 && idElemento == 0)
@@ -237,7 +241,7 @@ public class BD extends ActiveRecord {
 	public boolean insertRegra(int idUsuario, Regra r){
 		boolean erro = true;
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO regras (idUsuario,idRegra,idConjunto,idElemento,previa,texto,idTexto,arquivo) VALUES ("+idUsuario+","+r.getId()+","+r.getConjunto()+","+r.getElemento()+",'"+r.getPrevia()+"','"+r.getTexto()+"',"+r.getIdTexto()+",'"+r.getCaminhoArquivo()+"');");		
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT INTO regras (idUsuario,idRegra,idConjunto,idElemento,previa,texto,idTexto,idArquivo) VALUES ("+idUsuario+","+r.getId()+","+r.getConjunto()+","+r.getElemento()+",'"+r.getPrevia()+"','"+r.getTexto()+"',"+r.getIdTexto()+",'"+r.getIdArquivo()+"');");		
 			 erro = ps.execute();
 		}
 		catch(SQLException e){

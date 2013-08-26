@@ -13,8 +13,9 @@ CREATE TABLE IF NOT EXISTS usuarios(
 
 DROP TABLE IF EXISTS arquivos;
 CREATE TABLE IF NOT EXISTS arquivos(
-idUsuario int NOT NULL AUTO_INCREMENT,
-idArquivo int,
+idUsuario int NOT NULL,
+idArquivo int NOT NULL AUTO_INCREMENT,
+ordem int,
 absolutePath varchar(1000),
 nomeArquivo varchar(100),
 PRIMARY KEY (idUsuario,idArquivo));
@@ -42,11 +43,12 @@ dataRegra timestamp,
 previa varchar(100),
 texto varchar(100),
 idTexto int,
-arquivo varchar(1000),
+idArquivo int,
 PRIMARY KEY (idRegra),
 FOREIGN KEY (idUsuario) references usuarios(idUsuario),
 FOREIGN KEY (idConjunto) references conjuntos(idConjunto),
-FOREIGN KEY (idElemento) references elementos(idElemento));
+FOREIGN KEY (idElemento) references elementos(idElemento),
+FOREIGN KEY (idArquivo) references arquivos(idArquivo));
 
 DROP TABLE IF EXISTS subregras;
 CREATE TABLE IF NOT EXISTS subregras(

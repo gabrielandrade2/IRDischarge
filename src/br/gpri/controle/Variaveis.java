@@ -1,6 +1,7 @@
 package br.gpri.controle;
 
 import activerecord.BD;
+import activerecord.Arquivo;
 
 public class Variaveis {
 	
@@ -8,7 +9,8 @@ public class Variaveis {
 	protected static ControleExcel Excel = new ControleExcel();
 	protected static BD BD = new BD();
 	protected static String caminhoArquivo = new String();
-	
+	protected static int idArquivo;
+		
 	protected static ControleArquivo JanelaArquivo;
 	protected static ControleCadastroRegra JanelaCadRegra;
 	protected static ControleCadastroUsuario JanelaCadUsuario;
@@ -17,3 +19,4 @@ public class Variaveis {
 	protected static ControleLogin JanelaLogin;
 	protected static ControleResultados JanelaResultados;
 	}
+
