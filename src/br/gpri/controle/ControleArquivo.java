@@ -110,8 +110,9 @@ public class ControleArquivo extends Variaveis {
 		}
 			
 		private String corrigeTexto(String texto){
-			texto=texto.replaceAll("\\", "/");
-			texto=texto.replaceAll("\n\n", "\n");
+			texto=texto.replace("\\", "/");
+			texto=texto.replace("\n\n", "\n");
+			texto=texto.replace("  ", " ");
 			
 			return texto;
 		}
@@ -180,7 +181,7 @@ public class ControleArquivo extends Variaveis {
         			Arquivo a = new Arquivo();
         			a.setNome(Janela.AbreArquivo.getSelectedFile().getName());
         			a.setCaminho(Janela.AbreArquivo.getSelectedFile().getAbsolutePath());
-        			
+        			a.setId(BD.selectMaxIdArquivo(idUsuario));
         			adicionaArquivoRecente(a);
         			importaArquivo(a);
         			}

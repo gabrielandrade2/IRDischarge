@@ -18,6 +18,7 @@ import br.grpi.nlp.Tagger;
 public class ControleCadastroRegra extends Variaveis{
 
 	private Integer linha;
+	private Integer numTextos;
 	private JanelaCadastroRegra Janela;
 	private List<Elemento> elementos;
 	private List<Regra> regras;
@@ -26,6 +27,7 @@ public class ControleCadastroRegra extends Variaveis{
 		
 	public ControleCadastroRegra(){
 		linha = 0;
+		numTextos = BD.getNumTextos(idUsuario, idArquivo);
 		
 		Janela = new JanelaCadastroRegra();
 		Janela.BotaoAnterior1.addActionListener(this.Anterior);
@@ -41,9 +43,9 @@ public class ControleCadastroRegra extends Variaveis{
 		inicializaListasRegras();
 		buscaDropDownElementos();
 		geraListaRegras();
-	
+		
 																	//Tirar o textocaminhoarquivo, textogeraregra e textoregra da janela
-		Janela.TextoSumario1.setText(Excel.getConteudoCelula(linha)); //Tem 2 textosumario na janela também depois tirar o 1 do final
+		Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tem 2 textosumario na janela também depois tirar o 1 do final
 	}
 	
 	public void abreJanela(){
@@ -101,7 +103,7 @@ public class ControleCadastroRegra extends Variaveis{
 			if(linha != 0){
 				linha--;
 				System.out.println(linha);
-				Janela.TextoSumario1.setText(Excel.getConteudoCelula(linha)); //Tirar o 1 do final
+				Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tirar o 1 do final
 				
 				geraListaRegras();
 			}
@@ -111,10 +113,10 @@ public class ControleCadastroRegra extends Variaveis{
 	
 	 ActionListener Proximo = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			if(linha != Excel.getNumLinhas()){
+			if(linha != numTextos){
 				linha++;
 				System.out.println(linha); //DEBUG, mas acho que deveria ter um número contando do lado do texto, talvez editavel
-				Janela.TextoSumario1.setText(Excel.getConteudoCelula(linha)); //Tirar o 1 do final
+				Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tirar o 1 do final
 				
 				geraListaRegras();
 			}			

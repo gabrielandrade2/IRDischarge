@@ -68,10 +68,7 @@ public class BD extends ActiveRecord {
 			for(int i=0; i<arquivosRecentes.size(); i++){
 				Arquivo a = arquivosRecentes.elementAt(i);
 				PreparedStatement ps;
-				if(a.getId()<0)
-					ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos(idUsuario,ordem,absolutePath,nomeArquivo) values("+idUsuario+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
-				else
-					ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+idUsuario+","+a.getId()+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
+				ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+idUsuario+","+a.getId()+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
 				ps.execute();
 		    }
 		    return false;
@@ -81,6 +78,22 @@ public class BD extends ActiveRecord {
 		}
 		
 		return true;
+	}
+	
+	public int selectMaxIdArquivo(int idUsuario){
+		int maxId = 0;
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT MAX(idArquivo)+1 FROM arquivos where idUsuario ="+idUsuario+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				 maxId = res.getInt(1);
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return maxId;
 	}
 	
 	public List<Elemento> selectElemento(){
@@ -348,6 +361,39 @@ public class BD extends ActiveRecord {
 			e.printStackTrace();}
 		return false;
 		}
+	
+	public String selectTexto(int idUsuario, int idArquivo, int idTexto){
+		String texto = new String();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT texto from textos WHERE idUsuario="+idUsuario+" AND idArquivo="+idArquivo+" AND idTexto="+idTexto+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				 texto = res.getString("texto");
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+			texto="Erro Banco de Dados";
+		}
+		return texto;
+	}
+	
+	public int getNumTextos(int idUsuario, int idArquivo){
+		int numTextos=0;
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT Count(*) from textos WHERE idUsuario="+idUsuario+" AND idArquivo="+idArquivo+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				 numTextos = (res.getInt(1))-1;
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return numTextos;
+	}
 	
 	public boolean importaTexto(int idUsuario, int idArquivo, int idTexto, String texto){
 		boolean erro = true;
