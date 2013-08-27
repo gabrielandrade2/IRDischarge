@@ -93,10 +93,12 @@ DROP TABLE IF EXISTS resultados;
 CREATE TABLE IF NOT EXISTS resultados(
 idUsuario int,
 idArquivo int,
-idTexto int NOT NULL,
+idTexto int,
+id int NOT NULL AUTO_INCREMENT,
 trechoEncontrado text,
 idRegra int,
-PRIMARY KEY (idUsuario,idArquivo,idTexto),
+dataResultado timestamp,
+PRIMARY KEY (idUsuario,idArquivo,idTexto, id),
 FOREIGN KEY (idUsuario) references usuarios(idUsuario),
 FOREIGN KEY (idArquivo) references arquivos(idAquivo),
 FOREIGN KEY (idRegra) references regras(idRegra));

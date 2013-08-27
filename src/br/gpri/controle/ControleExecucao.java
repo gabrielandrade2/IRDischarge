@@ -187,9 +187,9 @@ public class ControleExecucao extends Variaveis{
 					
 					List<Integer> indiceRegras = pegaSelecaoRegras(); //Verifica os checkbox
 					List<Regra> regrasSelecionadas = buscaRegrasSelecionadas(indiceRegras); //Busca as regras selecionadas
-					
-					for(int i=0; i<Excel.getNumLinhas(); i++){ //Pra cada texto, executa
-						String texto = Excel.getConteudoCelula(i);
+					int numTextos = BD.getNumTextos(idUsuario, idArquivo);
+					for(int i=0; i<numTextos; i++){ //Pra cada texto, executa
+						String texto = BD.selectTexto(idUsuario, idArquivo, i);
 						List<TrechoEncontrado> encontrados = Tagger.executaRegra(texto, regrasSelecionadas);
 						
 						//Console
@@ -201,6 +201,15 @@ public class ControleExecucao extends Variaveis{
 							System.out.println("Regra: "+encontrados.get(j).getRegra().getPrevia());
 							System.out.println();
 						}
+						
+						//Caso não tenha encontrado nenhum trecho adiciona "Nada encontrado"
+						if(encontrados.isEmpty()){
+							TrechoEncontrado t = new TrechoEncontrado();
+							t.setTrechoEncontrado("Nada Encontrado");
+							encontrados.add(t);
+						}
+						//Insere no Banco de Dados
+						BD.insertResultados(idUsuario, idArquivo, i, encontrados);
 					}
 					
 					

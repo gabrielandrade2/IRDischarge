@@ -2,16 +2,10 @@ package activerecord;
 
 public class TrechoEncontrado {
 
-	private String textoPesquisado;
 	private String trechoEncontrado;
 	private Regra regra;
-	
-	public String getTextoPesquisado() {
-		return textoPesquisado;
-	}
-	public void setTextoPesquisado(String textoPesquisado) {
-		this.textoPesquisado = textoPesquisado;
-	}
+	private boolean hasRegra = false;
+
 	public String getTrechoEncontrado() {
 		return trechoEncontrado;
 	}
@@ -23,6 +17,11 @@ public class TrechoEncontrado {
 	}
 	public void setRegra(Regra regra) {
 		this.regra = regra;
+		this.hasRegra = true;
+	}
+	
+	public boolean hasRegra(){
+		return hasRegra;
 	}
 	
 }

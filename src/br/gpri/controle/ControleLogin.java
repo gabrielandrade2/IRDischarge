@@ -1,6 +1,9 @@
 package br.gpri.controle;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import activerecord.*;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -37,6 +40,23 @@ public class ControleLogin extends Variaveis {
 		
 		return false;
 	}
+	
+	private void Login(){
+    	Login l = new Login();
+    	l = BD.selectLogin(Janela.getUsuario());
+    	boolean aceito = verificaSenha(l);
+    	
+    	if(aceito){
+    		idUsuario = l.getId();
+    		fechaJanela();
+    		JanelaArquivo = new ControleArquivo();
+    		JanelaArquivo.abreJanela(); 
+    	}
+    	else{
+    		System.out.println("Login falhou");
+    		Janela.limpaCampos();
+    	}
+	}
 		
 	ActionListener Cadastro = new ActionListener() {
         public void actionPerformed(ActionEvent Cadastro) {
@@ -48,20 +68,8 @@ public class ControleLogin extends Variaveis {
 	
 	ActionListener Login = new ActionListener() {
         public void actionPerformed(ActionEvent Login) {
-        	Login l = new Login();
-        	l = BD.selectLogin(Janela.getUsuario());
-        	boolean aceito = verificaSenha(l);
-        	
-        	if(aceito){
-        		idUsuario = l.getId();
-        		fechaJanela();
-        		JanelaArquivo = new ControleArquivo();
-        		JanelaArquivo.abreJanela(); 
-        	}
-        	else{
-        		System.out.println("Login falhou");
-        		Janela.limpaCampos();
-        	}
+        	Login();
         }
 	};
+	
  }

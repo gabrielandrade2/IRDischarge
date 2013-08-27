@@ -385,7 +385,7 @@ public class BD extends ActiveRecord {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT Count(*) from textos WHERE idUsuario="+idUsuario+" AND idArquivo="+idArquivo+";");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
-				 numTextos = (res.getInt(1))-1;
+				 numTextos = (res.getInt(1));
 			}
 		}
 		
@@ -425,4 +425,50 @@ public class BD extends ActiveRecord {
 		}
 		return id;
 	}
+	
+	public boolean insertResultados(int idUsuario, int idArquivo, int idTexto, List<TrechoEncontrado> encontrados){
+		boolean erro = true;
+		for(int i=0; i<encontrados.size(); i++){
+			TrechoEncontrado t = encontrados.get(i);
+			String trecho = t.getTrechoEncontrado();
+			
+			int id = selectMaxIdResultados(idUsuario, idArquivo, idTexto);
+			
+			try{
+				PreparedStatement ps = null;
+				if(t.hasRegra()){
+					Regra r = t.getRegra();
+					int idRegra = r.getId();
+					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idUsuario, idArquivo, idTexto, id, trechoEncontrado, idRegra) values ("+idUsuario+","+idArquivo+","+idTexto+","+id+",'"+trecho+"',"+idRegra+");");
+				}
+				else
+					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idUsuario, idArquivo, idTexto, id, trechoEncontrado) values ("+idUsuario+","+idArquivo+","+idTexto+","+id+",'"+trecho+"');");
+				 erro = ps.execute();
+				 erro = false;
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+				erro = true;
+			}
+			
+		}
+		return erro;
+	}
+	
+	private int selectMaxIdResultados(int idUsuario, int idArquivo, int idTexto){
+		int maxId = 0;
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT MAX(id)+1 from resultados WHERE idUsuario="+idUsuario+" AND idArquivo="+idArquivo+" and idTexto="+idTexto+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				 maxId = res.getInt(1);
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return maxId;
+	}
+	
 }

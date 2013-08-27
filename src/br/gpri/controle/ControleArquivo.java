@@ -120,10 +120,13 @@ public class ControleArquivo extends Variaveis {
 	MouseListener Lista = new MouseListener(){
 		public void mouseClicked(MouseEvent e) {
 			int selecionado = Janela.AList.getSelectedIndex();
-			Arquivo a = arquivosRecentes.elementAt(selecionado);
-			caminhoArquivo = a.getCaminho();
-			idArquivo = a.getId();
-			Janela.AList.setToolTipText(caminhoArquivo);
+			try{
+				Arquivo a = arquivosRecentes.elementAt(selecionado);
+				caminhoArquivo = a.getCaminho();
+				idArquivo = a.getId();
+				Janela.AList.setToolTipText(caminhoArquivo);
+			}
+			catch(ArrayIndexOutOfBoundsException x){}
 		}
 
 		public void mouseEntered(MouseEvent e) {}

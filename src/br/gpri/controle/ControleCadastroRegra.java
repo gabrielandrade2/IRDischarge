@@ -43,6 +43,8 @@ public class ControleCadastroRegra extends Variaveis{
 		inicializaListasRegras();
 		buscaDropDownElementos();
 		geraListaRegras();
+		Janela.ListaRegras.setSelectedIndex(0);
+		
 		
 																	//Tirar o textocaminhoarquivo, textogeraregra e textoregra da janela
 		Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tem 2 textosumario na janela também depois tirar o 1 do final
@@ -113,7 +115,7 @@ public class ControleCadastroRegra extends Variaveis{
 	
 	 ActionListener Proximo = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			if(linha != numTextos){
+			if(linha != (numTextos)-1){
 				linha++;
 				System.out.println(linha); //DEBUG, mas acho que deveria ter um número contando do lado do texto, talvez editavel
 				Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tirar o 1 do final
