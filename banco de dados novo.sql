@@ -13,12 +13,13 @@ CREATE TABLE IF NOT EXISTS usuarios(
 
 DROP TABLE IF EXISTS arquivos;
 CREATE TABLE IF NOT EXISTS arquivos(
-idUsuario int NOT NULL,
 idArquivo int NOT NULL AUTO_INCREMENT,
+idUsuario int NOT NULL,
 ordem int,
 absolutePath varchar(1000),
 nomeArquivo varchar(100),
-PRIMARY KEY (idUsuario,idArquivo));
+PRIMARY KEY (idArquivo, idUsuario),
+FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario));
 
 DROP TABLE IF EXISTS conjuntos;
 CREATE TABLE IF NOT EXISTS conjuntos(
@@ -87,7 +88,7 @@ idTexto int,
 texto text,
 PRIMARY KEY (idUsuario,idArquivo,idTexto),
 FOREIGN KEY (idUsuario) references usuarios(idUsuario),
-FOREIGN KEY (idArquivo) references arquivo(idArquivo));
+FOREIGN KEY (idArquivo) references arquivos(idArquivo));
 
 DROP TABLE IF EXISTS resultados;
 CREATE TABLE IF NOT EXISTS resultados(
@@ -98,7 +99,12 @@ id int NOT NULL AUTO_INCREMENT,
 trechoEncontrado text,
 idRegra int,
 dataResultado timestamp,
-PRIMARY KEY (idUsuario,idArquivo,idTexto, id),
-FOREIGN KEY (idUsuario) references usuarios(idUsuario),
-FOREIGN KEY (idArquivo) references arquivos(idAquivo),
-FOREIGN KEY (idRegra) references regras(idRegra));
+PRIMARY KEY (id, idUsuario, idArquivo, idTexto),
+FOREIGN KEY (idUsuario) references textos(idUsuario),
+FOREIGN KEY(idArquivo) references textos(idArquivo)
+);
+
+INSERT into conjuntos values (1, 'Teste');
+INSERT into conjuntos values (2, 'Teste2');
+INSERT into elementos values(1, 'Paciente', 'Descrição');
+INSERT into elementos values(2, 'Medicamento', 'Descrição');
