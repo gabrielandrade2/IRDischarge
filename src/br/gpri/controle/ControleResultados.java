@@ -16,6 +16,7 @@ public class ControleResultados extends Variaveis{
 		Janela.BotaoOk.addActionListener(this.Ok);
 		
 		
+		
 	}
 	
 	public void abreJanela(){

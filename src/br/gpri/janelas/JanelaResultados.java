@@ -32,8 +32,6 @@ public class JanelaResultados extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        BotaoProximo = new javax.swing.JButton();
-        BotaoAnterior = new javax.swing.JButton();
         BotaoOk = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         ListaTexto = new javax.swing.JList();
@@ -41,9 +39,9 @@ public class JanelaResultados extends javax.swing.JFrame {
         ListaRegra = new javax.swing.JList();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        TextoTrecho = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
+        TextoRegra = new javax.swing.JTextArea();
 
         jTextField2.setText("jTextField2");
 
@@ -59,17 +57,8 @@ public class JanelaResultados extends javax.swing.JFrame {
 
         jLabel5.setText("Regra:");
 
-        BotaoProximo.setText("Próximo");
-
-        BotaoAnterior.setText("Anterior");
-
         BotaoOk.setText("OK");
 
-        ListaTexto.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(ListaTexto);
 
         ListaRegra.setModel(new javax.swing.AbstractListModel() {
@@ -81,13 +70,13 @@ public class JanelaResultados extends javax.swing.JFrame {
 
         jLabel6.setText("Trecho Original da Regra:");
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane6.setViewportView(jTextArea4);
+        TextoTrecho.setColumns(20);
+        TextoTrecho.setRows(5);
+        jScrollPane6.setViewportView(TextoTrecho);
 
-        jTextArea5.setColumns(20);
-        jTextArea5.setRows(5);
-        jScrollPane7.setViewportView(jTextArea5);
+        TextoRegra.setColumns(20);
+        TextoRegra.setRows(5);
+        jScrollPane7.setViewportView(TextoRegra);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,33 +85,27 @@ public class JanelaResultados extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(jLabel3)
                                 .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane4)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane4)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane6)
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane6)
-                                            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel4)
-                                                    .addComponent(jLabel6))
-                                                .addGap(0, 0, Short.MAX_VALUE)))))))
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel6))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BotaoProximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BotaoAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BotaoOk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(BotaoOk, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -143,12 +126,7 @@ public class JanelaResultados extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BotaoProximo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BotaoAnterior))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -204,23 +182,22 @@ public class JanelaResultados extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify                     
-    public javax.swing.JButton BotaoAnterior;
     public javax.swing.JButton BotaoOk;
-    public javax.swing.JButton BotaoProximo;
+    public javax.swing.JList ListaRegra;
+    public javax.swing.JList ListaTexto;
+    public javax.swing.JTextArea TextoRegra;
+    public javax.swing.JTextArea TextoTrecho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    public javax.swing.JList ListaTexto;
-    public javax.swing.JList ListaRegra;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    public javax.swing.JTextArea jTextArea4;
-    public javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration                   
+    
 }
