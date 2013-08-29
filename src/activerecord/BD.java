@@ -68,7 +68,7 @@ public class BD extends ActiveRecord {
 			for(int i=0; i<arquivosRecentes.size(); i++){
 				Arquivo a = arquivosRecentes.elementAt(i);
 				PreparedStatement ps;
-				ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+a.getId()+","+idUsuario+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
+				ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+idUsuario+","+a.getId()+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
 				ps.execute();
 		    }
 		    return false;

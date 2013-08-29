@@ -4,22 +4,24 @@ USE `intemed`;
 
 DROP TABLE IF EXISTS usuarios;
 CREATE TABLE IF NOT EXISTS usuarios(
-	idUsuario int(10)  NOT NULL AUTO_INCREMENT,
-	usuario varchar(20) UNIQUE NOT NULL,
-	senha varchar(10),
-	nome varchar(50),
-	email varchar(50) UNIQUE,
-	PRIMARY KEY(idUsuario));
+        idUsuario int(10)  NOT NULL AUTO_INCREMENT,
+        usuario varchar(20) UNIQUE NOT NULL,
+        senha varchar(10),
+        nome varchar(50),
+        email varchar(50) UNIQUE,
+        PRIMARY KEY(idUsuario));
 
 DROP TABLE IF EXISTS arquivos;
 CREATE TABLE IF NOT EXISTS arquivos(
-idArquivo int NOT NULL AUTO_INCREMENT,
 idUsuario int NOT NULL,
+idArquivo int NOT NULL,
 ordem int,
 absolutePath varchar(1000),
 nomeArquivo varchar(100),
-PRIMARY KEY (idArquivo, idUsuario),
+PRIMARY KEY (idUsuario, idArquivo),
 FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario));
+
+create index arquivo on arquivos(idArquivo);
 
 DROP TABLE IF EXISTS conjuntos;
 CREATE TABLE IF NOT EXISTS conjuntos(
@@ -90,19 +92,21 @@ PRIMARY KEY (idUsuario,idArquivo,idTexto),
 FOREIGN KEY (idUsuario) references usuarios(idUsuario),
 FOREIGN KEY (idArquivo) references arquivos(idArquivo));
 
+create index texto on textos(idTexto);
+
 DROP TABLE IF EXISTS resultados;
 CREATE TABLE IF NOT EXISTS resultados(
 idUsuario int,
 idArquivo int,
 idTexto int,
-id int NOT NULL AUTO_INCREMENT,
+id int,
 trechoEncontrado text,
 idRegra int,
 dataResultado timestamp,
-PRIMARY KEY (id, idUsuario, idArquivo, idTexto),
+PRIMARY KEY (idUsuario, idArquivo, idTexto, id),
 FOREIGN KEY (idUsuario) references textos(idUsuario),
-FOREIGN KEY(idArquivo) references textos(idArquivo)
-);
+FOREIGN KEY (idArquivo) references textos(idArquivo),
+FOREIGN KEY (idTexto) references textos(idTexto));
 
 INSERT into conjuntos values (1, 'Teste');
 INSERT into conjuntos values (2, 'Teste2');
