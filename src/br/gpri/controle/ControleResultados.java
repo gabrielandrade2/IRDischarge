@@ -80,6 +80,7 @@ public class ControleResultados extends Variaveis{
 		ListSelectionListener Regras = new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent Regras) {
 				
+				
 			}
 		};
 }

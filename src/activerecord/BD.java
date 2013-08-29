@@ -54,7 +54,7 @@ public class BD extends ActiveRecord {
 	
 	private void limpaArquivosUsuario(int idUsuario){
 		try{
-				PreparedStatement ps = (PreparedStatement) con.prepareStatement("DELETE FROM arquivos where idUsuario = "+idUsuario+";");
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement("UPDATE arquivos set ordem = null where idUsuario ="+idUsuario+";");
 				ps.execute();
 	    }
 		catch(SQLException e){
@@ -68,7 +68,7 @@ public class BD extends ActiveRecord {
 			for(int i=0; i<arquivosRecentes.size(); i++){
 				Arquivo a = arquivosRecentes.elementAt(i);
 				PreparedStatement ps;
-				ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+idUsuario+","+a.getId()+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
+				ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+a.getId()+","+idUsuario+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
 				ps.execute();
 		    }
 		    return false;
@@ -79,6 +79,25 @@ public class BD extends ActiveRecord {
 		
 		return true;
 	}
+
+	public boolean atualizaArquivos(int idUsuario,Stack<Arquivo> arquivosRecentes){
+		limpaArquivosUsuario(idUsuario);
+		try{
+			for(int i=0; i<arquivosRecentes.size(); i++){
+				Arquivo a = arquivosRecentes.elementAt(i);
+				PreparedStatement ps;
+				ps = (PreparedStatement) con.prepareStatement("UPDATE arquivos set ordem ="+i+" where idUsuario ="+idUsuario+";");
+				ps.execute();
+		    }
+		    return false;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
 	
 	public int selectMaxIdArquivo(int idUsuario){
 		int maxId = 0;
