@@ -23,6 +23,7 @@ public class ControleResultados extends Variaveis{
 		Janela.BotaoOk.addActionListener(this.Ok);
 		inicializaListas(textos);
 		this.listaEncontrados = listaEncontrados;
+		Janela.setLocationRelativeTo(null);
 		
 		
 	}

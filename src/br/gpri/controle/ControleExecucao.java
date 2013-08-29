@@ -209,7 +209,10 @@ public class ControleExecucao extends Variaveis{
 						//Caso não tenha encontrado nenhum trecho adiciona "Nada encontrado"
 						if(encontrados.isEmpty()){
 							TrechoEncontrado t = new TrechoEncontrado();
+							Regra r = new Regra();
+							r.setPrevia("Nada Encontrado");
 							t.setTrechoEncontrado("Nada Encontrado");
+							t.setRegra(r);
 							encontrados.add(t);
 						}
 						
