@@ -1,14 +1,7 @@
 package br.grpi.nlp;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import activerecord.Regra;
@@ -56,7 +49,7 @@ public class Tagger {
 	//Tagger para Interface gráfica
 	public Regra geraRegra(String text_sumario, String text_selecionado,int idElemento, int idRegra){
 		
-		List <Termo> termosregras = new ArrayList();
+		List <Termo> termosregras = new ArrayList<Termo>();
 		
 		//Executa operações de PRÉ-PROCESSAMENTO
 		text_sumario = preProccessText(text_sumario);
@@ -146,7 +139,7 @@ public class Tagger {
 	
 	public Subregra geraSubRegra(String text_sumario, String text_selecionado,int idRegra, int idSubRegra){
 		
-		List <Termo> termosregras = new ArrayList();
+		List <Termo> termosregras = new ArrayList<Termo>();
 		
 		//Executa operações de PRÉ-PROCESSAMENTO
 		text_sumario = preProccessText(text_sumario);

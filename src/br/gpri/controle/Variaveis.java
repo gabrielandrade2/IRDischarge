@@ -1,7 +1,6 @@
 package br.gpri.controle;
 
 import activerecord.BD;
-import activerecord.Arquivo;
 
 public class Variaveis {
 	
