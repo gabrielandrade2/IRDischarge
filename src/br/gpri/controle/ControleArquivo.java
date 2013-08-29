@@ -94,7 +94,7 @@ public class ControleArquivo extends Variaveis {
 			if(arquivosRecentes.size() >= 30)
 				arquivosRecentes.remove(30);
 			arquivosRecentes.insertElementAt(a, 0);
-        	System.out.println("Erro:"+BD.insertArquivos(idUsuario, arquivosRecentes));
+        	System.out.println("Erro:"+BD.atualizaArquivos(idUsuario, arquivosRecentes));
 		}
 		
 		private void importaArquivo(Arquivo a){
@@ -113,6 +113,7 @@ public class ControleArquivo extends Variaveis {
 			texto=texto.replace("\\", "/");
 			texto=texto.replace("\n\n", "\n");
 			texto=texto.replace("  ", " ");
+			texto=texto.replace("'", "");
 			
 			return texto;
 		}

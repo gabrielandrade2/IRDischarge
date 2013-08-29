@@ -761,7 +761,6 @@ public class Tagger {
 		text = text.replace(" REED "," radiograma de esôfago, estômago e duodeno ");
 		text = text.replace(" RNI "," razão normalizada internacional ");
 		text = text.replace(" STK "," streptoquinase ");
-		text = text.replace(" T2 "," tempo 2 ");
 		text = text.replace(" TPP "," trabalho de parto prematuro ");
 		text = text.replace(" VPA "," valproato de sódio ");
 		text = text.replace(" mCi "," milicurie ");

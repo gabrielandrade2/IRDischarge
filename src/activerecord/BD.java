@@ -35,7 +35,7 @@ public class BD extends ActiveRecord {
 		
 		Stack<Arquivo> arquivosRecentes = new Stack<Arquivo>();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idArquivo, ordem,nomeArquivo, absolutePath from arquivos WHERE idUsuario = '"+idUsuario+" ORDER BY ordem ASC';");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idArquivo, ordem,nomeArquivo, absolutePath from arquivos WHERE idUsuario = "+idUsuario+" ORDER BY ordem ASC;");
 		    ResultSet res = ps.executeQuery();
 		    while(res.next()){
 		    	Arquivo a = new Arquivo();
@@ -63,14 +63,12 @@ public class BD extends ActiveRecord {
 	}
 	
 	public boolean insertArquivos(int idUsuario,Stack<Arquivo> arquivosRecentes){
-		limpaArquivosUsuario(idUsuario);
 		try{
-			for(int i=0; i<arquivosRecentes.size(); i++){
-				Arquivo a = arquivosRecentes.elementAt(i);
-				PreparedStatement ps;
-				ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+idUsuario+","+a.getId()+","+i+",'"+a.getCaminho()+"','"+a.getNome()+"');");
-				ps.execute();
-		    }
+			Arquivo a = arquivosRecentes.elementAt(0);
+			PreparedStatement ps;
+			ps = (PreparedStatement) con.prepareStatement("INSERT INTO arquivos values("+idUsuario+","+a.getId()+","+null+",'"+a.getCaminho()+"','"+a.getNome()+"');");
+			ps.execute();
+			atualizaArquivos(idUsuario, arquivosRecentes);
 		    return false;
 		}
 		catch(SQLException e){
@@ -86,7 +84,7 @@ public class BD extends ActiveRecord {
 			for(int i=0; i<arquivosRecentes.size(); i++){
 				Arquivo a = arquivosRecentes.elementAt(i);
 				PreparedStatement ps;
-				ps = (PreparedStatement) con.prepareStatement("UPDATE arquivos set ordem ="+i+" where idUsuario ="+idUsuario+";");
+				ps = (PreparedStatement) con.prepareStatement("UPDATE arquivos set ordem ="+i+" where idUsuario ="+idUsuario+" AND idArquivo="+a.getId()+";");
 				ps.execute();
 		    }
 		    return false;
