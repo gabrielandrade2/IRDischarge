@@ -188,6 +188,10 @@ public class ControleExecucao extends Variaveis{
 					List<Integer> indiceRegras = pegaSelecaoRegras(); //Verifica os checkbox
 					List<Regra> regrasSelecionadas = buscaRegrasSelecionadas(indiceRegras); //Busca as regras selecionadas
 					int numTextos = BD.getNumTextos(idUsuario, idArquivo);
+					
+					List<String> textos = new ArrayList<String>();
+					List<List<TrechoEncontrado>> listaEncontrados = new ArrayList<List<TrechoEncontrado>>();
+					
 					for(int i=0; i<numTextos; i++){ //Pra cada texto, executa
 						String texto = BD.selectTexto(idUsuario, idArquivo, i);
 						List<TrechoEncontrado> encontrados = Tagger.executaRegra(texto, regrasSelecionadas);
@@ -208,13 +212,17 @@ public class ControleExecucao extends Variaveis{
 							t.setTrechoEncontrado("Nada Encontrado");
 							encontrados.add(t);
 						}
+						
+						textos.add(texto);
+						listaEncontrados.add(encontrados);
+						
 						//Insere no Banco de Dados
 						BD.insertResultados(idUsuario, idArquivo, i, encontrados);
 					}
 					
 					
 					fechaJanela();
-					JanelaResultados = new ControleResultados();
+					JanelaResultados = new ControleResultados(textos, listaEncontrados);
 					JanelaResultados.abreJanela();
 					
 				}
