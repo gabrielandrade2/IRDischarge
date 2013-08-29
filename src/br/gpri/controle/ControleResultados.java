@@ -18,12 +18,20 @@ public class ControleResultados extends Variaveis{
 	
 	private JanelaResultados Janela;
 	private List<List<TrechoEncontrado>> listaEncontrados;
+	private List<TrechoEncontrado> trechostextoselecionado;
+	
 	public ControleResultados(List<String> textos, List<List<TrechoEncontrado>> listaEncontrados){
 		Janela = new JanelaResultados();
 		Janela.BotaoOk.addActionListener(this.Ok);
 		inicializaListas(textos);
 		this.listaEncontrados = listaEncontrados;
 		Janela.setLocationRelativeTo(null);
+		Janela.TextoRegra.setEditable(false);
+		Janela.TextoRegra.setLineWrap(true);
+		Janela.TextoRegra.setWrapStyleWord(true);
+		Janela.TextoTrecho.setEditable(false);
+		Janela.TextoTrecho.setLineWrap(true);
+		Janela.TextoTrecho.setWrapStyleWord(true);
 		
 		
 	}
@@ -65,22 +73,32 @@ public class ControleResultados extends Variaveis{
 		};
 		ListSelectionListener Textos = new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent Regras) {
+				Janela.TextoRegra.setText("");
+				Janela.TextoTrecho.setText("");
 				DefaultListModel listaRegrasEncontrados = new DefaultListModel();
 				int textoselecionado=Janela.ListaTexto.getSelectedIndex();
-				List<TrechoEncontrado> trechos = listaEncontrados.get(textoselecionado);
-				for(int i=0;i<trechos.size();i++){
-					listaRegrasEncontrados.addElement(trechos.get(i).getRegra().getPrevia());
+				trechostextoselecionado = listaEncontrados.get(textoselecionado);
+				for(int i=0;i<trechostextoselecionado.size();i++){
+					listaRegrasEncontrados.addElement(trechostextoselecionado.get(i).getRegra().getPrevia());
 										
 				}
 				Janela.ListaRegra.setModel(listaRegrasEncontrados);
 				Janela.ListaRegra.updateUI();
+				Janela.ListaRegra.setSelectedIndex(0);
+
 			}	
 		};
 		
 		ListSelectionListener Regras = new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent Regras) {
-				
-				
+				int regraselecionada=Janela.ListaRegra.getSelectedIndex();	
+				if(regraselecionada>=0){
+					TrechoEncontrado t = trechostextoselecionado.get(regraselecionada);
+					String textoregra = t.getRegra().getTexto();
+					String textotrecho = t.getTrechoEncontrado();
+					Janela.TextoRegra.setText(textoregra);
+					Janela.TextoTrecho.setText(textotrecho);
+				}
 			}
 		};
 }

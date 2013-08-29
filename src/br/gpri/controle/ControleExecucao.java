@@ -211,6 +211,7 @@ public class ControleExecucao extends Variaveis{
 							TrechoEncontrado t = new TrechoEncontrado();
 							Regra r = new Regra();
 							r.setPrevia("Nada Encontrado");
+							r.setTexto("");
 							t.setTrechoEncontrado("Nada Encontrado");
 							t.setRegra(r);
 							encontrados.add(t);
