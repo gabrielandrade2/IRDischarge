@@ -275,12 +275,62 @@ public class Tagger {
 						//Se toda a comparação for igual, se tiver subregras testa
 						//Se tudo der certo, adiona na lista de encontrados e limpa a string trecho
 						if(igual){
-							boolean testeSubregra = true;
+//							boolean testeSubregra = true;
+							boolean igual_sr = true;
+							boolean encontrou_algum_sr = true;
 							if(r.hasSubregra())
-								testeSubregra = executaSubRegra(r.getSubregras()); //Testa as subregras, retorna true se ela validarem a regra
-							if(testeSubregra){
+							{
+//inicio alteração Fernando.
+								//	testeSubregra = executaSubRegra(r.getSubregras()); //Testa as subregras, retorna true se ela validarem a regra
+								List<Subregra> subregras = r.getSubregras();
+								//Executa cada uma das subregras
+								encontrou_algum_sr = false;
+								for (Subregra sr : subregras){
+									
+									igual_sr = false;
+									
+									
+									//Procura por incidencia da subregra
+									String trecho_sr = "";
+									for(int i_sr=0; i_sr < tokens.size(); i_sr++){
+										for(int j_sr=0; j_sr < sr.getNumTermos(); j_sr++){
+											String c;
+											try{
+												c = tokens.get(i_sr+j_sr).getMorphologicalTag().toString();
+											}
+											catch(IndexOutOfBoundsException e){
+												c = "";
+											}
+											String d = sr.getTermo(j_sr).getTermo();
+											if(c.contentEquals(d)){
+												igual_sr = true;
+												trecho_sr += tokens.get(i_sr+j_sr).getLexeme() + " ";
+											}
+											else{
+												igual_sr = false;
+												break;
+											}
+										}
+											//
+										if(igual_sr){
+											TrechoEncontrado t = new TrechoEncontrado();
+											t.setSubregra(sr);
+											t.setIsSubregra(true);
+											t.setTrechoEncontrado(trecho_sr);
+											encontrados.add(t);
+											encontrou_algum_sr=true;
+												
+									}
+									}
+
+								}
+							}
+//fim alteração Fernando
+//							if(testeSubregra){ trocado pela linha de baixo para manter os loops de regra e subregra parecidos
+							if(encontrou_algum_sr){
 								TrechoEncontrado t = new TrechoEncontrado();
 								t.setRegra(r);
+								t.setIsSubregra(false);
 								t.setTrechoEncontrado(trecho);
 								encontrados.add(t);
 								igual = false;
