@@ -450,19 +450,30 @@ public class BD extends ActiveRecord {
 			String trecho = t.getTrechoEncontrado();
 			
 			int id = selectMaxIdResultados(idUsuario, idArquivo, idTexto);
-			
+				
 			try{
 				PreparedStatement ps = null;
+				if(t.getIsSubregra())
+				{
+						Subregra sr = t.getSubregra();
+						int idSubregra = sr.getId();
+						int idRegra = sr.getIdRegra();
+						ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idUsuario, idArquivo, idTexto, id, trechoEncontrado, idRegra, idSubregra,isSubregra) values ("+idUsuario+","+idArquivo+","+idTexto+","+id+",'"+trecho+"',"+idRegra+","+idSubregra+",1);");
+				}
+				else
+				{
 				if(t.hasRegra()){
 					Regra r = t.getRegra();
 					int idRegra = r.getId();
 					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idUsuario, idArquivo, idTexto, id, trechoEncontrado, idRegra) values ("+idUsuario+","+idArquivo+","+idTexto+","+id+",'"+trecho+"',"+idRegra+");");
 				}
+				
 				else
 					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idUsuario, idArquivo, idTexto, id, trechoEncontrado) values ("+idUsuario+","+idArquivo+","+idTexto+","+id+",'"+trecho+"');");
+				}
 				 erro = ps.execute();
 				 erro = false;
-			}
+				}
 			catch(SQLException e){
 				e.printStackTrace();
 				erro = true;

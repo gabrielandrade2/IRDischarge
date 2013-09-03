@@ -308,6 +308,7 @@ public class Tagger {
 											}
 											else{
 												igual_sr = false;
+												trecho_sr="";
 												break;
 											}
 										}
@@ -317,8 +318,10 @@ public class Tagger {
 											t.setSubregra(sr);
 											t.setIsSubregra(true);
 											t.setTrechoEncontrado(trecho_sr);
+											trecho_sr = "";
 											encontrados.add(t);
 											encontrou_algum_sr=true;
+											
 												
 									}
 									}
@@ -332,6 +335,7 @@ public class Tagger {
 								t.setRegra(r);
 								t.setIsSubregra(false);
 								t.setTrechoEncontrado(trecho);
+								trecho="";
 								encontrados.add(t);
 								igual = false;
 							}
