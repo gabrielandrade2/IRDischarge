@@ -29,9 +29,9 @@ public class ControleResultados extends Variaveis{
 		Janela.TextoRegra.setEditable(false);
 		Janela.TextoRegra.setLineWrap(true);
 		Janela.TextoRegra.setWrapStyleWord(true);
-		Janela.TextoTrecho.setEditable(false);
-		Janela.TextoTrecho.setLineWrap(true);
-		Janela.TextoTrecho.setWrapStyleWord(true);
+		Janela.RegraTextoTrecho.setEditable(false);
+		Janela.RegraTextoTrecho.setLineWrap(true);
+		Janela.RegraTextoTrecho.setWrapStyleWord(true);
 		
 		
 	}
@@ -74,7 +74,7 @@ public class ControleResultados extends Variaveis{
 		ListSelectionListener Textos = new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent Regras) {
 				Janela.TextoRegra.setText("");
-				Janela.TextoTrecho.setText("");
+				Janela.RegraTextoTrecho.setText("");
 				DefaultListModel listaRegrasEncontrados = new DefaultListModel();
 				int textoselecionado=Janela.ListaTexto.getSelectedIndex();
 				trechostextoselecionado = listaEncontrados.get(textoselecionado);
@@ -97,7 +97,7 @@ public class ControleResultados extends Variaveis{
 					String textoregra = t.getRegra().getTexto();
 					String textotrecho = t.getTrechoEncontrado();
 					Janela.TextoRegra.setText(textoregra);
-					Janela.TextoTrecho.setText(textotrecho);
+					Janela.RegraTextoTrecho.setText(textotrecho);
 				}
 			}
 		};
