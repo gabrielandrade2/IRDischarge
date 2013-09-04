@@ -301,8 +301,9 @@ public class Tagger {
 											catch(IndexOutOfBoundsException e){
 												c = "";
 											}
-											String d = sr.getTermo(j_sr).getTermo();
-											if(c.contentEquals(d)){
+											String d = sr.getTermo(j_sr).getTermo();                
+											if(c.contentEquals(d) && !trecho.contains((tokens.get(i_sr+j_sr).getLexeme()))){
+												 
 												igual_sr = true;
 												trecho_sr += tokens.get(i_sr+j_sr).getLexeme() + " ";
 											}
