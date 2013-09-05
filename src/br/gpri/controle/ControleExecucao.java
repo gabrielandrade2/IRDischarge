@@ -192,6 +192,8 @@ public class ControleExecucao extends Variaveis{
 					List<String> textos = new ArrayList<String>();
 					List<List<TrechoEncontrado>> listaEncontrados = new ArrayList<List<TrechoEncontrado>>();
 					
+					int idExecucao = BD.insertExecucao();
+					
 					for(int i=0; i<numTextos; i++){ //Pra cada texto, executa
 						String texto = BD.selectTexto(idUsuario, idArquivo, i);
 						List<TrechoEncontrado> encontrados = Tagger.executaRegra(texto, regrasSelecionadas);
@@ -227,7 +229,7 @@ public class ControleExecucao extends Variaveis{
 						listaEncontrados.add(encontrados);
 						
 						//Insere no Banco de Dados
-						BD.insertResultados(idUsuario, idArquivo, i, encontrados);
+						BD.insertResultados(idUsuario, idArquivo, i, encontrados, idExecucao);
 					}
 					
 					
