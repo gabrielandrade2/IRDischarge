@@ -302,12 +302,12 @@ public class BD extends ActiveRecord {
 	}
 	
 	public int selectMaxIdRegra(){
-		int maxId = 0;
+		int maxId = 1;
 		try{
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT MAX(idRegra)+1 FROM regras;");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
-				 maxId = res.getInt(1);
+				 maxId = res.getInt(1)+1;
 			}
 		}
 		
@@ -351,12 +351,12 @@ public class BD extends ActiveRecord {
 	}
 	
 	public int selectMaxIdSubRegra(int idRegra){
-		int maxId = 0;
+		int maxId = 1;
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT MAX(idSubRegra)+1 FROM subregras WHERE idRegra = "+idRegra+";");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT MAX(idSubRegra) FROM subregras WHERE idRegra = "+idRegra+";");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
-				 maxId = res.getInt(1);
+				 maxId = res.getInt(1)+1;
 			}
 		}
 		
