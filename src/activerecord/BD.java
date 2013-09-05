@@ -468,7 +468,7 @@ public class BD extends ActiveRecord {
 				}
 				
 				else
-					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idUsuario, idArquivo, idTexto, idExecucao, trechoEncontrado) values ("+idUsuario+","+idArquivo+","+idTexto+","+idExecucao+",'"+trecho+"');");
+					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idUsuario, idArquivo, idTexto, idExecucao, trechoEncontrado) values ("+idUsuario+","+idArquivo+","+idTexto+","+idExecucao+",'Nada Encontrado');");
 				}
 				 erro = ps.execute();
 				 erro = false;

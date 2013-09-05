@@ -335,6 +335,7 @@ public class Tagger {
 								TrechoEncontrado t = new TrechoEncontrado();
 								t.setRegra(r);
 								t.setIsSubregra(false);
+								t.setHasRegra(true);
 								t.setTrechoEncontrado(trecho);
 								trecho="";
 								encontrados.add(t);
