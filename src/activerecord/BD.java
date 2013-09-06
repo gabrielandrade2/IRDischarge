@@ -449,7 +449,6 @@ public class BD extends ActiveRecord {
 		for(int i=0; i<encontrados.size(); i++){
 			TrechoEncontrado t = encontrados.get(i);
 			String trecho = t.getTrechoEncontrado();
-			
 			try{
 				PreparedStatement ps = null;
 				if(t.getIsSubregra())
