@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import activerecord.Arquivo;
 import br.gpri.janelas.JanelaArquivo;
+import br.gpri.janelas.JanelaExecAnt;
 
 public class ControleArquivo extends Variaveis {
 
@@ -162,7 +163,9 @@ public class ControleArquivo extends Variaveis {
         	JanelaCadRegra = new ControleCadastroRegra();
         	JanelaCadRegra.abreJanela();}
         else if(Resultado){
-        	
+        	fechaJanela();
+        	JanelaExecAnt = new ControleExecAnt();
+        	JanelaExecAnt.abreJanela();
         	
         }
         else
