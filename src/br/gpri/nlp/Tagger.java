@@ -254,61 +254,15 @@ public class Tagger {
 						//Se tudo der certo, adiona na lista de encontrados e limpa a string trecho
 						if(igual){
 //							boolean testeSubregra = true;
-							boolean igual_sr = true;
 							boolean encontrou_algum_sr = true;
+							System.out.println("debug 1: "+encontrados.size());
 							if(r.hasSubregra())
 							{
-//inicio alteração Fernando.
-								//	testeSubregra = executaSubRegra(r.getSubregras()); //Testa as subregras, retorna true se ela validarem a regra
 								List<Subregra> subregras = r.getSubregras();
-								//Executa cada uma das subregras
-								encontrou_algum_sr = false;
-								for (Subregra sr : subregras){
-									
-									igual_sr = false;
-									
-									
-									//Procura por incidencia da subregra
-									String trecho_sr = "";
-									for(int i_sr=0; i_sr < tokens.size(); i_sr++){
-										for(int j_sr=0; j_sr < sr.getNumTermos(); j_sr++){
-											String c;
-											try{
-												c = tokens.get(i_sr+j_sr).getMorphologicalTag().toString();
-											}
-											catch(IndexOutOfBoundsException e){
-												c = "";
-											}
-											String d = sr.getTermo(j_sr).getTermo();                
-											if(c.contentEquals(d) && !trecho.contains((tokens.get(i_sr+j_sr).getLexeme()))){
-												 
-												igual_sr = true;
-												trecho_sr += tokens.get(i_sr+j_sr).getLexeme() + " ";
-											}
-											else{
-												igual_sr = false;
-												trecho_sr="";
-												break;
-											}
-										}
-											//
-										if(igual_sr){
-											TrechoEncontrado t = new TrechoEncontrado();
-											t.setSubregra(sr);
-											t.setIsSubregra(true);
-											t.setTrechoEncontrado(trecho_sr);
-											trecho_sr = "";
-											encontrados.add(t);
-											encontrou_algum_sr=true;
-											
-												
-									}
-									}
-
-								}
+								executaSubRegra(subregras, tokens, trecho, encontrados);
 							}
-//fim alteração Fernando
 //							if(testeSubregra){ trocado pela linha de baixo para manter os loops de regra e subregra parecidos
+							System.out.println("debug 2: "+encontrados.size());
 							if(encontrou_algum_sr){
 								TrechoEncontrado t = new TrechoEncontrado();
 								t.setRegra(r);
@@ -328,9 +282,60 @@ public class Tagger {
 		return encontrados;	
 	}
 	
-	private boolean executaSubRegra(List<Subregra> subregras){
-		return true;
+	private boolean executaSubRegra(List<Subregra> subregras, List<Token> tokens, String trecho, List<TrechoEncontrado> encontrados){
+		//inicio alteração Fernando.
+		//	testeSubregra = executaSubRegra(r.getSubregras()); //Testa as subregras, retorna true se ela validarem a regra
+		boolean igual_sr = true;
+		
+		//Executa cada uma das subregras
+		boolean encontrou_algum_sr = false;
+		for (Subregra sr : subregras){
+			
+			igual_sr = false;
+			
+			
+			//Procura por incidencia da subregra
+			String trecho_sr = "";
+			for(int i_sr=0; i_sr < tokens.size(); i_sr++){
+				for(int j_sr=0; j_sr < sr.getNumTermos(); j_sr++){
+					String c;
+					try{
+						c = tokens.get(i_sr+j_sr).getMorphologicalTag().toString();
+					}
+					catch(IndexOutOfBoundsException e){
+						c = "";
+					}
+					String d = sr.getTermo(j_sr).getTermo();                
+					if(c.contentEquals(d) && !trecho.contains((tokens.get(i_sr+j_sr).getLexeme()))){
+						 
+						igual_sr = true;
+						trecho_sr += tokens.get(i_sr+j_sr).getLexeme() + " ";
+					}
+					else{
+						igual_sr = false;
+						trecho_sr="";
+						break;
+					}
+				}
+					//
+				if(igual_sr){
+					TrechoEncontrado t = new TrechoEncontrado();
+					t.setSubregra(sr);
+					t.setIsSubregra(true);
+					t.setTrechoEncontrado(trecho_sr);
+					trecho_sr = "";
+					encontrados.add(t);
+					encontrou_algum_sr=true;
+					
+						
+			}
+			}
+
+		}
+		return encontrou_algum_sr;
 	}
+
+	
 	
 	private String retiraErrosRecorrentes(String text){
 		
