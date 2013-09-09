@@ -21,6 +21,7 @@ public class ControleArquivo extends Variaveis {
 
 	private boolean Cadastrar = false;
 	private boolean Executar = false;
+	private boolean Resultado = false;
 	private JanelaArquivo Janela;
 	private Stack<Arquivo> arquivosRecentes = new Stack<Arquivo>();
 	private String caminhoArquivo = new String();
@@ -31,6 +32,7 @@ public class ControleArquivo extends Variaveis {
 		Janela.ABotaoVoltar.addActionListener(this.Volta);
 		Janela.ACadastrarRadio.addActionListener(this.Cad);
 		Janela.AExecutarRadio.addActionListener(this.Exec);
+		Janela.RadioResultados.addActionListener(this.Result);
 		Janela.BotaoAbrir.addActionListener(this.Importa);
 		Janela.AbreArquivo.setFileFilter(new FileNameExtensionFilter("Arquivo do Sumário/Laudos do Excel","xls"));
         Janela.AbreArquivo.setAcceptAllFileFilterUsed(false);
@@ -159,6 +161,10 @@ public class ControleArquivo extends Variaveis {
         	Excel.abreExcel(caminhoArquivo);
         	JanelaCadRegra = new ControleCadastroRegra();
         	JanelaCadRegra.abreJanela();}
+        else if(Resultado){
+        	
+        	
+        }
         else
         	System.out.println("Selecione uma opção");
 		}
@@ -168,6 +174,7 @@ public class ControleArquivo extends Variaveis {
         public void actionPerformed(ActionEvent Cad) {
         	Cadastrar = true;
         	Executar = false;
+        	Resultado = false;
 		}
     };  
     
@@ -175,8 +182,17 @@ public class ControleArquivo extends Variaveis {
         public void actionPerformed(ActionEvent Exec) {
         	Cadastrar = false;
         	Executar = true;
+        	Resultado = false;
 		}
     }; 
+    
+	ActionListener Result = new ActionListener() {
+        public void actionPerformed(ActionEvent Cad) {
+        	Cadastrar = false;
+        	Executar = false;
+        	Resultado = true;
+		}
+    };  
     
     ActionListener Importa = new ActionListener() {
         public void actionPerformed(ActionEvent Importa) {
