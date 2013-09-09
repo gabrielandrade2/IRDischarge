@@ -70,11 +70,7 @@ public class JanelaResultados extends javax.swing.JFrame {
 
         jScrollPane4.setViewportView(ListaTexto);
 
-        ListaRegra.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+      
         jScrollPane5.setViewportView(ListaRegra);
 
         jLabel6.setText("Trecho Original da Regra:");
@@ -87,11 +83,7 @@ public class JanelaResultados extends javax.swing.JFrame {
         TextoRegra.setRows(5);
         jScrollPane7.setViewportView(TextoRegra);
 
-        ListaSubRegra.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+
         jScrollPane1.setViewportView(ListaSubRegra);
 
         jLabel7.setText("Trecho Original da Sub-Regra:");

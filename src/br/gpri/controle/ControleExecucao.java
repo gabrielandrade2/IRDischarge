@@ -192,7 +192,7 @@ public class ControleExecucao extends Variaveis{
 					List<String> textos = new ArrayList<String>();
 					List<List<TrechoEncontrado>> listaEncontrados = new ArrayList<List<TrechoEncontrado>>();
 					
-					int idExecucao = BD.insertExecucao();
+					int idExecucao = BD.insertExecucao(idUsuario,idArquivo);
 					
 					for(int i=0; i<numTextos; i++){ //Pra cada texto, executa
 						String texto = BD.selectTexto(idUsuario, idArquivo, i);
@@ -225,7 +225,7 @@ public class ControleExecucao extends Variaveis{
 						listaEncontrados.add(encontrados);
 						
 						//Insere no Banco de Dados
-						BD.insertResultados(idUsuario, idArquivo, i, encontrados, idExecucao);
+						BD.insertResultados(i, encontrados, idExecucao);
 					}
 					
 					

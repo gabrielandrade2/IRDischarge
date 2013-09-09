@@ -443,7 +443,7 @@ public class BD extends ActiveRecord {
 		return id;
 	}
 	
-	public boolean insertResultados(int idUsuario, int idArquivo, int idTexto, List<TrechoEncontrado> encontrados, int idExecucao){
+	public boolean insertResultados(int idTexto, List<TrechoEncontrado> encontrados, int idExecucao){
 		boolean erro = true;
 		
 		for(int i=0; i<encontrados.size(); i++){
@@ -457,18 +457,18 @@ public class BD extends ActiveRecord {
 						Subregra sr = t.getSubregra();
 						int idSubregra = sr.getId();
 						int idRegra = sr.getIdRegra();
-						ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idUsuario, idArquivo, idTexto, idExecucao, trechoEncontrado, idRegra, idSubregra,isSubregra) values ("+idUsuario+","+idArquivo+","+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+","+idSubregra+",1);");
+						ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, idRegra, idSubregra,isSubregra) values ("+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+","+idSubregra+",1);");
 				}
 				else
 				{
 				if(t.hasRegra()){
 					Regra r = t.getRegra();
 					int idRegra = r.getId();
-					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idUsuario, idArquivo, idTexto, idExecucao, trechoEncontrado, idRegra) values ("+idUsuario+","+idArquivo+","+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+");");
+					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, idRegra,isSubregra) values ("+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+",0);");
 				}
 				
 				else
-					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idUsuario, idArquivo, idTexto, idExecucao, trechoEncontrado) values ("+idUsuario+","+idArquivo+","+idTexto+","+idExecucao+",'Nada Encontrado');");
+					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado) values ("+idTexto+","+idExecucao+",'Nada Encontrado');");
 				}
 				 erro = ps.execute();
 				 erro = false;
@@ -483,9 +483,9 @@ public class BD extends ActiveRecord {
 	}
 	
 	
-	public int insertExecucao(){
+	public int insertExecucao(int idUsuario, int idArquivo){
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT into execucoes values();");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT into execucoes(idUsuario,idArquivo) values("+idUsuario+","+idArquivo+");");
 			ps.execute();
 		}
 		catch(SQLException e){
@@ -522,4 +522,45 @@ public class BD extends ActiveRecord {
 		return maxId;
 	}
 	
+	public List<Execucao> selectExecucoes(int idUsuario){
+		List<Execucao> execucoes = new ArrayList<Execucao>();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,data,nomeArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE idUsuario="+idUsuario+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				Execucao e = new Execucao();
+				e.setId(res.getInt("id"));
+				e.setData(res.getString("data"));
+				e.setArquivo(res.getString("Arquivo"));
+				execucoes.add(e);
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+	
+		return execucoes;
+	}
+	
+	public List<Execucao> selectExecucoes(int idUsuario, int idArquivo){
+	List<Execucao> execucoes = new ArrayList<Execucao>();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,data,nomeArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE idUsuario="+idUsuario+" AND idArquivo="+idArquivo+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				Execucao e = new Execucao();
+				e.setId(res.getInt("id"));
+				e.setData(res.getString("data"));
+				e.setArquivo(res.getString("Arquivo"));
+				execucoes.add(e);
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+	
+		return execucoes;
+	}
 }
