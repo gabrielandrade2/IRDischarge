@@ -525,13 +525,13 @@ public class BD extends ActiveRecord {
 	public List<Execucao> selectExecucoes(int idUsuario){
 		List<Execucao> execucoes = new ArrayList<Execucao>();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,data,nomeArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE idUsuario="+idUsuario+";");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,dataExecucao,nomeArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE execucoes.idUsuario="+idUsuario+";");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				Execucao e = new Execucao();
 				e.setId(res.getInt("id"));
-				e.setData(res.getString("data"));
-				e.setArquivo(res.getString("Arquivo"));
+				e.setData(res.getString("dataExecucao"));
+				e.setArquivo(res.getString("nomeArquivo"));
 				execucoes.add(e);
 			}
 		}
@@ -546,13 +546,13 @@ public class BD extends ActiveRecord {
 	public List<Execucao> selectExecucoes(int idUsuario, int idArquivo){
 	List<Execucao> execucoes = new ArrayList<Execucao>();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,data,nomeArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE idUsuario="+idUsuario+" AND idArquivo="+idArquivo+";");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,dataExecucao,nomeArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE execucoes.idUsuario="+idUsuario+" AND idArquivo="+idArquivo+";");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				Execucao e = new Execucao();
 				e.setId(res.getInt("id"));
-				e.setData(res.getString("data"));
-				e.setArquivo(res.getString("Arquivo"));
+				e.setData(res.getString("dataExecucao"));
+				e.setArquivo(res.getString("nomeArquivo"));
 				execucoes.add(e);
 			}
 		}

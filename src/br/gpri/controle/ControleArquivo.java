@@ -150,28 +150,39 @@ public class ControleArquivo extends Variaveis {
     
 	ActionListener OK = new ActionListener() {
         public void actionPerformed(ActionEvent OK) {
-		if(Executar){
-			colocaArquivoPrimeiroLista();
-        	fechaJanela();
-        	Excel.abreExcel(caminhoArquivo);
-        	JanelaExecucao = new ControleExecucao();
-        	JanelaExecucao.abreJanela();}
-        else if(Cadastrar){
-        	colocaArquivoPrimeiroLista();
-		   	fechaJanela();
-        	Excel.abreExcel(caminhoArquivo);
-        	JanelaCadRegra = new ControleCadastroRegra();
-        	JanelaCadRegra.abreJanela();}
-        else if(Resultado){
-        	fechaJanela();
-        	JanelaExecAnt = new ControleExecAnt();
-        	JanelaExecAnt.abreJanela();
-        	
+    		if(Janela.AList.isSelectionEmpty()){
+    			if(Resultado){
+		        	fechaJanela();
+		        	JanelaExecAnt = new ControleExecAnt();
+		        	JanelaExecAnt.abreJanela();
+    			}
+    			else
+    				System.out.println("Selecione um arquivo");
+    		}
+	    	else{
+		        if(Executar){
+					colocaArquivoPrimeiroLista();
+		        	fechaJanela();
+		        	Excel.abreExcel(caminhoArquivo);
+		        	JanelaExecucao = new ControleExecucao();
+		        	JanelaExecucao.abreJanela();}
+		        else if(Cadastrar){
+		        	colocaArquivoPrimeiroLista();
+				   	fechaJanela();
+		        	Excel.abreExcel(caminhoArquivo);
+		        	JanelaCadRegra = new ControleCadastroRegra();
+		        	JanelaCadRegra.abreJanela();}
+		        else if(Resultado){
+		        	fechaJanela();
+		        	JanelaExecAnt = new ControleExecAnt(idArquivo);
+		        	JanelaExecAnt.abreJanela();
+		        	
+		        }
+		        else
+		        	System.out.println("Selecione uma opção");
+			}
         }
-        else
-        	System.out.println("Selecione uma opção");
-		}
-    };  
+	};  
 	
 	ActionListener Cad = new ActionListener() {
         public void actionPerformed(ActionEvent Cad) {
