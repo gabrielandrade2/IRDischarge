@@ -15,7 +15,7 @@ import activerecord.Regra;
 import activerecord.Subregra;
 import activerecord.TrechoEncontrado;
 import br.gpri.janelas.JanelaExecucao;
-import br.grpi.nlp.Tagger;
+import br.gpri.nlp.Tagger;
 
 public class ControleExecucao extends Variaveis{
 

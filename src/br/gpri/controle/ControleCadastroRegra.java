@@ -13,7 +13,7 @@ import javax.swing.event.ListSelectionListener;
 
 import activerecord.*;
 import br.gpri.janelas.JanelaCadastroRegra;
-import br.grpi.nlp.Tagger;
+import br.gpri.nlp.Tagger;
 
 public class ControleCadastroRegra extends Variaveis{
 
