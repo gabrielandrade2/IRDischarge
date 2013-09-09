@@ -16,5 +16,6 @@ public class Variaveis {
 	protected static ControleExecucao JanelaExecucao;
 	protected static ControleLogin JanelaLogin;
 	protected static ControleResultados JanelaResultados;
+	protected static ControleExecAnt JanelaExecAnt;
 	}
 
