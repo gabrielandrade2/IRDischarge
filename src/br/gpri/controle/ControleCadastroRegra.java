@@ -224,7 +224,7 @@ public class ControleCadastroRegra extends Variaveis{
 		DefaultListModel lista = new DefaultListModel();
 		int index = Janela.ListaRegras.getSelectedIndex();
 		if(index >= 0 && !regras.isEmpty()){
-			subregras = BD.selectSubRegra(regras.get(index));
+			subregras = BD.selectSubRegras(regras.get(index));
 			if(subregras.isEmpty()){
 				lista.addElement("Não existem subregras");
 			}

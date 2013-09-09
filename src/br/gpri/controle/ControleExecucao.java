@@ -155,7 +155,7 @@ public class ControleExecucao extends Variaveis{
 			r = BD.selectTermoRegra(r); //Busca os termos dessa regra
 			
 			List<Subregra> subregras = new ArrayList<Subregra>();  
-			subregras = BD.selectSubRegra(r); //Busca suas subregras
+			subregras = BD.selectSubRegras(r); //Busca suas subregras
 			if(!(subregras.isEmpty()))
 				for(int j=0; j<subregras.size(); j++){
 					Subregra s = subregras.get(j);	//Busca os termos da subregra e atualiza na lista

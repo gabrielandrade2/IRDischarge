@@ -152,6 +152,24 @@ public class BD extends ActiveRecord {
 		return Lista;
 	}
 	
+	public Regra selectRegra(int idUsuario, int idRegra){
+		Regra r = new Regra();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM regras WHERE (idUsuario="+idUsuario+" AND idRegra="+idRegra+");");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				r.setId(idRegra);
+				r.setPrevia(res.getString("previa"));
+				r.setTexto(res.getString("texto"));
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return r;
+}
+	
 	public List<Regra> selectRegraCadastro(int idTexto, int idArquivo, int idUsuario){
 		List<Regra> Lista = new ArrayList<Regra>();
 		try{
@@ -201,7 +219,7 @@ public class BD extends ActiveRecord {
 		return Lista;
 }
 	
-	public List<Subregra> selectSubRegra(Regra r){
+	public List<Subregra> selectSubRegras(Regra r){
 		int idRegra = r.getId();
 		List<Subregra> Lista = new ArrayList<Subregra>();
 		try{
@@ -221,6 +239,26 @@ public class BD extends ActiveRecord {
 		}
 		return Lista;
 	}
+	
+	
+	public Subregra selectSubRegra(int idRegra, int idSubregra){
+		Subregra s = new Subregra();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT previa,texto FROM subregras WHERE idRegra="+idRegra+" AND idSubregra="+idSubregra+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+					s.setIdRegra(idRegra);
+					s.setId(idSubregra);
+					s.setPrevia(res.getString("previa"));
+					s.setTexto(res.getString("texto"));
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return s;
+	}
+	
 	
 	public Regra selectTermoRegra(Regra r){
 		List<Termo> Lista = new ArrayList<Termo>();
@@ -397,6 +435,25 @@ public class BD extends ActiveRecord {
 		return texto;
 	}
 	
+	public List<String> selectTextos(int idUsuario, int idArquivo){
+		List<String> textos = new ArrayList<String>();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT texto from textos WHERE idUsuario="+idUsuario+" AND idArquivo="+idArquivo+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				String texto;
+				texto = res.getString("texto");
+				textos.add(texto);
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return textos;
+	}
+	
 	public int getNumTextos(int idUsuario, int idArquivo){
 		int numTextos=0;
 		try{
@@ -442,6 +499,53 @@ public class BD extends ActiveRecord {
 			e.printStackTrace();
 		}
 		return id;
+	}
+	
+	private int countTextos(int idArquivo){
+		int countTextos = 0;
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT Count(*) from textos where idArquivo="+idArquivo+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				countTextos = res.getInt("Count(*)");
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return countTextos;
+	}
+	
+	public List<List<TrechoEncontrado>> selectResultados(int idExecucao, int idArquivo, int idUsuario){
+		List<List<TrechoEncontrado>> lista = new ArrayList<List<TrechoEncontrado>>();
+		int countTextos = countTextos(idArquivo);
+		for(int i=0; i<countTextos; i++){
+			List<TrechoEncontrado> l = new ArrayList<TrechoEncontrado>();
+			try{
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM resultados WHERE idExecucao="+idExecucao+" and idTexto="+i+";");
+				ResultSet res = ps.executeQuery();
+				while(res.next()){
+					TrechoEncontrado t = new TrechoEncontrado();
+					if(res.getInt("isSubregra") == 1){
+						Subregra s = selectSubRegra(res.getInt("idRegra"), res.getInt("idSubregra"));
+						t.setSubregra(s);
+						t.setIsSubregra(true);
+					}
+					Regra r = selectRegra(idUsuario, res.getInt("idRegra"));
+					t.setRegra(r);
+					t.setTrechoEncontrado(res.getString("trechoEncontrado"));
+					
+					l.add(t);
+				}
+			}
+			
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+			
+			lista.add(l);
+		}
+		return lista;
 	}
 	
 	public boolean insertResultados(int idTexto, List<TrechoEncontrado> encontrados, int idExecucao){
@@ -526,13 +630,14 @@ public class BD extends ActiveRecord {
 	public List<Execucao> selectExecucoes(int idUsuario){
 		List<Execucao> execucoes = new ArrayList<Execucao>();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,dataExecucao,nomeArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE execucoes.idUsuario="+idUsuario+";");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,dataExecucao,nomeArquivo,execucoes.idArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE execucoes.idUsuario="+idUsuario+";");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				Execucao e = new Execucao();
 				e.setId(res.getInt("id"));
 				e.setData(res.getString("dataExecucao"));
 				e.setArquivo(res.getString("nomeArquivo"));
+				e.setIdArquivo(res.getInt("idArquivo"));
 				execucoes.add(e);
 			}
 		}
@@ -547,13 +652,14 @@ public class BD extends ActiveRecord {
 	public List<Execucao> selectExecucoes(int idUsuario, int idArquivo){
 	List<Execucao> execucoes = new ArrayList<Execucao>();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,dataExecucao,nomeArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE execucoes.idUsuario="+idUsuario+" AND idArquivo="+idArquivo+";");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,dataExecucao,nomeArquivo,execucoes.idArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE execucoes.idUsuario="+idUsuario+" AND idArquivo="+idArquivo+";");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				Execucao e = new Execucao();
 				e.setId(res.getInt("id"));
 				e.setData(res.getString("dataExecucao"));
 				e.setArquivo(res.getString("nomeArquivo"));
+				e.setIdArquivo(res.getInt("idArquivo"));
 				execucoes.add(e);
 			}
 		}

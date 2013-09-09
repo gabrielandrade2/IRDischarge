@@ -4,7 +4,14 @@ public class Execucao {
 	private int id;
 	private String data;
 	private String arquivo;
+	private int idArquivo;
 	
+	public int getIdArquivo() {
+		return idArquivo;
+	}
+	public void setIdArquivo(int idArquivo) {
+		this.idArquivo = idArquivo;
+	}
 	public String getArquivo() {
 		return arquivo;
 	}
