@@ -1,4 +1,4 @@
-package br.grpi.nlp;
+package br.gpri.nlp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +46,24 @@ public class Tagger {
 		return text;
 	}
 	
+	private List<Token> processCogroo(String sentenca){
+		//Tokeniza sentença
+		SentenceCogroo sc = new SentenceCogroo(sentenca);
+		List<Token> tokens = null;
+		cogroo.tokenizer(sc);
+
+		//Aplica o NAMEFINDER
+		cogroo.nameFinder(sc);
+		
+		//Expansão de preposições
+		cogroo.preTagger(sc);
+		
+		//Realiza POS_tagging
+		cogroo.tagger(sc);
+		tokens = sc.getTokens();
+		return tokens;
+	}
+	
 	//Tagger para Interface gráfica
 	public Regra geraRegra(String text_sumario, String text_selecionado,int idElemento, int idRegra){
 		
@@ -68,21 +86,8 @@ public class Tagger {
 		String[] sentencas = cogroo.sentDetect(text_sumario);
 		for (String sentenca : sentencas) {
 			
-			//Tokeniza sentença
-			SentenceCogroo sc = new SentenceCogroo(sentenca);
-			List<Token> tokens = null;
-			cogroo.tokenizer(sc);
+			List<Token> tokens = processCogroo(sentenca);
 
-			//Aplica o NAMEFINDER
-			cogroo.nameFinder(sc);
-			
-			//Expansão de preposições
-			cogroo.preTagger(sc);
-			
-			//Realiza POS_tagging
-			cogroo.tagger(sc);
-			tokens = sc.getTokens();
-			
 			//Procura onde estão os termos selecionados
 			//Compara um termo com o primeiro do vetor separado, caso encontre, ve se os termos
 			//seguintes também são os esperados
@@ -157,21 +162,7 @@ public class Tagger {
 		//Separa texto em sentenças
 		String[] sentencas = cogroo.sentDetect(text_sumario);
 		for (String sentenca : sentencas) {
-			
-			//Tokeniza sentença
-			SentenceCogroo sc = new SentenceCogroo(sentenca);
-			List<Token> tokens = null;
-			cogroo.tokenizer(sc);
-
-			//Aplica o NAMEFINDER
-			cogroo.nameFinder(sc);
-			
-			//Expansão de preposições
-			cogroo.preTagger(sc);
-			
-			//Realiza POS_tagging
-			cogroo.tagger(sc);
-			tokens = sc.getTokens();
+			List<Token> tokens = processCogroo(sentenca);
 			
 			//Procura onde estão os termos selecionados
 			//Compara um termo com o primeiro do vetor separado, caso encontre, ve se os termos
@@ -229,21 +220,7 @@ public class Tagger {
 		//Separa texto em sentenças
 		String[] sentencas = cogroo.sentDetect(text_sumario);
 		for (String sentenca : sentencas) {
-			
-			//Tokeniza sentença
-			SentenceCogroo sc = new SentenceCogroo(sentenca);
-			List<Token> tokens = null;
-			cogroo.tokenizer(sc);
-
-			//Aplica o NAMEFINDER
-			cogroo.nameFinder(sc);
-			
-			//Expansão de preposições
-			cogroo.preTagger(sc);
-			
-			//Realiza POS_tagging
-			cogroo.tagger(sc);
-			tokens = sc.getTokens();
+			List<Token> tokens = processCogroo(sentenca);
 			
 			//Executa cada uma das regras
 			for (Regra r : regras){
