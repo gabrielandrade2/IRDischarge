@@ -326,7 +326,8 @@ public class BD extends ActiveRecord {
 		catch(SQLException e){
 			e.printStackTrace();
 		}
-				
+		
+			
 		erro = insertTermosSubRegras(s.getTermos()); 
 		return erro;
 		

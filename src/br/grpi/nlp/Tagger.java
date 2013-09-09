@@ -198,6 +198,7 @@ public class Tagger {
 							previa += "[" + token.getMorphologicalTag() + "]";
 							Termo t = new Termo();
 							t.setIdRegra(idRegra);
+							t.setIdSubregra(idSubRegra);
 							t.setIdTermo(k);
 							t.setTermo(token.getMorphologicalTag().toString());
 							t.setTexto(token.getLexeme().toString());
