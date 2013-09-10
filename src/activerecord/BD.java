@@ -652,7 +652,7 @@ public class BD extends ActiveRecord {
 	public List<Execucao> selectExecucoes(int idUsuario, int idArquivo){
 	List<Execucao> execucoes = new ArrayList<Execucao>();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,dataExecucao,nomeArquivo,execucoes.idArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE execucoes.idUsuario="+idUsuario+" AND idArquivo="+idArquivo+";");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT id,dataExecucao,nomeArquivo,execucoes.idArquivo from execucoes JOIN arquivos ON execucoes.idArquivo = arquivos.idArquivo WHERE execucoes.idUsuario="+idUsuario+" AND execucoes.idArquivo="+idArquivo+";");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				Execucao e = new Execucao();

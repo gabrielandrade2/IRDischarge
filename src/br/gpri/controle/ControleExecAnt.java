@@ -28,7 +28,7 @@ public class ControleExecAnt extends Variaveis{
 	
 	public ControleExecAnt(int idArquivo){
 		Janela = new JanelaExecAnt();
-		List<Execucao> execucoes = BD.selectExecucoes(idArquivo, idArquivo);
+		execucoes = BD.selectExecucoes(idUsuario, idArquivo);
 		geraListaExecucoes(execucoes);
 		
 		Janela.ABotaoOk.addActionListener(this.OK);
