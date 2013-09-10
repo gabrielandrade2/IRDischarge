@@ -557,7 +557,7 @@ public class BD extends ActiveRecord {
 			
 			try{
 				PreparedStatement ps = null;
-				if(t.getIsSubregra())
+				if(t.isSubregra())
 				{
 						Subregra sr = t.getSubregra();
 						int idSubregra = sr.getId();

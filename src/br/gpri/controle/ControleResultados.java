@@ -18,7 +18,7 @@ public class ControleResultados extends Variaveis{
 	
 	private JanelaResultados Janela;
 	private List<List<TrechoEncontrado>> listaEncontrados;
-	private List<TrechoEncontrado> trechostextoselecionado;
+	private List<TrechoEncontrado> trechosTextoSelecionado;
 	
 	public ControleResultados(List<String> textos, List<List<TrechoEncontrado>> listaEncontrados){
 		Janela = new JanelaResultados();
@@ -50,6 +50,10 @@ public class ControleResultados extends Variaveis{
 		Janela.ListaRegra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Janela.ListaRegra.setLayoutOrientation(JList.VERTICAL);
 		Janela.ListaRegra.addListSelectionListener(this.Regras);
+		
+		Janela.ListaSubRegra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		Janela.ListaSubRegra.setLayoutOrientation(JList.VERTICAL);
+		Janela.ListaSubRegra.addListSelectionListener(null);
 	}
 	
 	public void abreJanela(){
@@ -76,11 +80,11 @@ public class ControleResultados extends Variaveis{
 				Janela.TextoRegra.setText("");
 				Janela.RegraTextoTrecho.setText("");
 				DefaultListModel listaRegrasEncontrados = new DefaultListModel();
-				int textoselecionado=Janela.ListaTexto.getSelectedIndex();
-				trechostextoselecionado = listaEncontrados.get(textoselecionado);
-				for(int i=0;i<trechostextoselecionado.size();i++){
-					listaRegrasEncontrados.addElement(trechostextoselecionado.get(i).getRegra().getPrevia());
-										
+				int textoSelecionado=Janela.ListaTexto.getSelectedIndex();
+				trechosTextoSelecionado = listaEncontrados.get(textoSelecionado);
+				for(int i=0;i<trechosTextoSelecionado.size();i++){
+					if(!trechosTextoSelecionado.get(i).isSubregra())
+						listaRegrasEncontrados.addElement(trechosTextoSelecionado.get(i).getRegra().getPrevia());				
 				}
 				Janela.ListaRegra.setModel(listaRegrasEncontrados);
 				Janela.ListaRegra.updateUI();
@@ -93,7 +97,7 @@ public class ControleResultados extends Variaveis{
 			public void valueChanged(ListSelectionEvent Regras) {
 				int regraselecionada=Janela.ListaRegra.getSelectedIndex();	
 				if(regraselecionada>=0){
-					TrechoEncontrado t = trechostextoselecionado.get(regraselecionada);
+					TrechoEncontrado t = trechosTextoSelecionado.get(regraselecionada);
 					String textoregra = t.getRegra().getTexto();
 					String textotrecho = t.getTrechoEncontrado();
 					Janela.TextoRegra.setText(textoregra);

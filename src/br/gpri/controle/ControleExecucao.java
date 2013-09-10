@@ -204,7 +204,7 @@ public class ControleExecucao extends Variaveis{
 						System.out.println();
 						for(int j=0; j<encontrados.size(); j++){
 							System.out.println("Trecho Encontrado: "+encontrados.get(j).getTrechoEncontrado());
-							if(encontrados.get(j).getIsSubregra()){
+							if(encontrados.get(j).isSubregra()){
 								System.out.println("subRegra: "+encontrados.get(j).getSubregra().getPrevia());
 							}
 							else{
@@ -224,7 +224,7 @@ public class ControleExecucao extends Variaveis{
 						textos.add(texto);
 						listaEncontrados.add(encontrados);
 						
-						//Insere no Banco de Dados
+						//Insere no Banco de Dados - Insere regra seguido de suas subregras
 						BD.insertResultados(i, encontrados, idExecucao);
 					}
 					

@@ -255,14 +255,13 @@ public class Tagger {
 						if(igual){
 //							boolean testeSubregra = true;
 							boolean encontrou_algum_sr = true;
-							System.out.println("debug 1: "+encontrados.size());
+							List<TrechoEncontrado> subregrasEncontrados = new ArrayList<TrechoEncontrado>();
 							if(r.hasSubregra())
 							{
 								List<Subregra> subregras = r.getSubregras();
-								executaSubRegra(subregras, tokens, trecho, encontrados);
+								executaSubRegra(subregras, tokens, trecho, subregrasEncontrados);
 							}
 //							if(testeSubregra){ trocado pela linha de baixo para manter os loops de regra e subregra parecidos
-							System.out.println("debug 2: "+encontrados.size());
 							if(encontrou_algum_sr){
 								TrechoEncontrado t = new TrechoEncontrado();
 								t.setRegra(r);
@@ -272,9 +271,14 @@ public class Tagger {
 								trecho="";
 								encontrados.add(t);
 								igual = false;
+								
+								//Adiciona trechos das subregras na lista
+								if(!subregrasEncontrados.isEmpty())
+									for(int k=0; k<subregrasEncontrados.size(); k++)
+										encontrados.add(subregrasEncontrados.get(k));
 							}
 							
-						}
+					}
 				}		
 				
 			}
@@ -282,7 +286,7 @@ public class Tagger {
 		return encontrados;	
 	}
 	
-	private boolean executaSubRegra(List<Subregra> subregras, List<Token> tokens, String trecho, List<TrechoEncontrado> encontrados){
+	private boolean executaSubRegra(List<Subregra> subregras, List<Token> tokens, String trecho, List<TrechoEncontrado> subregraEncontrados){
 		//inicio alteração Fernando.
 		//	testeSubregra = executaSubRegra(r.getSubregras()); //Testa as subregras, retorna true se ela validarem a regra
 		boolean igual_sr = true;
@@ -324,7 +328,7 @@ public class Tagger {
 					t.setIsSubregra(true);
 					t.setTrechoEncontrado(trecho_sr);
 					trecho_sr = "";
-					encontrados.add(t);
+					subregraEncontrados.add(t);
 					encontrou_algum_sr=true;
 					
 						

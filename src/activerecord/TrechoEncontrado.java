@@ -14,7 +14,7 @@ public class TrechoEncontrado {
 	public void setSubregra(Subregra subregra) {
 		this.subregra = subregra;
 	}
-	public boolean getIsSubregra() {
+	public boolean isSubregra() {
 		return isSubregra;
 	}
 	public void setIsSubregra(boolean isSubregra) {
