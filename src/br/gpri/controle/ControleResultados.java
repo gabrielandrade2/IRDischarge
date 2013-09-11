@@ -136,8 +136,8 @@ public class ControleResultados extends Variaveis{
 				if(regraSelecionada>=0){
 					TrechoEncontrado t = trechosTextoSelecionadoRegras.get(regraSelecionada);
 					int idRegra = t.getRegra().getId();
-					String textoRegra = t.getRegra().getTexto();
-					String textoTrecho = t.getTrechoEncontrado();
+					String textoTrecho = t.getRegra().getTexto();
+					String textoRegra = t.getTrechoEncontrado();
 					Janela.TextoRegra.setText(textoRegra);
 					Janela.RegraTextoTrecho.setText(textoTrecho);
 					
@@ -151,8 +151,8 @@ public class ControleResultados extends Variaveis{
 				int subregraSelecionada=Janela.ListaSubRegra.getSelectedIndex();	
 				if(subregraSelecionada>=0){
 					TrechoEncontrado t = trechosTextoSelecionadoSubregras.get(subregraSelecionada);
-					String textoSubregra = t.getSubregra().getTexto();
-					String textoTrecho = t.getTrechoEncontrado();
+					String textoTrecho= t.getSubregra().getTexto();
+					String textoSubregra = t.getTrechoEncontrado();
 					Janela.TextoSubRegra.setText(textoSubregra);
 					Janela.SubRegraTextoTrecho.setText(textoTrecho);
 				}

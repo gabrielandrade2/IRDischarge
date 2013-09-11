@@ -3,7 +3,7 @@ use intemed;
 
 /* CUIDADO APAGA TODOS OS RESULTADOS*/
 
-
+drop table resultados;
 drop table execucoes;
 create table execucoes(
 	id int not null auto_increment,
@@ -15,7 +15,11 @@ create table execucoes(
 	FOREIGN KEY (idUsuario) references textos(idUsuario),
 	FOREIGN KEY (idArquivo) references textos(idArquivo));
 
-drop table resultados;
+Create index idArquivo on arquivos(idArquivo);
+Create index idRegra on regras(idRegra);
+Create index idSubregra on subregras(idSubregra);
+	
+
 CREATE TABLE IF NOT EXISTS resultados(
 idTexto int,
 idExecucao int,
@@ -32,6 +36,3 @@ FOREIGN KEY (idRegra) references regras(idRegra),
 FOREIGN KEY (idSubregra) references subregras(idSubregra)
 );
 
-Create index idArquivo on arquivos(idArquivo);
-Create index idRegra on regras(idRegra);
-Create index idSubregra on subregras(idSubregra);
