@@ -20,8 +20,8 @@ import br.gpri.nlp.Tagger;
 public class ControleExecucao extends Variaveis{
 
 	private JanelaExecucao Janela; 
-	private List<Elemento> elementos;
-	private List<Conjunto> conjuntos;
+	private List<Elemento> elementos = new ArrayList<Elemento>();
+	private List<Conjunto> conjuntos = new ArrayList<Conjunto>();
 	private List<Regra> regras;
 	private JCheckBox[] checkbox;
 	
@@ -67,18 +67,25 @@ public class ControleExecucao extends Variaveis{
 	tabela.addColumn("Seleção");
 	tabela.addColumn("Texto");
 	tabela.addColumn("Regra");
+	tabela.addColumn("Conjunto");
 	tabela.addColumn("Elemento");
 	 
 	for(int i=0; i<regras.size();i++){
 		Regra r = regras.get(i);
 		String elemento = "";
+		String conjunto = " ";
 		for(int j=0; j<elementos.size(); j++)
 			if(r.getElemento() == elementos.get(j).getId()){
 				elemento = elementos.get(j).getNome();
 				break;
 			}
+		for(int k=0; k<conjuntos.size(); k++)
+			if(r.getConjunto() == conjuntos.get(k).getId()){
+				conjunto = conjuntos.get(k).getNome();
+				break;
+			}
 		
-		Object[] o={true,r.getTexto(), r.getPrevia(), elemento};
+		Object[] o={true,r.getTexto(), r.getPrevia(), conjunto, elemento};
 		tabela.addRow(o);
 		
 	}

@@ -134,6 +134,7 @@ public class ControleResultados extends Variaveis{
 			public void valueChanged(ListSelectionEvent Regras) {
 				int regraSelecionada=Janela.ListaRegra.getSelectedIndex();	
 				if(regraSelecionada>=0){
+					limpaCaixasTexto();
 					TrechoEncontrado t = trechosTextoSelecionadoRegras.get(regraSelecionada);
 					int idRegra = t.getRegra().getId();
 					String textoTrecho = t.getRegra().getTexto();

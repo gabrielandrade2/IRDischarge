@@ -195,13 +195,13 @@ public class BD extends ActiveRecord {
 		PreparedStatement ps = null;
 		try{
 			if(idConjunto == 0 && idElemento == 0)
-				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento FROM regras WHERE (idUsuario="+idUsuario+");");
+				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento,idConjunto FROM regras WHERE (idUsuario="+idUsuario+");");
 			else if(idConjunto == 0)
-				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento FROM regras WHERE (idUsuario="+idUsuario+" AND idElemento="+idElemento+");");
+				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento,idConjunto FROM regras WHERE (idUsuario="+idUsuario+" AND idElemento="+idElemento+");");
 			else if(idElemento == 0)
-				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento FROM regras WHERE (idUsuario="+idUsuario+" AND idConjunto="+idConjunto+");");
+				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento,idConjunto FROM regras WHERE (idUsuario="+idUsuario+" AND idConjunto="+idConjunto+");");
 			else
-				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento FROM regras WHERE (idUsuario="+idUsuario+" AND idElemento="+idElemento+" AND idConjunto="+idConjunto+");");
+				ps = (PreparedStatement) con.prepareStatement("SELECT idRegra,previa,texto,idElemento,idConjunto FROM regras WHERE (idUsuario="+idUsuario+" AND idElemento="+idElemento+" AND idConjunto="+idConjunto+");");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				Regra r = new Regra();
@@ -209,6 +209,7 @@ public class BD extends ActiveRecord {
 				r.setPrevia(res.getString("previa"));
 				r.setTexto(res.getString("texto"));
 				r.setElemento(res.getInt("idElemento"));
+				r.setConjunto(res.getInt("idConjunto"));
 				Lista.add(r);
 			}
 		}
