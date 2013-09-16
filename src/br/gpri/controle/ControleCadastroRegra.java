@@ -2,6 +2,7 @@ package br.gpri.controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -23,6 +24,7 @@ public class ControleCadastroRegra extends Variaveis{
 	private List<Elemento> elementos;
 	private List<Regra> regras;
 	List<Subregra> subregras;
+	List<String> textos = new ArrayList<String>();
 	
 		
 	public ControleCadastroRegra(){
@@ -40,14 +42,14 @@ public class ControleCadastroRegra extends Variaveis{
 		Janela.TextoSumario1.setEditable(false);
 		Janela.TextoSumario1.setLineWrap(true);
 		Janela.TextoSumario1.setWrapStyleWord(true);
-		inicializaListasRegras();
+		inicializaListas();
 		buscaDropDownElementos();
 		geraListaRegras();
 		Janela.ListaRegras.setSelectedIndex(0);
+		Janela.ListaTexto.setSelectedIndex(linha);
+		Janela.Indice.setText(linha.toString());
+		Janela.Indice.setEditable(false);	
 		
-		
-																	//Tirar o textocaminhoarquivo, textogeraregra e textoregra da janela
-		Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tem 2 textosumario na janela também depois tirar o 1 do final
 	}
 	
 	public void abreJanela(){
@@ -59,7 +61,18 @@ public class ControleCadastroRegra extends Variaveis{
 		Janela.dispose();
 	}
 	
-	private void inicializaListasRegras(){
+	private void inicializaListas(){
+		textos=(BD.selectTextos(idUsuario, idArquivo));
+		Janela.ListaTexto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		Janela.ListaTexto.setLayoutOrientation(JList.VERTICAL);
+		Janela.ListaTexto.addListSelectionListener(this.Textos);
+		DefaultListModel listaTexto = new DefaultListModel();
+		for(int i=0; i<textos.size(); i++){
+			listaTexto.addElement(textos.get(i));
+			
+		}
+		Janela.ListaTexto.setModel(listaTexto);
+		
 		Janela.ListaRegras.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Janela.ListaRegras.setLayoutOrientation(JList.VERTICAL);
 		Janela.ListaRegras.setVisibleRowCount(5); //Provisório 5 itens verificar
@@ -104,6 +117,8 @@ public class ControleCadastroRegra extends Variaveis{
 		public void actionPerformed(ActionEvent e) {
 			if(linha != 0){
 				linha--;
+				Janela.ListaTexto.setSelectedIndex(linha);
+				Janela.Indice.setText(linha.toString());
 				System.out.println(linha);
 				Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tirar o 1 do final
 				
@@ -117,6 +132,8 @@ public class ControleCadastroRegra extends Variaveis{
 		public void actionPerformed(ActionEvent e) {
 			if(linha != (numTextos)-1){
 				linha++;
+				Janela.ListaTexto.setSelectedIndex(linha);
+				Janela.Indice.setText(linha.toString());
 				System.out.println(linha); //DEBUG, mas acho que deveria ter um número contando do lado do texto, talvez editavel
 				Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tirar o 1 do final
 				
@@ -206,6 +223,15 @@ public class ControleCadastroRegra extends Variaveis{
 					Janela.ListaRegras.setToolTipText(r.getTexto());
 			}
 		}
+	};
+	
+	ListSelectionListener Textos = new ListSelectionListener() {
+		public void valueChanged(ListSelectionEvent Regras) {
+			Janela.TextoSumario1.setText((String) Janela.ListaTexto.getSelectedValue());
+			linha = Janela.ListaTexto.getSelectedIndex();
+			Janela.Indice.setText(linha.toString());
+		}
+			
 	};
 	
 	ListSelectionListener Subregra = new ListSelectionListener() {
