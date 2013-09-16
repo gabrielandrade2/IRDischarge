@@ -1,5 +1,5 @@
 package activerecord;
-
+import br.gpri.nlp.Tagger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -518,13 +518,16 @@ public class BD extends ActiveRecord {
 	}
 	
 	public List<List<TrechoEncontrado>> selectResultados(int idExecucao, int idArquivo, int idUsuario){
+		List<String> trechosDistintos = selectDistinctTrechoEncontrado(idExecucao, idArquivo, idUsuario);
 		List<List<TrechoEncontrado>> lista = new ArrayList<List<TrechoEncontrado>>();
 		int countTextos = countTextos(idArquivo);
 		for(int i=0; i<countTextos; i++){
 			List<TrechoEncontrado> l = new ArrayList<TrechoEncontrado>();
 			try{
-				PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM resultados WHERE idExecucao="+idExecucao+" and idTexto="+i+";");
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement(
+						"SELECT * FROM resultados WHERE idExecucao="+idExecucao+" and idTexto="+i+";");
 				ResultSet res = ps.executeQuery();
+				int idTextoAnt=-1;
 				while(res.next()){
 					TrechoEncontrado t = new TrechoEncontrado();
 					if(res.getInt("isSubregra") == 1){
@@ -535,7 +538,13 @@ public class BD extends ActiveRecord {
 					Regra r = selectRegra(idUsuario, res.getInt("idRegra"));
 					t.setRegra(r);
 					t.setTrechoEncontrado(res.getString("trechoEncontrado"));
-					
+//executar médoto passando a lista e o idtexto para que este método faça os edits e inserts
+					int idTexto=res.getInt("idTexto");
+					if(idTextoAnt!=idTexto)
+					{
+						insereRapidMiner(trechosDistintos, idExecucao, idArquivo, idUsuario, idTexto);
+						idTextoAnt=idTexto;
+					}
 					l.add(t);
 				}
 			}
@@ -548,7 +557,85 @@ public class BD extends ActiveRecord {
 		}
 		return lista;
 	}
+	public List<String> selectDistinctTrechoEncontrado(int idExecucao, int idArquivo, int idUsuario){
+			List<String> lista = new ArrayList<String>();
+			try{
+				PreparedStatement psResultado = (PreparedStatement) con.prepareStatement(
+				"SELECT distinct(trechoencontrado) FROM resultados WHERE idExecucao="+idExecucao+";");
+				ResultSet res = psResultado.executeQuery();
+				while(res.next()){
+					lista.add(res.getString("trechoEncontrado"));
+					}
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+			
+			
+		
+		return lista;
+	}
 	
+	public List<String> selectDistinctTrechoEncontradoDeUmResultado(int idExecucao, int idArquivo, int idUsuario, int idTexto){
+		List<String> lista = new ArrayList<String>();
+		try{
+			PreparedStatement psResultado = (PreparedStatement) con.prepareStatement(
+			"SELECT distinct(trechoencontrado) FROM resultados WHERE idExecucao="+idExecucao+" and idTexto="+idTexto+";");
+			ResultSet res = psResultado.executeQuery();
+			while(res.next()){
+				lista.add(res.getString("trechoEncontrado"));
+				}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		
+	
+	return lista;
+}
+
+	public boolean insereRapidMiner(List<String> trechosDistintos,int idExecucao, int idArquivo, int idUsuario, int idTexto)
+	{
+		try{
+			List<String> trechosDistintosDeUmResultado = 
+					selectDistinctTrechoEncontradoDeUmResultado(idExecucao, idArquivo, idUsuario,idTexto);
+			PreparedStatement psResultado = (PreparedStatement) con.prepareStatement(
+"SELECT texto FROM textos WHERE idTexto="+idTexto+";");
+			ResultSet res = psResultado.executeQuery();
+			while(res.next()){
+				String td="";
+				Tagger tg=new Tagger();
+				String textoAuxiliar=tg.sentencaRapidMiner(res.getString("texto"));
+				
+				for(int i=0;i<trechosDistintosDeUmResultado.size();i++)
+				{
+					td = trechosDistintosDeUmResultado.get(i);
+					td=td.trim();
+					textoAuxiliar=textoAuxiliar.replace(td, td.replace(" ", "_"));
+				}
+				for(int i=0;i<trechosDistintos.size();i++)
+				{
+					td = trechosDistintos.get(i);
+					td=td.trim();
+					if(!textoAuxiliar.contains(td.replace(" ", "_")))
+					{
+						textoAuxiliar=textoAuxiliar.concat(" NAO_"+td.replace(" ", "_"));
+					}
+				}
+				PreparedStatement ps2 = null;
+				ps2 = (PreparedStatement) con.prepareStatement(
+				"INSERT into textoRapidMiner(texto) values ('"+textoAuxiliar+"');");
+				boolean erro = ps2.execute();
+				erro = false;
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return true;
+	}
+
 	public boolean insertResultados(int idTexto, List<TrechoEncontrado> encontrados, int idExecucao){
 		boolean erro = true;
 		
