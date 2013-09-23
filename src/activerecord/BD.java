@@ -542,7 +542,7 @@ public class BD extends ActiveRecord {
 					int idTexto=res.getInt("idTexto");
 					if(idTextoAnt!=idTexto)
 					{
-						insereRapidMiner(trechosDistintos, idExecucao, idArquivo, idUsuario, idTexto);
+//						insereRapidMiner(trechosDistintos, idExecucao, idArquivo, idUsuario, idTexto);
 						idTextoAnt=idTexto;
 					}
 					l.add(t);
@@ -625,7 +625,7 @@ public class BD extends ActiveRecord {
 				}
 				PreparedStatement ps2 = null;
 				ps2 = (PreparedStatement) con.prepareStatement(
-				"INSERT into textoRapidMiner(texto) values ('"+textoAuxiliar+"');");
+				"INSERT into textoRapidMiner(idtexto,texto) values ("+idTexto+", '"+textoAuxiliar+"');");
 				boolean erro = ps2.execute();
 				erro = false;
 			}

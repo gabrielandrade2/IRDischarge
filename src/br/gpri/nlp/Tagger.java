@@ -21,6 +21,8 @@ public class Tagger {
 		cogroo = new CogrooWrapper();
 		String s = "sem sinal";
 		frasesNegativas.add(s);
+		s = "sem sinais";
+		frasesNegativas.add(s);
 		s="dentro da normalidade";
 		frasesNegativas.add(s);
 		s="sem alterações";
