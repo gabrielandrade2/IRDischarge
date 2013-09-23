@@ -519,13 +519,23 @@ public class BD extends ActiveRecord {
 	
 	public List<List<TrechoEncontrado>> selectResultados(int idExecucao, int idArquivo, int idUsuario){
 		List<List<TrechoEncontrado>> lista = new ArrayList<List<TrechoEncontrado>>();
-		int countTextos = countTextos(idArquivo);
-		for(int i=0; i<countTextos; i++){
-			List<TrechoEncontrado> l = new ArrayList<TrechoEncontrado>();
-			try{
-				PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM resultados WHERE idExecucao="+idExecucao+" and idTexto="+i+";");
-				ResultSet res = ps.executeQuery();
+		int idTexto =-1;
+		boolean once = true;
+		try{
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM resultados WHERE idExecucao="+idExecucao+" ORDER BY idTexto;");
+		ResultSet res = ps.executeQuery();
+		List<TrechoEncontrado> l = new ArrayList<TrechoEncontrado>();
 				while(res.next()){
+					if(once){
+						idTexto = res.getInt("idTexto");
+						once = false;
+					}
+					if(!(res.getInt("idTexto") == idTexto)){
+						lista.add(l);
+						l = new ArrayList<TrechoEncontrado>();
+						idTexto = res.getInt("idTexto");
+						}
+						
 					TrechoEncontrado t = new TrechoEncontrado();
 					if(res.getInt("isSubregra") == 1){
 						Subregra s = selectSubRegra(res.getInt("idRegra"), res.getInt("idSubregra"));
@@ -538,14 +548,14 @@ public class BD extends ActiveRecord {
 					
 					l.add(t);
 				}
+				
 			}
 			
 			catch(SQLException e){
 				e.printStackTrace();
 			}
 			
-			lista.add(l);
-		}
+		
 		return lista;
 	}
 	

@@ -90,6 +90,7 @@ public class ControleResultados extends Variaveis{
 	private void geraListaRegras(){
 		DefaultListModel listaRegrasEncontrados = new DefaultListModel();
 		for(int i=0;i<trechosTextoSelecionadoRegras.size();i++){
+			//Dar uma olhada
 			listaRegrasEncontrados.addElement(trechosTextoSelecionadoRegras.get(i).getRegra().getPrevia());				
 		}
 		Janela.ListaRegra.setModel(listaRegrasEncontrados);
