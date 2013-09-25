@@ -542,7 +542,7 @@ public class BD extends ActiveRecord {
 					int idTexto=res.getInt("idTexto");
 					if(idTextoAnt!=idTexto)
 					{
-						insereRapidMiner(trechosDistintos, idExecucao, idArquivo, idUsuario, idTexto);
+//						insereRapidMiner(trechosDistintos, idExecucao, idArquivo, idUsuario, idTexto);
 						idTextoAnt=idTexto;
 					}
 					l.add(t);
