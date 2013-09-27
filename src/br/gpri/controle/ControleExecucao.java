@@ -189,7 +189,7 @@ public class ControleExecucao extends Variaveis{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Tagger Tagger = new Tagger();
+					Tagger Tagger = new Tagger(BD);
 					
 					
 					List<Integer> indiceRegras = pegaSelecaoRegras(); //Verifica os checkbox

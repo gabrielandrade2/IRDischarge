@@ -171,7 +171,7 @@ public class ControleCadastroRegra extends Variaveis{
 			int idElemento = elementos.get(Janela.DropDownListBox3.getSelectedIndex()).getId();  //tirar o 3 do dropdown
 			int idRegra = BD.selectMaxIdRegra();
 		
-			Tagger Tagger = new Tagger(); 
+			Tagger Tagger = new Tagger(BD); 
 			Regra r = Tagger.geraRegra(Janela.TextoSumario1.getText(), Janela.TextoSumario1.getSelectedText(), idElemento, idRegra);
 			r.setIdTexto(linha);
 			r.setIdArquivo(idArquivo);
@@ -194,7 +194,7 @@ public class ControleCadastroRegra extends Variaveis{
 				
 				int idSubRegra = BD.selectMaxIdSubRegra(idRegra);
 						
-				Tagger Tagger = new Tagger();
+				Tagger Tagger = new Tagger(BD);
 				Subregra s = Tagger.geraSubRegra(Janela.TextoSumario1.getText(), Janela.TextoSumario1.getSelectedText(), idRegra, idSubRegra);
 				JanelaIndices = new ControleIndice(s);
 				JanelaIndices.abreJanela();

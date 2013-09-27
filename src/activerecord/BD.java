@@ -681,4 +681,26 @@ public class BD extends ActiveRecord {
 	
 		return execucoes;
 	}
+	
+	public List<Acronimo> selectAcronimos(){
+		List<Acronimo> acronimos = new ArrayList<Acronimo>();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * from acronimos");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				Acronimo a = new Acronimo();
+				a.setId(res.getInt("id"));
+				a.setAcronimo(res.getString("acronimo"));
+				a.setExpansao(res.getString("expansao"));
+				acronimos.add(a);
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+	
+		return acronimos;
+	}
+
 }
