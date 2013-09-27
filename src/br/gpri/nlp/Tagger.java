@@ -18,15 +18,32 @@ public class Tagger{
 	
 	public CogrooWrapper cogroo;
 	public final int conjuntoTeste = 1;
-	
+
 	private List<Acronimo> acronimos;
+	public List <String> frasesNegativas=new ArrayList<String>();
 	
 	public Tagger(BD BD){
+
 		cogroo = new CogrooWrapper();
-		acronimos = BD.selectAcronimos();
+
+		acronimos =  BD.selectAcronimos();
+
+		String s = "sem sinal";
+		frasesNegativas.add(s);
+		s = "sem sinais";
+		frasesNegativas.add(s);
+		s="dentro da normalidade";
+		frasesNegativas.add(s);
+		s="sem alterações";
+		frasesNegativas.add(s);
+		s="não apresenta";
+		frasesNegativas.add(s);
+		s="sem dilatação";
+		frasesNegativas.add(s);
+
 	}
 	
-	private String preProccessText(String text){
+	public String preProccessText(String text){
 		//Adiciona espaço para acronimos no começo/final frase
 		text = espacaTexto(text);
 		//Expande as datas	
@@ -50,7 +67,28 @@ public class Tagger{
 		
 		return text;
 	}
-	
+
+	public String sentencaRapidMiner (String sentenca)
+	{
+		sentenca=preProccessText(sentenca);
+		//Tokeniza sentença
+		SentenceCogroo sc = new SentenceCogroo(sentenca);
+		cogroo.tokenizer(sc);
+
+		//Aplica o NAMEFINDER
+		cogroo.nameFinder(sc);
+		
+		//Expansão de preposições
+		cogroo.preTagger(sc);
+		List<Token> tokens = null;
+		tokens = sc.getTokens();
+		String textoRepomposto = "";
+		for (int i=0;i<sc.getTokens().size();i++)
+			textoRepomposto = textoRepomposto+" "+tokens.get(i);
+		return textoRepomposto;
+		
+		
+	}
 	private List<Token> processCogroo(String sentenca){
 		//Tokeniza sentença
 		SentenceCogroo sc = new SentenceCogroo(sentenca);
@@ -63,12 +101,21 @@ public class Tagger{
 		//Expansão de preposições
 		cogroo.preTagger(sc);
 		
+		
 		//Realiza POS_tagging
 		cogroo.tagger(sc);
 		tokens = sc.getTokens();
 		return tokens;
 	}
-	
+	public boolean temFraseNegativa(String s)
+	{
+		for(int i=0; i<frasesNegativas.size(); i++)
+		{
+			if (s.contains(frasesNegativas.get(i)))
+				return true;
+		}
+		return false;
+	}
 	//Tagger para Interface gráfica
 	public Regra geraRegra(String text_sumario, String text_selecionado,int idElemento, int idRegra){
 		
@@ -90,7 +137,6 @@ public class Tagger{
 		//Separa texto em sentenças
 		String[] sentencas = cogroo.sentDetect(text_sumario);
 		for (String sentenca : sentencas) {
-			
 			List<Token> tokens = processCogroo(sentenca);
 
 			//Procura onde estão os termos selecionados
@@ -221,12 +267,12 @@ public class Tagger{
 		
 		//Executa operações de PRÉ-PROCESSAMENTO
 		String text_sumario = preProccessText(texto_sumario);
-							
 		//Separa texto em sentenças
 		String[] sentencas = cogroo.sentDetect(text_sumario);
 		for (String sentenca : sentencas) {
 			List<Token> tokens = processCogroo(sentenca);
-			
+			if (temFraseNegativa(sentenca))
+				continue;
 			//Executa cada uma das regras
 			for (Regra r : regras){
 				

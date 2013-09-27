@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use intemed;
 
 drop table if exists acronimos;
@@ -793,3 +794,12 @@ Insert into acronimos(acronimo,expansao) values(" r-x "," raio X ");
 Insert into acronimos(acronimo,expansao) values(" s/n "," se necessário ");
 Insert into acronimos(acronimo,expansao) values(" satO2 "," saturação de oxigênio ");
 Insert into acronimos(acronimo,expansao) values(" vO "," via oral ");
+=======
+CREATE TABLE `textorapidminer` (
+  `datahora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `texto` text,
+  PRIMARY KEY (`datahora`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8$$;
+
+alter table intemed.textoRapidMiner add idTexto int;
+>>>>>>> branch 'master' of https://Akiyama-san@bitbucket.org/Akiyama-san/IRDischarge.git
