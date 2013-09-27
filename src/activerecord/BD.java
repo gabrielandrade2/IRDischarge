@@ -566,6 +566,7 @@ public class BD extends ActiveRecord {
 		
 		return lista;
 	}
+
 	public List<String> selectDistinctTrechoEncontrado(int idExecucao, int idArquivo, int idUsuario){
 			List<String> lista = new ArrayList<String>();
 			try{
@@ -614,6 +615,7 @@ public class BD extends ActiveRecord {
 			ResultSet res = psResultado.executeQuery();
 			while(res.next()){
 				String td="";
+
 				Tagger tg=new Tagger(this);
 				String textoAuxiliar=tg.sentencaRapidMiner(res.getString("texto"));
 				
