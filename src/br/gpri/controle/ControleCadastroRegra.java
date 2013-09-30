@@ -48,7 +48,8 @@ public class ControleCadastroRegra extends Variaveis{
 		Janela.ListaRegras.setSelectedIndex(0);
 		Janela.ListaTexto.setSelectedIndex(linha);
 		Janela.Indice.setText("1");
-		Janela.Indice.setEditable(false);	
+		Janela.Indice.setEditable(true);	
+		Janela.Indice.addActionListener(this.Indice);
 		
 	}
 	
@@ -118,11 +119,6 @@ public class ControleCadastroRegra extends Variaveis{
 			if(linha != 0){
 				linha--;
 				Janela.ListaTexto.setSelectedIndex(linha);
-				Integer l = linha+1;
-				Janela.Indice.setText(l.toString());
-				System.out.println(linha);
-				Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tirar o 1 do final
-				
 				geraListaRegras();
 			}
 			
@@ -134,11 +130,6 @@ public class ControleCadastroRegra extends Variaveis{
 			if(linha != (numTextos)-1){
 				linha++;
 				Janela.ListaTexto.setSelectedIndex(linha);
-				Integer l = linha+1;
-				Janela.Indice.setText(l.toString());
-				System.out.println(linha); //DEBUG, mas acho que deveria ter um número contando do lado do texto, talvez editavel
-				Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tirar o 1 do final
-				
 				geraListaRegras();
 			}			
 		}
@@ -233,8 +224,30 @@ public class ControleCadastroRegra extends Variaveis{
 			linha = Janela.ListaTexto.getSelectedIndex();
 			Integer l = linha+1;
 			Janela.Indice.setText(l.toString());
+			System.out.println(linha);
 		}
 			
+	};
+	
+	ActionListener Indice = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Integer l = Integer.parseInt(Janela.Indice.getText());
+			if(l>0){
+				if(l<Janela.ListaTexto.getModel().getSize()){
+					linha = l-1;
+					Janela.ListaTexto.setSelectedIndex(linha);
+				}
+				else{
+					l = Janela.ListaTexto.getModel().getSize();
+					linha = l-1;
+					Janela.ListaTexto.setSelectedIndex(linha);
+				}
+			}
+			else{
+				l = linha +1;
+				Janela.Indice.setText(l.toString());
+			}
+		}
 	};
 	
 	ListSelectionListener Subregra = new ListSelectionListener() {
@@ -269,6 +282,6 @@ public class ControleCadastroRegra extends Variaveis{
 		Janela.ListaSubRegras.updateUI();
 	}
 	
-	
+
 }
 
