@@ -47,7 +47,7 @@ public class ControleCadastroRegra extends Variaveis{
 		geraListaRegras();
 		Janela.ListaRegras.setSelectedIndex(0);
 		Janela.ListaTexto.setSelectedIndex(linha);
-		Janela.Indice.setText(linha.toString());
+		Janela.Indice.setText("1");
 		Janela.Indice.setEditable(false);	
 		
 	}
