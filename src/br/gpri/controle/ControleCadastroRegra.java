@@ -118,7 +118,8 @@ public class ControleCadastroRegra extends Variaveis{
 			if(linha != 0){
 				linha--;
 				Janela.ListaTexto.setSelectedIndex(linha);
-				Janela.Indice.setText((linha++).toString());
+				Integer l = linha+1;
+				Janela.Indice.setText(l.toString());
 				System.out.println(linha);
 				Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tirar o 1 do final
 				
@@ -133,7 +134,8 @@ public class ControleCadastroRegra extends Variaveis{
 			if(linha != (numTextos)-1){
 				linha++;
 				Janela.ListaTexto.setSelectedIndex(linha);
-				Janela.Indice.setText((linha++).toString());
+				Integer l = linha+1;
+				Janela.Indice.setText(l.toString());
 				System.out.println(linha); //DEBUG, mas acho que deveria ter um número contando do lado do texto, talvez editavel
 				Janela.TextoSumario1.setText(BD.selectTexto(idUsuario, idArquivo, linha)); //Tirar o 1 do final
 				
@@ -229,7 +231,8 @@ public class ControleCadastroRegra extends Variaveis{
 		public void valueChanged(ListSelectionEvent Regras) {
 			Janela.TextoSumario1.setText((String) Janela.ListaTexto.getSelectedValue());
 			linha = Janela.ListaTexto.getSelectedIndex();
-			Janela.Indice.setText((linha++).toString());
+			Integer l = linha+1;
+			Janela.Indice.setText(l.toString());
 		}
 			
 	};
