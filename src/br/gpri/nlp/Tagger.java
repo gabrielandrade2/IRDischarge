@@ -24,7 +24,7 @@ public class Tagger{
 	
 	public Tagger(BD BD){
 
-
+		cogroo = new CogrooWrapper();
 
 		acronimos =  BD.selectAcronimos();
 
