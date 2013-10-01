@@ -517,6 +517,8 @@ public class BD extends ActiveRecord {
 		return countTextos;
 	}
 	
+
+	
 	public List<List<TrechoEncontrado>> selectResultados(int idExecucao, int idArquivo, int idUsuario){
 		List<String> trechosDistintos = selectDistinctTrechoEncontrado(idExecucao, idArquivo, idUsuario);
 		List<List<TrechoEncontrado>> lista = new ArrayList<List<TrechoEncontrado>>();
@@ -547,6 +549,7 @@ public class BD extends ActiveRecord {
 					Regra r = selectRegra(idUsuario, res.getInt("idRegra"));
 					t.setRegra(r);
 					t.setTrechoEncontrado(res.getString("trechoEncontrado"));
+					t.setidResultado(res.getInt("id"));
 //executar médoto passando a lista e o idtexto para que este método faça os edits e inserts
 					int idTexto2=res.getInt("idTexto");
 					if(idTextoAnt!=idTexto2)
@@ -567,6 +570,8 @@ public class BD extends ActiveRecord {
 		return lista;
 	}
 
+	
+	
 	public List<String> selectDistinctTrechoEncontrado(int idExecucao, int idArquivo, int idUsuario){
 			List<String> lista = new ArrayList<String>();
 			try{
@@ -790,5 +795,33 @@ public class BD extends ActiveRecord {
 	
 		return acronimos;
 	}
-
+	public boolean insertComentario(int idResultado, String comentario){
+		boolean erro = true;
+				try{
+					PreparedStatement ps = (PreparedStatement) con.prepareStatement("UPDATE resultados set comentario='"+comentario+"' where id="+idResultado+";");		
+					 erro = ps.execute();
+				}
+				catch(SQLException e){
+					e.printStackTrace();
+				}
+					 
+				return erro;
+	}
+	
+	public String selectComentario(int idResultado){
+		String comentario = new String();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT comentario from resultados WHERE id="+idResultado+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				 comentario = res.getString("comentario");
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+			comentario="Erro Banco de Dados";
+		}
+		return comentario;
+	}
 }

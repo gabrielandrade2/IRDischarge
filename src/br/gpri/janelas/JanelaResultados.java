@@ -117,9 +117,9 @@ public class JanelaResultados extends javax.swing.JFrame {
 
         jButton2.setText("+");
 
-        jLabel11.setText("NÃºmero do Texto:");
+        jLabel11.setText("Número do Texto:");
 
-        DropDownTexto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Encontrados", "NÃ£o Encontrados"}));
+        DropDownTexto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Encontrados", "Não Encontrados"}));
 
         BotaoRegra.setText("Cadastrar Regra");
 

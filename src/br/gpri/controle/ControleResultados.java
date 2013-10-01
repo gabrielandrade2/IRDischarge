@@ -23,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 public class ControleResultados extends Variaveis{
 	
 	Integer linha;
+	int idResult;
 	private JanelaResultados Janela;
 	private List<List<TrechoEncontrado>> listaEncontrados;
 	private List<Elemento> elementos;
@@ -53,6 +54,7 @@ public class ControleResultados extends Variaveis{
 		Janela.NumeroTexto.setEditable(false);
 		Janela.DropDownTexto.addActionListener(this.DropDownListBox);
 		Janela.BotaoComRegra.addActionListener(this.Comment);
+		
 	}
 	
 	private void inicializaListas(List<String> textos){
@@ -180,7 +182,7 @@ public class ControleResultados extends Variaveis{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					JanelaComentario = new ControleComentario();
+					JanelaComentario = new ControleComentario(idResult);
 					JanelaComentario.abreJanela();
 					
 				}
@@ -192,8 +194,10 @@ public class ControleResultados extends Variaveis{
 				Janela.AreaTexto.setText((String) Janela.ListaTextos.getSelectedValue());
 				int textoSelecionado=Janela.ListaTextos.getSelectedIndex();
 				List<TrechoEncontrado> trechosTextoSelecionado = listaEncontrados.get(textoSelecionado);
+				
 				separaTrechos(trechosTextoSelecionado);
 				linha = Janela.ListaTextos.getSelectedIndex();
+				linha = linha+1;
 				Janela.NumeroTexto.setText(linha.toString());
 				geraListaRegras();
 			}	
@@ -205,6 +209,7 @@ public class ControleResultados extends Variaveis{
                     if(regraSelecionada>=0){
                             limpaCaixasTexto();
                             TrechoEncontrado t = trechosTextoSelecionadoRegras.get(regraSelecionada);
+                            idResult=t.getidResultado();
                             int idRegra = t.getRegra().getId();
                             String textoTrecho = t.getRegra().getTexto();
                             String textoRegra = t.getTrechoEncontrado();

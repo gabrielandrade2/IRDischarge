@@ -7,6 +7,7 @@ public class TrechoEncontrado {
 	private Subregra subregra;
 	private boolean isSubregra = false;
 	private boolean hasRegra = false;
+	private int idResultado;
 
 	public Subregra getSubregra() {
 		return subregra;
@@ -42,6 +43,16 @@ public class TrechoEncontrado {
 	
 	public boolean hasRegra(){
 		return hasRegra;
+	}
+	
+	public int getidResultado(){
+		return idResultado;
+		
+	}
+	
+	public void setidResultado(int idResultado){
+		this.idResultado = idResultado;
+		
 	}
 	
 }

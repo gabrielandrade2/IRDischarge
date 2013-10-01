@@ -8,12 +8,14 @@ import br.gpri.janelas.JanelaComentario;
 public class ControleComentario extends Variaveis{
 
 	private JanelaComentario Janela;
-	
-	
-	public ControleComentario(){
+	Integer id;
+	String comentario;
+	public ControleComentario(int idResultado){
 		Janela = new JanelaComentario();
 		Janela.BotaoOk.addActionListener(this.Ok);
 		Janela.TextoComentario.setEditable(true);
+		id = idResultado;
+		Janela.TextoComentario.setText(BD.selectComentario(id));
 		Janela.setLocationRelativeTo(null);
 	}
 	
@@ -30,6 +32,8 @@ public class ControleComentario extends Variaveis{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			comentario = Janela.TextoComentario.getText();
+			BD.insertComentario(id, comentario);
 			fechaJanela();
 			
 		}
