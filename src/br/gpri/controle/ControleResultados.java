@@ -52,7 +52,7 @@ public class ControleResultados extends Variaveis{
 		Janela.AreaTexto.setWrapStyleWord(true);
 		Janela.NumeroTexto.setEditable(false);
 		Janela.DropDownTexto.addActionListener(this.DropDownListBox);
-		
+		Janela.BotaoComRegra.addActionListener(this.Comment);
 	}
 	
 	private void inicializaListas(List<String> textos){
@@ -60,6 +60,14 @@ public class ControleResultados extends Variaveis{
 		Janela.ListaTextos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Janela.ListaTextos.setLayoutOrientation(JList.VERTICAL);
 		Janela.ListaTextos.addListSelectionListener(this.Textos);
+		DefaultListModel listaTexto = new DefaultListModel();
+		for(int i=0; i<textos.size(); i++){
+				listaTexto.addElement(textos.get(i));
+		}
+		
+		Janela.ListaTextos.setModel(listaTexto);
+		
+		
 
 		Janela.ListaRegra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Janela.ListaRegra.setLayoutOrientation(JList.VERTICAL);
@@ -99,21 +107,19 @@ public class ControleResultados extends Variaveis{
 		}
 	}
 
-	protected void geraListaTexto(List<String> textos){
+/*	protected void geraListaTexto(List<String> textos){
 		int item=Janela.DropDownTexto.getSelectedIndex();
 		DefaultListModel listaTexto = new DefaultListModel();
-		Janela.DropDownTexto.setSelectedIndex(1);
-		if(item==1){
-			for(int i=0; i<textos.size(); i++){
+		Janela.DropDownTexto.setSelectedIndex(0);
+		for(int i=0; i<textos.size(); i++){
 				
 				listaTexto.addElement(textos.get(i));
-				Janela.ListaTextos.setModel(listaTexto);
-			}}
-		else{
-			
-		}
-		
-	}
+				
+			}
+		Janela.ListaTextos.setModel(listaTexto);
+		Janela.ListaTextos.updateUI();
+		Janela.ListaTextos.setSelectedIndex(0);
+	}*/
 	
 	protected void geraListaRegras(){
 		DefaultListModel listaRegrasEncontrados = new DefaultListModel();
@@ -161,12 +167,24 @@ public class ControleResultados extends Variaveis{
 		ActionListener DropDownListBox = new ActionListener() {
 			public void actionPerformed(ActionEvent DropDownListBox) {
 				int item = Janela.DropDownTexto.getSelectedIndex();
-				if (item==0){}
+				if (item==0){
+				
+				}
 				else if (item==1){}
 				else{}
 				
 			}
 		};
+		
+		 ActionListener Comment = new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JanelaComentario = new ControleComentario();
+					JanelaComentario.abreJanela();
+					
+				}
+			};
 			
 		ListSelectionListener Textos = new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent Regras) {

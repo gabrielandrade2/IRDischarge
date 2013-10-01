@@ -55,7 +55,7 @@ public class JanelaResultados extends javax.swing.JFrame {
         AreaTexto = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         NumeroTexto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BotaoComRegra = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         DropDownTexto = new javax.swing.JComboBox();
@@ -113,7 +113,7 @@ public class JanelaResultados extends javax.swing.JFrame {
 
         jLabel10.setText("Lista de Textos:");
 
-        jButton1.setText("+");
+        BotaoComRegra.setText("+");
 
         jButton2.setText("+");
 
@@ -138,7 +138,7 @@ public class JanelaResultados extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton1)))
+                                        .addComponent(BotaoComRegra)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -206,7 +206,7 @@ public class JanelaResultados extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jLabel9)
-                            .addComponent(jButton1)
+                            .addComponent(BotaoComRegra)
                             .addComponent(jButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -285,7 +285,7 @@ public class JanelaResultados extends javax.swing.JFrame {
     public javax.swing.JTextArea SubRegraTextoTrecho;
     public javax.swing.JTextArea TextoRegra;
     public javax.swing.JTextArea TextoSubRegra;
-    public javax.swing.JButton jButton1;
+    public javax.swing.JButton BotaoComRegra;
     public javax.swing.JButton jButton2;
     public javax.swing.JButton BotaoRegra;
     public javax.swing.JComboBox DropDownTexto;
