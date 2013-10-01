@@ -119,7 +119,6 @@ public class ControleCadastroRegra extends Variaveis{
 			if(linha != 0){
 				linha--;
 				Janela.ListaTexto.setSelectedIndex(linha);
-				geraListaRegras();
 			}
 			
 		}
@@ -130,7 +129,6 @@ public class ControleCadastroRegra extends Variaveis{
 			if(linha != (numTextos)-1){
 				linha++;
 				Janela.ListaTexto.setSelectedIndex(linha);
-				geraListaRegras();
 			}			
 		}
 	};
@@ -225,6 +223,8 @@ public class ControleCadastroRegra extends Variaveis{
 			Integer l = linha+1;
 			Janela.Indice.setText(l.toString());
 			System.out.println(linha);
+			geraListaRegras();
+
 		}
 			
 	};
