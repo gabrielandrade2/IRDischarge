@@ -27,14 +27,23 @@ public class ControleCadastroRegra extends Variaveis{
 	List<String> textos = new ArrayList<String>();
 	
 		
-	public ControleCadastroRegra(){
-		linha = 0;
+	public ControleCadastroRegra(boolean botao, Integer textonumero){
+		linha=0;
+		linha = textonumero;
+		System.out.println(linha);
 		numTextos = BD.getNumTextos(idUsuario, idArquivo);
 		
 		Janela = new JanelaCadastroRegra();
 		Janela.BotaoAnterior1.addActionListener(this.Anterior);
 		Janela.BotaoProximo1.addActionListener(this.Proximo);
-		Janela.CRBotaoExecutar.addActionListener(this.Executar);
+		
+		if(botao == true)
+			Janela.CRBotaoExecutar.addActionListener(this.Executar);
+		else
+			Janela.CRBotaoExecutar.setName( "Ok");
+			Janela.CRBotaoExecutar.setText("OK");
+			Janela.CRBotaoExecutar.addActionListener(this.Ok);	
+		
 		Janela.CRBotaoVoltar.addActionListener(this.Voltar);
 		Janela.BotaoGerarRegra1.addActionListener(this.GerarRegra);
 		Janela.BotaoSubRegra.addActionListener(this.GerarSubRegra);
@@ -47,7 +56,7 @@ public class ControleCadastroRegra extends Variaveis{
 		geraListaRegras();
 		Janela.ListaRegras.setSelectedIndex(0);
 		Janela.ListaTexto.setSelectedIndex(linha);
-		Janela.Indice.setText("1");
+		
 		Janela.Indice.setEditable(true);	
 		Janela.Indice.addActionListener(this.Indice);
 		
@@ -143,7 +152,13 @@ public class ControleCadastroRegra extends Variaveis{
 			JanelaExecucao.abreJanela();
 		}
 	};
-	
+	ActionListener Ok = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			fechaJanela();
+			}
+	};
 	
 	ActionListener Voltar = new ActionListener() {
 			

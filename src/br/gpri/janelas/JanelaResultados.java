@@ -56,7 +56,7 @@ public class JanelaResultados extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         NumeroTexto = new javax.swing.JTextField();
         BotaoComRegra = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BotaoComSubRegra = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         DropDownTexto = new javax.swing.JComboBox();
         BotaoRegra = new javax.swing.JButton();
@@ -115,7 +115,7 @@ public class JanelaResultados extends javax.swing.JFrame {
 
         BotaoComRegra.setText("+");
 
-        jButton2.setText("+");
+        BotaoComSubRegra.setText("+");
 
         jLabel11.setText("Número do Texto:");
 
@@ -144,7 +144,7 @@ public class JanelaResultados extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addGap(155, 155, 155)
-                                        .addComponent(jButton2))
+                                        .addComponent(BotaoComSubRegra))
                                     .addComponent(jScrollPane1))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane9)
@@ -207,7 +207,7 @@ public class JanelaResultados extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel9)
                             .addComponent(BotaoComRegra)
-                            .addComponent(jButton2))
+                            .addComponent(BotaoComSubRegra))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -286,7 +286,7 @@ public class JanelaResultados extends javax.swing.JFrame {
     public javax.swing.JTextArea TextoRegra;
     public javax.swing.JTextArea TextoSubRegra;
     public javax.swing.JButton BotaoComRegra;
-    public javax.swing.JButton jButton2;
+    public javax.swing.JButton BotaoComSubRegra;
     public javax.swing.JButton BotaoRegra;
     public javax.swing.JComboBox DropDownTexto;
     private javax.swing.JLabel jLabel1;

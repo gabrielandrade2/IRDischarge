@@ -54,6 +54,7 @@ public class ControleResultados extends Variaveis{
 		Janela.NumeroTexto.setEditable(false);
 		Janela.DropDownTexto.addActionListener(this.DropDownListBox);
 		Janela.BotaoComRegra.addActionListener(this.Comment);
+		Janela.BotaoComSubRegra.addActionListener(this.Comment);
 		
 	}
 	
@@ -159,7 +160,7 @@ public class ControleResultados extends Variaveis{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					JanelaCadRegra= new ControleCadastroRegra();
+					JanelaCadRegra= new ControleCadastroRegra(false, linha-1);
 					JanelaCadRegra.abreJanela();
 					
 				}

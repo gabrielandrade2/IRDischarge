@@ -170,7 +170,7 @@ public class ControleArquivo extends Variaveis {
 		        	colocaArquivoPrimeiroLista();
 				   	fechaJanela();
 		        	Excel.abreExcel(caminhoArquivo);
-		        	JanelaCadRegra = new ControleCadastroRegra();
+		        	JanelaCadRegra = new ControleCadastroRegra(true, 1);
 		        	JanelaCadRegra.abreJanela();}
 		        else if(Resultado){
 		        	fechaJanela();
