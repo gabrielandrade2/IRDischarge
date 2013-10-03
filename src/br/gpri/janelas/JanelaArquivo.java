@@ -70,7 +70,7 @@ public class JanelaArquivo extends javax.swing.JFrame {
 
         ABotaoVoltar.setText("Voltar");
 
-        BotaoAbrir.setText("Abrir");
+        BotaoAbrir.setText("Importar");
 
         jLabel2.setText("INTEMED");
 
