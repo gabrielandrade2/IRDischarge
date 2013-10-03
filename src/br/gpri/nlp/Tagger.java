@@ -20,27 +20,14 @@ public class Tagger{
 	public final int conjuntoTeste = 1;
 
 	private List<Acronimo> acronimos;
-	public List <String> frasesNegativas=new ArrayList<String>();
+	public List <String> frasesNegativas;
 	
 	public Tagger(BD BD){
 
 		cogroo = new CogrooWrapper();
 
 		acronimos =  BD.selectAcronimos();
-
-		String s = "sem sinal";
-		frasesNegativas.add(s);
-		s = "sem sinais";
-		frasesNegativas.add(s);
-		s="dentro da normalidade";
-		frasesNegativas.add(s);
-		s="sem alterações";
-		frasesNegativas.add(s);
-		s="não apresenta";
-		frasesNegativas.add(s);
-		s="sem dilatação";
-		frasesNegativas.add(s);
-
+		frasesNegativas = BD.selectFrasesNegativas();
 	}
 	
 	public String preProccessText(String text){

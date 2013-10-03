@@ -715,6 +715,25 @@ public class BD extends ActiveRecord {
 		return id;
 	}
 	
+	public boolean insertRegrasExecucao(int idExecucao, List<Regra> regrasSelecionadas){
+		boolean erro = false;
+		for(int i=0; i< regrasSelecionadas.size(); i++){
+			Regra r = regrasSelecionadas.get(i);
+			int idRegra = r.getId();
+			try{
+				PreparedStatement ps = (PreparedStatement) con.prepareStatement("INSERT into regrasexecucao values("+idExecucao+","+idRegra+");");
+				ps.execute();
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+				System.out.println("Falha ao armazenar regras da execucao: "+i);
+				erro = true;
+			}	
+		}
+		return erro;
+	}
+	
+	
 	private int selectMaxIdResultados(int idUsuario, int idArquivo, int idTexto){
 		int maxId = 0;
 		try{
@@ -795,6 +814,25 @@ public class BD extends ActiveRecord {
 	
 		return acronimos;
 	}
+	
+	public List<String> selectFrasesNegativas(){
+		List<String> frasesNegativas = new ArrayList<String>();
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * from frasesnegativas");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				frasesNegativas.add(res.getString("frase"));
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+	
+		return frasesNegativas;
+	}
+	
+	
 	public boolean insertComentario(int idResultado, String comentario){
 		boolean erro = true;
 				try{

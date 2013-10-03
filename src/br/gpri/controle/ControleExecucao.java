@@ -199,7 +199,8 @@ public class ControleExecucao extends Variaveis{
 					List<String> textos = new ArrayList<String>();
 					List<List<TrechoEncontrado>> listaEncontrados = new ArrayList<List<TrechoEncontrado>>();
 					
-					int idExecucao = BD.insertExecucao(idUsuario,idArquivo);
+					int idExecucao = BD.insertExecucao(idUsuario,idArquivo); //Cria a instância da Execucao
+					BD.insertRegrasExecucao(idExecucao, regrasSelecionadas); //Armazena regras usadas na execucao
 					
 					for(int i=0; i<numTextos; i++){ //Pra cada texto, executa
 						String texto = BD.selectTexto(idUsuario, idArquivo, i);
