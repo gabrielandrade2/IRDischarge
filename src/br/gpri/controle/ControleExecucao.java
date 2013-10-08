@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import activerecord.Conjunto;
 import activerecord.Elemento;
 import activerecord.Regra;
+import activerecord.Resultados;
 import activerecord.Subregra;
 import activerecord.TrechoEncontrado;
 import br.gpri.janelas.JanelaExecucao;
@@ -197,13 +198,17 @@ public class ControleExecucao extends Variaveis{
 					int numTextos = BD.getNumTextos(idUsuario, idArquivo);
 					
 					List<String> textos = new ArrayList<String>();
-					List<List<TrechoEncontrado>> listaEncontrados = new ArrayList<List<TrechoEncontrado>>();
+					
+					List<Resultados> listaResultados = new ArrayList<Resultados>();
+					//List<List<TrechoEncontrado>> listaEncontrados = new ArrayList<List<TrechoEncontrado>>();
 					
 					int idExecucao = BD.insertExecucao(idUsuario,idArquivo); //Cria a instância da Execucao
 					BD.insertRegrasExecucao(idExecucao, regrasSelecionadas); //Armazena regras usadas na execucao
 					
 					for(int i=0; i<numTextos; i++){ //Pra cada texto, executa
 						String texto = BD.selectTexto(idUsuario, idArquivo, i);
+						boolean isEncontrado;
+						
 						List<TrechoEncontrado> encontrados = Tagger.executaRegra(texto, regrasSelecionadas);
 						
 						//Console
@@ -232,10 +237,22 @@ public class ControleExecucao extends Variaveis{
 							t.setTrechoEncontrado("Nada Encontrado");
 							t.setHasRegra(false);
 							encontrados.add(t);
+							isEncontrado = false;
 						}
 						
-						textos.add(texto);
-						listaEncontrados.add(encontrados);
+						else{
+							isEncontrado = true;
+						}
+						
+						Resultados res = new Resultados();
+						res.setTexto(texto);
+						res.setTrechos(encontrados);
+						res.setIsEncontrado(isEncontrado);
+						
+						listaResultados.add(res);
+						
+						//textos.add(texto);
+						//listaEncontrados.add(encontrados);
 						
 						//Insere no Banco de Dados - Insere regra seguido de suas subregras
 						BD.insertResultados(i, encontrados, idExecucao);
@@ -243,7 +260,7 @@ public class ControleExecucao extends Variaveis{
 					
 					
 					fechaJanela();
-					JanelaResultados = new ControleResultados(textos, listaEncontrados);
+					JanelaResultados = new ControleResultados(textos, listaResultados);
 					JanelaResultados.abreJanela();
 					
 				}

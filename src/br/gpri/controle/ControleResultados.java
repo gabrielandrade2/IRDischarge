@@ -2,6 +2,7 @@ package br.gpri.controle;
 
 import activerecord.Elemento;
 import activerecord.Regra;
+import activerecord.Resultados;
 import activerecord.Subregra;
 import activerecord.TrechoEncontrado;
 import br.gpri.janelas.JanelaCadastroRegra;
@@ -25,34 +26,61 @@ public class ControleResultados extends Variaveis{
 	Integer linha;
 	int idResult;
 	private JanelaResultados Janela;
-	private List<List<TrechoEncontrado>> listaEncontrados;
+	private List<Resultados> listaResultados;
+	private List<Resultados> listaResultadosSelecionados;
 	private List<Elemento> elementos;
 	private List<Regra> regras;
 	List<Subregra> subregras;
 	private List<TrechoEncontrado> trechosTextoSelecionadoRegras = new ArrayList<TrechoEncontrado>();
 	private List<TrechoEncontrado> trechosTextoSelecionadoSubregras = new ArrayList<TrechoEncontrado>();
 	
-	public ControleResultados(List<String> textos, List<List<TrechoEncontrado>> listaEncontrados){
+	public ControleResultados(List<String> textos, List<Resultados> listaResultados){
 		linha = 0;
+		this.listaResultados = listaResultados;
+		
 		Janela = new JanelaResultados();
+		Janela.setLocationRelativeTo(null);
+		
+		//ActionListener dos Botões
 		Janela.BotaoOk.addActionListener(this.Ok);
 		Janela.BotaoRegra.addActionListener(this.Cadastra);
+		
+		//Gera Lista dos textos
 		inicializaListas(textos);
-		this.listaEncontrados = listaEncontrados;
-		Janela.setLocationRelativeTo(null);
+		
+		//Caixa de Texto Regra
 		Janela.TextoRegra.setEditable(false);
 		Janela.TextoRegra.setLineWrap(true);
 		Janela.TextoRegra.setWrapStyleWord(true);
+		
+		//Caixa de Texto Trecho Regra
 		Janela.RegraTextoTrecho.setEditable(false);
 		Janela.RegraTextoTrecho.setLineWrap(true);
 		Janela.RegraTextoTrecho.setWrapStyleWord(true);
+		
+		//Caixa de Texto Subregra
+		Janela.TextoSubRegra.setEditable(false);
+		Janela.TextoSubRegra.setLineWrap(false);
+		Janela.TextoSubRegra.setWrapStyleWord(true);
+		
+		//Caixa de Texto Trecho Subregra
+		Janela.SubRegraTextoTrecho.setEditable(false);
+		Janela.SubRegraTextoTrecho.setLineWrap(true);
+		Janela.SubRegraTextoTrecho.setWrapStyleWord(true);
+		
+		//Referente aos Textos
 		Janela.ListaTextos.setSelectedIndex(linha);
 		Janela.NumeroTexto.setText(linha.toString());
 		Janela.AreaTexto.setEditable(false);
 		Janela.AreaTexto.setLineWrap(true);
 		Janela.AreaTexto.setWrapStyleWord(true);
 		Janela.NumeroTexto.setEditable(false);
+		
+		//DropDownListBox filtro de textos
 		Janela.DropDownTexto.addActionListener(this.DropDownListBox);
+		Janela.DropDownTexto.setSelectedIndex(0);
+		
+		//Botões de Comentário
 		Janela.BotaoComRegra.addActionListener(this.Comment);
 		Janela.BotaoComSubRegra.addActionListener(this.Comment);
 		
@@ -63,14 +91,8 @@ public class ControleResultados extends Variaveis{
 		Janela.ListaTextos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Janela.ListaTextos.setLayoutOrientation(JList.VERTICAL);
 		Janela.ListaTextos.addListSelectionListener(this.Textos);
-		DefaultListModel listaTexto = new DefaultListModel();
-		for(int i=0; i<textos.size(); i++){
-				listaTexto.addElement(textos.get(i));
-		}
-		
-		Janela.ListaTextos.setModel(listaTexto);
-		
-		
+	
+		geraListaResultados();
 
 		Janela.ListaRegra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Janela.ListaRegra.setLayoutOrientation(JList.VERTICAL);
@@ -95,6 +117,45 @@ public class ControleResultados extends Variaveis{
 		Janela.RegraTextoTrecho.setText("");
 		Janela.TextoSubRegra.setText("");
 		Janela.SubRegraTextoTrecho.setText("");
+	}
+	
+	private void geraListaResultados(){
+		int filtro = Janela.DropDownTexto.getSelectedIndex(); //Pega a seleção do DropDown
+		listaResultadosSelecionados = new ArrayList<Resultados>();
+		List<String> textos = new ArrayList<String>();
+		
+		//Compara e gera a lista para cada caso
+		if(filtro == 0){ //Todos
+			listaResultadosSelecionados = listaResultados;
+			for(int i=0; i<listaResultados.size(); i++){
+				textos.add(listaResultados.get(i).getTexto());
+			}
+		}
+		else if(filtro == 1){ //Encontrados
+			for(int i=0; i<listaResultados.size(); i++){
+				Resultados r = listaResultados.get(i);
+				if(r.isEncontrado())
+					listaResultadosSelecionados.add(r);
+					textos.add(r.getTexto());
+			}
+		}
+		else if(filtro == 2){ //Não encontrados
+			for(int i=0; i<listaResultados.size(); i++){
+				Resultados r = listaResultados.get(i);
+				if(!r.isEncontrado())
+					listaResultadosSelecionados.add(r);
+					textos.add(r.getTexto());
+			}
+		}
+		else
+			System.out.println("Problema com o DropDownListBox do filtro de textos");
+		
+		DefaultListModel listaTexto = new DefaultListModel();
+		for(int i=0; i<textos.size(); i++){
+				listaTexto.addElement(textos.get(i));
+		}
+		
+		Janela.ListaTextos.setModel(listaTexto);
 	}
 	
 		
@@ -194,7 +255,9 @@ public class ControleResultados extends Variaveis{
 				limpaCaixasTexto();
 				Janela.AreaTexto.setText((String) Janela.ListaTextos.getSelectedValue());
 				int textoSelecionado=Janela.ListaTextos.getSelectedIndex();
-				List<TrechoEncontrado> trechosTextoSelecionado = listaEncontrados.get(textoSelecionado);
+				
+				List<TrechoEncontrado> trechosTextoSelecionado = listaResultados.get(textoSelecionado).getTrechos();
+				//List<TrechoEncontrado> trechosTextoSelecionado = listaEncontrados.get(textoSelecionado);
 				
 				separaTrechos(trechosTextoSelecionado);
 				linha = Janela.ListaTextos.getSelectedIndex();
