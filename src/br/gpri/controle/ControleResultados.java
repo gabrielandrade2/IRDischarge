@@ -25,6 +25,7 @@ public class ControleResultados extends Variaveis{
 	
 	Integer linha;
 	int idResult;
+	int idResultSR;
 	private JanelaResultados Janela;
 	private List<Resultados> listaResultados;
 	private List<Resultados> listaResultadosSelecionados;
@@ -82,7 +83,7 @@ public class ControleResultados extends Variaveis{
 		
 		//Botões de Comentário
 		Janela.BotaoComRegra.addActionListener(this.Comment);
-		Janela.BotaoComSubRegra.addActionListener(this.Comment);
+		Janela.BotaoComSubRegra.addActionListener(this.CommentSubRegra);
 		
 	}
 	
@@ -249,7 +250,16 @@ public class ControleResultados extends Variaveis{
 					
 				}
 			};
-			
+			 ActionListener CommentSubRegra = new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						JanelaComentario = new ControleComentario(idResultSR);
+						JanelaComentario.abreJanela();
+						
+					}
+				};
+				
 		ListSelectionListener Textos = new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent Regras) {
 				limpaCaixasTexto();
@@ -289,12 +299,15 @@ public class ControleResultados extends Variaveis{
             public void valueChanged(ListSelectionEvent Subregras) {
                     int subregraSelecionada=Janela.ListaSubRegra.getSelectedIndex();        
                     if(subregraSelecionada>=0){
-                            TrechoEncontrado t = trechosTextoSelecionadoSubregras.get(subregraSelecionada);
+                    	
+                    		TrechoEncontrado t = trechosTextoSelecionadoSubregras.get(subregraSelecionada);
                             String textoTrecho= t.getSubregra().getTexto();
                             String textoSubregra = t.getTrechoEncontrado();
+                            idResultSR=t.getidResultado();
                             Janela.TextoSubRegra.setText(textoSubregra);
                             Janela.SubRegraTextoTrecho.setText(textoTrecho);
                     }
+                    
             }
     };
 		

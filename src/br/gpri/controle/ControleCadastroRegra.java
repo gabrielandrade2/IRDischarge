@@ -30,7 +30,7 @@ public class ControleCadastroRegra extends Variaveis{
 	public ControleCadastroRegra(boolean botao, Integer textonumero){
 		linha=0;
 		linha = textonumero;
-		System.out.println(linha);
+		
 		numTextos = BD.getNumTextos(idUsuario, idArquivo);
 		
 		Janela = new JanelaCadastroRegra();

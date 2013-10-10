@@ -20,6 +20,7 @@ public class ControleLogin extends Variaveis {
 		Janela.BotaoCadastro.addActionListener(Cadastro);
 		Janela.BotaoLogin.addActionListener(Login);
 		Janela.setLocationRelativeTo(null);
+		Janela.getRootPane().setDefaultButton(Janela.BotaoLogin);
 	}
 
 	public void abreJanela(){

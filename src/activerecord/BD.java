@@ -869,4 +869,21 @@ public class BD extends ActiveRecord {
 		}
 		return comentario;
 	}
+	
+	public int selectidSR(int idResultado){
+		int idSubregra=0;
+		try{
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT idSubregra from resultados WHERE id="+idResultado+";");
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				idSubregra = res.getInt("idSubregra");
+			}
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+			idSubregra=0;
+		}
+		return idSubregra;
+	}
 }
