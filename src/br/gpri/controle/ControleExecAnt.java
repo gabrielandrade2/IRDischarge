@@ -8,6 +8,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import activerecord.Execucao;
+import activerecord.Resultados;
 import activerecord.TrechoEncontrado;
 import br.gpri.janelas.JanelaExecAnt;
 
@@ -85,7 +86,7 @@ public class ControleExecAnt extends Variaveis{
     			int idExecucao = execucao.getId();
     			int idArquivo = execucao.getIdArquivo();
     			List<String> textos = BD.selectTextos(idUsuario, idArquivo);
-    			List<List<TrechoEncontrado>> listaResultados = BD.selectResultados(idExecucao, idArquivo, idUsuario);
+    			List<Resultados> listaResultados = BD.selectResultados(idExecucao, idArquivo, idUsuario);
     			
     			fechaJanela();
     			JanelaResultados = new ControleResultados(textos, listaResultados);

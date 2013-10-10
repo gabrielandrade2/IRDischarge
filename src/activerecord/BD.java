@@ -1,5 +1,6 @@
 package activerecord;
 import br.gpri.nlp.Tagger;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -439,7 +440,7 @@ public class BD extends ActiveRecord {
 	public List<String> selectTextos(int idUsuario, int idArquivo){
 		List<String> textos = new ArrayList<String>();
 		try{
-			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT texto from textos WHERE idUsuario="+idUsuario+" AND idArquivo="+idArquivo+";");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT texto from textos WHERE idUsuario="+idUsuario+" AND idArquivo="+idArquivo+" ORDER BY idTexto;");
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				String texto;
@@ -519,27 +520,33 @@ public class BD extends ActiveRecord {
 	
 
 	
-	public List<List<TrechoEncontrado>> selectResultados(int idExecucao, int idArquivo, int idUsuario){
+	public List<Resultados> selectResultados(int idExecucao, int idArquivo, int idUsuario){
 		List<String> trechosDistintos = selectDistinctTrechoEncontrado(idExecucao, idArquivo, idUsuario);
-		List<List<TrechoEncontrado>> lista = new ArrayList<List<TrechoEncontrado>>();
+		List<Resultados> lista = new ArrayList<Resultados>();
+		
+		List<String> textos = selectTextos(idUsuario, idArquivo);
+		
 		int idTexto =-1;
 		int idTextoAnt=-1;
 		boolean once = true;
 		try{
-		PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM resultados WHERE idExecucao="+idExecucao+" ORDER BY idTexto;");
+		PreparedStatement ps = (PreparedStatement) con.prepareStatement("SELECT * FROM resultados JOIN textos on resultados.idTexto = textos.idTexto WHERE idExecucao="+idExecucao+" ORDER BY resultados.idTexto;");
 		ResultSet res = ps.executeQuery();
-		List<TrechoEncontrado> l = new ArrayList<TrechoEncontrado>();
+		Resultados ResultadoTexto = new Resultados();
 				while(res.next()){
 					if(once){
 						idTexto = res.getInt("idTexto");
 						once = false;
 					}
 					if(!(res.getInt("idTexto") == idTexto)){
-						lista.add(l);
-						l = new ArrayList<TrechoEncontrado>();
+						lista.add(ResultadoTexto);
+						ResultadoTexto = new Resultados();
 						idTexto = res.getInt("idTexto");
-						}
-						
+					}
+					
+					ResultadoTexto.setTexto(res.getString("texto")); //Adiciona texto no objeto resultado
+					ResultadoTexto.setIsEncontrado(res.getBoolean("isEncontrado")); //Verifica se é resultado encontrado ou não
+					
 					TrechoEncontrado t = new TrechoEncontrado();
 					if(res.getInt("isSubregra") == 1){
 						Subregra s = selectSubRegra(res.getInt("idRegra"), res.getInt("idSubregra"));
@@ -557,7 +564,7 @@ public class BD extends ActiveRecord {
 //						insereRapidMiner(trechosDistintos, idExecucao, idArquivo, idUsuario, idTexto);
 						idTextoAnt=idTexto2;
 					}
-					l.add(t);
+					ResultadoTexto.addTrecho(t);
 				}
 				
 			}
