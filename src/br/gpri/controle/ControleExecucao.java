@@ -261,7 +261,7 @@ public class ControleExecucao extends Variaveis{
 					
 					
 					fechaJanela();
-					JanelaResultados = new ControleResultados(textos, listaResultados);
+					JanelaResultados = new ControleResultados(listaResultados);
 					JanelaResultados.abreJanela();
 					
 				}

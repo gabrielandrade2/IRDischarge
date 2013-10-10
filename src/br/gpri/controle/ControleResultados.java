@@ -35,7 +35,7 @@ public class ControleResultados extends Variaveis{
 	private List<TrechoEncontrado> trechosTextoSelecionadoRegras = new ArrayList<TrechoEncontrado>();
 	private List<TrechoEncontrado> trechosTextoSelecionadoSubregras = new ArrayList<TrechoEncontrado>();
 	
-	public ControleResultados(List<String> textos, List<Resultados> listaResultados){
+	public ControleResultados(List<Resultados> listaResultados){
 		linha = 0;
 		this.listaResultados = listaResultados;
 		
@@ -46,8 +46,7 @@ public class ControleResultados extends Variaveis{
 		Janela.BotaoOk.addActionListener(this.Ok);
 		Janela.BotaoRegra.addActionListener(this.Cadastra);
 		
-		//Gera Lista dos textos
-		inicializaListas(textos);
+	
 		
 		//Caixa de Texto Regra
 		Janela.TextoRegra.setEditable(false);
@@ -70,7 +69,6 @@ public class ControleResultados extends Variaveis{
 		Janela.SubRegraTextoTrecho.setWrapStyleWord(true);
 		
 		//Referente aos Textos
-		Janela.ListaTextos.setSelectedIndex(linha);
 		Janela.NumeroTexto.setText(linha.toString());
 		Janela.AreaTexto.setEditable(false);
 		Janela.AreaTexto.setLineWrap(true);
@@ -78,17 +76,21 @@ public class ControleResultados extends Variaveis{
 		Janela.NumeroTexto.setEditable(false);
 		
 		//DropDownListBox filtro de textos
-		Janela.DropDownTexto.addActionListener(this.DropDownListBox);
 		Janela.DropDownTexto.setSelectedIndex(0);
-		
+		Janela.DropDownTexto.addActionListener(this.DropDownListBox);
+
 		//Botões de Comentário
 		Janela.BotaoComRegra.addActionListener(this.Comment);
 		Janela.BotaoComSubRegra.addActionListener(this.CommentSubRegra);
 		
+		//Gera Lista dos textos
+		inicializaListas();
+		
 	}
 	
-	private void inicializaListas(List<String> textos){
-	
+	private void inicializaListas(){
+		
+		Janela.ListaTextos.setSelectedIndex(linha);
 		Janela.ListaTextos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Janela.ListaTextos.setLayoutOrientation(JList.VERTICAL);
 		Janela.ListaTextos.addListSelectionListener(this.Textos);
@@ -135,28 +137,34 @@ public class ControleResultados extends Variaveis{
 		else if(filtro == 1){ //Encontrados
 			for(int i=0; i<listaResultados.size(); i++){
 				Resultados r = listaResultados.get(i);
-				if(r.isEncontrado())
+				if(r.isEncontrado()){
 					listaResultadosSelecionados.add(r);
 					textos.add(r.getTexto());
+				}
 			}
 		}
 		else if(filtro == 2){ //Não encontrados
 			for(int i=0; i<listaResultados.size(); i++){
 				Resultados r = listaResultados.get(i);
-				if(!r.isEncontrado())
+				if(!r.isEncontrado()){
 					listaResultadosSelecionados.add(r);
 					textos.add(r.getTexto());
+				}
 			}
 		}
 		else
 			System.out.println("Problema com o DropDownListBox do filtro de textos");
 		
+		//Atualiza lista na Janela
 		DefaultListModel listaTexto = new DefaultListModel();
 		for(int i=0; i<textos.size(); i++){
 				listaTexto.addElement(textos.get(i));
 		}
 		
 		Janela.ListaTextos.setModel(listaTexto);
+		
+		Janela.ListaTextos.updateUI();
+		Janela.ListaTextos.setSelectedIndex(0);
 	}
 	
 		
@@ -231,13 +239,7 @@ public class ControleResultados extends Variaveis{
 
 		ActionListener DropDownListBox = new ActionListener() {
 			public void actionPerformed(ActionEvent DropDownListBox) {
-				int item = Janela.DropDownTexto.getSelectedIndex();
-				if (item==0){
-				
-				}
-				else if (item==1){}
-				else{}
-				
+				geraListaResultados();
 			}
 		};
 		
@@ -265,14 +267,17 @@ public class ControleResultados extends Variaveis{
 				limpaCaixasTexto();
 				Janela.AreaTexto.setText((String) Janela.ListaTextos.getSelectedValue());
 				int textoSelecionado=Janela.ListaTextos.getSelectedIndex();
+				if(textoSelecionado == -1){
+					textoSelecionado = 0;
+				}	
 				
 				List<TrechoEncontrado> trechosTextoSelecionado = listaResultados.get(textoSelecionado).getTrechos();
 				//List<TrechoEncontrado> trechosTextoSelecionado = listaEncontrados.get(textoSelecionado);
 				
 				separaTrechos(trechosTextoSelecionado);
 				linha = Janela.ListaTextos.getSelectedIndex();
-				linha = linha+1;
-				Janela.NumeroTexto.setText(linha.toString());
+				Integer l = linha + 1;
+				Janela.NumeroTexto.setText(l.toString());
 				geraListaRegras();
 			}	
 		};
