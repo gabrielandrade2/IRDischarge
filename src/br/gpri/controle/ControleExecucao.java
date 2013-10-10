@@ -227,6 +227,8 @@ public class ControleExecucao extends Variaveis{
 							System.out.println();
 						}
 						
+						Resultados ResultadoTexto = new Resultados();
+						
 						//Caso não tenha encontrado nenhum trecho adiciona "Nada encontrado"
 						if(encontrados.isEmpty()){
 							TrechoEncontrado t = new TrechoEncontrado();
@@ -235,27 +237,26 @@ public class ControleExecucao extends Variaveis{
 							r.setTexto("Nada Encontrado");
 							t.setRegra(r);
 							t.setTrechoEncontrado("Nada Encontrado");
-							t.setHasRegra(false);
-							encontrados.add(t);
-							isEncontrado = false;
+							t.setHasRegra(false); //Verificar pra tirar isso aqui
+							ResultadoTexto.addTrecho(t);
+							ResultadoTexto.setIsEncontrado(false);
 						}
 						
 						else{
-							isEncontrado = true;
+							ResultadoTexto.setIsEncontrado(true);
 						}
 						
-						Resultados res = new Resultados();
-						res.setTexto(texto);
-						res.setTrechos(encontrados);
-						res.setIsEncontrado(isEncontrado);
 						
-						listaResultados.add(res);
+						ResultadoTexto.setTexto(texto);
+						ResultadoTexto.setTrechos(encontrados);
+												
+						listaResultados.add(ResultadoTexto);
 						
 						//textos.add(texto);
 						//listaEncontrados.add(encontrados);
 						
 						//Insere no Banco de Dados - Insere regra seguido de suas subregras
-						BD.insertResultados(i, encontrados, idExecucao);
+						BD.insertResultados(ResultadoTexto, i, idExecucao);
 					}
 					
 					

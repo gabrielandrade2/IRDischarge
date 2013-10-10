@@ -659,7 +659,9 @@ public class BD extends ActiveRecord {
 		return true;
 	}
 
-	public boolean insertResultados(int idTexto, List<TrechoEncontrado> encontrados, int idExecucao){
+	public boolean insertResultados(Resultados ResultadoTexto, int idTexto, int idExecucao){
+		
+		List<TrechoEncontrado> encontrados = ResultadoTexto.getTrechos();
 		boolean erro = true;
 		
 		for(int i=0; i<encontrados.size(); i++){
