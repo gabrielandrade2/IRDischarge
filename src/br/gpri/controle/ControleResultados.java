@@ -236,7 +236,7 @@ public class ControleResultados extends Variaveis{
             public void valueChanged(ListSelectionEvent Subregras) {
                     int subregraSelecionada=Janela.ListaSubRegra.getSelectedIndex();        
                     if(subregraSelecionada>=0){
-                    	
+                    		
                     		TrechoEncontrado t = trechosTextoSelecionadoSubregras.get(subregraSelecionada);
                             String textoTrecho= t.getSubregra().getTexto();
                             String textoSubregra = t.getTrechoEncontrado();
@@ -244,7 +244,9 @@ public class ControleResultados extends Variaveis{
                             Janela.TextoSubRegra.setText(textoSubregra);
                             Janela.SubRegraTextoTrecho.setText(textoTrecho);
                     }
+
                     
+                    	
             }
     };
 		
