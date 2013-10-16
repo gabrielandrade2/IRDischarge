@@ -9,14 +9,14 @@ primary key(id));
 insert into frasesnegativas(frase) values('sem sinal');
 insert into frasesnegativas(frase) values('sem sinais');
 insert into frasesnegativas(frase) values('dentro da normalidade');
-insert into frasesnegativas(frase) values('sem alteraÃ§Ãµes');
-insert into frasesnegativas(frase) values('nÃ£o apresenta');
-insert into frasesnegativas(frase) values('sem dilataÃ§Ã£o');
+insert into frasesnegativas(frase) values('sem alterações');
+insert into frasesnegativas(frase) values('não apresenta');
+insert into frasesnegativas(frase) values('sem dilatação');
 
 CREATE TABLE IF NOT EXISTS regrasexecucao(
 idExecucao int,
 idRegra int,
 
 primary key(idExecucao, idRegra),
-FOREIGN KEY(idExecucao) references execuoes(id),
+FOREIGN KEY(idExecucao) references execucoes(id),
 FOREIGN KEY(idRegra) references regras(idRegra));

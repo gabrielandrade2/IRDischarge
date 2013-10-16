@@ -675,18 +675,18 @@ public class BD extends ActiveRecord {
 						Subregra sr = t.getSubregra();
 						int idSubregra = sr.getId();
 						int idRegra = sr.getIdRegra();
-						ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, idRegra, idSubregra,isSubregra) values ("+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+","+idSubregra+",1);");
+						ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, idRegra, idSubregra,isSubregra, isEncontrado) values ("+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+","+idSubregra+",1,1);");
 				}
 				else
 				{
 				if(t.hasRegra()){
 					Regra r = t.getRegra();
 					int idRegra = r.getId();
-					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, idRegra,isSubregra) values ("+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+",0);");
+					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, idRegra,isSubregra, isEncontrado) values ("+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+",0,1);");
 				}
 				
 				else
-					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado) values ("+idTexto+","+idExecucao+",'Nada Encontrado');");
+					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, isEncontrado) values ("+idTexto+","+idExecucao+",'Nada Encontrado',0);");
 				}
 				 erro = ps.execute();
 				 erro = false;

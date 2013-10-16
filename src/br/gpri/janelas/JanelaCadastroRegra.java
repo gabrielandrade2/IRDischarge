@@ -62,7 +62,7 @@ public class JanelaCadastroRegra extends javax.swing.JFrame {
         ListaTexto = new javax.swing.JList();
         Indice = new javax.swing.JTextField();
 
-        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         BotaoAnterior.setText("Anterior");
 
@@ -152,7 +152,7 @@ public class JanelaCadastroRegra extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         BotaoAnterior1.setText("Anterior");
 

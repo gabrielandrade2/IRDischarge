@@ -39,10 +39,11 @@ public class ControleCadastroRegra extends Variaveis{
 		
 		if(botao == true)
 			Janela.CRBotaoExecutar.addActionListener(this.Executar);
-		else
+		else{
 			Janela.CRBotaoExecutar.setName( "Ok");
 			Janela.CRBotaoExecutar.setText("OK");
 			Janela.CRBotaoExecutar.addActionListener(this.Ok);	
+		}
 		
 		Janela.CRBotaoVoltar.addActionListener(this.Voltar);
 		Janela.BotaoGerarRegra1.addActionListener(this.GerarRegra);

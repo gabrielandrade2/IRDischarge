@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ButtonModel;
+import javax.swing.JFrame;
 
 import br.gpri.janelas.JanelaElementos;
 import activerecord.*;
@@ -20,6 +21,7 @@ public class ControleElementos extends Variaveis{
 	
 	public ControleElementos(Regra r){
 		Janela = new JanelaElementos();
+		
 		this.isSubregra = false;
 		this.Regra = r;
 		this.Termos = Regra.getTermos();
