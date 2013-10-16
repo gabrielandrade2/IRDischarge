@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import activerecord.Conjunto;
 import activerecord.Elemento;
 import activerecord.Regra;
+import activerecord.Resultados;
 import activerecord.Subregra;
 import activerecord.TrechoEncontrado;
 import br.gpri.janelas.JanelaExecucao;
@@ -197,13 +198,17 @@ public class ControleExecucao extends Variaveis{
 					int numTextos = BD.getNumTextos(idUsuario, idArquivo);
 					
 					List<String> textos = new ArrayList<String>();
-					List<List<TrechoEncontrado>> listaEncontrados = new ArrayList<List<TrechoEncontrado>>();
+					
+					List<Resultados> listaResultados = new ArrayList<Resultados>();
+					//List<List<TrechoEncontrado>> listaEncontrados = new ArrayList<List<TrechoEncontrado>>();
 					
 					int idExecucao = BD.insertExecucao(idUsuario,idArquivo); //Cria a instância da Execucao
 					BD.insertRegrasExecucao(idExecucao, regrasSelecionadas); //Armazena regras usadas na execucao
 					
 					for(int i=0; i<numTextos; i++){ //Pra cada texto, executa
 						String texto = BD.selectTexto(idUsuario, idArquivo, i);
+						boolean isEncontrado;
+						
 						List<TrechoEncontrado> encontrados = Tagger.executaRegra(texto, regrasSelecionadas);
 						
 						//Console
@@ -222,6 +227,8 @@ public class ControleExecucao extends Variaveis{
 							System.out.println();
 						}
 						
+						Resultados ResultadoTexto = new Resultados();
+						
 						//Caso não tenha encontrado nenhum trecho adiciona "Nada encontrado"
 						if(encontrados.isEmpty()){
 							TrechoEncontrado t = new TrechoEncontrado();
@@ -230,20 +237,31 @@ public class ControleExecucao extends Variaveis{
 							r.setTexto("Nada Encontrado");
 							t.setRegra(r);
 							t.setTrechoEncontrado("Nada Encontrado");
-							t.setHasRegra(false);
-							encontrados.add(t);
+							t.setHasRegra(false); //Verificar pra tirar isso aqui
+							ResultadoTexto.addTrecho(t);
+							ResultadoTexto.setIsEncontrado(false);
 						}
 						
-						textos.add(texto);
-						listaEncontrados.add(encontrados);
+						else{
+							ResultadoTexto.setIsEncontrado(true);
+						}
+						
+						
+						ResultadoTexto.setTexto(texto);
+						ResultadoTexto.setTrechos(encontrados);
+												
+						listaResultados.add(ResultadoTexto);
+						
+						//textos.add(texto);
+						//listaEncontrados.add(encontrados);
 						
 						//Insere no Banco de Dados - Insere regra seguido de suas subregras
-						BD.insertResultados(i, encontrados, idExecucao);
+						BD.insertResultados(ResultadoTexto, i, idExecucao);
 					}
 					
 					
 					fechaJanela();
-					JanelaResultados = new ControleResultados(textos, listaEncontrados);
+					JanelaResultados = new ControleResultados(listaResultados);
 					JanelaResultados.abreJanela();
 					
 				}
