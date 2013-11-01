@@ -3,8 +3,8 @@ use intemed;
 
 /* CUIDADO APAGA TODOS OS RESULTADOS*/
 
-drop table resultados;
-drop table execucoes;
+drop table if exists resultados;
+drop table if exists execucoes;
 create table execucoes(
 	id int not null auto_increment,
 	idUsuario int,

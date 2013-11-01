@@ -28,6 +28,10 @@ public class BD extends ActiveRecord {
 		catch(SQLException e){
 			e.printStackTrace();
 		}
+		catch(NullPointerException e){
+			bdNaoExiste();
+		}
+		
 		return Login;
 			
 	}
@@ -417,6 +421,11 @@ public class BD extends ActiveRecord {
 		catch (SQLException e) {
 			System.out.println("Erro ao efetuar Insert");
 			e.printStackTrace();}
+		
+		catch(NullPointerException e){
+			bdNaoExiste();
+		}
+		
 		return false;
 		}
 	
@@ -670,24 +679,24 @@ public class BD extends ActiveRecord {
 			
 			try{
 				PreparedStatement ps = null;
-				if(t.isSubregra())
-				{
-						Subregra sr = t.getSubregra();
-						int idSubregra = sr.getId();
-						int idRegra = sr.getIdRegra();
-						ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, idRegra, idSubregra,isSubregra, isEncontrado) values ("+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+","+idSubregra+",1,1);");
+				if(ResultadoTexto.isEncontrado()){
+					if(t.isSubregra())
+					{
+							Subregra sr = t.getSubregra();
+							int idSubregra = sr.getId();
+							int idRegra = sr.getIdRegra();
+							ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, idRegra, idSubregra,isSubregra, isEncontrado) values ("+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+","+idSubregra+",1,1);");
+					}
+					
+					else if(t.hasRegra()){
+						Regra r = t.getRegra();
+						int idRegra = r.getId();
+						ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, idRegra,isSubregra, isEncontrado) values ("+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+",0,1);");
+					}
 				}
-				else
-				{
-				if(t.hasRegra()){
-					Regra r = t.getRegra();
-					int idRegra = r.getId();
-					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, idRegra,isSubregra, isEncontrado) values ("+idTexto+","+idExecucao+",'"+trecho+"',"+idRegra+",0,1);");
-				}
-				
 				else
 					ps = (PreparedStatement) con.prepareStatement("INSERT into resultados(idTexto, idExecucao, trechoEncontrado, isEncontrado) values ("+idTexto+","+idExecucao+",'Nada Encontrado',0);");
-				}
+				
 				 erro = ps.execute();
 				 erro = false;
 				}
@@ -888,4 +897,11 @@ public class BD extends ActiveRecord {
 		}
 		return idSubregra;
 	}
+	
+	private void bdNaoExiste(){
+		System.out.println("Banco de Dados inexistente!");
+		System.out.println("NullPointerException");
+	}
+
+	
 }

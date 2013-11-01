@@ -243,12 +243,13 @@ public class ControleExecucao extends Variaveis{
 						}
 						
 						else{
+							ResultadoTexto.setTrechos(encontrados);
 							ResultadoTexto.setIsEncontrado(true);
 						}
 						
 						
 						ResultadoTexto.setTexto(texto);
-						ResultadoTexto.setTrechos(encontrados);
+						
 												
 						listaResultados.add(ResultadoTexto);
 						
